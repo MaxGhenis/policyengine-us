@@ -1,0 +1,6 @@
+- bump: minor
+  changes:
+    changed:
+      - Update JupyterBook from 1.0 to 2.0 beta version
+      - Migrate documentation configuration from _config.yml and _toc.yml to myst.yml format
+      - Update Makefile documentation target to use new jupyter-book commands

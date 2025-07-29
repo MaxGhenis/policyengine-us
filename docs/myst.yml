@@ -1,0 +1,80 @@
+version: 1
+project:
+  title: PolicyEngine US documentation
+  authors:
+    - PolicyEngine
+  copyright: '2023'
+  github: policyengine/policyengine-us
+  toc:
+    - file: index.md
+    - title: Government programs
+      children:
+        - file: gov/fcc/index.md
+          children:
+            - file: gov/fcc/lifeline.ipynb
+            - file: gov/fcc/acp.ipynb
+        - file: gov/hhs/index.md
+          children:
+            - file: gov/hhs/tanf.ipynb
+        - file: gov/hud/index.md
+          children:
+            - file: gov/hud/housing-assistance.ipynb
+        - file: gov/irs/tax.ipynb
+          children:
+            - file: gov/irs/credits/eitc.ipynb
+            - file: gov/irs/credits/cdcc.ipynb
+            - file: gov/irs/credits/clean-vehicle.ipynb
+            - file: gov/irs/capital-gains.ipynb
+        - file: gov/ssa/index.md
+          children:
+            - file: gov/ssa/ssi.ipynb
+        - file: gov/states/index.md
+          children:
+            - file: gov/states/ca/index.md
+              children:
+                - file: gov/states/ca/calepa/carb/cvrp.ipynb
+            - file: gov/states/ma/index.md
+              children:
+                - file: gov/states/ma/tax-benefit.ipynb
+                - file: gov/states/ma/tax/income/index.ipynb
+                - file: >-
+                    gov/states/ma/tax/income/credits/senior-circuit-breaker.ipynb
+            - file: gov/states/md/index.md
+              children:
+                - file: gov/states/md/tax/income/index.ipynb
+                - file: gov/states/md/tax/income/credits/cdcc.ipynb
+                - file: gov/states/md/tax/income/credits/ctc.ipynb
+                - file: gov/states/md/tax/income/credits/eitc.ipynb
+                - file: gov/states/md/tax/income/credits/poverty-line-credit.ipynb
+                - file: gov/states/md/tax/income/deductions/standard-deduction.ipynb
+            - file: gov/states/ny/index.md
+              children:
+                - file: gov/states/ny/cdcc.ipynb
+                - file: gov/states/ny/ctc.ipynb
+                - file: gov/states/ny/eitc.ipynb
+                - file: gov/states/ny/tax.ipynb
+                - file: gov/states/ny/tax-benefit.ipynb
+            - file: gov/states/pa/tax.ipynb
+            - file: gov/states/ut/ut_income_tax.ipynb
+            - file: gov/states/wa/index.md
+              children:
+                - file: >-
+                    gov/states/wa/tax/income/credits/working-families-tax-credit.ipynb
+        - file: gov/usda/index.md
+          children:
+            - file: gov/usda/snap.ipynb
+            - file: gov/usda/school-meals.ipynb
+            - file: gov/usda/wic.ipynb
+    - title: Validation
+      children:
+        - file: validation/taxsim.ipynb
+    - title: Usage
+      children:
+        - file: usage/speed.ipynb
+    - title: Examples
+      children:
+        - file: examples/income-sources.ipynb
+site:
+  options:
+    folders: true
+  template: book-theme
