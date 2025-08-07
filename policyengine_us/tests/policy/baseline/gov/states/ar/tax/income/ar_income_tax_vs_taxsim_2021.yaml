@@ -9,13 +9,10 @@
     ar_files_separately: true
     state_code: AR
   output:
-    # TaxSim 2021 calculation for Arkansas:
-    # From tab21t in taxsim.f:
-    # Tax brackets: 0%, 2%, 3%, 3.4%, 5%, 5.9% 
-    # Thresholds: $4,799, $9,499, $14,299, $23,599, $39,699
-    # For $50,000: Rate is 5.9%, reduction is $797.25
-    # Tax = 0.059 * 50,000 - 797.25 = 2,950 - 797.25 = 2,152.75
-    ar_income_tax_before_non_refundable_credits_indiv: 2_152.75
+    # Actual TaxSim 2021 output for Arkansas:
+    # Input: taxsimid=1, year=2021, state=4, mstat=1, pwages=50000
+    # TaxSim output: siitax = 1993.95
+    ar_income_tax_before_non_refundable_credits_indiv: 1_993.95
 
 - name: Compare with TaxSim - Single filer $25,000 taxable income (2021)
   period: 2021
