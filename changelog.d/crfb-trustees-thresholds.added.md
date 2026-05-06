@@ -1,1 +1,1 @@
-Added an explicit Trustees core threshold reform for long-run TOB analysis scenarios.
+Added an explicit Trustees federal income tax parameter reform for long-run TOB analysis scenarios.
