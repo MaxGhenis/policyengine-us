@@ -28,9 +28,9 @@ Verified independently in the frozen housing-consumer lane
 - [x] Reproduce bundled FY2025/FY2026 rows from the published workbooks to prove the transform before applying it to FY2024
 - [x] Append FY2024 county FMR rows (23,820, from `FMR2024_final_revised.xlsx`)
 - [x] Append FY2024 SAFMR rows (2,515), scoped to the three metros HUD had implemented for 2024
-- [ ] Measure the 2025/2026 side effects (county-FMR missing-row fallback; SAFMR HCV ZIP union)
-- [ ] Tests: period-exact resolution, representative jurisdictions, missing-row/refusal behaviour
-- [ ] README vintage/effective dates, changelog fragment, `make format`
+- [x] Measure the side effects: FY2025/FY2026 loader digests and every probed engine value are **bit-identical**; periods **before** 2024 now resolve to FY2024 instead of FY2025 (measured, listed below)
+- [x] Tests: period-exact resolution, representative jurisdictions, missing-row/refusal behaviour (gov/hud YAML 197 -> 220 passing)
+- [x] README vintage/effective dates, changelog fragment, `ruff format` + `ruff check` clean
 - [ ] Focused test run + artifacts in `R/us-hud-2024-model-source-fix-REPORT.md/.json`
 
 ## Done
@@ -75,10 +75,41 @@ Four bundled ZIPs in the three implemented metros have no FY2024 SAFMR published
 (`75099`, `75429`, `78028`, `78284`) and get no FY2024 row, matching the existing
 treatment of ZIPs HUD did not publish for FY2025.
 
+## Measured consequences
+
+`nearest_fmr_year` and `nearest_safmr_year` both changed for **2018-2024**
+(`2025 -> 2024`) and are unchanged for 2025-2028. Periods before 2024 fall back
+to the earliest bundled year, so bundling FY2024 moves them from FY2025 to
+FY2024 — closer to the modelled year under the pre-existing nearest-year
+convention, but a change beyond period 2024 that has to be stated, not assumed.
+
+Loader tables and engine values at 2025, 2026 and 2027 are **bit-identical**
+before and after (per-year SHA-256 digests of the county and SAFMR tables match;
+every probed household value matches).
+
+| jurisdiction (2BR) | period 2024 before | period 2024 after |
+|---|---|---|
+| Los Angeles County CA | 31,500 | 30,528 |
+| Alameda County CA | 32,184 | 31,080 |
+| Fairfield County CT (median fallback) | 26,844 | 26,652 |
+| Honolulu County HI (revised vintage) | 32,244 | 28,656 |
+| Harris County TX | 18,348 | 16,284 |
+| American Samoa pseudo-county | 12,144 | 11,724 |
+| Northern Mariana pseudo-county | 11,952 | 11,544 |
+| unmapped county `99999` | 0 | 0 |
+| Dallas ZIP 75201 SAFMR | 33,960 | 31,680 |
+| Wichita ZIP 67202 payment standard | 12,840 (SAFMR) | 12,204 (county FMR) |
+
+Across the 16,175 shared county/bedroom cells the FY2024 value is lower than
+FY2025 in 12,002, higher in 4,116 and equal in 57; the median county 2BR FMR is
+**3.1% lower**. Over the 2,515 shared SAFMR cells the median is 5.2% lower. So
+the launch path was reading 2024 rents roughly 3% high at the median, and up to
+51% high in the tail.
+
 ## Next
 
-Measure the loader- and engine-level consequences (including periods before 2024,
-which also re-resolve), then README, tests and changelog.
+Focused test runs, then the report in
+`R/us-hud-2024-model-source-fix-REPORT.md/.json`.
 
 ## Out of scope (recorded, not waived)
 
