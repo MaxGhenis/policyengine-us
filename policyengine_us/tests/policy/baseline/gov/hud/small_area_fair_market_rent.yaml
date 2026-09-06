@@ -149,9 +149,9 @@
 # FY2024 is bundled only for the metros HUD had already required to use SAFMRs
 # for Housing Choice Voucher payment standards during 2024: Dallas (implemented
 # 10/1/2011), Fort Worth-Arlington and San Antonio-New Braunfels (both 4/1/2018).
-# Beaumont-Port Arthur, Kansas City MO-KS and Wichita KS implement 1/1/2025, so
-# they have no FY2024 rows and resolve to zero, leaving the county FMR as the
-# payment-standard basis.
+# Beaumont-Port Arthur, Kansas City MO-KS and Wichita KS became mandatory on
+# 10/1/2024 (the first day of FY2025), so they have no FY2024 rows and resolve
+# to zero, leaving the county FMR as the payment-standard basis.
 - name: Dallas ZIP 2BR at period 2024 uses the FY2024 SAFMR, not FY2025
   period: 2024
   input:
@@ -185,7 +185,7 @@
   output:
     small_area_fair_market_rent: 59_064 # FY2024 4,280 * 1.15 * 12
 
-- name: Beaumont-Port Arthur ZIP returns zero at period 2024 (SAFMRs implemented 1/1/2025)
+- name: Beaumont-Port Arthur ZIP returns zero at period 2024 (SAFMRs mandatory from 10/1/2024)
   period: 2024
   input:
     zip_code: "77701"
@@ -193,7 +193,7 @@
   output:
     small_area_fair_market_rent: 0
 
-- name: Wichita KS ZIP returns zero at period 2024 (SAFMRs implemented 1/1/2025)
+- name: Wichita KS ZIP returns zero at period 2024 (SAFMRs mandatory from 10/1/2024)
   period: 2024
   input:
     zip_code: "67202"
@@ -201,7 +201,7 @@
   output:
     small_area_fair_market_rent: 0
 
-- name: Kansas City KS ZIP returns zero at period 2024 (SAFMRs implemented 1/1/2025)
+- name: Kansas City KS ZIP returns zero at period 2024 (SAFMRs mandatory from 10/1/2024)
   period: 2024
   input:
     zip_code: "66101"

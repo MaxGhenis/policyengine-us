@@ -117,8 +117,8 @@
     pha_payment_standard: 20_760 # SAFMR 1,730 * 12
 
 # FY2024: the payment standard falls to the county FMR in the three bundled
-# metros HUD had not yet required to use SAFMRs during 2024 (implementation
-# 1/1/2025), and uses the FY2024 SAFMR where it had.
+# metros HUD had not yet required to use SAFMRs during FY2024 (mandatory from
+# 10/1/2024), and uses the FY2024 SAFMR where it had.
 - name: Dallas ZIP 2BR at period 2024 uses the FY2024 Small Area FMR
   period: 2024
   input:
@@ -135,7 +135,7 @@
     county_fips: "20173"
     bedrooms: 2
   output:
-    # SAFMRs became the Wichita HCV basis on 1/1/2025, so 2024 keeps the county
+    # SAFMRs became the Wichita HCV basis on 10/1/2024, so FY2024 keeps the county
     # FMR: Sedgwick County FY2024 $1,017/mo x 12.
     pha_payment_standard: 12_204
 

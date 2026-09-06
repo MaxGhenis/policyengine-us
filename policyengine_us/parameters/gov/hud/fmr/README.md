@@ -156,26 +156,33 @@ standard basis (only inside the mandatory-SAFMR metros bundled here).
   `hud_area_name` column is a curated metro label, not HUD's raw FMR-area name;
   the ZIP set is the union HUD publishes across these metros.
 - **Metro coverage is per fiscal year, keyed to HUD's implementation dates.**
-  HUD's designated-SAFMR-areas list gives, for each mandatory metro, the date
-  PHAs must have implemented SAFMRs:
+  The six bundled metros fall in two cohorts:
 
-  | metro | year designated | implemented | bundled fiscal years |
+  | metro | cohort | mandatory from | bundled fiscal years |
   |---|---|---|---|
-  | Dallas, TX | 2011 | 10/1/2011 | FY2024, FY2025, FY2026 |
-  | Fort Worth-Arlington, TX | 2016 | 4/1/2018 | FY2024, FY2025, FY2026 |
-  | San Antonio-New Braunfels, TX | 2016 | 4/1/2018 | FY2024, FY2025, FY2026 |
-  | Beaumont-Port Arthur, TX | 2023 | 1/1/2025 | FY2025, FY2026 |
-  | Kansas City, MO-KS | 2023 | 1/1/2025 | FY2025, FY2026 |
-  | Wichita, KS | 2023 | 1/1/2025 | FY2025, FY2026 |
+  | Dallas, TX | 2016 rule | 4/1/2018 | FY2024, FY2025, FY2026 |
+  | Fort Worth-Arlington, TX | 2016 rule | 4/1/2018 | FY2024, FY2025, FY2026 |
+  | San Antonio-New Braunfels, TX | 2016 rule | 4/1/2018 | FY2024, FY2025, FY2026 |
+  | Beaumont-Port Arthur, TX | 2023 notice | 10/1/2024 | FY2025, FY2026 |
+  | Kansas City, MO-KS | 2023 notice | 10/1/2024 | FY2025, FY2026 |
+  | Wichita, KS | 2023 notice | 10/1/2024 | FY2025, FY2026 |
 
-  HUD published FY2024 SAFMRs for all six, but the 2023 cohort's SAFMRs were
-  not the HCV payment-standard basis during FY2024 (2023-10-01 to 2024-09-30)
-  under either the designating notice's implementation date (2024-10-01) or the
-  1/1/2025 date HUD's designated-areas list records. Their FY2024 rows are
-  therefore not bundled, and `small_area_fair_market_rent` returns zero for
-  them at period 2024, which leaves `pha_payment_standard` on the county FMR —
-  the correct FY2024 basis — through its existing `> 0` guard. See "Known gap"
-  below for the part of this that the model still gets wrong.
+  Notice PIH 2018-01 required the 2016-rule cohort to have implemented SAFMRs
+  "no later than April 1, 2018". For the cohort designated by the 2023 notice,
+  Notice PIH 2023-32 states: "The notice included an implementation date of
+  October 1, 2024, and PHAs operating in the newly designated metropolitan
+  areas will then have until January 1, 2025, in accordance with 24 CFR
+  982.503(b)(1)(i) to implement SAFMR-based payment standards." The 1/1/2025
+  date in HUD's designated-areas PDF is that payment-standard alignment
+  deadline, not the mandate date; earlier use was voluntary opt-in.
+
+  HUD published FY2024 SAFMRs for all six metros, but 10/1/2024 is the first
+  day of FY2025 — one day after FY2024 ends — so the second cohort carried no
+  SAFMR obligation at any point inside FY2024 (2023-10-01 to 2024-09-30). Their
+  FY2024 rows are therefore not bundled, and `small_area_fair_market_rent`
+  returns zero for them at period 2024, which leaves `pha_payment_standard` on
+  the county FMR — the correct FY2024 basis — through its existing `> 0` guard.
+  See "Known gap" below for the part of this that the model still gets wrong.
 - **Data**: 724 ZIPs for FY2026, 722 for FY2025, 503 for FY2024. Two ZIPs
   (`75429` Dallas, `78284` San Antonio) exist only in the FY2026 SAFMR file —
   HUD did not publish FY2025 SAFMRs for them, so they have no FY2025 rows and
@@ -240,9 +247,16 @@ workbook.
   original `fy2024_safmrs.xlsx` is SHA-256
   `467a96d011969b82cc0b508469010f73acf90ab7f6a4010df76341b1b2f1d423` and is
   identical over the bundled ZIPs).
-- FY2024 SAFMR designation notice (the 2023 cohort and its implementation date):
-  <https://www.federalregister.gov/documents/2023/10/25/2023-23685> (published
-  2023-10-25, "Implementation date: October 1, 2024").
+- SAFMR designation notice for the second cohort:
+  <https://www.federalregister.gov/documents/2023/10/25/2023-23685> (88 FR
+  73352, published 2023-10-25, "DATES: Implementation date: October 1, 2024").
+- Implementation guidance: HUD Notice PIH 2023-32, "Small Area Fair Market Rent
+  Implementation Guidance for FY2024 Designated Metropolitan Areas"
+  <https://www.hud.gov/sites/dfiles/PIH/documents/PIH2023-32.pdf> (retrieved
+  2026-09-06, SHA-256
+  `58f487641ba3c4d8333d24ddc05304797b6679e08d74de4137e84e856c9331bd`), and
+  Notice PIH 2018-01 for the 2016-rule cohort
+  <https://www.hud.gov/sites/dfiles/OCHCO/documents/18-01pihn.pdf>.
 - FY2025 SAFMR workbook: <https://www.huduser.gov/portal/datasets/fmr/fmr2025/fy2025_safmrs.xlsx>
   (retrieved 2026-07-06).
 - FY2026 SAFMR workbook: <https://www.huduser.gov/portal/datasets/fmr/fmr2026/fy2026_safmrs.xlsx>
