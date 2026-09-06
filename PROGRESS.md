@@ -31,7 +31,7 @@ Verified independently in the frozen housing-consumer lane
 - [x] Measure the side effects: FY2025/FY2026 loader digests and every probed engine value are **bit-identical**; periods **before** 2024 now resolve to FY2024 instead of FY2025 (measured, listed below)
 - [x] Tests: period-exact resolution, representative jurisdictions, missing-row/refusal behaviour (gov/hud YAML 197 -> 220 passing)
 - [x] README vintage/effective dates, changelog fragment, `ruff format` + `ruff check` clean
-- [ ] Focused test run + artifacts in `R/us-hud-2024-model-source-fix-REPORT.md/.json`
+- [x] Focused test runs + artifacts in `R/us-hud-2024-model-source-fix-REPORT.md/.json`
 
 ## Done
 
@@ -106,10 +106,25 @@ FY2025 in 12,002, higher in 4,116 and equal in 57; the median county 2BR FMR is
 the launch path was reading 2024 rents roughly 3% high at the median, and up to
 51% high in the tail.
 
+## Checks
+
+| check | result |
+|---|---|
+| `ruff format` + `ruff check .` | clean |
+| all HUD YAML (`gov/hud`) | 220 passed (197 before, +23 new cases) |
+| 41 baseline YAML files naming any HUD housing variable, incl. partner contract tests | 397 passed |
+| 256 baseline YAML files over the full transitive dependency closure (157 variables) | 1,703 passed |
+| `contrib/harris` (the reform reading `small_area_fair_market_rent`) | 19 passed |
+| `pytest policyengine_us/tests` excluding `policy/` and `microsimulation/` | 363 passed, 1 skipped |
+
+Before the tests were updated exactly two failed — the two that pinned the defect
+by name. No partner contract test needed editing and none was edited. No
+microsimulation was run and no national or congressional-district aggregate was
+produced.
+
 ## Next
 
-Focused test runs, then the report in
-`R/us-hud-2024-model-source-fix-REPORT.md/.json`.
+Nothing. The branch is a review candidate: not pushed, no PR, worktree clean.
 
 ## Out of scope (recorded, not waived)
 
