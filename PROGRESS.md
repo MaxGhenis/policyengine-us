@@ -29,7 +29,7 @@ Verified independently in the frozen housing-consumer lane
 - [x] Append FY2024 county FMR rows (23,820, from `FMR2024_final_revised.xlsx`)
 - [x] Append FY2024 SAFMR rows (2,515), scoped to the three metros HUD had implemented for 2024
 - [x] Measure the side effects: FY2025/FY2026 loader digests and every probed engine value are **bit-identical**; periods **before** 2024 now resolve to FY2024 instead of FY2025 (measured, listed below)
-- [x] Tests: period-exact resolution, representative jurisdictions, missing-row/refusal behaviour (gov/hud YAML 197 -> 220 passing)
+- [x] Tests: period-exact resolution, representative jurisdictions, missing-row/refusal behaviour (gov/hud YAML: 199 cases before with 2 failing, 220 passing after)
 - [x] README vintage/effective dates, changelog fragment, `ruff format` + `ruff check` clean
 - [x] Focused test runs + artifacts in `R/us-hud-2024-model-source-fix-REPORT.md/.json`
 
@@ -111,7 +111,7 @@ the launch path was reading 2024 rents roughly 3% high at the median, and up to
 | check | result |
 |---|---|
 | `ruff format` + `ruff check .` | clean |
-| all HUD YAML (`gov/hud`) | 220 passed (197 before, +23 new cases) |
+| all HUD YAML (`gov/hud`) | 220 passed (199 cases before; 21 net new) |
 | 41 baseline YAML files naming any HUD housing variable, incl. partner contract tests | 397 passed |
 | 256 baseline YAML files over the full transitive dependency closure (157 variables) | 1,703 passed |
 | `contrib/harris` (the reform reading `small_area_fair_market_rent`) | 19 passed |
