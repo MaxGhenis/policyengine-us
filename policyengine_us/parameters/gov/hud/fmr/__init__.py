@@ -97,11 +97,14 @@ def _load_small_area_fair_market_rents() -> pd.DataFrame:
 
     Scoped to the six metros where HUD mandates SAFMR use under the Housing
     Choice Voucher program and PolicyEngine has ZIP coverage: Dallas, Fort
-    Worth-Arlington, and San Antonio-New Braunfels (2018 implementation) plus
-    Beaumont-Port Arthur, Kansas City (KS side), and Wichita (all implemented
-    1/1/2025). Houston is not a designated metro. Bundled for FY2025 and
-    FY2026; ``nearest_safmr_year`` maps each period to the matching fiscal
-    year. Outside these areas the model keeps the county FMR.
+    Worth-Arlington, and San Antonio-New Braunfels (2018 implementation or
+    earlier) plus Beaumont-Port Arthur, Kansas City (KS side), and Wichita (all
+    implemented 1/1/2025). Houston is not a designated metro. Bundled for
+    FY2024, FY2025 and FY2026, except that the 1/1/2025 cohort has no FY2024
+    rows because its SAFMRs were not yet the HCV payment-standard basis during
+    that fiscal year. ``nearest_safmr_year`` maps each period to the matching
+    fiscal year. Outside these areas, and inside them before implementation,
+    the model keeps the county FMR.
     """
     raw = pd.read_csv(
         FOLDER / "small_area_fair_market_rents.csv",

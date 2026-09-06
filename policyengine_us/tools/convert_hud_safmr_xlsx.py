@@ -128,7 +128,9 @@ def main() -> int:
         subset=["zip_code", "year", "bedrooms"], keep="last"
     )
     combined.to_csv(args.output, index=False)
-    print(f"Wrote {len(combined):,} rows ({len(new):,} for FY{args.year}) to {args.output}")
+    print(
+        f"Wrote {len(combined):,} rows ({len(new):,} for FY{args.year}) to {args.output}"
+    )
     return 0
 
 

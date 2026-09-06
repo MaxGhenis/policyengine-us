@@ -146,13 +146,84 @@
   output:
     small_area_fair_market_rent: 62_928 # FY2025 4,560 * 1.15 * 12
 
-- name: Period 2024 falls back to the nearest bundled year (FY2025)
+# FY2024 is bundled only for the metros HUD had already required to use SAFMRs
+# for Housing Choice Voucher payment standards during 2024: Dallas (implemented
+# 10/1/2011), Fort Worth-Arlington and San Antonio-New Braunfels (both 4/1/2018).
+# Beaumont-Port Arthur, Kansas City MO-KS and Wichita KS implement 1/1/2025, so
+# they have no FY2024 rows and resolve to zero, leaving the county FMR as the
+# payment-standard basis.
+- name: Dallas ZIP 2BR at period 2024 uses the FY2024 SAFMR, not FY2025
   period: 2024
   input:
     zip_code: "75201"
     bedrooms: 2
   output:
-    small_area_fair_market_rent: 33_960 # nearest_safmr_year(2024) = 2025
+    small_area_fair_market_rent: 31_680 # FY2024 2,640/mo * 12 (FY2025 is 33,960)
+
+- name: Fort Worth ZIP 2BR at period 2024 uses the FY2024 SAFMR
+  period: 2024
+  input:
+    zip_code: "76102"
+    bedrooms: 2
+  output:
+    small_area_fair_market_rent: 24_360 # FY2024 2,030/mo * 12 (FY2025 is 24,960)
+
+- name: San Antonio ZIP 2BR at period 2024 uses the FY2024 SAFMR
+  period: 2024
+  input:
+    zip_code: "78207"
+    bedrooms: 2
+  output:
+    small_area_fair_market_rent: 12_720 # FY2024 1,060/mo * 12 (FY2025 is 13,080)
+
+- name: FY2024 SAFMR 5BR adds 15 percent to the FY2024 4BR value
+  period: 2024
+  absolute_error_margin: 0.01
+  input:
+    zip_code: "75201"
+    bedrooms: 5
+  output:
+    small_area_fair_market_rent: 59_064 # FY2024 4,280 * 1.15 * 12
+
+- name: Beaumont-Port Arthur ZIP returns zero at period 2024 (SAFMRs implemented 1/1/2025)
+  period: 2024
+  input:
+    zip_code: "77701"
+    bedrooms: 2
+  output:
+    small_area_fair_market_rent: 0
+
+- name: Wichita KS ZIP returns zero at period 2024 (SAFMRs implemented 1/1/2025)
+  period: 2024
+  input:
+    zip_code: "67202"
+    bedrooms: 2
+  output:
+    small_area_fair_market_rent: 0
+
+- name: Kansas City KS ZIP returns zero at period 2024 (SAFMRs implemented 1/1/2025)
+  period: 2024
+  input:
+    zip_code: "66101"
+    bedrooms: 2
+  output:
+    small_area_fair_market_rent: 0
+
+- name: ZIP absent from the FY2024 SAFMR file returns zero at period 2024
+  period: 2024
+  input:
+    zip_code: "75099" # bundled for FY2025 and FY2026; HUD published no FY2024 SAFMR
+    bedrooms: 2
+  output:
+    small_area_fair_market_rent: 0
+
+- name: Period 2023 falls back to the earliest bundled SAFMR year (FY2024)
+  period: 2023
+  input:
+    zip_code: "75201"
+    bedrooms: 2
+  output:
+    small_area_fair_market_rent: 31_680 # nearest_safmr_year(2023) = 2024
 
 - name: Period 2027 falls back to the nearest bundled year (FY2026)
   period: 2027

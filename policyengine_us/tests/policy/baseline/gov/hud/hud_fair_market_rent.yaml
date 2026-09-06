@@ -55,13 +55,92 @@
   output:
     hud_fair_market_rent: 22_272
 
-- name: LA County FY2024 falls back to nearest bundled FMR year
+- name: LA County 2BR FY2024 resolves to the FY2024 value, not FY2025
   period: 2024
   input:
     county_fips: "06037"
     bedrooms: 2
   output:
-    hud_fair_market_rent: 31_500
+    # FY2024 CSV value $2,544/mo x 12 = $30,528 (FY2025 was $31,500).
+    hud_fair_market_rent: 30_528
+
+- name: LA County 0BR FY2024
+  period: 2024
+  input:
+    county_fips: "06037"
+    bedrooms: 0
+  output:
+    hud_fair_market_rent: 21_324
+
+- name: LA County 5BR FY2024 adds 15 percent to the FY2024 4BR FMR
+  period: 2024
+  absolute_error_margin: 0.01
+  input:
+    county_fips: "06037"
+    bedrooms: 5
+  output:
+    # FY2024 4BR $3,600/mo x 1.15 x 12 = $49,680.
+    hud_fair_market_rent: 49_680
+
+- name: Alameda County 2BR FY2024 derives county FIPS from HUD FMR area code
+  period: 2024
+  input:
+    county_fips: "06001"
+    bedrooms: 2
+  output:
+    hud_fair_market_rent: 31_080
+
+- name: Fairfield County 2BR FY2024 uses the median HUD FMR-area fallback
+  period: 2024
+  input:
+    county_fips: "09001"
+    bedrooms: 2
+  output:
+    hud_fair_market_rent: 26_652
+
+- name: Honolulu County 2BR FY2024 uses HUD's revised FY2024 schedule
+  period: 2024
+  input:
+    county_fips: "15003"
+    bedrooms: 2
+  output:
+    # FMR2024_final_revised.xlsx raised Honolulu from $2,252 to $2,388/mo;
+    # $2,388 x 12 = $28,656. Pins the bundled vintage as the revised file.
+    hud_fair_market_rent: 28_656
+
+- name: American Samoa county 2BR FY2024 expands the territory pseudo-area
+  period: 2024
+  input:
+    county_fips: "60010"
+    bedrooms: 2
+  output:
+    hud_fair_market_rent: 11_724
+
+- name: Northern Mariana Islands county 2BR FY2024 expands the territory pseudo-area
+  period: 2024
+  input:
+    county_fips: "69110"
+    bedrooms: 2
+  output:
+    hud_fair_market_rent: 11_544
+
+- name: Unmapped county returns zero at FY2024 rather than borrowing a later year
+  period: 2024
+  input:
+    county_fips: "99999"
+    bedrooms: 2
+  output:
+    hud_fair_market_rent: 0
+
+- name: Period 2023 falls back to the earliest bundled FMR year (FY2024)
+  period: 2023
+  input:
+    county_fips: "06037"
+    bedrooms: 2
+  output:
+    # FY2024 is now the earliest bundled year, so periods before it resolve
+    # there instead of to FY2025.
+    hud_fair_market_rent: 30_528
 
 - name: LA County 5BR FY2025 adds 15 percent to 4BR FMR
   period: 2025

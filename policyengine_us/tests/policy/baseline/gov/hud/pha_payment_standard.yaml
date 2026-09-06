@@ -115,3 +115,44 @@
   output:
     # Overland Park (Johnson Co) SAFMR 1,730 exceeds the county FMR (1,346); SAFMR is the mandatory basis.
     pha_payment_standard: 20_760 # SAFMR 1,730 * 12
+
+# FY2024: the payment standard falls to the county FMR in the three bundled
+# metros HUD had not yet required to use SAFMRs during 2024 (implementation
+# 1/1/2025), and uses the FY2024 SAFMR where it had.
+- name: Dallas ZIP 2BR at period 2024 uses the FY2024 Small Area FMR
+  period: 2024
+  input:
+    zip_code: "75201"
+    county_fips: "48113"
+    bedrooms: 2
+  output:
+    pha_payment_standard: 31_680
+
+- name: Wichita KS ZIP 2BR at period 2024 uses the FY2024 county FMR, not a SAFMR
+  period: 2024
+  input:
+    zip_code: "67202"
+    county_fips: "20173"
+    bedrooms: 2
+  output:
+    # SAFMRs became the Wichita HCV basis on 1/1/2025, so 2024 keeps the county
+    # FMR: Sedgwick County FY2024 $1,017/mo x 12.
+    pha_payment_standard: 12_204
+
+- name: Beaumont-Port Arthur ZIP 2BR at period 2024 uses the FY2024 county FMR
+  period: 2024
+  input:
+    zip_code: "77701"
+    county_fips: "48245"
+    bedrooms: 2
+  output:
+    pha_payment_standard: 13_512
+
+- name: Kansas City KS ZIP 2BR at period 2024 uses the FY2024 county FMR
+  period: 2024
+  input:
+    zip_code: "66101"
+    county_fips: "20209"
+    bedrooms: 2
+  output:
+    pha_payment_standard: 15_096
