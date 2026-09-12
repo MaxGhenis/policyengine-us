@@ -1,0 +1,1 @@
+Move the default population to the re-certified Microcosm release `populace-us-2024-spm-20260912`: the same H5 (sha256 6496cc43…) certified with policyengine-us 2.0.1 as the build-time model, so the wrapper can bind 2.0.1 and later patch releases against a release that names them.

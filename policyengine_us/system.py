@@ -52,7 +52,7 @@ DEFAULT_START_DATE = str(CURRENT_YEAR) + "-01-01"
 # Certified Populace build (primary-source US microdata), pinned by build id.
 # Populace ships from a Hugging Face *dataset* repo, hence the `hf://datasets/`
 # prefix handled in `_resolve_dataset_path`.
-DEFAULT_DATASET = "hf://datasets/policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909"
+DEFAULT_DATASET = "hf://datasets/policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260912"
 
 
 class CountryTaxBenefitSystem(TaxBenefitSystem):
