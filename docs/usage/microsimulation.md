@@ -81,13 +81,21 @@ hh_earnings = sim.calc("employment_income", map_to="household")
 ### Common use cases
 
 ```python
-# Calculate poverty at person level for person-weighted statistics
+# Requires a dataset with qualified annual SPM scope and Microdf >= 1.3.0.
 person_poverty = sim.calc("in_poverty", map_to="person")
-poverty_rate = person_poverty.mean()
+included_people = person_poverty.count()
+poverty_rate = person_poverty.mean() if included_people > 0 else None
 
 # Map tax credits to see household-level impact
 hh_eitc = sim.calc("eitc", map_to="household")
 ```
+
+SPM outcomes are missing for records outside the declared measurement universe.
+Keep those records in full-population coverage counts, and exclude their missing
+outcomes from the poverty-rate denominator. Serialize an empty denominator as
+JSON `null`. The current lock's Microdf 1.2.1 does not exclude missing outcomes
+from weighted `count()`; its dependency update remains a release prerequisite.
+See the [annual scope contract](../engineering/spm-universe.md).
 
 ## Available datasets
 
@@ -101,6 +109,11 @@ HuggingFace *dataset* repository:
 sim = Microsimulation()
 ```
 
+The existing default build has not been qualified for the annual SPM scope
+contract. Ordinary income remains available; SPM outputs refuse calculations
+without the required annual declarations. This source change does not certify
+or switch the default population.
+
 ### Supplying another population
 
 A population file has to satisfy the SPM input contract: it supplies primitive
@@ -108,18 +121,21 @@ inputs, including observed `county_fips` codes as five-digit strings and
 source-backed `is_spm_independent_minor_role` values, and it must not store
 formula-owned SPM outputs such as `spm_unit_spm_threshold`. Any observed Census
 measurement is retained under a separate report-only name.
+It must also supply `spm_unit_spm_universe_status` for each SPM unit and year.
+Scope is not carried forward by automatic dataset extension.
 
 The legacy files under `hf://policyengine/policyengine-us-data/` predate that
 contract, so SPM measurements are not available over them:
 
 - `cps_2023.h5` stores `spm_unit_spm_threshold`, so the loader rejects it.
-- `enhanced_cps_2024.h5` loads and computes tax variables, but carries no SPM
-  independence roles, so 18 of its SPM units - each a lone 15-to-17-year-old -
-  classify no measurement adult, and `spm_unit_spm_threshold` raises
-  `SPM_COMPOSITION_REQUIRED` over the file. That is what
+- `enhanced_cps_2024.h5` loads and computes tax variables, but lacks an annual
+  SPM scope declaration, so `spm_unit_spm_threshold` first raises
+  `SPM_UNIVERSE_REQUIRED`. It also lacks source-backed SPM independence roles:
+  18 lone 15-to-17-year-old units classify no measurement adult. That remains
+  a separate composition prerequisite for any unit declared included.
   `test_legacy_enhanced_cps_lacks_source_backed_spm_independence_roles`
-  checks. Outputs that no longer reach the threshold, household net income
-  and benefits among them, do compute over the file.
+  retains the primitive geography/composition checks and expects scope refusal.
+  Ordinary household net income and benefits do not depend on SPM measurement.
 
 A household simulation that has no county input can select an SPM area
 explicitly instead:
