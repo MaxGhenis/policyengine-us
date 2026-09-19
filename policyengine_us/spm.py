@@ -260,6 +260,19 @@ class CountyRequiringSPMProvider(PolicyEngineSPMProvider):
             if not isinstance(value, (str, bytes)):
                 untyped[(year, str(value))] = repr(value)
 
+    def with_county_input_types(self, year, values):
+        """Validate selected inputs without replacing simulation-wide receipts.
+
+        An excluded numeric county can spell the same FIPS as an included text
+        county. Only the selected raw inputs constrain this measurement. Share
+        the canonical amount cache and provenance with the simulation, while
+        keeping this view's typing receipt private.
+        """
+        selected = copy(self)
+        object.__setattr__(selected, "_untyped_counties", self._untyped_counties.copy())
+        selected.record_county_input_types(year, values)
+        return selected
+
     def require_county_input(self, year, county_fips):
         """Reject a county this provider cannot honour as a five-digit string."""
         if self.geography_kind != "county":
@@ -339,6 +352,7 @@ def masked_policyengine_amount(unit, period, field, mask):
     tenures = np.asarray(unit("spm_unit_tenure_type", period).decode_to_str())[mask]
     if bound.geography_kind == "county":
         counties = np.asarray(unit.household("county_fips", period))[mask]
+        bound = bound.with_county_input_types(int(period.start.year), counties)
     else:
         counties = [None] * len(adults)
     rows = [

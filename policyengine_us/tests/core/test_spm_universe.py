@@ -684,3 +684,104 @@ def test_included_poverty_resources_must_be_finite(mixed_source, invalid, variab
     with pytest.raises(SPMInputError) as error:
         simulation.calculate(variable, YEAR)
     assert error.value.code == "SPM_MEASUREMENT_INVALID"
+
+
+def _county_type_collision_source(mixed_source):
+    source = mixed_source.copy()
+    source.household["state_code"] = ["NY", "NY"]
+    # Both spell the same county after string conversion, but only the first
+    # is a valid source input. The second belongs to an outside unit.
+    source.household["county_fips"] = ["36061", 36061]
+    return source
+
+
+@pytest.mark.parametrize("simulation_type", [Simulation, Microsimulation])
+def test_outside_numeric_county_does_not_poison_included_measurements(
+    mixed_source, simulation_type
+):
+    source = _county_type_collision_source(mixed_source)
+    simulation = simulation_type(dataset=source)
+    standalone = simulation_type(dataset=_only_included(source))
+    provider = simulation.tax_benefit_system.spm_forecast_provider
+    original_types = provider._untyped_counties
+    before = original_types.copy()
+    assert before[(YEAR, "36061")] == "36061"
+
+    for variable in MEASUREMENT_AMOUNTS[:6]:
+        actual = simulation.calculate(variable, YEAR)
+        expected = standalone.calculate(variable, YEAR)
+        assert np.isfinite(actual[0]), variable
+        assert actual[0] == expected[0], variable
+        assert np.isnan(actual[1]), variable
+        # Selection must use a private typing view, not mutate the original
+        # receipt to forget the malformed outside input.
+        assert provider._untyped_counties is original_types
+        assert provider._untyped_counties == before
+
+    # A selected provider view must still populate the simulation's original
+    # cache and provenance, rather than strand them on a temporary provider.
+    assert provider._amount_cache
+    provenance = simulation.spm_provenance()
+    assert set(provenance["years"]) == {str(YEAR)}
+    assert provenance["geographies"]
+    assert {
+        receipt["county_assignment"]["county_fips"]
+        for receipt in provenance["geographies"]
+    } == {"36061"}
+
+
+@pytest.mark.parametrize("simulation_type", [Simulation, Microsimulation])
+def test_cached_valid_county_amount_does_not_accept_newly_included_numeric_county(
+    mixed_source, simulation_type
+):
+    source = _county_type_collision_source(mixed_source)
+    # Identical one-adult compositions ensure the numeric row would hit the
+    # valid row's exact provider cache key if typing were checked too late.
+    source.person = source.person.loc[source.person.person_id != 102].copy()
+    source.person["age"] = [40, 40]
+    source.marital_unit = source.marital_unit.loc[
+        source.marital_unit.marital_unit_id != 102
+    ].copy()
+    source = source.copy()  # Rebuild the table tuple after replacing frames.
+    simulation = simulation_type(dataset=source)
+    provider = simulation.tax_benefit_system.spm_forecast_provider
+    before = provider._untyped_counties.copy()
+    for variable in MEASUREMENT_AMOUNTS[:6]:
+        values = simulation.calculate(variable, YEAR)
+        assert np.isfinite(values[0]) and np.isnan(values[1]), variable
+    assert (YEAR, 1, 0, "renter", "36061") in provider._amount_cache
+
+    simulation.set_input(STATUS, YEAR, ["INCLUDED", "INCLUDED"])
+    for variable in MEASUREMENT_AMOUNTS[:6]:
+        # Core's explicit input API does not invalidate dependent holders.
+        # Recalculate the output while deliberately retaining the provider memo.
+        simulation.delete_arrays(variable, YEAR)
+        with pytest.raises(SPMInputError) as error:
+            simulation.calculate(variable, YEAR)
+        assert error.value.code == "SPM_GEOGRAPHY_REQUIRED", variable
+    assert provider._untyped_counties == before
+
+
+@pytest.mark.parametrize("simulation_type", [Simulation, Microsimulation])
+def test_unassisted_included_numeric_county_does_not_poison_assisted_housing_cap(
+    mixed_source, simulation_type
+):
+    source = _county_type_collision_source(mixed_source)
+    source.person["age"] = [40, 8, 40]
+    source.spm_unit[STATUS] = "INCLUDED"
+    source.spm_unit["hud_hap"] = [30_000.0, 0.0]
+    simulation = simulation_type(dataset=source)
+    standalone = simulation_type(dataset=_only_included(source))
+    provider = simulation.tax_benefit_system.spm_forecast_provider
+    before = provider._untyped_counties.copy()
+
+    cap = simulation.calculate("spm_unit_capped_housing_subsidy", YEAR)
+    expected = standalone.calculate("spm_unit_capped_housing_subsidy", YEAR)
+    assert np.isfinite(cap[0]) and cap[0] > 0
+    np.testing.assert_array_equal(cap, [expected[0], 0.0])
+    assert provider._untyped_counties == before
+    # Only the cap may ignore this unassisted unit's geography: a threshold
+    # measurement still selects every included unit and must reject its type.
+    with pytest.raises(SPMInputError) as error:
+        simulation.calculate("spm_unit_spm_threshold", YEAR)
+    assert error.value.code == "SPM_GEOGRAPHY_REQUIRED"
