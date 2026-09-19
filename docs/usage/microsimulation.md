@@ -81,7 +81,7 @@ hh_earnings = sim.calc("employment_income", map_to="household")
 ### Common use cases
 
 ```python
-# Requires a dataset with qualified annual SPM scope and Microdf >= 1.3.0.
+# Requires a dataset with qualified annual SPM scope and pinned Microdf 1.3.0.
 person_poverty = sim.calc("in_poverty", map_to="person")
 included_people = person_poverty.count()
 poverty_rate = person_poverty.mean() if included_people > 0 else None
@@ -93,8 +93,10 @@ hh_eitc = sim.calc("eitc", map_to="household")
 SPM outcomes are missing for records outside the declared measurement universe.
 Keep those records in full-population coverage counts, and exclude their missing
 outcomes from the poverty-rate denominator. Serialize an empty denominator as
-JSON `null`. The current lock's Microdf 1.2.1 does not exclude missing outcomes
-from weighted `count()`; its dependency update remains a release prerequisite.
+JSON `null`. The pinned Microdf 1.3.0 excludes missing outcomes from weighted
+`count()`. Keep the model's nullable poverty indicator when aggregating;
+recomputing a comparison from missing resources can turn missing outcomes into
+false values.
 See the [annual scope contract](../engineering/spm-universe.md).
 
 ## Available datasets
@@ -304,9 +306,17 @@ decile = baseline.calc("household_income_decile", map_to="person")
 results = []
 for d in range(1, 11):
     in_decile = decile == d
-    avg_change = change[in_decile].mean()
+    decile_change = change[in_decile]
+    avg_change = decile_change.mean() if decile_change.count() > 0 else None
     results.append({"Decile": d, "Average change": avg_change})
 
 df = pd.DataFrame(results)
 print(df)
 ```
+
+Microdf 1.3.0 assigns equal incomes to the same decile using the cumulative
+person weight at the upper end of the tie. Shuffling rows does not split a tie.
+This convention can leave deciles empty; report their average changes as `None`
+(JSON `null`). Earlier Microdf releases could assign different ranks within a tie.
+SPM deciles also exclude units outside their declared measurement universe before
+ranking.

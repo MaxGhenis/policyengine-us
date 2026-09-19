@@ -76,6 +76,11 @@ without invoking the ranker. Included nonfinite income is an error, not another
 excluded record. Deciles are floating-point stocks with integer-valued ranks
 inside the universe.
 
+Microdf 1.3.0 assigns tied incomes the cumulative person-weighted rank at the
+upper end of the tie. Both household and SPM deciles use this convention, so
+equal incomes stay together when rows are shuffled. Some deciles can be empty;
+their weighted means have no estimate and should serialize as JSON `null`.
+
 Missing-aware weighted summaries require Microdf 1.3.0. A weighted `.count()` gives
 the included denominator, and `.mean()` gives the poverty rate among included
 people. When the denominator is empty, callers should report no estimate, using
@@ -85,11 +90,12 @@ qualify downstream JSON serialization.
 
 ## Validation and release holds
 
-This reconciliation is limited to source changes and synthetic validation using
-an existing runtime with Core 3.30.2, calculator 1.0.0 and Microdf 1.3.0. It does not
-change dependencies, country version, data defaults or population payloads. The
-repository lock still selects Microdf 1.2.1, whose weighted missing-value count
-behavior is not qualified for these nullable summaries.
+The country requirement and lock pin Microdf 1.3.0 for missing-aware weighted
+counts. Synthetic checks use Core 3.30.2, calculator 1.0.0, pandas 3.0.0 and
+NumPy 2.4.1. They cover nullable summaries and tied income ranks; they do not
+qualify every Microdf method. Callers must filter missing values before raw
+quantile operations. The Microdf `gini(negatives="shift")` option also has a known
+failure on nonnegative inputs; these SPM summaries do not call it.
 
 The default native population tests retain their SPM decile and 10,000-unit SPM
 net-income assertions. They are not run in this bounded reconciliation and are
@@ -98,6 +104,6 @@ not skipped assertions or evidence of a qualified dataset. The legacy enhanced-C
 threshold test now expects the earlier scope error while retaining its geography
 and composition checks; that native test is also not run here.
 
-Actual annual source declarations, dependency reconciliation, native population
-validation, and cross-repository wrapper/bundle acceptance require separate work.
+Actual annual source declarations, native population validation, and
+cross-repository wrapper/bundle dependency acceptance require separate work.
 Synthetic results alone do not establish merge or release readiness.
