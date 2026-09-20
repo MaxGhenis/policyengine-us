@@ -1,4 +1,5 @@
 from policyengine_us.model_api import *
+from policyengine_us.spm import spm_universe_mask
 
 
 def create_boost_middle_class_tax_credit() -> Reform:
@@ -99,6 +100,7 @@ def create_boost_middle_class_tax_credit() -> Reform:
         unit = USD
 
         def formula(spm_unit, period, parameters):
+            included = spm_universe_mask(spm_unit, period)
             BENEFITS = [
                 "social_security",
                 "ssi",
@@ -142,8 +144,12 @@ def create_boost_middle_class_tax_credit() -> Reform:
             )
             previous_benefits = add(spm_unit, period, BENEFITS)
             if p.administered_through_ssa is False:
-                return previous_benefits
-            return add(spm_unit, period, BENEFITS) + middle_class_tax_credit
+                return where(included, previous_benefits, np.nan)
+            return where(
+                included,
+                add(spm_unit, period, BENEFITS) + middle_class_tax_credit,
+                np.nan,
+            )
 
     class reform(Reform):
         def apply(self):
