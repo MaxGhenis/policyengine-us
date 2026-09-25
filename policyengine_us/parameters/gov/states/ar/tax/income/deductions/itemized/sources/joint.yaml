@@ -4,6 +4,8 @@ values:
     - ar_post_secondary_education_tuition_deduction
     - ar_medical_expense_deduction_joint
     - ar_misc_deduction_joint
+    # Gambling losses are outside the 2% floor on miscellaneous deductions.
+    - ar_gambling_loss_deduction
     - real_estate_taxes
     - charitable_deduction
     - interest_deduction
