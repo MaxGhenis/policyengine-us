@@ -1,0 +1,366 @@
+# IRC 32(i) tests the taxpayer's own disqualified income, and Publication 596
+# (2025) Worksheet 1 is filled in from the filer's own Form 1040. Expected
+# investment income is Worksheet 1 line 14 arithmetic on that return, and the
+# 2025 limit is $11,950 (Rev. Proc. 2024-40, section 3.06(2)).
+# Credit amounts use the Rev. Proc. 2024-40 section 3.06(1) values for two
+# qualifying children and other filing statuses (maximum $7,152, phaseout
+# threshold $23,350) and the 21.06% phaseout rate in IRC 32(b)(1)(A).
+# Household for every case: head aged 35 with two children aged 15 and 5, TX.
+
+- name: Case 1a, a dependent's interest does not deny the parent's EITC
+  # The child's 12,500 of interest is on the child's own return (no Form 8814),
+  # so every Worksheet 1 line on the parent's return is 0. Earned income and
+  # AGI are 20,000, on the plateau, so the credit is the $7,152 maximum.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 20_000
+      child1:
+        age: 15
+        taxable_interest_income: 12_500
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 0
+    eitc_investment_income_eligible: true
+    eitc: 7_152
+  absolute_error_margin: 0.01
+
+- name: Case 1b, a dependent's capital loss does not offset the parent's capital gain
+  # Worksheet 1 line 1 is 9,000 and line 5 is the parent's own 4,000 of
+  # long-term gain, so line 7 is 4,000 and line 14 is 13,000.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 20_000
+        taxable_interest_income: 9_000
+        long_term_capital_gains: 4_000
+      child1:
+        age: 15
+        short_term_capital_gains: -4_000
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 13_000
+    eitc_investment_income_eligible: false
+    eitc: 0
+
+- name: Case 1c, a dependent's rental loss does not offset the parent's rental income
+  # Worksheet 1 line 1 is 9,000 and line 11 is the parent's 4,000 of rental
+  # income, so line 13 is 4,000 and line 14 is 13,000.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 20_000
+        taxable_interest_income: 9_000
+        rental_income: 4_000
+      child1:
+        age: 15
+        rental_income: -4_000
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 13_000
+    eitc_investment_income_eligible: false
+    eitc: 0
+
+- name: Case 1d, a dependent's capital gain and passive income do not count for the parent
+  # The child's gain, farm rental and passive income are on the child's own
+  # return, so line 14 is the parent's line 1, 9,000.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 20_000
+        taxable_interest_income: 9_000
+      child1:
+        age: 15
+        long_term_capital_gains: 5_000
+        farm_rent_income: 3_000
+        partnership_income: 2_000
+        passive_partnership_s_corp_income: 2_000
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 9_000
+    eitc_investment_income_eligible: true
+
+- name: Case 2a, a general partner's passive share that is also earned income is left out
+  # The 8,000 distributive share is net earnings from self-employment
+  # (IRC 1402(a)) and so earned income, which the line 11 and 12 instructions
+  # exclude. Line 14 is line 1, 5,000.
+  # Schedule SE: 8,000 x 0.9235 x 0.153 = 1,130.36 of tax, half deducted
+  # (565.18). Earned income is 15,000 + 8,000 - 565.18 = 22,434.82 and AGI is
+  # 27,434.82, which is greater, so the credit is
+  # 7,152 - 0.2106 x (27,434.82 - 23,350) = 6,291.74.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 15_000
+        taxable_interest_income: 5_000
+        partnership_income: 8_000
+        passive_partnership_s_corp_income: 8_000
+        partnership_self_employment_net_earnings: 8_000
+      child1:
+        age: 15
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 5_000
+    eitc_investment_income_eligible: true
+    eitc: 6_291.74
+  absolute_error_margin: 0.01
+
+- name: Case 2b, a general partner's passive loss that is also earned income does not offset rental income
+  # The 4,000 loss is in earned income, so it stays off line 12. Line 1 is
+  # 9,000 and line 13 is the 4,000 of rental income, so line 14 is 13,000.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 20_000
+        taxable_interest_income: 9_000
+        rental_income: 4_000
+        partnership_income: -4_000
+        passive_partnership_s_corp_income: -4_000
+        partnership_self_employment_net_earnings: -4_000
+      child1:
+        age: 15
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 13_000
+    eitc_investment_income_eligible: false
+    eitc: 0
+
+- name: Case 2c, a limited partner's passive share stays in the passive basket
+  # Control. IRC 1402(a)(13) excludes a limited partner's share from net
+  # earnings from self-employment, so the 8,000 is on line 11 and line 14 is
+  # 5,000 + 8,000 = 13,000.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 15_000
+        taxable_interest_income: 5_000
+        partnership_income: 8_000
+        passive_partnership_s_corp_income: 8_000
+      child1:
+        age: 15
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 13_000
+    eitc_investment_income_eligible: false
+    eitc: 0
+
+- name: Case 2d, only the part of a passive share included in earned income is left out
+  # Of the 8,000 passive share, 5,000 is reported as partnership net earnings
+  # from self-employment and so is earned income; the other 3,000 is not and
+  # stays on line 11. Line 14 is 5,000 + 3,000 = 8,000.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 15_000
+        taxable_interest_income: 5_000
+        partnership_income: 8_000
+        passive_partnership_s_corp_income: 8_000
+        partnership_self_employment_net_earnings: 5_000
+      child1:
+        age: 15
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 8_000
+    eitc_investment_income_eligible: true
+
+- name: Case 2e, self-employment earnings of the opposite sign do not remove passive income
+  # The head holds a limited partnership interest with an 8,000 passive
+  # share and an active general partnership interest with a 3,000
+  # self-employment loss that is not passive. Only the 8,000 is passive, so
+  # line 11 is 8,000 and line 14 is 5,000 + 8,000 = 13,000.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 15_000
+        taxable_interest_income: 5_000
+        partnership_income: 5_000
+        passive_partnership_s_corp_income: 8_000
+        partnership_self_employment_net_earnings: -3_000
+      child1:
+        age: 15
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 13_000
+    eitc_investment_income_eligible: false
+    eitc: 0
+
+- name: Case 2f, a spouse's self-employment earnings do not remove the head's passive income
+  # The head is a limited partner with an 8,000 passive share. The spouse is
+  # an active general partner in another partnership with 8,000 of
+  # self-employment earnings that are not passive. Line 11 is the head's
+  # 8,000, so line 14 on the joint return is 5,000 + 8,000 = 13,000.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 15_000
+        taxable_interest_income: 5_000
+        partnership_income: 8_000
+        passive_partnership_s_corp_income: 8_000
+      spouse:
+        age: 33
+        partnership_income: 8_000
+        partnership_self_employment_net_earnings: 8_000
+      child1:
+        age: 15
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, spouse, child1, child2]
+    households:
+      household:
+        members: [head, spouse, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 13_000
+    eitc_investment_income_eligible: false
+    eitc: 0
+
+- name: Case 3a, farm rental income is passive income
+  # Schedule E line 40 net income is on line 11, so line 14 is
+  # 8,000 + 5,000 = 13,000.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 20_000
+        taxable_interest_income: 8_000
+        farm_rent_income: 5_000
+      child1:
+        age: 15
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 13_000
+    eitc_investment_income_eligible: false
+    eitc: 0
+
+- name: Case 3b, a farm rental loss nets against rental income in the passive basket
+  # Lines 11 and 12 are 4,000 and -4,000, so line 13 is 0 and line 14 is
+  # 9,000. AGI is 20,000 + 9,000 + 4,000 - 4,000 = 29,000, so the credit is
+  # 7,152 - 0.2106 x (29,000 - 23,350) = 5,962.11.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 20_000
+        taxable_interest_income: 9_000
+        rental_income: 4_000
+        farm_rent_income: -4_000
+      child1:
+        age: 15
+      child2:
+        age: 5
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 9_000
+    eitc_investment_income_eligible: true
+    eitc: 5_962.11
+  absolute_error_margin: 0.01

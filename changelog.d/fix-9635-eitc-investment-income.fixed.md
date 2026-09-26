@@ -1,0 +1,1 @@
+The EITC investment income test now counts only the head's and spouse's own amounts, leaves out passive partnership income that is also self-employment earnings, and includes farm rental income in the passive basket.
