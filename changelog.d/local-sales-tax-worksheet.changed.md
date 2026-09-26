@@ -1,0 +1,1 @@
+Compute the local general sales tax for the optional sales tax deduction with the IRS worksheet (the Optional Local Sales Tax Tables in the states it lists, the ratio method elsewhere) instead of 20% of the state amount. The combined state and local sales tax rate defaults to a population-weighted state average from Tax Foundation data and can be input.
