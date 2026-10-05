@@ -110,6 +110,27 @@ def create_additional_tax_bracket() -> Reform:
             tax_on_excluded = tax_at_main_rates(excluded, filing_status, bracket)
             return where(excluded > 0, max_(0, tax - tax_on_excluded), tax)
 
+    class income_tax_main_rates_on_taxable_income(Variable):
+        value_type = float
+        entity = TaxUnit
+        definition_period = YEAR
+        label = "Income tax at the main rates on all taxable income"
+        unit = USD
+        reference = "https://www.law.cornell.edu/uscode/text/26/1#h_1"
+
+        def formula(tax_unit, period, parameters):
+            # As in the baseline formula, on the reform's rate schedule: the
+            # 26 U.S.C. 1(h)(1) limit on the regular tax.
+            taxable_income = tax_unit(
+                "taxable_income_plus_section_911_exclusion", period
+            )
+            bracket = parameters(period).gov.contrib.additional_tax_bracket.bracket
+            filing_status = tax_unit("filing_status", period)
+            tax = tax_at_main_rates(max_(0, taxable_income), filing_status, bracket)
+            excluded = max_(0, tax_unit("foreign_earned_income_exclusion", period))
+            tax_on_excluded = tax_at_main_rates(excluded, filing_status, bracket)
+            return where(excluded > 0, max_(0, tax - tax_on_excluded), tax)
+
     class taxable_income_taxed_below_25_percent(Variable):
         value_type = float
         entity = TaxUnit
@@ -135,6 +156,7 @@ def create_additional_tax_bracket() -> Reform:
     class reform(Reform):
         def apply(self):
             self.update_variable(income_tax_main_rates)
+            self.update_variable(income_tax_main_rates_on_taxable_income)
             self.update_variable(regular_tax_before_credits)
             self.update_variable(taxable_income_taxed_below_25_percent)
 

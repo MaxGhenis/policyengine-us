@@ -1,0 +1,1 @@
+Limit the regular tax to the tax on all taxable income at the regular rates (26 U.S.C. 1(h)(1), "shall not exceed"; Schedule D Tax Worksheet line 47, Qualified Dividends and Capital Gain Tax Worksheet line 25), in `capital_gains_tax` and in the Harris, Biden 2025 budget and additional tax bracket reforms.

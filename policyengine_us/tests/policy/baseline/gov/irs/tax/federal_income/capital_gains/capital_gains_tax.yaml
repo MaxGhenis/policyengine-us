@@ -91,3 +91,44 @@
     foreign_earned_income_exclusion: 130_000
   output:
     capital_gains_tax: 0
+
+# 26 U.S.C. 1(h)(1): the tax "shall not exceed" the section 1(h) sum, so the
+# regular tax is the smaller of that sum (line 23) and the tax on all taxable
+# income (line 24). In 2025 the 0% amount ($48,350 single) ends below the top
+# of the 12% bracket ($48,475), so gain between the two is taxed at 15% where
+# ordinary income would be taxed at 12%.
+- name: The regular tax is limited to the tax on all taxable income
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    filing_status: SINGLE
+    taxable_income: 48_475
+    net_capital_gain: 125
+    adjusted_net_capital_gain: 125
+    foreign_earned_income_exclusion: 0
+  output:
+    # Line 5 = 48,350; line 9 = 0; line 17 = 125; line 18 = 18.75. Line 22
+    # (tax on 48,350) = 5,563.50; line 23 = 5,582.25. Line 24 (tax on
+    # 48,475) = 5,578.50; line 25 = 5,578.50. The capital gains tax is line
+    # 25 less line 22.
+    income_tax_main_rates: 5_563.50
+    capital_gains_tax: 15
+    income_tax_before_credits: 5_578.50
+
+- name: The same limit on the stacked tax of a Form 2555 filer
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    filing_status: SINGLE
+    taxable_income: 18_475
+    net_capital_gain: 125
+    adjusted_net_capital_gain: 125
+    foreign_earned_income_exclusion: 30_000
+  output:
+    # Foreign Earned Income Tax Worksheet line 3 = 48,475, so the capital
+    # gains worksheet is the one above: line 25 = 5,578.50. Line 5 (tax on
+    # 30,000) = 3,361.50; line 6 = 2,217. The regular tax on the 48,350 at
+    # the regular rates, less the tax on 30,000, is 2,202.
+    income_tax_main_rates: 2_202
+    capital_gains_tax: 15
+    income_tax_before_credits: 2_217
