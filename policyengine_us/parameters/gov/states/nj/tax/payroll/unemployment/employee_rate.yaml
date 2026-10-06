@@ -1,0 +1,32 @@
+description: New Jersey requires employees to contribute this share of taxable wages to unemployment insurance, including the unemployment compensation administration fund.
+values:
+  # 0.20% from January 1, 2000 through December 31, 2001. Earlier years reuse
+  # this rate so the parameter resolves in every period. The statute set other
+  # worker rates before 2000 (0.10% in 1998 and 0.15% in 1999, for example),
+  # which are not modeled.
+  0000-01-01: 0.002
+  # 0.1825% from January 1, 2002 through June 30, 2004. From January 1, 2000
+  # through June 30, 2004, workers also paid 0.20% to the Health Care Subsidy
+  # Fund under N.J.S.A. 43:21-7b, modeled separately.
+  2002-01-01: 0.001825
+  # 0.3825% since July 1, 2004, when worker Health Care Subsidy Fund
+  # contributions ended. From January 1, 2024, P.L. 2024, c.101 splits it into
+  # 0.3625% for the unemployment compensation fund and 0.02% for the
+  # unemployment compensation administration fund.
+  2004-07-01: 0.003825
+
+metadata:
+  period: year
+  unit: /1
+  label: New Jersey employee unemployment insurance contribution rate
+  reference:
+    - title: N.J.S.A. 43:21-7(d)(1)(D), worker contributions from 2000
+      href: https://www.nj.gov/labor/myunemployment/assets/pdfs/UI_statute.pdf#page=59
+    - title: N.J.S.A. 43:21-7(d)(1)(D), worker contributions from 2002 and July 2004
+      href: https://www.nj.gov/labor/myunemployment/assets/pdfs/UI_statute.pdf#page=60
+    - title: P.L. 2004, c.45, setting the 0.3825% worker rate from July 1, 2004
+      href: https://pub.njleg.state.nj.us/Bills/2004/PL04/45_.HTM
+    - title: N.J.S.A. 43:21-7(d)(1)(D), as amended by P.L. 2024, c.101
+      href: https://pub.njleg.state.nj.us/Bills/2024/AL24/101_.HTM
+    - title: New Jersey Department of Labor, worker contribution rates (2015-2027)
+      href: https://www.nj.gov/labor/ea/employer-services/rate-info/

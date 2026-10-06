@@ -1,7 +1,10 @@
+import numpy as np
+import pandas as pd
 import pytest
 from policyengine_core.reforms import Reform
 
-from policyengine_us import CountryTaxBenefitSystem, Simulation
+from policyengine_us import CountryTaxBenefitSystem, Microsimulation, Simulation
+from policyengine_us.data.dataset_schema import USSingleYearDataset
 from policyengine_us.system import system as SYSTEM
 
 PERIOD = "2026"
@@ -63,6 +66,48 @@ def make_simulation(
 
 def calculate(sim: Simulation, variable: str) -> float:
     return sim.calculate(variable, PERIOD)[0]
+
+
+def test_nj_worker_contributions_in_mixed_state_microsimulation():
+    # N.J.S.A. 43:21-7(d)(1), 34:15D-13, and 34:15D-22 apply a
+    # separate UI/WF wage cap to each NJ worker, excluding self-employment.
+    ids = np.arange(1, 6)
+    person = pd.DataFrame(
+        {
+            "person_id": ids,
+            "person_household_id": ids,
+            "person_tax_unit_id": ids,
+            "person_spm_unit_id": ids,
+            "person_family_id": ids,
+            "person_marital_unit_id": ids,
+            "age": np.full(5, 40),
+            "employment_income": [26_800, 100_000, 100_000, -1_000, 0],
+            "self_employment_income": [0, 0, 0, 0, 100_000],
+        }
+    )
+    dataset = USSingleYearDataset(
+        person=person,
+        household=pd.DataFrame(
+            {
+                "household_id": ids,
+                "state_fips": [34, 34, 36, 34, 34],
+                "household_weight": np.ones(5),
+            }
+        ),
+        tax_unit=pd.DataFrame({"tax_unit_id": ids}),
+        spm_unit=pd.DataFrame({"spm_unit_id": ids}),
+        family=pd.DataFrame({"family_id": ids}),
+        marital_unit=pd.DataFrame({"marital_unit_id": ids}),
+        time_period=2026,
+    )
+    sim = Microsimulation(dataset=dataset)
+
+    assert sim.calculate(
+        "nj_employee_unemployment_insurance_contribution", PERIOD
+    ).values == pytest.approx([102.51, 171.36, 0, 0, 0], abs=0.01)
+    assert sim.calculate(
+        "nj_employee_workforce_fund_contribution", PERIOD
+    ).values == pytest.approx([11.39, 19.04, 0, 0, 0], abs=0.01)
 
 
 @pytest.mark.parametrize(
@@ -335,8 +380,10 @@ def make_employer_total_simulation(
             {
                 "nj_employee_temporary_disability_insurance_contribution": 190,
                 "nj_employee_family_leave_insurance_contribution": 230,
-                "nj_employee_state_payroll_tax": 420,
-                "employee_state_payroll_tax": 420,
+                "nj_employee_unemployment_insurance_contribution": 171.36,
+                "nj_employee_workforce_fund_contribution": 19.04,
+                "nj_employee_state_payroll_tax": 610.40,
+                "employee_state_payroll_tax": 610.40,
             },
             id="NJ",
         ),
@@ -759,8 +806,8 @@ def test_connecticut_paid_leave_uses_fica_taxable_wages():
             {
                 "nj_temporary_disability_insurance_taxable_wages": 171_100,
                 "nj_family_leave_insurance_taxable_wages": 171_100,
-                "nj_taxable_earnings_for_state_unemployment_tax": 42_300,
-                "taxable_earnings_for_state_unemployment_tax": 42_300,
+                "nj_taxable_earnings_for_state_unemployment_tax": 44_800,
+                "taxable_earnings_for_state_unemployment_tax": 44_800,
             },
             id="NJ",
         ),

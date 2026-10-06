@@ -7,6 +7,9 @@ from policyengine_us.variables.gov.states.tax.payroll.unemployment._jurisdiction
 )
 
 PERIOD = "2026"
+# select_state_unemployment_tax_parameter reads these parameters for every
+# jurisdiction and every person, whatever the household's state.
+HELPER_PARAMETERS = ("taxable_wage_base", "default_rate")
 
 
 def make_simulation(state_code: str) -> Simulation:
@@ -57,3 +60,24 @@ def test_jurisdiction_specific_employer_state_unemployment_tax_formula(
 
     assert jurisdiction_tax == pytest.approx(expected)
     assert aggregate_tax == pytest.approx(jurisdiction_tax)
+
+
+@pytest.mark.parametrize(
+    ("group", "slug"),
+    [(group, slug) for group, _, slug in STATE_UNEMPLOYMENT_TAX_JURISDICTIONS],
+    ids=[state_code for _, state_code, _ in STATE_UNEMPLOYMENT_TAX_JURISDICTIONS],
+)
+def test_jurisdiction_unemployment_helper_parameters_cover_every_period(
+    group: str, slug: str
+):
+    # A jurisdiction whose parameter starts after a simulated period would make
+    # the all-jurisdiction helper raise ParameterNotFoundError for every
+    # household in that period, not only households in that jurisdiction.
+    unemployment = getattr(
+        getattr(SYSTEM.parameters.gov, group), slug
+    ).tax.payroll.unemployment
+    instants = ["0001-01-01"] + [f"{year}-01-01" for year in range(2000, 2031)]
+    for name in HELPER_PARAMETERS:
+        parameter = getattr(unemployment, name)
+        missing = [instant for instant in instants if parameter(instant) is None]
+        assert not missing, f"{parameter.name} has no value at {missing}"

@@ -1,0 +1,26 @@
+description: New Jersey requires employees to contribute this share of taxable wages to the Health Care Subsidy Fund.
+values:
+  # 0.20% from January 1, 2000 until June 30, 2004. Earlier years reuse this
+  # rate so the parameter resolves in every period. The statute set other
+  # rates for 1993 through 1999 (0.30% in 1998 and 0.25% in 1999, for
+  # example), which are not modeled.
+  0000-01-01: 0.002
+  # P.L. 2004, c.45 ended worker contributions to the fund on June 30, 2004,
+  # and raised the worker unemployment insurance rate by the same 0.20%.
+  2004-07-01: 0
+
+metadata:
+  period: year
+  unit: /1
+  label: New Jersey employee Health Care Subsidy Fund contribution rate
+  reference:
+    - title: N.J.S.A. 43:21-7b(a), worker contributions to the Health Care Subsidy Fund
+      href: https://www.nj.gov/labor/myunemployment/assets/pdfs/UI_statute.pdf#page=70
+    - title: N.J.S.A. 43:21-7e(a), combined worker UI and Health Care Subsidy Fund contributions of 0.4% for 2000-2001 and 0.3825% from 2002
+      href: https://www.nj.gov/labor/myunemployment/assets/pdfs/UI_statute.pdf#page=73
+    - title: P.L. 2004, c.45, ending worker contributions to the fund after June 30, 2004
+      href: https://pub.njleg.state.nj.us/Bills/2004/PL04/45_.HTM
+    - title: New Jersey Department of Labor, 2003 rates (worker H.C. rate 0.2%), archived
+      href: https://web.archive.org/web/20061216113251/http://www.state.nj.us/labor/ea/ea2003.html
+    - title: New Jersey Department of Labor, 2005 rates (worker H.C. contributions eliminated July 1, 2004), archived
+      href: https://web.archive.org/web/20061219102329/http://www.state.nj.us/labor/ea/ea2005.html

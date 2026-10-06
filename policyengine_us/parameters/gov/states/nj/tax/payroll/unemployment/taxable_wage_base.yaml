@@ -1,13 +1,81 @@
-description: Employer-side unemployment insurance taxable wage base for New Jersey.
+description: New Jersey limits wages subject to employee and employer unemployment insurance contributions, employee Health Care Subsidy Fund contributions, and employee workforce fund contributions to this amount per person.
 values:
-  0000-01-01: 42_300
+  # Published bases are verified from 2000 (21,200). Earlier years reuse the
+  # 2000 base, like the undated earliest entries of the other jurisdictions,
+  # because the all-jurisdiction state unemployment tax helper reads every
+  # jurisdiction's base in every period, whatever the household's state.
+  0000-01-01: 21_200
+  2001-01-01: 22_100
+  2002-01-01: 23_500
+  2003-01-01: 23_900
+  2004-01-01: 24_300
+  2005-01-01: 24_900
+  2006-01-01: 25_800
+  2007-01-01: 26_600
+  2008-01-01: 27_700
+  2009-01-01: 28_900
+  2010-01-01: 29_700
+  # NJDOL and U.S. DOL both publish a 2011 base below the 2010 base.
+  2011-01-01: 29_600
+  2012-01-01: 30_300
+  2013-01-01: 30_900
+  2014-01-01: 31_500
+  2015-01-01: 32_000
+  2016-01-01: 32_600
+  2017-01-01: 33_500
+  2018-01-01: 33_700
+  2019-01-01: 34_400
+  2020-01-01: 35_300
+  2021-01-01: 36_200
+  2022-01-01: 39_800
+  2023-01-01: 41_100
+  2024-01-01: 42_300
+  2025-01-01: 43_300
+  2026-01-01: 44_800
+  2027-01-01: 46_400
 
 metadata:
   period: year
   unit: currency-USD
   label: New Jersey unemployment taxable wage base
   reference:
-    - title: New Jersey Unemployment Compensation Law Section 43:21-7
-      href: https://www.nj.gov/labor/myunemployment/assets/pdfs/UI_statute.pdf#page=46
-    - title: Tax Measures of State Unemployment Insurance Tax Systems, CY 2024
-      href: https://oui.doleta.gov/unemploy/pdf/sigmeasures/sigmeasuitaxsys24.pdf#page=40
+    - title: New Jersey Unemployment Compensation Law Section 43:21-7(b)(3)
+      href: https://www.nj.gov/labor/myunemployment/assets/pdfs/UI_statute.pdf#page=47
+    - title: New Jersey Department of Labor, annual UI and WF/SWF taxable wage bases (2015-2027)
+      href: https://www.nj.gov/labor/ea/employer-services/rate-info/
+    - title: New Jersey Division of Taxation, Notice to employers of 2014 W-2 wage and tax statements (2014 base)
+      href: https://www.nj.gov/treasury/taxation/pdf/other_forms/git-er/m6025-2014.pdf
+    - title: New Jersey Department of Labor, 2001 rates (2001 base), archived
+      href: https://web.archive.org/web/20040604124209/http://www.state.nj.us/labor/ea/ea2001.html
+    - title: New Jersey Department of Labor, 2011 rates (2011 base), archived
+      href: https://web.archive.org/web/20131104031533/http://lwd.dol.state.nj.us/labor/ea/rates/ea2011.html
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2000
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2000-2009/January2000.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2001
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2000-2009/January2001.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2002
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2000-2009/January2002.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2003
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2000-2009/January2003.pdf#page=2
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2004
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2000-2009/January2004.pdf#page=2
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2005
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2000-2009/January2005.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2006
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2000-2009/January2006.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2007
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2000-2009/January2007.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2008
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2000-2009/January2008.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2009
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2000-2009/January2009.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2010
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2010-2019/January2010.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2011
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2010-2019/January2011.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2012
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2010-2019/January2012.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2013
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2010-2019/January2013.pdf#page=3
+    - title: U.S. DOL, Significant Provisions of State Unemployment Insurance Laws, January 2014
+      href: https://oui.doleta.gov/unemploy/content/sigpros/2010-2019/January2014.pdf#page=3

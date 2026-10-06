@@ -1,0 +1,25 @@
+description: New Jersey requires employees to contribute this share of taxable wages to the Workforce Development Partnership Fund and the Supplemental Workforce Fund for Basic Skills combined.
+values:
+  # Workforce Development Partnership Fund only: 0.025% in NJDOL's 2001 worker
+  # rates. Earlier years reuse this rate so the parameter resolves in every
+  # period; worker rates before 2001 are not verified.
+  0000-01-01: 0.00025
+  # N.J.S.A. 34:15D-22 adds 0.0175% for the Supplemental Workforce Fund from
+  # January 1, 2002, for a combined WF/SWF rate of 0.0425%.
+  2002-01-01: 0.000425
+
+metadata:
+  period: year
+  unit: /1
+  label: New Jersey employee workforce fund contribution rate
+  reference:
+    - title: N.J.S.A. 34:15D-22, enacted by P.L. 2001, c.152, s.2
+      href: https://pub.njleg.state.nj.us/Bills/2000/PL01/152_.HTM
+    - title: New Jersey Department of Labor, 2001 rates (WF worker rate), archived
+      href: https://web.archive.org/web/20040604124209/http://www.state.nj.us/labor/ea/ea2001.html
+    - title: New Jersey Department of Labor, 2002 rates (WF/SWF worker rate), archived
+      href: https://web.archive.org/web/20060821193602/http://www.state.nj.us/labor/ea/ea2002.html
+    - title: New Jersey Department of Labor, worker WF/SWF contribution rates (2015-2027)
+      href: https://www.nj.gov/labor/ea/employer-services/rate-info/
+    - title: New Jersey Department of Labor, employer handbook, Supplemental Workforce Fund
+      href: https://www.nj.gov/labor/ea/help/employer_handbook/taxes_wages.shtml

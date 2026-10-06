@@ -1,0 +1,202 @@
+# N.J.S.A. 43:21-7(b)(3) sets an annual UI taxable wage base for employees
+# and employers. Bases from 2000 come from NJDOL rate pages, U.S. DOL's
+# Significant Provisions of State UI Laws, and NJ Taxation W-2 notices.
+# Worker rates: N.J.S.A. 43:21-7(d)(1)(D) for UI; N.J.S.A. 43:21-7b for the
+# Health Care Subsidy Fund (HCSF); NJDOL rate tables and N.J.S.A. 34:15D-22
+# for WF/SWF. N.J.S.A. 43:21-7e caps combined worker UI and HCSF
+# contributions at 0.4% of the base for 2000-2001 and 0.3825% from 2002.
+# Pin an employer rate of 3.4% to isolate the annual base from employer rating.
+# Employer outputs start in 2010 because payroll_tax_gross_wages, which the
+# generic employer path reads, cannot be computed before 2010 (its FICA
+# pre-tax deduction list starts in 2010).
+
+- name: New Jersey worker contributions reuse the earliest verified base and rates before 2000.
+  period: 1995
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+  output:
+    # This case checks that pre-2000 periods resolve. It does not pin 1995
+    # law: the statute set different worker UI and HCSF rates for 1993-1999,
+    # and the model does not encode them or the pre-2000 bases.
+    nj_taxable_earnings_for_state_unemployment_tax: 21_200
+    # 21,200 * 0.002 = 42.40 each for UI and HCSF; 21,200 * 0.00025 = 5.30.
+    nj_employee_unemployment_insurance_contribution: 42.40
+    nj_employee_health_care_subsidy_fund_contribution: 42.40
+    nj_employee_workforce_fund_contribution: 5.30
+    nj_employee_state_payroll_tax: 90.10
+
+- name: New Jersey worker UI and HCSF contributions use the 2000 base and rates.
+  period: 2000
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 21_200
+    # UI 0.20% and HCSF 0.20% for 2000, together 0.4% of the base.
+    nj_employee_unemployment_insurance_contribution: 42.40
+    nj_employee_health_care_subsidy_fund_contribution: 42.40
+
+- name: New Jersey worker contributions use the 2001 base and rates.
+  period: 2001
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 22_100
+    # UI 0.20% and HCSF 0.20%, together 88.40 = 0.4% of 22,100;
+    # WF 0.025% before the 2002 SWF contribution.
+    nj_employee_unemployment_insurance_contribution: 44.20
+    nj_employee_health_care_subsidy_fund_contribution: 44.20
+    nj_employee_workforce_fund_contribution: 5.525
+    nj_employee_state_payroll_tax: 93.925
+
+- name: New Jersey worker contributions use the 2003 base and rates.
+  period: 2003
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 23_900
+    # UI 23,900 * 0.001825 = 43.6175; HCSF 23,900 * 0.002 = 47.80;
+    # together 91.4175 = 0.3825% of 23,900. WF/SWF 23,900 * 0.000425 = 10.1575.
+    nj_employee_unemployment_insurance_contribution: 43.6175
+    nj_employee_health_care_subsidy_fund_contribution: 47.80
+    nj_employee_workforce_fund_contribution: 10.1575
+    nj_employee_state_payroll_tax: 101.575
+
+- name: New Jersey 2004 worker UI and HCSF use the rates in force on January 1, before the July change.
+  period: 2004
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 24_300
+    # 24,300 * 0.001825 = 44.3475; 24,300 * 0.002 = 48.60. Their sum,
+    # 92.9475, equals 0.3825% of 24,300, the combined rate before and after
+    # July 1, 2004.
+    nj_employee_unemployment_insurance_contribution: 44.3475
+    nj_employee_health_care_subsidy_fund_contribution: 48.60
+    nj_employee_workforce_fund_contribution: 10.3275
+
+- name: New Jersey worker UI uses 0.3825% and HCSF contributions end after June 30, 2004.
+  period: 2005
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 24_900
+    # 24,900 * 0.003825 = 95.2425; 24,900 * 0.000425 = 10.5825.
+    nj_employee_unemployment_insurance_contribution: 95.2425
+    nj_employee_health_care_subsidy_fund_contribution: 0
+    nj_employee_workforce_fund_contribution: 10.5825
+    nj_employee_state_payroll_tax: 105.825
+
+- name: New Jersey employee and employer UI use the published 2011 base, which is below the 2010 base.
+  period: 2011
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+    employer_state_unemployment_tax_rate: 0.034
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 29_600
+    taxable_earnings_for_state_unemployment_tax: 29_600
+    nj_employee_unemployment_insurance_contribution: 113.22
+    nj_employee_workforce_fund_contribution: 12.58
+    nj_employer_state_unemployment_tax: 1_006.40
+
+- name: New Jersey employee and employer UI use the 2014 taxable wage base.
+  period: 2014
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+    employer_state_unemployment_tax_rate: 0.034
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 31_500
+    taxable_earnings_for_state_unemployment_tax: 31_500
+    # 120.4875 + 13.3875 = 133.875, the UI/WF/SWF maximum in NJ Taxation's
+    # 2014 W-2 notice (M-6025), which shows 133.88.
+    nj_employee_unemployment_insurance_contribution: 120.4875
+    nj_employee_health_care_subsidy_fund_contribution: 0
+    nj_employee_workforce_fund_contribution: 13.3875
+    nj_employee_state_payroll_tax: 133.875
+    nj_employer_state_unemployment_tax: 1_071
+
+- name: New Jersey employee and employer UI use the 2015 taxable wage base.
+  period: 2015
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+    employer_state_unemployment_tax_rate: 0.034
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 32_000
+    taxable_earnings_for_state_unemployment_tax: 32_000
+    # 32,000 * 0.003825 = 122.40; 32,000 * 0.000425 = 13.60.
+    nj_employee_unemployment_insurance_contribution: 122.40
+    nj_employee_workforce_fund_contribution: 13.60
+    nj_employer_state_unemployment_tax: 1_088
+
+- name: New Jersey employee and employer UI use the 2024 taxable wage base.
+  period: 2024
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+    employer_state_unemployment_tax_rate: 0.034
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 42_300
+    taxable_earnings_for_state_unemployment_tax: 42_300
+    nj_employee_unemployment_insurance_contribution: 161.7975
+    nj_employee_workforce_fund_contribution: 17.9775
+    nj_employer_state_unemployment_tax: 1_438.20
+
+- name: New Jersey employee and employer UI use the 2025 taxable wage base.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+    employer_state_unemployment_tax_rate: 0.034
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 43_300
+    taxable_earnings_for_state_unemployment_tax: 43_300
+    nj_employee_unemployment_insurance_contribution: 165.6225
+    nj_employee_workforce_fund_contribution: 18.4025
+    nj_employer_state_unemployment_tax: 1_472.20
+
+- name: New Jersey employee and employer UI use the 2026 taxable wage base.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+    employer_state_unemployment_tax_rate: 0.034
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 44_800
+    taxable_earnings_for_state_unemployment_tax: 44_800
+    nj_employee_unemployment_insurance_contribution: 171.36
+    nj_employee_workforce_fund_contribution: 19.04
+    nj_employer_state_unemployment_tax: 1_523.20
+
+- name: New Jersey employee and employer UI use the 2027 taxable wage base.
+  period: 2027
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+    employer_state_unemployment_tax_rate: 0.034
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 46_400
+    taxable_earnings_for_state_unemployment_tax: 46_400
+    nj_employee_unemployment_insurance_contribution: 177.48
+    nj_employee_workforce_fund_contribution: 19.72
+    nj_employer_state_unemployment_tax: 1_577.60

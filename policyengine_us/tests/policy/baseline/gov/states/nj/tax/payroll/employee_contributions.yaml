@@ -1,0 +1,106 @@
+# N.J.S.A. 43:21-7(d)(1) requires employee UI contributions; N.J.S.A.
+# 34:15D-13 and 34:15D-22 require workforce and supplemental workforce
+# contributions. Ordinary covered workers pay 0.3825% UI and 0.0425% WF/SWF.
+# NJDOL annual wage bases: https://www.nj.gov/labor/ea/employer-services/rate-info/
+
+- name: New Jersey employee UI and workforce contributions apply below the wage base.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 26_800
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 26_800
+    # 26,800 * 0.003825 = 102.51; 26,800 * 0.000425 = 11.39.
+    nj_employee_unemployment_insurance_contribution: 102.51
+    nj_employee_workforce_fund_contribution: 11.39
+    # TDI 50.92 + FLI 61.64 + UI 102.51 + WF/SWF 11.39.
+    nj_employee_state_payroll_tax: 226.46
+    employee_state_payroll_tax: 226.46
+
+- name: New Jersey employee UI and workforce contributions apply before 2026.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 26_800
+  output:
+    nj_employee_unemployment_insurance_contribution: 102.51
+    nj_employee_workforce_fund_contribution: 11.39
+
+- name: New Jersey employee UI and workforce contributions reach their caps at the wage base.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 44_800
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 44_800
+    # 44,800 * 0.003825 = 171.36; 44,800 * 0.000425 = 19.04.
+    nj_employee_unemployment_insurance_contribution: 171.36
+    nj_employee_workforce_fund_contribution: 19.04
+
+- name: New Jersey employee UI and workforce contributions stop increasing above the wage base.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    state_code: NJ
+    employment_income: 100_000
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 44_800
+    nj_employee_unemployment_insurance_contribution: 171.36
+    nj_employee_workforce_fund_contribution: 19.04
+
+- name: New Jersey spouses each have a separate employee UI and workforce wage cap.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        employment_income: 100_000
+      spouse:
+        employment_income: 60_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: NJ
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: [44_800, 44_800]
+    nj_employee_unemployment_insurance_contribution: [171.36, 171.36]
+    nj_employee_workforce_fund_contribution: [19.04, 19.04]
+
+- name: New Jersey self-employment income does not incur employee UI or workforce contributions.
+  period: 2026
+  input:
+    state_code: NJ
+    employment_income: 0
+    self_employment_income: 100_000
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 0
+    nj_employee_unemployment_insurance_contribution: 0
+    nj_employee_workforce_fund_contribution: 0
+    nj_employee_state_payroll_tax: 0
+
+- name: Negative New Jersey wages do not generate negative UI or workforce contributions.
+  period: 2026
+  input:
+    state_code: NJ
+    employment_income: -1_000
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 0
+    nj_employee_unemployment_insurance_contribution: 0
+    nj_employee_workforce_fund_contribution: 0
+
+- name: New York wages do not incur New Jersey employee UI or workforce contributions.
+  period: 2026
+  input:
+    state_code: NY
+    employment_income: 100_000
+  output:
+    nj_taxable_earnings_for_state_unemployment_tax: 0
+    nj_employee_unemployment_insurance_contribution: 0
+    nj_employee_workforce_fund_contribution: 0
+    nj_employee_state_payroll_tax: 0

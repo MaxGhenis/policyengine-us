@@ -1,0 +1,54 @@
+# The generic state unemployment tax path reads every jurisdiction's
+# unemployment parameters for every person, whatever the household's state.
+# A gap in one jurisdiction's parameter history would break employer payroll
+# taxes in every state for the missing years, so these cases compute
+# non-New Jersey employers in years before 2015, which New Jersey's dated
+# wage base must also cover. Employer UI outputs start in 2010 because
+# payroll_tax_gross_wages cannot be computed before 2010 (its FICA pre-tax
+# deduction list starts in 2010).
+
+- name: Case 1, Texas employer unemployment tax resolves in 2010.
+  period: 2010
+  input:
+    state_code: TX
+    employment_income: 50_000
+  output:
+    # Texas base 9,000 at the 2.7% default rate.
+    taxable_earnings_for_state_unemployment_tax: 9_000
+    employer_state_unemployment_tax: 243
+
+- name: Case 2, Texas employer payroll tax resolves in 2014.
+  period: 2014
+  input:
+    state_code: TX
+    employment_income: 50_000
+  output:
+    taxable_earnings_for_state_unemployment_tax: 9_000
+    employer_state_unemployment_tax: 243
+    # Social Security 3,100 + Medicare 725 + FUTA 42 (0.6% of 7,000) + state
+    # UI 243.
+    employer_payroll_tax: 4_110
+    employer_cost_of_employment: 54_110
+
+- name: Case 3, New York employer payroll tax resolves in 2013.
+  period: 2013
+  input:
+    state_code: NY
+    employment_income: 50_000
+  output:
+    # New York base 12,500 at the 3.4% default rate.
+    taxable_earnings_for_state_unemployment_tax: 12_500
+    employer_state_unemployment_tax: 425
+    # Social Security 3,100 + Medicare 725 + FUTA 105 (0.6% plus New York's
+    # 0.9% 2013 credit reduction, on 7,000) + state UI 425.
+    employer_payroll_tax: 4_355
+
+- name: Case 4, California employer unemployment tax resolves in 2014.
+  period: 2014
+  input:
+    state_code: CA
+    employment_income: 50_000
+  output:
+    # California base 7,000 at the 3.4% default rate.
+    taxable_earnings_for_state_unemployment_tax: 7_000
+    employer_state_unemployment_tax: 238
