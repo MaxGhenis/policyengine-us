@@ -1,0 +1,1 @@
+Exclude pre-tax payroll contributions from federal EITC, ACTC, and state federal-style earned-income credit bases. Apply California's wage exclusions to CalEITC and YCTC while retaining payroll HSA contributions and preserving the AMT kiddie-tax earnings cap.

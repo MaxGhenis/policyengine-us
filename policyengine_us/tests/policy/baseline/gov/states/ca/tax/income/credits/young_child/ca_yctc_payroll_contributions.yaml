@@ -1,0 +1,53 @@
+# RTC 17052.1(a)(2)(C) phases out the YCTC using California earned income;
+# FTB 3514 line 25 subtracts the threshold from California earned income.
+# https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=17052.1
+# https://www.ftb.ca.gov/forms/2021/2021-3514-instructions.html
+- name: Traditional retirement contributions reduce the YCTC phase-out income
+  period: 2021
+  input:
+    people:
+      parent:
+        age: 35
+        employment_income: 27_100
+        traditional_401k_contributions: 2_000
+      child:
+        age: 5
+        ca_is_qualifying_child_for_caleitc: true
+    tax_units:
+      tax_unit:
+        members: [parent, child]
+        ca_eitc: 1
+    households:
+      household:
+        members: [parent, child]
+        state_code: CA
+  output:
+    ca_eitc_earned_income: 25_100
+    # 1,000 - (25,100 - 25,000) / 100 * 20.
+    ca_yctc: 980
+
+- name: Payroll HSA contributions do not reduce the YCTC phase-out income
+  # EDD DE 231EB lists employee HSA salary reductions as taxable CA wages.
+  # https://edd.ca.gov/siteassets/files/pdf_pub_ctr/de231eb.pdf
+  period: 2021
+  input:
+    people:
+      parent:
+        age: 35
+        employment_income: 27_100
+        health_savings_account_payroll_contributions: 2_000
+      child:
+        age: 5
+        ca_is_qualifying_child_for_caleitc: true
+    tax_units:
+      tax_unit:
+        members: [parent, child]
+        ca_eitc: 1
+    households:
+      household:
+        members: [parent, child]
+        state_code: CA
+  output:
+    ca_eitc_earned_income: 27_100
+    # 1,000 - (27,100 - 25,000) / 100 * 20.
+    ca_yctc: 580

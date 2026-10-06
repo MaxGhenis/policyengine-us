@@ -14,7 +14,8 @@ class eitc_earned_income(Variable):
 
     def formula(tax_unit, period, parameters):
         earned_income_sources = [
-            "employment_income",
+            # IRC 32(c)(2)(A)(i) includes only wages in gross income.
+            "irs_employment_income",
             "self_employment_income",
             "sstb_self_employment_income",
             "farm_operations_income",

@@ -1,0 +1,62 @@
+# IRC 32(c)(2)(A): only taxable wages, with the existing SE adjustment.
+# https://www.law.cornell.edu/uscode/text/26/32#c_2
+- name: Negative wages do not create positive excluded wages or earnings
+  period: 2026
+  input:
+    employment_income: -1_200
+  output:
+    filer_adjusted_earnings: 0
+
+- name: State federal-style earnings exclude traditional but not Roth deferrals
+  period: 2024
+  input:
+    employment_income: [10_000, 10_000]
+    traditional_401k_contributions_desired: [2_000, 0]
+    roth_401k_contributions_desired: [0, 2_000]
+  output:
+    adjusted_earnings: [10_000, 10_000]
+    filer_adjusted_earnings: [8_000, 10_000]
+
+- name: Pre-tax wages are excluded before the self-employment adjustment floor
+  period: 2026
+  input:
+    employment_income: [10_000, 10_000]
+    traditional_401k_contributions_desired: [2_000, 2_000]
+    self_employment_income: [-9_000, 4_000]
+    self_employment_tax: [0, 600]
+  output:
+    filer_adjusted_earnings: [0, 11_700]
+
+- name: Dependent exclusions cannot reduce the earnings of another filer
+  period: 2026
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 10_000
+        traditional_401k_contributions_desired: 2_000
+      child:
+        age: 16
+        employment_income: 5_000
+        traditional_401k_contributions_desired: 1_000
+        is_tax_unit_dependent: true
+    tax_units:
+      tax_unit:
+        members: [head, child]
+  output:
+    filer_adjusted_earnings: 8_000
+
+- name: Oklahoma reconstructed federal EITC uses taxable wages
+  # 68 O.S. section 2357.43 uses IRC 32 as in effect for tax year 2020.
+  # https://www.oklegislature.gov/cf_pdf/2021-22%20ENR/hB/HB2962%20ENR.PDF
+  period: 2026
+  input:
+    state_code: OK
+    age: 35
+    employment_income: 10_000
+    traditional_401k_contributions_desired: 2_000
+    eitc_child_count: 1
+  output:
+    filer_adjusted_earnings: 8_000
+    # The frozen 2020 one-child phase-in rate is 34%.
+    ok_federal_eitc_phased_in: 2_720

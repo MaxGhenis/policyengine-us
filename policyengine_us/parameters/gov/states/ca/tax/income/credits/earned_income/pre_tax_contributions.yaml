@@ -1,0 +1,17 @@
+description: California excludes these payroll contributions from wages used to determine California earned income for the CalEITC.
+values:
+  2015-01-01:
+    - traditional_401k_contributions
+    - traditional_403b_contributions
+    - pre_tax_health_insurance_premiums
+metadata:
+  label: CalEITC pre-tax payroll contributions
+  unit: list
+  period: year
+  reference:
+    - title: California Revenue and Taxation Code Section 17052(c)
+      href: https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=17052.
+    - title: 2025 California Earned Income Tax Credit Booklet, Step 5, line 13
+      href: https://www.ftb.ca.gov/forms/2025/2025-3514-booklet.html
+    - title: EDD DE 231EB, Taxability of Employee Benefits, cafeteria plans, HSA, and retirement plans
+      href: https://edd.ca.gov/siteassets/files/pdf_pub_ctr/de231eb.pdf

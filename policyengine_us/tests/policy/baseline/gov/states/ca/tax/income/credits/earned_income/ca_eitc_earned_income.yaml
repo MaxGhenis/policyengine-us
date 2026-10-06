@@ -1,0 +1,107 @@
+# RTC 17052(c) and FTB 3514 Step 5, line 13 use California taxable wages
+# (W-2 box 16). EDD DE 231EB distinguishes excluded qualified retirement and
+# cafeteria-plan health contributions from taxable HSA salary reductions.
+# https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=17052.
+# https://www.ftb.ca.gov/forms/2025/2025-3514-booklet.html
+# https://edd.ca.gov/siteassets/files/pdf_pub_ctr/de231eb.pdf
+- name: California excludes traditional retirement and pre-tax health contributions but retains Roth contributions
+  period: 2025
+  input:
+    state_code: [CA, CA, CA, CA, CA]
+    employment_income: [10_000, 10_000, 10_000, 10_000, 10_000]
+    traditional_401k_contributions: [2_000, 0, 0, 0, 0]
+    traditional_403b_contributions: [0, 2_000, 0, 0, 0]
+    pre_tax_health_insurance_premiums: [0, 0, 2_000, 0, 0]
+    roth_401k_contributions: [0, 0, 0, 2_000, 0]
+    roth_403b_contributions: [0, 0, 0, 0, 2_000]
+  output:
+    ca_eitc_earned_income: [8_000, 8_000, 8_000, 10_000, 10_000]
+
+- name: Payroll HSA contributions remain in California earned income but are excluded federally
+  period: 2024
+  input:
+    state_code: CA
+    employment_income: 10_000
+    health_savings_account_payroll_contributions: 2_000
+  output:
+    eitc_earned_income: 8_000
+    filer_adjusted_earnings: 8_000
+    ca_eitc_earned_income: 10_000
+
+- name: California retains HSA wages before flooring earnings with self-employment losses
+  period: 2024
+  input:
+    state_code: [CA, CA]
+    employment_income: [1_000, 1_000]
+    self_employment_income: [-750, -1_250]
+    health_savings_account_payroll_contributions: [500, 500]
+  output:
+    eitc_earned_income: [0, 0]
+    filer_adjusted_earnings: [0, 0]
+    # Adding the HSA contribution to floored federal income would give 500
+    # in both cases; California earnings are max(0, wages + business loss).
+    ca_eitc_earned_income: [250, 0]
+
+- name: California payroll exclusions do not reduce earnings below zero
+  period: 2023
+  input:
+    state_code: CA
+    employment_income: 1_000
+    traditional_401k_contributions: 500
+    self_employment_income: -750
+  output:
+    ca_eitc_earned_income: 0
+
+- name: California earned income excludes dependent wages and payroll deductions
+  period: 2025
+  input:
+    people:
+      parent:
+        age: 40
+        employment_income: 10_000
+        traditional_401k_contributions: 2_000
+      child:
+        age: 16
+        is_tax_unit_dependent: true
+        employment_income: 5_000
+        traditional_401k_contributions: 1_000
+    tax_units:
+      tax_unit:
+        members: [parent, child]
+    households:
+      household:
+        members: [parent, child]
+        state_code: CA
+  output:
+    ca_eitc_earned_income: 8_000
+
+- name: PolicyBench scenario 023 earnings exclude the actual traditional 401k contribution
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    state_code: CA
+    age: 28
+    employment_income: 17_442.65
+    # Contribution implied by the audit's gross/net earnings difference;
+    # these are provision inputs, not a raw scenario JSON fixture.
+    traditional_401k_contributions: 2_778.48
+  output:
+    ca_eitc_earned_income: 14_664.17
+
+- name: The CalEITC AGI comparison still controls after payroll exclusions
+  # RTC 17052(a) incorporates IRC 32(a)(2)(B); FTB 3514's EITC worksheet
+  # takes the smaller earnings/AGI credit. In 2023 for one child:
+  # (6,577 - (10,182.45 - 6,577)) * 0.34 * 0.85 = 858.77795.
+  # The AGI-based credit is below the credit at either 8,000 or 10,000.
+  period: 2023
+  absolute_error_margin: 0.01
+  input:
+    state_code: [CA, CA]
+    age: [35, 35]
+    employment_income: [10_000, 10_000]
+    traditional_401k_contributions: [0, 2_000]
+    adjusted_gross_income: [10_182.45, 10_182.45]
+    eitc_child_count: [1, 1]
+  output:
+    ca_eitc_earned_income: [10_000, 8_000]
+    ca_eitc: [858.77795, 858.77795]

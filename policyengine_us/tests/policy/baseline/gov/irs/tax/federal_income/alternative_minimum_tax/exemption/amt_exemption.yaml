@@ -3,7 +3,7 @@
   input:
     amt_income: 200_000
     amt_kiddie_tax_applies: false
-    filer_adjusted_earnings: 400_000
+    adjusted_earnings: 400_000
     filing_status: SINGLE
   output:
     # Base exemption for SINGLE in 2022 is 75,900
@@ -16,7 +16,7 @@
   input:
     amt_income: 200_000
     amt_kiddie_tax_applies: true
-    filer_adjusted_earnings: 10_000
+    adjusted_earnings: 10_000
     filing_status: SINGLE
   output:
     # Base exemption for SINGLE in 2022 is 75,900
@@ -30,7 +30,7 @@
   input:
     amt_income: 1_000_000
     amt_kiddie_tax_applies: false
-    filer_adjusted_earnings: 400_000
+    adjusted_earnings: 400_000
     filing_status: SINGLE
   output:
     # Base exemption for SINGLE in 2022 is 75,900
@@ -44,7 +44,7 @@
   input:
     amt_income: 600_000
     amt_kiddie_tax_applies: false
-    filer_adjusted_earnings: 400_000
+    adjusted_earnings: 400_000
     filing_status: SINGLE
   output:
     # Base exemption for SINGLE in 2022 is 75,900
@@ -58,7 +58,7 @@
   input:
     amt_income: 500_000
     amt_kiddie_tax_applies: false
-    filer_adjusted_earnings: 400_000
+    adjusted_earnings: 400_000
     filing_status: JOINT
   output:
     # Base exemption for JOINT in 2022 is 118,100
@@ -66,3 +66,22 @@
     # income_excess = max(0, 500,000 - 1,079,800) = 0
     # Full exemption of 118,100
     amt_exemption: 118_100
+
+# IRC 59(j)(1)(A) refers to section 911(d)(2), not section 32(c)(2).
+# https://www.law.cornell.edu/uscode/text/26/59#j_1_A
+- name: EITC wage exclusions do not reduce the AMT kiddie-tax earnings cap
+  period: 2022
+  input:
+    age: 17
+    # This child files their own return rather than belonging to a parent's unit.
+    is_tax_unit_head: true
+    employment_income: 10_000
+    traditional_401k_contributions_desired: 2_000
+    amt_income: 200_000
+    amt_kiddie_tax_applies: true
+    filing_status: SINGLE
+  output:
+    adjusted_earnings: 10_000
+    filer_adjusted_earnings: 8_000
+    # Gross earnings of 10,000 plus the 2022 child exemption of 8,200.
+    amt_exemption: 18_200
