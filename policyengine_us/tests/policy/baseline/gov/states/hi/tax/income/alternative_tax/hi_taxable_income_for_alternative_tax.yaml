@@ -41,3 +41,18 @@
     net_capital_gain: 50_000
   output:
     hi_taxable_income_for_alternative_tax: 48_000
+
+# Tax on Capital Gains Worksheet (N-11 instructions), line 2: federal
+# Schedule D line 15, or Form 1040 line 7 if Schedule D is not required.
+# Capital gain distributions reported without Schedule D therefore count
+# as net long-term capital gain.
+- name: Capital gain distributions reported without Schedule D reduce taxable income
+  period: 2021
+  input:
+    filing_status: SINGLE
+    hi_alternative_tax_on_capital_gains_eligible: true
+    hi_taxable_income: 100_000
+    non_sch_d_capital_gains: 20_000
+  output:
+    # Lines 4 and 7 are both 20_000; max(100_000 - 20_000, 24_000).
+    hi_taxable_income_for_alternative_tax: 80_000

@@ -17,7 +17,15 @@ class mt_regular_income_tax_indiv(Variable):
             period,
         )
         if p.capital_gains.in_effect:
-            ltcg = person("long_term_capital_gains", period)
+            # Form 2 line 2 takes federal Form 1040 line 7 when Schedule D is
+            # not required, so capital gain distributions reported without
+            # Schedule D count as net long-term capital gains
+            # (26 U.S.C. 852(b)(3)(B); MCA 15-30-2103).
+            ltcg = add(
+                person,
+                period,
+                ["long_term_capital_gains", "non_sch_d_capital_gains"],
+            )
             stcg = person("short_term_capital_gains", period)
             net_cg = ltcg + stcg
             # Montana Form 2 line 2 uses the federal net long-term capital gain

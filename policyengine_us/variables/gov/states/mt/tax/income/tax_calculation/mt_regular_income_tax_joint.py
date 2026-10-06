@@ -16,7 +16,15 @@ class mt_regular_income_tax_joint(Variable):
         status = filing_status.possible_values
 
         if p.capital_gains.in_effect:
-            ltcg = add(tax_unit, period, ["long_term_capital_gains"])
+            # Form 2 line 2 takes federal Form 1040 line 7 when Schedule D is
+            # not required, so capital gain distributions reported without
+            # Schedule D count as net long-term capital gains
+            # (26 U.S.C. 852(b)(3)(B); MCA 15-30-2103).
+            ltcg = add(
+                tax_unit,
+                period,
+                ["long_term_capital_gains", "non_sch_d_capital_gains"],
+            )
             stcg = add(tax_unit, period, ["short_term_capital_gains"])
             net_cg = ltcg + stcg
             # Montana Form 2 line 2 uses the federal net long-term capital gain

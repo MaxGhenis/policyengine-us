@@ -27,3 +27,94 @@
     state_code: WI
   output:
     wi_capital_gain_loss_subtraction: 0
+
+# Capital gain distributions are gain on assets held more than one year
+# (26 U.S.C. 852(b)(3)(B)), so Wis. Stat. 71.05(6)(b)9 subtracts 30% of them.
+# Distributions reported on Form 1040 without Schedule D enter Schedule WD
+# line 14 (part of line 17); when they are the only capital gain, Schedule SB
+# line 5 subtracts 30% of the distribution directly (2025 Schedule SB
+# instructions, page 2).
+- name: Capital gain distributions reported without Schedule D, Schedule SB line 5 exception
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    non_sch_d_capital_gains: 1_000
+    state_code: WI
+  output:
+    wi_capital_gain_loss_subtraction: 300  # = 1_000 * 0.30
+    # Distributions never create a Wisconsin capital loss addition.
+    wi_capital_loss: 0
+    wi_capital_gain_loss_addition: 0
+
+- name: Distributions combine with Schedule D long-term gain on Schedule WD line 17
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    long_term_capital_gains: 900
+    non_sch_d_capital_gains: 100
+    state_code: WI
+  output:
+    wi_capital_gain_loss_subtraction: 300  # = (900 + 100) * 0.30
+
+- name: Short-term loss nets against distributions before the 30 percent applies
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    short_term_capital_gains: -400
+    non_sch_d_capital_gains: 1_000
+    state_code: WI
+  output:
+    # Line 17 = 1_000, line 18 = 600, line 19 = min(1_000, 600) = 600.
+    wi_capital_gain_loss_subtraction: 180  # = 600 * 0.30
+
+- name: Short-term loss larger than distributions leaves no subtraction
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    short_term_capital_gains: -1_500
+    non_sch_d_capital_gains: 1_000
+    state_code: WI
+  output:
+    wi_capital_gain_loss_subtraction: 0  # line 18 is a loss
+
+- name: No Wisconsin subtraction for distributions outside Wisconsin
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    non_sch_d_capital_gains: 1_000
+    state_code: MN
+  output:
+    wi_capital_gain_loss_subtraction: 0
+
+- name: PolicyBench scenario_091, single filer with capital gain distributions only
+  absolute_error_margin: 0.01
+  period: 2026
+  input:
+    people:
+      head:
+        age: 22
+        employment_income: 27_000
+        fsla_overtime_premium: 628
+        non_qualified_dividend_income: 208
+        qualified_dividend_income: 3_968
+        taxable_interest_income: 4_806
+        non_sch_d_capital_gains: 1_170
+        traditional_401k_contributions: 926
+        traditional_ira_contributions: 43
+        roth_401k_contributions: 163
+        roth_ira_contributions: 67
+        bank_account_assets: 558_700
+        stock_assets: 718_100
+        is_enrolled_at_least_half_time_for_american_opportunity_credit: true
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: WI
+  output:
+    # 27_000 - 926 + 208 + 3_968 + 4_806 + 1_170 - 43
+    adjusted_gross_income: 36_183
+    wi_capital_gain_loss_subtraction: 351  # = 1_170 * 0.30
+    wi_agi: 35_832  # = 36_183 - 351

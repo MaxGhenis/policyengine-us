@@ -6,6 +6,8 @@ values:
     - dividend_income
     # Capital gains included in AGI
     - capital_gains
+    # Capital gain distributions reported on Form 1040 line 7 without Schedule D.
+    - non_sch_d_capital_gains
 metadata:
   unit: list
   label: Michigan interest, dividends, and capital gains deduction income types  

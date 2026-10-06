@@ -9,14 +9,25 @@ class mt_capital_gains_tax_indiv(Variable):
     )
     unit = USD
     definition_period = YEAR
-    reference = "https://mtrevenue.gov/wp-content/uploads/dlm_uploads/2023/12/Form_2_2023_Instructions.pdf#page=6"  # Net Long-Term Capital Gains Tax Table
+    reference = (
+        "https://mtrevenue.gov/wp-content/uploads/dlm_uploads/2023/12/Form_2_2023_Instructions.pdf#page=6",  # Net Long-Term Capital Gains Tax Table
+        "https://revenue.mt.gov/files/Forms/Montana-Individual-Income-Tax-Return-Form-2/2024_Montana_Individual_Income_Tax_Return_Form_2_Instructions.pdf#page=19",  # Line 2, net long-term capital gains
+    )
     defined_for = "mt_married_filing_separately_on_same_return_eligible"
 
     def formula(person, period, parameters):
         p = parameters(period).gov.states.mt.tax.income.main.capital_gains
         # the tax for capital gains comes into effect after 2024
         if p.in_effect:
-            ltcg = person("long_term_capital_gains", period)
+            # Form 2 line 2 takes federal Form 1040 line 7 when Schedule D is
+            # not required, so capital gain distributions reported without
+            # Schedule D count as net long-term capital gains
+            # (26 U.S.C. 852(b)(3)(B); MCA 15-30-2103).
+            ltcg = add(
+                person,
+                period,
+                ["long_term_capital_gains", "non_sch_d_capital_gains"],
+            )
             stcg = person("short_term_capital_gains", period)
             net_cg = ltcg + stcg
             capital_gains = max_(min_(ltcg, net_cg), 0)

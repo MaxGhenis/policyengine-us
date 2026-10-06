@@ -12,7 +12,14 @@ class nm_net_capital_gains_deduction(Variable):
 
     def formula(tax_unit, period, parameters):
         p = parameters(period).gov.states.nm.tax.income.deductions.net_capital_gains
-        net_capital_gains = max_(0, add(tax_unit, period, ["capital_gains"]))
+        # Capital gain distributions are long-term capital gain
+        # (26 U.S.C. 852(b)(3)(B)) within the IRC 1222(11) net capital gain
+        # the deduction uses, including those reported on Form 1040 without
+        # Schedule D.
+        net_capital_gains = max_(
+            0,
+            add(tax_unit, period, ["capital_gains", "non_sch_d_capital_gains"]),
+        )
         uncapped_element = p.uncapped_element_percent * net_capital_gains
         filing_status = tax_unit("filing_status", period)
         separate = filing_status == filing_status.possible_values.SEPARATE

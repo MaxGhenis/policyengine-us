@@ -122,3 +122,36 @@
         state_fips: 5  # AR
   output:  # expected results from filing out 2021 AR1000D form
     ar_taxable_capital_gains_joint: [-1_500, -1_000]
+
+# Ark. Code 26-51-815; 2025 AR1000D. The AR1000D is completed for a gain
+# reported on federal Form 1040 line 7 when Schedule D is not required, its
+# line 1 takes that amount as long-term gain, and line 8 taxes 50% of the net
+# gain, so capital gain distributions reported without Schedule D are 50%
+# taxable.
+- name: Capital gain distributions reported without Schedule D, 50% taxable
+  period: 2025
+  input:
+    state_code: AR
+    non_sch_d_capital_gains: 2_000
+    filing_status: SINGLE
+  output:
+    ar_taxable_capital_gains_joint: 1_000  # = 2_000 * 0.5
+    ar_gross_income_joint: 1_000
+
+- name: Distributions combine with Schedule D long-term gain on AR1000D line 1
+  period: 2025
+  input:
+    state_code: AR
+    long_term_capital_gains: 3_000
+    non_sch_d_capital_gains: 1_000
+    filing_status: SINGLE
+  output:
+    ar_taxable_capital_gains_joint: 2_000  # = (3_000 + 1_000) * 0.5
+
+- name: No Arkansas taxable capital gain for distributions outside Arkansas
+  period: 2025
+  input:
+    state_code: TX
+    non_sch_d_capital_gains: 2_000
+  output:
+    ar_taxable_capital_gains_joint: 0

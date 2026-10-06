@@ -9,13 +9,21 @@ class ar_taxable_capital_gains_indiv(Variable):
     reference = (
         "https://codes.findlaw.com/ar/title-26-taxation/ar-code-sect-26-51-815.html",
         "https://www.taxformfinder.org/forms/2023/2023-arkansas-form-ar1000d.pdf#page=1",
+        "https://www.dfa.arkansas.gov/wp-content/uploads/2025_AR1000D_CapitalGains.pdf#page=1",
     )
     definition_period = YEAR
     defined_for = StateCode.AR
 
     def formula(person, period, parameters):
-        # Line 1-3 - long term capital gain or loss
-        lt_capital_gains = person("long_term_capital_gains", period)
+        # Line 1-3 - long term capital gain or loss. Line 1 takes federal
+        # Schedule D line 15, or Form 1040 line 7 when Schedule D is not
+        # required, so capital gain distributions reported without
+        # Schedule D count as long-term gain (26 U.S.C. 852(b)(3)(B)).
+        lt_capital_gains = add(
+            person,
+            period,
+            ["long_term_capital_gains", "non_sch_d_capital_gains"],
+        )
         # Line 4-6 - short term capital loss
         st_capital_gains = person("short_term_capital_gains", period)
         st_capital_loss = max_(-st_capital_gains, 0)

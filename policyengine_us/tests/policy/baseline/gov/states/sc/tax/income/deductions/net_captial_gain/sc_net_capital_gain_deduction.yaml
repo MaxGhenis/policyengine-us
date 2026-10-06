@@ -33,3 +33,33 @@
     short_term_capital_gains: -5_000
   output: 
     sc_net_capital_gain_deduction: 880
+
+# S.C. Code 12-6-1150(A), (B)(2): 44% of net capital gain as defined in
+# IRC 1222 and related sections. Capital gain distributions are gain on assets
+# held more than one year (26 U.S.C. 852(b)(3)(B)); the 2025 SC1040
+# instructions for line i say capital gain distributions qualify when that
+# holding period is met.
+- name: Capital gain distributions reported without Schedule D
+  period: 2025
+  input:
+    state_code: SC
+    non_sch_d_capital_gains: 1_000
+  output:
+    sc_net_capital_gain_deduction: 440  # = 1_000 * 0.44
+
+- name: Short-term loss reduces the distributions
+  period: 2025
+  input:
+    state_code: SC
+    non_sch_d_capital_gains: 1_000
+    short_term_capital_gains: -300
+  output:
+    sc_net_capital_gain_deduction: 308  # = (1_000 - 300) * 0.44
+
+- name: No South Carolina deduction outside South Carolina
+  period: 2025
+  input:
+    state_code: NC
+    non_sch_d_capital_gains: 1_000
+  output:
+    sc_net_capital_gain_deduction: 0

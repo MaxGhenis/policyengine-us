@@ -109,3 +109,61 @@
   output:
     mo_capital_gains_subtraction: 8_000
     mo_capital_gains_subtraction_person: [8_000, 0]
+
+# RSMo 143.121.3(14)(a) subtracts 100% of income reported as a capital gain
+# for federal purposes; Form MO-A line 18 takes federal Form 1040 line 7a,
+# which includes capital gain distributions reported without Schedule D.
+- name: Capital gain distributions reported without Schedule D
+  period: 2025
+  absolute_error_margin: 0
+  input:
+    people:
+      person1:
+        non_sch_d_capital_gains: 1_000
+    tax_units:
+      tax_unit1:
+        members: [person1]
+    households:
+      household1:
+        members: [person1]
+        state_code: MO
+  output:
+    mo_capital_gains_subtraction: 1_000
+    mo_capital_gains_subtraction_person: [1_000]
+
+- name: Distributions and Schedule D gains allocated to each spouse
+  period: 2025
+  absolute_error_margin: 0
+  input:
+    people:
+      person1:
+        non_sch_d_capital_gains: 1_000
+      person2:
+        long_term_capital_gains: 3_000
+    tax_units:
+      tax_unit1:
+        members: [person1, person2]
+    households:
+      household1:
+        members: [person1, person2]
+        state_code: MO
+  output:
+    mo_capital_gains_subtraction: 4_000
+    mo_capital_gains_subtraction_person: [1_000, 3_000]
+
+- name: No subtraction for distributions before 2025
+  period: 2024
+  absolute_error_margin: 0
+  input:
+    people:
+      person1:
+        non_sch_d_capital_gains: 1_000
+    tax_units:
+      tax_unit1:
+        members: [person1]
+    households:
+      household1:
+        members: [person1]
+        state_code: MO
+  output:
+    mo_capital_gains_subtraction: 0

@@ -7,7 +7,10 @@ class mt_capital_gains_tax_joint(Variable):
     label = "Montana net long-term capital gains tax when married couples file jointly"
     unit = USD
     definition_period = YEAR
-    reference = "https://mtrevenue.gov/wp-content/uploads/dlm_uploads/2023/12/Form_2_2023_Instructions.pdf#page=6"  # Net Long-Term Capital Gains Tax Table
+    reference = (
+        "https://mtrevenue.gov/wp-content/uploads/dlm_uploads/2023/12/Form_2_2023_Instructions.pdf#page=6",  # Net Long-Term Capital Gains Tax Table
+        "https://revenue.mt.gov/files/Forms/Montana-Individual-Income-Tax-Return-Form-2/2024_Montana_Individual_Income_Tax_Return_Form_2_Instructions.pdf#page=19",  # Line 2, net long-term capital gains
+    )
     defined_for = StateCode.MT
 
     def formula(tax_unit, period, parameters):
@@ -19,7 +22,15 @@ class mt_capital_gains_tax_joint(Variable):
             # Line 1 — aggregate across persons for joint filing
             taxable_income = add(tax_unit, period, ["mt_taxable_income_joint"])
             # Line 2 — lesser of net LTCG and total net capital gain
-            ltcg = add(tax_unit, period, ["long_term_capital_gains"])
+            # Form 2 line 2 takes federal Form 1040 line 7 when Schedule D is
+            # not required, so capital gain distributions reported without
+            # Schedule D count as net long-term capital gains
+            # (26 U.S.C. 852(b)(3)(B); MCA 15-30-2103).
+            ltcg = add(
+                tax_unit,
+                period,
+                ["long_term_capital_gains", "non_sch_d_capital_gains"],
+            )
             stcg = add(tax_unit, period, ["short_term_capital_gains"])
             net_cg = ltcg + stcg
             capital_gains = max_(min_(ltcg, net_cg), 0)

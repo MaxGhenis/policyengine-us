@@ -19,7 +19,10 @@ class mo_capital_gains_subtraction_person(Variable):
         tax_unit_subtraction = tax_unit("mo_capital_gains_subtraction", period)
         # Allocate only across people with positive capital gains so
         # spouse-level capital losses do not over-allocate the unit total.
-        person_positive_cg = max_(0, person("capital_gains", period))
+        person_positive_cg = max_(
+            0,
+            add(person, period, ["capital_gains", "non_sch_d_capital_gains"]),
+        )
         tax_unit_positive_cg = tax_unit.sum(person_positive_cg)
         # Use mask to avoid divide-by-zero, default to zero allocation
         person_share = np.zeros_like(tax_unit_positive_cg)

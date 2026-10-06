@@ -12,7 +12,13 @@ class mt_capital_gains_tax_applicable_threshold_indiv(Variable):
 
     def formula(person, period, parameters):
         p = parameters(period).gov.states.mt.tax.income.main.capital_gains
-        ltcg = person("long_term_capital_gains", period)
+        # Capital gain distributions reported without Schedule D count as
+        # net long-term capital gains (Form 2 line 2 instructions).
+        ltcg = add(
+            person,
+            period,
+            ["long_term_capital_gains", "non_sch_d_capital_gains"],
+        )
         stcg = person("short_term_capital_gains", period)
         capital_gains = max_(min_(ltcg, ltcg + stcg), 0)
         taxable_income = person("mt_taxable_income_indiv", period)

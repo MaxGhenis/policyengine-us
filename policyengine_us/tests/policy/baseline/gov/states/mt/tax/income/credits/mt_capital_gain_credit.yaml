@@ -13,3 +13,32 @@
     state_code: MT
   output:
     mt_capital_gain_credit: 60
+
+# 2022 Form 2 instructions: the resident capital gains credit is 2% of the
+# net capital gain on Form 2 line 7, which takes the capital gain reported on
+# the federal return; that includes capital gain distributions reported on
+# Form 1040 line 7 without Schedule D.
+- name: Capital gain distributions reported without Schedule D
+  period: 2022
+  input:
+    non_sch_d_capital_gains: 2_000
+    state_code: MT
+  output:
+    mt_capital_gain_credit: 40  # = 2_000 * 0.02
+
+- name: Distributions combine with Schedule D capital gains
+  period: 2021
+  input:
+    capital_gains: 1_000
+    non_sch_d_capital_gains: 2_000
+    state_code: MT
+  output:
+    mt_capital_gain_credit: 60  # = (1_000 + 2_000) * 0.02
+
+- name: No Montana capital gain credit for distributions outside Montana
+  period: 2022
+  input:
+    non_sch_d_capital_gains: 2_000
+    state_code: ID
+  output:
+    mt_capital_gain_credit: 0

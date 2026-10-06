@@ -123,3 +123,30 @@
         state_code: MT
   output:
     mt_capital_gains_tax_joint: 409
+
+# MCA 15-30-2103 defines net long-term capital gains by IRC 1222, and
+# capital gain distributions are long-term gain (26 U.S.C. 852(b)(3)(B)).
+# Form 2 line 2 takes federal Form 1040 line 7 when Schedule D is not
+# required (2024 Form 2 instructions, page 11, PDF page 19), so distributions
+# reported without Schedule D count.
+- name: Capital gain distributions reported without Schedule D, higher rate
+  period: 2024
+  input:
+    non_sch_d_capital_gains: 1_000
+    mt_taxable_income_joint: 1_000
+    mt_capital_gains_tax_applicable_threshold_joint: 0
+    filing_status: SINGLE
+    state_code: MT
+  output:
+    mt_capital_gains_tax_joint: 41  # = 1_000 * 0.041
+
+- name: Capital gain distributions reported without Schedule D, lower rate
+  period: 2024
+  input:
+    non_sch_d_capital_gains: 1_000
+    mt_taxable_income_joint: 1_000
+    mt_capital_gains_tax_applicable_threshold_joint: 2_000
+    filing_status: SINGLE
+    state_code: MT
+  output:
+    mt_capital_gains_tax_joint: 30  # = 1_000 * 0.03

@@ -7,6 +7,7 @@ class hi_taxable_income_for_alternative_tax(Variable):
     label = "Hawaii eligible capital gains for the alternative tax capital gains"
     unit = USD
     definition_period = YEAR
+    reference = "https://files.hawaii.gov/tax/forms/2025/n11ins.pdf#page=35"
     defined_for = "hi_alternative_tax_on_capital_gains_eligible"
 
     def formula(tax_unit, period, parameters):
@@ -15,8 +16,14 @@ class hi_taxable_income_for_alternative_tax(Variable):
         # line 1 of Hawaii Tax on Capital Gains Worksheet
         # on Hawaii Resident Income Tax Instructions N-11 Rev.2022, page=33
         taxable_income = tax_unit("hi_taxable_income", period)
-        # line 4
-        net_lt_capital_gain = add(tax_unit, period, ["long_term_capital_gains"])
+        # line 4; worksheet line 2 takes federal Schedule D line 15, or
+        # Form 1040 line 7 when Schedule D is not required, so capital gain
+        # distributions reported without Schedule D count.
+        net_lt_capital_gain = add(
+            tax_unit,
+            period,
+            ["long_term_capital_gains", "non_sch_d_capital_gains"],
+        )
         # line 7
         net_capital_gain = tax_unit("net_capital_gain", period)
         # line 8

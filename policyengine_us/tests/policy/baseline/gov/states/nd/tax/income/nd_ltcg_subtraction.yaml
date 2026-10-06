@@ -31,3 +31,33 @@
       state_code: ND
   output:
     nd_ltcg_subtraction: (7_000 - 2_000) * 0.40
+
+# N.D.C.C. 57-38-30.3(2)(d)(1): 40% of the excess of net long-term capital
+# gain over net short-term capital loss, as computed for federal purposes.
+# Capital gain distributions are long-term gain (26 U.S.C. 852(b)(3)(B)); the
+# 2025 ND-1 line 6 worksheet enters distributions reported on Form 1040
+# without Schedule D on its line 3.
+- name: Test 3, capital gain distributions reported without Schedule D
+  period: 2025
+  input:
+    non_sch_d_capital_gains: 1_000
+    state_code: ND
+  output:
+    nd_ltcg_subtraction: 1_000 * 0.40
+
+- name: Test 4, short-term loss reduces the distributions
+  period: 2025
+  input:
+    non_sch_d_capital_gains: 1_000
+    short_term_capital_gains: -300
+    state_code: ND
+  output:
+    nd_ltcg_subtraction: (1_000 - 300) * 0.40
+
+- name: Test 5, no North Dakota subtraction outside North Dakota
+  period: 2025
+  input:
+    non_sch_d_capital_gains: 1_000
+    state_code: SD
+  output:
+    nd_ltcg_subtraction: 0

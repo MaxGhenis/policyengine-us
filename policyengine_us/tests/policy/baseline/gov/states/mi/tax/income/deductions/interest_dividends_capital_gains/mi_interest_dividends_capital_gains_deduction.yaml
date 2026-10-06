@@ -80,3 +80,63 @@
       state_code: MI
   output: # 12697 - 10000 - 1000 - 300 = 1397 < 5000 + 400 + 100
     mi_interest_dividends_capital_gains_deduction: 1_397
+
+# MCL 206.30(1)(p): a senior citizen may deduct, to the extent included in
+# adjusted gross income, interest, dividends, and capital gains. Capital gain
+# distributions reported on Form 1040 line 7 without Schedule D are in AGI.
+- name: 2022 single filer with capital gain distributions reported without Schedule D
+  period: 2022
+  input:
+    people:
+      person1:
+        non_sch_d_capital_gains: 1_000
+        is_tax_unit_head_or_spouse: true
+    tax_units:
+      tax_unit:
+        mi_interest_dividends_capital_gains_deduction_eligible: true
+        elderly_disabled_credit: 0
+        members: [person1]
+        filing_status: SINGLE
+    household:
+      members: [person1]
+      state_code: MI
+  output:
+    mi_interest_dividends_capital_gains_deduction: 1_000
+
+- name: 2022 single filer with capital gain distributions above the maximum
+  period: 2022
+  input:
+    people:
+      person1:
+        non_sch_d_capital_gains: 20_000
+        is_tax_unit_head_or_spouse: true
+    tax_units:
+      tax_unit:
+        mi_interest_dividends_capital_gains_deduction_eligible: true
+        elderly_disabled_credit: 0
+        members: [person1]
+        filing_status: SINGLE
+    household:
+      members: [person1]
+      state_code: MI
+  output:
+    mi_interest_dividends_capital_gains_deduction: 12_697
+
+- name: 2022 filer not of qualifying age gets no deduction for capital gain distributions
+  period: 2022
+  input:
+    people:
+      person1:
+        non_sch_d_capital_gains: 1_000
+        is_tax_unit_head_or_spouse: true
+    tax_units:
+      tax_unit:
+        mi_interest_dividends_capital_gains_deduction_eligible: false
+        elderly_disabled_credit: 0
+        members: [person1]
+        filing_status: SINGLE
+    household:
+      members: [person1]
+      state_code: MI
+  output:
+    mi_interest_dividends_capital_gains_deduction: 0

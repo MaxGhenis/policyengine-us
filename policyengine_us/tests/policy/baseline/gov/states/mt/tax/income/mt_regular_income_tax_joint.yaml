@@ -62,3 +62,28 @@
         state_code: MT
   output:
     mt_regular_income_tax_joint: 141
+
+# MCA 15-30-2103 defines net long-term capital gains by IRC 1222, and
+# capital gain distributions are long-term gain (26 U.S.C. 852(b)(3)(B)).
+# Form 2 line 2 takes federal Form 1040 line 7 when Schedule D is not
+# required (2024 Form 2 instructions, page 11, PDF page 19), so distributions
+# reported without Schedule D count.
+- name: Capital gain distributions reported without Schedule D leave the ordinary brackets
+  period: 2024
+  input:
+    people:
+      person1:
+        mt_taxable_income_joint: 50_000
+        non_sch_d_capital_gains: 10_000
+      person2:
+        mt_taxable_income_joint: 0
+    tax_units:
+      tax_unit:
+        members: [person1, person2]
+        filing_status: JOINT
+    households:
+      household:
+        members: [person1, person2]
+        state_code: MT
+  output:
+    mt_regular_income_tax_joint: 1_880  # = (50_000 - 10_000) * 0.047
