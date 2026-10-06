@@ -11,6 +11,6 @@ class ma_part_a_taxable_dividend_income(Variable):
     defined_for = StateCode.MA
 
     def formula(tax_unit, period, parameters):
-        dividends = add(tax_unit, period, ["dividend_income"])
+        dividends = tax_unit("ma_part_a_adjusted_interest_and_dividends", period)
         part_b_excess_exemption = tax_unit("ma_part_b_excess_exemption", period)
         return max_(0, dividends - part_b_excess_exemption)

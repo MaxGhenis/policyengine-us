@@ -1,0 +1,66 @@
+# M.G.L. c. 62, section 2(c)(2)(a): short-term losses offset Part A interest
+# and dividends first (up to $2,000); only the remaining excess offsets
+# Part C long-term gains. DOR TIR 02-21, II.B.2.
+# https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter62/Section2
+# https://www.mass.gov/technical-information-release/tir-02-21-capital-gains-and-losses-massachusetts-tax-law-changes
+
+- name: Part C AGI nets only short-term losses not used against dividends
+  period: 2026
+  input:
+    state_code: [MA, MA, MA, MA, MA, MA]
+    dividend_income: [3_000, 3_000, 3_000, 100, 0, 3_000]
+    short_term_capital_gains: [-1_000, -1_500, -10_000, -1_080, -1_500, 2_000]
+    long_term_capital_gains: [1_000, 10_000, 10_000, 5_000, 10_000, 4_000]
+  output:
+    ma_part_c_agi: [1_000, 10_000, 2_000, 4_020, 8_500, 4_000]
+
+- name: Part C AGI is zero with a net long-term loss
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: -1_000
+    long_term_capital_gains: -500
+  output:
+    ma_part_c_agi: 0
+
+- name: Part C gross income still nets the full short-term loss for Part B
+  period: 2026
+  input:
+    state_code: MA
+    employment_income: 100_000
+    dividend_income: 3_000
+    short_term_capital_gains: -1_000
+    long_term_capital_gains: 1_000
+  output:
+    ma_part_c_gross_income: 0
+    ma_part_c_agi: 1_000
+    ma_part_b_gross_income: 100_000
+    # 2,000 Part A + 100,000 Part B + 1,000 Part C: the loss is used once.
+    ma_agi: 103_000
+
+- name: Issue 6991 household uses each dollar of short-term loss once, dividends first
+  # Section 2(c)(2)(a) applies up to $2,000 of the loss to dividends first,
+  # then the remaining 8,000 to long-term gains: 3,000 + 2,000 = 5,000 total.
+  period: 2024
+  input:
+    state_code: MA
+    dividend_income: 5_000
+    short_term_capital_gains: -10_000
+    long_term_capital_gains: 10_000
+  output:
+    ma_part_a_short_term_capital_loss_against_interest_and_dividends: 2_000
+    ma_part_a_agi: 3_000
+    ma_part_c_gross_income: 0
+    ma_part_c_agi: 2_000
+    ma_agi: 5_000
+
+- name: Part C AGI does not apply in other states
+  period: 2026
+  input:
+    state_code: NH
+    dividend_income: 3_000
+    short_term_capital_gains: -1_000
+    long_term_capital_gains: 1_000
+  output:
+    ma_part_c_agi: 0

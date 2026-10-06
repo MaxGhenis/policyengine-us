@@ -1,0 +1,51 @@
+# M.G.L. c. 62, section 2(c)(2) and (4): only capital losses reduce Part A
+# interest/dividends under this rule, with a combined $2,000 limit.
+# https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter62/Section2
+
+- name: Losses just below at and above the dividend deduction cap
+  period: 2020
+  input:
+    state_code: [MA, MA, MA]
+    dividend_income: [3_000, 3_000, 3_000]
+    short_term_capital_gains: [-1_999, -2_000, -2_001]
+  output:
+    ma_part_a_adjusted_interest_and_dividends: [1_001, 1_000, 1_000]
+    ma_part_a_agi: [1_001, 1_000, 1_000]
+
+- name: Part B interest alone is not Part A income available for a loss deduction
+  period: 2026
+  input:
+    state_code: MA
+    taxable_interest_income: 5_000
+    short_term_capital_gains: -1_000
+  output:
+    ma_part_a_adjusted_interest_and_dividends: 0
+
+- name: Qualified and non-qualified dividends both receive the loss offset
+  period: 2026
+  input:
+    state_code: MA
+    qualified_dividend_income: 1_000
+    non_qualified_dividend_income: 500
+    long_term_capital_gains: -600
+  output:
+    ma_part_a_adjusted_interest_and_dividends: 900
+    ma_part_a_agi: 900
+
+- name: Collectibles deductions do not create a dividend loss offset
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    long_term_capital_gains_on_collectibles: 2_000
+  output:
+    ma_part_a_adjusted_interest_and_dividends: 3_000
+
+- name: Massachusetts adjusted interest and dividends do not apply in other states
+  period: 2026
+  input:
+    state_code: NH
+    dividend_income: 3_000
+    short_term_capital_gains: -1_000
+  output:
+    ma_part_a_adjusted_interest_and_dividends: 0

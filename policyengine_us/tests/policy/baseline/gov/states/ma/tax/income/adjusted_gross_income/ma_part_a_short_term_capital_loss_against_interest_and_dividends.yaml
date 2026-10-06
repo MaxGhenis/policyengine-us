@@ -1,0 +1,41 @@
+# M.G.L. c. 62, section 2(c)(2)(a) and (4): the net short-term capital loss
+# is applied against Part A interest and dividends first, up to $2,000.
+# https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter62/Section2
+# https://www.mass.gov/technical-information-release/tir-02-21-capital-gains-and-losses-massachusetts-tax-law-changes
+
+- name: Short-term loss is limited by the loss, the cap, and dividends
+  period: 2026
+  input:
+    state_code: [MA, MA, MA, MA, MA]
+    dividend_income: [3_000, 3_000, 500, 3_000, 0]
+    short_term_capital_gains: [-1_200, -2_500, -1_200, 1_000, -1_200]
+  output:
+    ma_part_a_short_term_capital_loss_against_interest_and_dividends: [1_200, 2_000, 500, 0, 0]
+
+- name: Long-term gains do not reduce the short-term loss applied to dividends
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: -1_000
+    long_term_capital_gains: 10_000
+  output:
+    ma_part_a_short_term_capital_loss_against_interest_and_dividends: 1_000
+
+- name: The two thousand dollar cap applies from 2002
+  period: 2002
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: -2_500
+  output:
+    ma_part_a_short_term_capital_loss_against_interest_and_dividends: 2_000
+
+- name: Short-term loss offset does not apply in other states
+  period: 2026
+  input:
+    state_code: NH
+    dividend_income: 3_000
+    short_term_capital_gains: -1_000
+  output:
+    ma_part_a_short_term_capital_loss_against_interest_and_dividends: 0

@@ -1,0 +1,1 @@
+Apply Massachusetts capital loss offsets to Part A taxable dividends and excess exemptions using the combined $2,000 limit, and reduce Part C long-term gains only by the short-term loss left after the dividend offset.

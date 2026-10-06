@@ -1,13 +1,15 @@
-description: Maximum capital losses deductible against interest or dividends.
+description: Massachusetts limits the combined capital loss deduction against Part A interest and dividends to this amount.
 values:
-  2020-01-01: 2_000
+  2002-01-01: 2_000
 metadata:
   unit: currency-USD
   period: year
-  label: MA income tax max capital gains deductible against interest or dividends
+  label: MA income tax max capital losses deductible against interest and dividends
   reference:
-    - title: Mass. General Laws c.62 § 3(B)(a)(19)
-      href: https://www.mass.gov/info-details/mass-general-laws-c62-ss-3
+    - title: Mass. General Laws c.62 § 2(c)(4)
+      href: https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter62/Section2
+    - title: Massachusetts DOR TIR 02-21 Capital Gains and Losses (II.C)
+      href: https://www.mass.gov/technical-information-release/tir-02-21-capital-gains-and-losses-massachusetts-tax-law-changes
     - title: Form 1 2022 Massachusetts Resident Income Tax (line 20)
       href: https://www.mass.gov/doc/2022-form-1-instructions/download#page=25
     - title: Form 1 2023 Massachusetts Resident Income Tax (line 20)

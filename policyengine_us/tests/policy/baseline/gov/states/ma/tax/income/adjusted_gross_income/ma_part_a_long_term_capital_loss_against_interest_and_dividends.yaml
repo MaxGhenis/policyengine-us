@@ -1,0 +1,48 @@
+# M.G.L. c. 62, section 2(c)(2)(b) and (4): a net long-term loss offsets
+# Part A short-term gains first; the excess offsets interest and dividends
+# within whatever remains of the $2,000 cap after short-term losses.
+# https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter62/Section2
+# https://www.mass.gov/technical-information-release/tir-02-21-capital-gains-and-losses-massachusetts-tax-law-changes
+
+- name: Long-term loss uses the cap left after short-term losses
+  period: 2026
+  input:
+    state_code: [MA, MA, MA]
+    dividend_income: [3_000, 3_000, 3_000]
+    short_term_capital_gains: [-1_500, -2_500, 0]
+    long_term_capital_gains: [-1_500, -1_500, -1_500]
+  output:
+    ma_part_a_short_term_capital_loss_against_interest_and_dividends: [1_500, 2_000, 0]
+    ma_part_a_long_term_capital_loss_against_interest_and_dividends: [500, 0, 1_500]
+    ma_part_a_adjusted_interest_and_dividends: [1_000, 1_000, 1_500]
+
+- name: Long-term loss offsets short-term gains before dividends
+  period: 2026
+  input:
+    state_code: [MA, MA]
+    dividend_income: [3_000, 3_000]
+    short_term_capital_gains: [1_500, 1_000]
+    long_term_capital_gains: [-1_000, -2_500]
+  output:
+    ma_part_a_long_term_capital_loss_against_interest_and_dividends: [0, 1_500]
+
+- name: Long-term loss is limited by dividends left after short-term losses
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 800
+    short_term_capital_gains: -500
+    long_term_capital_gains: -1_000
+  output:
+    ma_part_a_short_term_capital_loss_against_interest_and_dividends: 500
+    ma_part_a_long_term_capital_loss_against_interest_and_dividends: 300
+    ma_part_a_adjusted_interest_and_dividends: 0
+
+- name: Long-term gains create no dividend offset
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    long_term_capital_gains: 5_000
+  output:
+    ma_part_a_long_term_capital_loss_against_interest_and_dividends: 0

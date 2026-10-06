@@ -13,22 +13,18 @@ class ma_part_a_agi(Variable):
     def formula(tax_unit, period, parameters):
         part_a_gross_income = tax_unit("ma_part_a_gross_income", period)
         short_term_capital_gains = add(tax_unit, period, ["short_term_capital_gains"])
-        short_term_capital_loss = max_(0, -short_term_capital_gains)
         nonnegative_short_term_capital_gains = max_(0, short_term_capital_gains)
-        interest_and_dividends = add(
-            tax_unit, period, ["taxable_interest_income", "dividend_income"]
-        )
-
-        tax = parameters(period).gov.states.ma.tax.income
-        interest_dividends_deduction_cap = (
-            tax.capital_gains.deductible_against_interest_dividends
-        )
-        short_term_loss_against_interest_dividends = min_(
-            interest_dividends_deduction_cap,
-            min_(
-                interest_and_dividends,
-                short_term_capital_loss,
-            ),
+        # Section 2(c)(2) and (4): capital losses applied against interest
+        # and dividends, capped at $2,000 in total. The same amounts reduce
+        # taxable dividends, and ma_part_c_agi nets only the short-term loss
+        # left over against Part C gains.
+        loss_against_interest_and_dividends = add(
+            tax_unit,
+            period,
+            [
+                "ma_part_a_short_term_capital_loss_against_interest_and_dividends",
+                "ma_part_a_long_term_capital_loss_against_interest_and_dividends",
+            ],
         )
         long_term_capital_gains = add(tax_unit, period, ["long_term_capital_gains"])
         long_term_capital_loss = max_(0, -long_term_capital_gains)
@@ -37,38 +33,20 @@ class ma_part_a_agi(Variable):
             long_term_capital_loss,
             nonnegative_short_term_capital_gains,
         )
-        remaining_long_term_loss = (
-            long_term_capital_loss - long_term_loss_against_short_term_gain
-        )
-        remaining_interest_dividends = (
-            interest_and_dividends - short_term_loss_against_interest_dividends
-        )
-        remaining_interest_deduction_cap = (
-            interest_dividends_deduction_cap
-            - short_term_loss_against_interest_dividends
-        )
-        long_term_loss_against_interest_dividends = min_(
-            remaining_interest_deduction_cap,
-            min_(
-                remaining_long_term_loss,
-                remaining_interest_dividends,
-            ),
-        )
-
         long_term_capital_gains_on_collectibles = add(
             tax_unit, period, ["long_term_capital_gains_on_collectibles"]
         )
         nonnegative_long_term_capital_gains_on_collectibles = max_(
             0, long_term_capital_gains_on_collectibles
         )
+        tax = parameters(period).gov.states.ma.tax.income
         long_term_gains_on_collectibles_deduction = (
             tax.capital_gains.long_term_collectibles_deduction
             * nonnegative_long_term_capital_gains_on_collectibles
         )
 
         deductions = (
-            short_term_loss_against_interest_dividends
-            + long_term_loss_against_interest_dividends
+            loss_against_interest_and_dividends
             + long_term_loss_against_short_term_gain
             + long_term_gains_on_collectibles_deduction
         )

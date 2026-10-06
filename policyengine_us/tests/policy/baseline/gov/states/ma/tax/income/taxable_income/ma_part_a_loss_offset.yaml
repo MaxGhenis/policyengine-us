@@ -1,0 +1,257 @@
+# M.G.L. c. 62, sections 2(c)(2), 2(c)(4), and 2(f): capital losses
+# reduce Part A interest/dividends before exemptions and tax, subject to a
+# combined $2,000 cap. Long-term losses offset short-term gains first.
+# Under section 2(c)(2)(a), only the short-term loss left after the dividend
+# offset reduces Part C long-term gains (DOR TIR 02-21, II.B.2 and II.C.3).
+# https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter62/Section2
+# https://www.mass.gov/technical-information-release/tir-02-21-capital-gains-and-losses-massachusetts-tax-law-changes
+
+- name: PolicyBench scenario_081 dividends are fully offset by short-term losses
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    state_code: MA
+    employment_income: 175_002
+    non_qualified_dividend_income: 110
+    taxable_interest_income: 56
+    short_term_capital_gains: -1_080
+    rent: 44_400
+  output:
+    ma_part_a_gross_income: 110
+    ma_part_a_agi: 0
+    ma_part_a_taxable_dividend_income: 0
+    ma_part_a_taxable_capital_gains_income: 0
+    ma_part_a_cg_excess_exemption: 0
+    # Interest retains the model's existing Part B classification.
+    # (175,002 + 56 - 2,000 FICA - 4,000 rent - 4,400 exemption) * 5%.
+    ma_part_b_taxable_income: 164_658
+    state_income_tax_before_refundable_credits: 8_232.90
+
+- name: No capital losses leaves dividends and short-term gains taxable
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: 1_000
+    ma_part_b_excess_exemption: 0
+  output:
+    ma_part_a_agi: 4_000
+    ma_part_a_taxable_dividend_income: 3_000
+    ma_part_a_taxable_capital_gains_income: 1_000
+    ma_part_a_div_excess_exemption: 0
+    ma_part_a_cg_excess_exemption: 0
+
+- name: Partial short-term loss reduces taxable dividends before exemptions
+  period: 2020
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: -500
+    ma_part_b_excess_exemption: 200
+  output:
+    ma_part_a_agi: 2_500
+    ma_part_a_taxable_dividend_income: 2_300
+    ma_part_a_taxable_capital_gains_income: 0
+    ma_part_a_div_excess_exemption: 0
+    ma_part_a_cg_excess_exemption: 0
+
+- name: Short-term loss deduction against dividends is capped at two thousand dollars
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: -2_500
+    ma_part_b_excess_exemption: 0
+  output:
+    ma_part_a_agi: 1_000
+    ma_part_a_taxable_dividend_income: 1_000
+    ma_part_a_taxable_capital_gains_income: 0
+    ma_part_a_cg_excess_exemption: 0
+
+- name: Short-term and long-term losses share the dividend deduction cap
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: -1_500
+    long_term_capital_gains: -1_500
+    ma_part_b_excess_exemption: 0
+  output:
+    ma_part_a_agi: 1_000
+    ma_part_a_taxable_dividend_income: 1_000
+    ma_part_a_taxable_capital_gains_income: 0
+    ma_part_a_cg_excess_exemption: 0
+
+- name: Long-term loss consumed by short-term gains does not reduce dividends
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: 1_500
+    long_term_capital_gains: -1_000
+    ma_part_b_excess_exemption: 0
+  output:
+    ma_part_a_agi: 3_500
+    ma_part_a_taxable_dividend_income: 3_000
+    ma_part_a_taxable_capital_gains_income: 500
+    ma_part_a_cg_excess_exemption: 0
+
+- name: Remaining long-term loss offsets dividends after short-term gains
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: 1_000
+    long_term_capital_gains: -2_500
+    ma_part_b_excess_exemption: 0
+  output:
+    ma_part_a_agi: 1_500
+    ma_part_a_taxable_dividend_income: 1_500
+    ma_part_a_taxable_capital_gains_income: 0
+    ma_part_a_cg_excess_exemption: 0
+
+- name: Dividend losses preserve unused exemptions without creating extra exemptions
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 1_000
+    short_term_capital_gains: -800
+    ma_part_b_excess_exemption: 500
+    # The whole short-term loss is used against dividends, so none is left
+    # to reduce the long-term gain in Part C.
+    long_term_capital_gains: 1_000
+  output:
+    ma_part_a_agi: 200
+    ma_part_a_taxable_dividend_income: 0
+    ma_part_a_taxable_capital_gains_income: 0
+    ma_part_a_div_excess_exemption: 300
+    ma_part_a_cg_excess_exemption: 300
+    ma_part_c_agi: 1_000
+    ma_part_c_taxable_income: 700
+
+- name: A loss equal to dividends leaves the full excess exemption available
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 1_000
+    short_term_capital_gains: -1_000
+    ma_part_b_excess_exemption: 500
+  output:
+    ma_part_a_agi: 0
+    ma_part_a_taxable_dividend_income: 0
+    ma_part_a_taxable_capital_gains_income: 0
+    ma_part_a_div_excess_exemption: 500
+    ma_part_a_cg_excess_exemption: 500
+
+- name: Part B interest does not enlarge Part A losses or excess exemptions
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 100
+    taxable_interest_income: 5_000
+    short_term_capital_gains: 1_000
+    long_term_capital_gains: -2_000
+    ma_part_b_excess_exemption: 0
+  output:
+    ma_part_a_agi: 0
+    ma_part_a_taxable_dividend_income: 0
+    ma_part_a_taxable_capital_gains_income: 0
+    ma_part_a_div_excess_exemption: 0
+    ma_part_a_cg_excess_exemption: 0
+
+- name: Short-term loss used against dividends is not used again against long-term gains
+  period: 2026
+  input:
+    state_code: MA
+    employment_income: 100_000
+    qualified_dividend_income: 3_000
+    short_term_capital_gains: -1_000
+    long_term_capital_gains: 1_000
+  output:
+    ma_part_a_short_term_capital_loss_against_interest_and_dividends: 1_000
+    ma_part_a_taxable_dividend_income: 2_000
+    ma_part_c_agi: 1_000
+    ma_part_c_taxable_income: 1_000
+    # 100,000 wages - 2,000 FICA - 4,400 exemption = 93,600 Part B.
+    # (93,600 + 2,000 + 1,000) * 5%.
+    ma_income_tax_before_credits: 4_830
+
+- name: Short-term loss capped against dividends leaves large long-term gains whole
+  period: 2026
+  input:
+    state_code: MA
+    employment_income: 100_000
+    qualified_dividend_income: 3_000
+    short_term_capital_gains: -2_000
+    long_term_capital_gains: 10_000
+  output:
+    ma_part_a_taxable_dividend_income: 1_000
+    ma_part_c_agi: 10_000
+    ma_part_c_taxable_income: 10_000
+    # (93,600 + 1,000 + 10,000) * 5%.
+    ma_income_tax_before_credits: 5_230
+
+- name: Short-term loss partly used against dividends and partly against long-term gains
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: -1_500
+    long_term_capital_gains: 1_000
+    ma_part_b_excess_exemption: 0
+  output:
+    ma_part_a_taxable_dividend_income: 1_500
+    ma_part_a_taxable_capital_gains_income: 0
+    ma_part_c_taxable_income: 1_000
+
+- name: Short-term loss beyond the dividend cap offsets long-term gains
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: -10_000
+    long_term_capital_gains: 10_000
+    ma_part_b_excess_exemption: 0
+  output:
+    # 2,000 of the loss offsets dividends; the remaining 8,000 offsets
+    # long-term gains, so total Part A dividends plus Part C is 3,000.
+    ma_part_a_taxable_dividend_income: 1_000
+    ma_part_c_agi: 2_000
+    ma_part_c_taxable_income: 2_000
+
+- name: Short-term loss larger than dividends leaves the excess for long-term gains
+  period: 2026
+  input:
+    state_code: MA
+    dividend_income: 100
+    short_term_capital_gains: -1_080
+    long_term_capital_gains: 5_000
+    ma_part_b_excess_exemption: 0
+  output:
+    ma_part_a_taxable_dividend_income: 0
+    # 5,000 - (1,080 - 100).
+    ma_part_c_taxable_income: 4_020
+
+- name: Short-term loss applies in full to long-term gains when there are no dividends
+  period: 2026
+  input:
+    state_code: MA
+    short_term_capital_gains: -1_500
+    long_term_capital_gains: 10_000
+    ma_part_b_excess_exemption: 0
+  output:
+    ma_part_a_short_term_capital_loss_against_interest_and_dividends: 0
+    ma_part_c_agi: 8_500
+    ma_part_c_taxable_income: 8_500
+
+- name: Loss ordering applies in earlier years
+  period: 2019
+  input:
+    state_code: MA
+    dividend_income: 3_000
+    short_term_capital_gains: -1_000
+    long_term_capital_gains: 1_000
+    ma_part_b_excess_exemption: 0
+  output:
+    ma_part_a_taxable_dividend_income: 2_000
+    ma_part_c_taxable_income: 1_000
