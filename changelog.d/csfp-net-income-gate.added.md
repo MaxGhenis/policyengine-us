@@ -1,0 +1,1 @@
+Gate the Commodity Supplemental Food Program behind gov.simulation.include_csfp_benefits_in_net_income (default false), so its per-slot value, which has no take-up input and accrues to every computed-eligible person, no longer enters household net income by default, mirroring the health and Head Start inclusion switches.

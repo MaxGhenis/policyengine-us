@@ -1,0 +1,9 @@
+description: The government counts these Commodity Supplemental Food Program sources as household benefits.
+values:
+  2022-01-01:
+    - commodity_supplemental_food_program
+
+metadata:
+  unit: list
+  period: year
+  label: Household CSFP benefits

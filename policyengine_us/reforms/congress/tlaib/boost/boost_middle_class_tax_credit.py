@@ -75,6 +75,7 @@ def create_boost_middle_class_tax_credit() -> Reform:
                 "spm_unit_capped_housing_subsidy",
                 "household_state_benefits",
                 "household_head_start_benefits",
+                "household_csfp_benefits",
             ]
             if parameters(period).gov.hud.abolition:
                 BENEFITS = [

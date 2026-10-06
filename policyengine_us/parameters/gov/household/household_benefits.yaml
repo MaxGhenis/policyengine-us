@@ -53,7 +53,7 @@ values:
     - basic_income
     - spm_unit_capped_housing_subsidy
     - household_state_benefits
-    - commodity_supplemental_food_program
+    - household_csfp_benefits
     - household_health_benefits
 
 metadata:

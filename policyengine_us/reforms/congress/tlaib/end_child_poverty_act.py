@@ -111,6 +111,7 @@ def create_end_child_poverty_act() -> Reform:
                 "spm_unit_capped_housing_subsidy",
                 "household_state_benefits",
                 "household_head_start_benefits",
+                "household_csfp_benefits",
                 "ecpa_child_benefit",
             ]
             if parameters(period).gov.hud.abolition:
