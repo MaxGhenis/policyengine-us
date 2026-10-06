@@ -1,0 +1,54 @@
+{
+  "base_commit": "42103db1b7d5be74bd28ebfc8e93adb2c7859079",
+  "before": {
+    "policyengine_us/spm.py": "6c7cb1cd50a4434a1b7f8577e58ffa628730571c8717511e928fc76b90011758",
+    "policyengine_us/tests/core/test_spm_system.py": "f40e2b564c92f13584afea652f2f660bd21288facb04be107f71ba4b92119672",
+    "policyengine_us/tests/core/test_behavioral_response_measurements.py": "ccea72bd3b5f9d4d70e8d6327f097bcd03799b0e083f61a23d4942f4549b2b11",
+    "policyengine_us/tests/core/test_local_employee_taxes.py": "bd69e8c03836e04176b071b07dc3f27eb2150650e34f9bbd3cfaeafa630c0cdc",
+    "PROGRESS.md": "e706821fda44521ad646e2370300f28b8a5465605a2211f8d5a93f40a8bd26ec",
+    "COUNTRY-SPM-HANDOFF.md": "a493fb5a49bac190f6f4068cdca9baf06f30a14559ef2706a5815ea9578ff243",
+    "changelog.d/spm-canonical-default.changed.md": "46b4c2cf923c79f9e6f48cca62d0e49aec379b4afaf17be83a0e609024d0fc49",
+    "policyengine_us/tests/microsimulation/data/fixtures/test_extend_single_year_dataset.py": "ae669091f968f456e27f59d18d5b55755c0e65450e82e1617620aed05d70e890"
+  },
+  "before_source": "Captured before this continuation\u2019s edits; fixture pre-edit hashes supplied by delegated editor.",
+  "runtime_changed_files": [
+    "policyengine_us/spm.py"
+  ],
+  "after": {
+    "policyengine_us/spm.py": "1553c0ebca131555c95e3aaeda1174eb6c454f1831ac8e772bca95ddb6e08270",
+    "policyengine_us/tests/core/test_spm_system.py": "b69a1479a7ea0d05d9be2666eb261c628511c820c8cdd73a92b7468aaf6a6c9a",
+    "policyengine_us/tests/core/test_behavioral_response_measurements.py": "226e2c85e4f58312be3696a5812ddc92cf29616640b46371ad4b4629421da43c",
+    "policyengine_us/tests/core/test_local_employee_taxes.py": "436ad77294fddb29d8f95f2f2749b61651b82ebcea0a633a0b7a2541c25d4f7c",
+    "changelog.d/spm-canonical-default.changed.md": "29e2d0cd487b4f168aac719af7f87a0c7e12ff5360d4005763e4dd3ff6b8bd08",
+    "policyengine_us/tests/microsimulation/data/fixtures/test_extend_single_year_dataset.py": "e97754325d3a61149952435ad3a507e569e9ed04f253cc025afb4829aed8f490"
+  },
+  "unchanged_this_continuation": {
+    "policyengine_us/system.py": "65851d7a33abb6b18cb35d4cfae5f7309cab08da0bca2c12eb2ae26aecb87c63",
+    "policyengine_us/variables/household/income/spm_unit/spm_unit_capped_housing_subsidy.py": "a746503db8d28ab2b1883d812bfe9c83d567056ecbf2aab9bc362862c5bd5bcb",
+    "policyengine_us/variables/household/demographic/spm_unit/spm_unit_count_adults.py": "999ea42018393b96d6e194e64470956953012d7cbeabccffc8a376bf2e055948",
+    "policyengine_us/variables/household/demographic/spm_unit/spm_unit_count_children.py": "e8c4497f24a701cc127fd069329dc2b407840460a2562e0cc4534c96137a4eca",
+    "policyengine_us/tests/unit/test_spm_integration_contract.py": "e22f41ccc26c19149d94c6736a44cdbaff018e11f01a9e7f65751151110e449e",
+    "pyproject.toml": "36a97426ec3341e4b54a6132e20926ff6377f8ead0cc4b05db43da639adc796c"
+  },
+  "calculator_source_head": "4c591e1b1e1f53d04462db7939ef928277bfd9dc",
+  "calculator_adapter_sha256": "bdc6878167a6e24877dbcc9ae58970c6fdf1a5543fc0af3fa9c1b38450aab0ac",
+  "calculator_python_diff_from_review_c89d20f": "",
+  "original_assertion_counts": {
+    "test_substitution_channel_is_live_end_to_end": {
+      "original_assertions_preserved": 5
+    },
+    "test_capital_gains_channel_is_live_end_to_end": {
+      "original_assertions_preserved": 5
+    },
+    "test_local_taxes_feed_household_net_income": {
+      "original_assertions_preserved": 4
+    }
+  },
+  "core_source_sha256": {
+    "simulations/simulation.py": "1cac4fec0e2abd8898e5f50fd2b3bad7297b904b0dc1a7fa450f95f5c66eb3df",
+    "holders/holder.py": "cf419bb9a78f7c74931a3a8182e119c9280bf2543035a8cc3fe46e4a2566a1d7",
+    "populations/population.py": "8a63e2089c2334271c4acbd62f5087ffb14d508a33c431fd5dcac2d4e3dc95a3",
+    "populations/group_population.py": "b29ced7f121ed66a26cedd35d8fb2a1fa3f76a39fd0a0a0bf65ed553cd0e1705",
+    "taxbenefitsystems/tax_benefit_system.py": "38c8a32ee56629f6d0037915763783de1c4b343f5dcc9dcab1c534c50a79116f"
+  }
+}

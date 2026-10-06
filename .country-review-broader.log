@@ -1,0 +1,79 @@
+........................................................................ [ 43%]
+........................................................................ [ 87%]
+.........FFF.........                                                    [100%]
+=================================== FAILURES ===================================
+_ TestMicrosimulationDatasetRouting.test_string_hdfstore_path_triggers_extend __
+policyengine_us/tests/microsimulation/data/test_extend_single_year_dataset.py:995: in test_string_hdfstore_path_triggers_extend
+    sim = system_module.Microsimulation(dataset=path)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+policyengine_us/system.py:377: in __init__
+    super().__init__(*args, **kwargs)
+policyengine_us/spm.py:105: in __init__
+    ???
+policyengine_us/spm.py:114: in _rebind_holders
+    population.entity = entity
+                  ^^^^^^^^^^^^^
+E   AttributeError: 'Microsimulation' object has no attribute 'populations'
+__ TestMicrosimulationDatasetRouting.test_single_year_dataset_triggers_extend __
+policyengine_us/tests/microsimulation/data/test_extend_single_year_dataset.py:1019: in test_single_year_dataset_triggers_extend
+    sim = system_module.Microsimulation(dataset=base_dataset)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+policyengine_us/system.py:377: in __init__
+    super().__init__(*args, **kwargs)
+policyengine_us/spm.py:105: in __init__
+    ???
+policyengine_us/spm.py:114: in _rebind_holders
+    population.entity = entity
+                  ^^^^^^^^^^^^^
+E   AttributeError: 'Microsimulation' object has no attribute 'populations'
+___ TestMicrosimulationDatasetRouting.test_multi_year_dataset_passes_through ___
+policyengine_us/tests/microsimulation/data/test_extend_single_year_dataset.py:1046: in test_multi_year_dataset_passes_through
+    sim = system_module.Microsimulation(dataset=multi)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+policyengine_us/system.py:377: in __init__
+    super().__init__(*args, **kwargs)
+policyengine_us/spm.py:105: in __init__
+    ???
+policyengine_us/spm.py:114: in _rebind_holders
+    population.entity = entity
+                  ^^^^^^^^^^^^^
+E   AttributeError: 'Microsimulation' object has no attribute 'populations'
+=============================== warnings summary ===============================
+policyengine_us/tests/unit/test_spm_integration_contract.py::test_tax_only_state_input_is_lazy_and_spm_never_computes_county
+policyengine_us/tests/unit/test_spm_integration_contract.py::test_state_only_resource_consumers_require_geography_even_without_assistance[False-household_net_income]
+policyengine_us/tests/unit/test_spm_integration_contract.py::test_state_only_resource_consumers_require_geography_even_without_assistance[False-marginal_tax_rate]
+policyengine_us/tests/unit/test_spm_integration_contract.py::test_state_only_resource_consumers_require_geography_even_without_assistance[True-household_net_income]
+policyengine_us/tests/unit/test_spm_integration_contract.py::test_state_only_resource_consumers_require_geography_even_without_assistance[True-marginal_tax_rate]
+policyengine_us/tests/unit/test_spm_integration_contract.py::test_state_only_resource_consumers_require_geography_even_without_assistance[True-marginal_tax_rate]
+policyengine_us/tests/core/test_local_employee_taxes.py::test_local_income_tax_before_refundable_credits_keeps_nyc_pre_credit_amount
+policyengine_us/tests/core/test_local_employee_taxes.py::test_local_taxes_feed_household_net_income
+policyengine_us/tests/core/test_state_code_str_backfill.py::test_state_code_str_only_yields_that_states_income_tax_not_california
+  /Users/maxghenis/spm-rebuild-20260908/worktrees/policyengine-us-spm-integration-audit/policyengine_us/variables/gov/irs/income/taxable_income/adjusted_gross_income/irs_gross_income/unemployment_insurance/taxable_unemployment_insurance.py:22: RuntimeWarning: invalid value encountered in divide
+    share = where(tax_unit_uc > 0, person_uc / tax_unit_uc, 0)
+
+policyengine_us/tests/unit/test_spm_integration_contract.py::test_state_only_resource_consumers_require_geography_even_without_assistance[True-marginal_tax_rate]
+  /Users/maxghenis/spm-rebuild-20260908/worktrees/policyengine-us-spm-integration-audit/policyengine_us/variables/household/marginal_tax_rate.py:32: RuntimeWarning: invalid value encountered in divide
+    positive_self_employment_income / positive_self_employment_total,
+
+policyengine_us/tests/unit/test_spm_integration_contract.py::test_state_only_resource_consumers_require_geography_even_without_assistance[True-marginal_tax_rate]
+  /Users/maxghenis/spm-rebuild-20260908/worktrees/policyengine-us-spm-integration-audit/policyengine_us/variables/household/marginal_tax_rate.py:37: RuntimeWarning: invalid value encountered in divide
+    positive_sstb_self_employment_income / positive_self_employment_total,
+
+policyengine_us/tests/microsimulation/data/test_extend_single_year_dataset.py::TestFileIORoundtrips::test_multi_year_save_and_load_roundtrip
+  /Users/maxghenis/spm-rebuild-20260908/worktrees/policyengine-us-spm-integration-audit/.venv/lib/python3.13/site-packages/tables/path.py:146: NaturalNameWarning: object name is not a valid Python identifier: '2024'; it does not match the pattern ``^[a-zA-Z_][a-zA-Z0-9_]*$``; you will not be able to use natural naming to access this object; using ``getattr()`` will still work, though
+    check_attribute_name(name)
+
+policyengine_us/tests/microsimulation/data/test_extend_single_year_dataset.py::TestFileIORoundtrips::test_multi_year_save_and_load_roundtrip
+  /Users/maxghenis/spm-rebuild-20260908/worktrees/policyengine-us-spm-integration-audit/.venv/lib/python3.13/site-packages/tables/path.py:146: NaturalNameWarning: object name is not a valid Python identifier: '2025'; it does not match the pattern ``^[a-zA-Z_][a-zA-Z0-9_]*$``; you will not be able to use natural naming to access this object; using ``getattr()`` will still work, though
+    check_attribute_name(name)
+
+policyengine_us/tests/microsimulation/data/test_extend_single_year_dataset.py::TestFileIORoundtrips::test_multi_year_save_and_load_roundtrip
+  /Users/maxghenis/spm-rebuild-20260908/worktrees/policyengine-us-spm-integration-audit/.venv/lib/python3.13/site-packages/tables/path.py:146: NaturalNameWarning: object name is not a valid Python identifier: '2026'; it does not match the pattern ``^[a-zA-Z_][a-zA-Z0-9_]*$``; you will not be able to use natural naming to access this object; using ``getattr()`` will still work, though
+    check_attribute_name(name)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED policyengine_us/tests/microsimulation/data/test_extend_single_year_dataset.py::TestMicrosimulationDatasetRouting::test_string_hdfstore_path_triggers_extend
+FAILED policyengine_us/tests/microsimulation/data/test_extend_single_year_dataset.py::TestMicrosimulationDatasetRouting::test_single_year_dataset_triggers_extend
+FAILED policyengine_us/tests/microsimulation/data/test_extend_single_year_dataset.py::TestMicrosimulationDatasetRouting::test_multi_year_dataset_passes_through
+3 failed, 162 passed, 14 warnings in 550.17s (0:09:10)

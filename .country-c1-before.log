@@ -1,0 +1,58 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+_____ test_chosen_system_and_simulation_clones_preserve_user_reform[False] _____
+policyengine_us/tests/core/test_spm_system.py:70: in test_chosen_system_and_simulation_clones_preserve_user_reform
+    assert clone.calculate("income_tax", 2024)[0] == 4_016
+E   assert np.float32(0.0) == 4016
+_____ test_chosen_system_and_simulation_clones_preserve_user_reform[True] ______
+policyengine_us/tests/core/test_spm_system.py:70: in test_chosen_system_and_simulation_clones_preserve_user_reform
+    assert clone.calculate("income_tax", 2024)[0] == 4_016
+E   assert np.float32(0.0) == 4016
+______ test_reform_baseline_and_clones_calculate_original_tax[Simulation] ______
+policyengine_us/tests/core/test_spm_system.py:93: in test_reform_baseline_and_clones_calculate_original_tax
+    np.testing.assert_array_equal(changed.baseline.calculate("income_tax", 2024), 4_016)
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   Mismatched elements: 1 / 1 (100%)
+E   Mismatch at index:
+E    [0]: 0.0 (ACTUAL), 4016 (DESIRED)
+E   Max absolute difference among violations: 4016.
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([0.], dtype=float32)
+E    DESIRED: array(4016)
+___ test_reform_baseline_and_clones_calculate_original_tax[Microsimulation] ____
+policyengine_us/tests/core/test_spm_system.py:93: in test_reform_baseline_and_clones_calculate_original_tax
+    np.testing.assert_array_equal(changed.baseline.calculate("income_tax", 2024), 4_016)
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   Mismatched elements: 2 / 2 (100%)
+E   Mismatch at indices:
+E    [0]: 0.0 (ACTUAL), 4016 (DESIRED)
+E    [1]: 0.0 (ACTUAL), 4016 (DESIRED)
+E   Max absolute difference among violations: 4016.
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([0., 0.], dtype=float32)
+E    DESIRED: array(4016)
+_______ test_applying_reform_to_calculated_clone_preserves_original_tax ________
+policyengine_us/tests/core/test_spm_system.py:126: in test_applying_reform_to_calculated_clone_preserves_original_tax
+    assert clone.get_holder("income_tax").variable is clone.tax_benefit_system.variables[
+E   AssertionError: assert <4581842560_9220029508632482457_income_tax.income_tax object at 0x1494251d0> is <4581842560_9220029508632482457_income_tax.income_tax object at 0x174700050>
+E    +  where <4581842560_9220029508632482457_income_tax.income_tax object at 0x1494251d0> = <policyengine_core.holders.holder.Holder object at 0x154feaad0>.variable
+E    +    where <policyengine_core.holders.holder.Holder object at 0x154feaad0> = get_holder('income_tax')
+E    +      where get_holder = <policyengine_us.system.Simulation object at 0x30d132ad0>.get_holder
+=============================== warnings summary ===============================
+policyengine_us/tests/core/test_spm_system.py::test_applying_reform_to_calculated_clone_preserves_original_tax
+policyengine_us/tests/core/test_spm_system.py::test_applying_reform_to_calculated_clone_preserves_original_tax
+  /Users/maxghenis/spm-rebuild-20260908/worktrees/policyengine-us-spm-integration-audit/policyengine_us/variables/gov/irs/income/taxable_income/adjusted_gross_income/irs_gross_income/unemployment_insurance/taxable_unemployment_insurance.py:22: RuntimeWarning: invalid value encountered in divide
+    share = where(tax_unit_uc > 0, person_uc / tax_unit_uc, 0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED policyengine_us/tests/core/test_spm_system.py::test_chosen_system_and_simulation_clones_preserve_user_reform[False]
+FAILED policyengine_us/tests/core/test_spm_system.py::test_chosen_system_and_simulation_clones_preserve_user_reform[True]
+FAILED policyengine_us/tests/core/test_spm_system.py::test_reform_baseline_and_clones_calculate_original_tax[Simulation]
+FAILED policyengine_us/tests/core/test_spm_system.py::test_reform_baseline_and_clones_calculate_original_tax[Microsimulation]
+FAILED policyengine_us/tests/core/test_spm_system.py::test_applying_reform_to_calculated_clone_preserves_original_tax
+5 failed, 18 deselected, 2 warnings in 80.44s (0:01:20)

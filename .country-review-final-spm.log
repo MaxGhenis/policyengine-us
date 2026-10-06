@@ -1,0 +1,28 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.9, pytest-8.4.2, pluggy-1.6.0
+rootdir: /Users/maxghenis/spm-rebuild-20260908/worktrees/policyengine-us-spm-integration-audit
+configfile: pyproject.toml
+plugins: anyio-4.15.1
+collected 52 items
+
+policyengine_us/tests/policy/baseline/household/income/spm_unit/spm_unit_benefits.yaml ....
+policyengine_us/tests/policy/baseline/household/income/spm_unit/spm_unit_capped_housing_subsidy.yaml ...
+policyengine_us/tests/policy/baseline/household/income/spm_unit/spm_unit_energy_subsidy.yaml .
+policyengine_us/tests/policy/baseline/household/income/spm_unit/spm_unit_is_in_spm_poverty.yaml ..
+policyengine_us/tests/policy/baseline/household/income/spm_unit/spm_unit_market_income.yaml .
+policyengine_us/tests/policy/baseline/household/income/spm_unit/spm_unit_medical_out_of_pocket_expenses.yaml ....
+policyengine_us/tests/policy/baseline/household/income/spm_unit/spm_unit_medical_out_of_pocket_expenses_medicare_part_b.yaml ....
+policyengine_us/tests/policy/baseline/household/income/spm_unit/spm_unit_net_income.yaml ...
+policyengine_us/tests/policy/baseline/household/income/spm_unit/spm_unit_spm_expenses_chip_premium.yaml ..
+policyengine_us/tests/policy/baseline/household/income/spm_unit/spm_unit_spm_threshold_housing_portion.yaml ...
+policyengine_us/tests/policy/baseline/household/income/spm_unit/test_spm_unit_spm_threshold.py .....................
+policyengine_us/tests/policy/baseline/household/demographic/spm_unit/spm_unit_is_married.yaml ..
+policyengine_us/tests/policy/baseline/household/demographic/spm_unit/spm_unit_size.yaml ..
+
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1290
+  /Users/maxghenis/spm-rebuild-20260908/worktrees/policyengine-us-spm-integration-audit/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 52 passed, 1 warning in 122.27s (0:02:02) ===================

@@ -1,0 +1,24 @@
+F
+=================================== FAILURES ===================================
+___________ test_clone_can_add_a_variable_without_mutating_original ____________
+policyengine_us/tests/core/test_spm_system.py:162: in test_clone_can_add_a_variable_without_mutating_original
+    clone.apply_reform(AddedInputReform)
+policyengine_us/spm.py:133: in apply_reform
+    super().apply_reform(reform)
+.venv/lib/python3.13/site-packages/policyengine_core/simulations/simulation.py:264: in apply_reform
+    reform.apply(self.tax_benefit_system)
+policyengine_us/tests/core/test_spm_system.py:155: in apply
+    self.update_variable(clone_only_income)
+.venv/lib/python3.13/site-packages/policyengine_core/taxbenefitsystems/tax_benefit_system.py:264: in update_variable
+    return self.load_variable(variable, update=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/policyengine_core/taxbenefitsystems/tax_benefit_system.py:217: in load_variable
+    variable = variable_class(baseline_variable=baseline_variable)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/policyengine_core/variables/variable.py:217: in __init__
+    raise ValueError('Variable "{name}" has no label'.format(name=self.name))
+E   ValueError: Variable "clone_only_income" has no label
+=========================== short test summary info ============================
+FAILED policyengine_us/tests/core/test_spm_system.py::test_clone_can_add_a_variable_without_mutating_original
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed in 8.26s

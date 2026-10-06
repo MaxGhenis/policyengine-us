@@ -1,0 +1,11 @@
+.......................                                                  [100%]
+=============================== warnings summary ===============================
+policyengine_us/tests/core/test_spm_system.py::test_chosen_system_and_simulation_clones_preserve_user_reform[False]
+policyengine_us/tests/core/test_spm_system.py::test_chosen_system_and_simulation_clones_preserve_user_reform[True]
+policyengine_us/tests/core/test_spm_system.py::test_applying_reform_to_calculated_clone_preserves_original_tax
+policyengine_us/tests/core/test_spm_system.py::test_applying_reform_to_calculated_clone_preserves_original_tax
+  /Users/maxghenis/spm-rebuild-20260908/worktrees/policyengine-us-spm-integration-audit/policyengine_us/variables/gov/irs/income/taxable_income/adjusted_gross_income/irs_gross_income/unemployment_insurance/taxable_unemployment_insurance.py:22: RuntimeWarning: invalid value encountered in divide
+    share = where(tax_unit_uc > 0, person_uc / tax_unit_uc, 0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+23 passed, 4 warnings in 197.11s (0:03:17)
