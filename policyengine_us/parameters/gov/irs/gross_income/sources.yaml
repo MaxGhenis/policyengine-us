@@ -39,6 +39,11 @@ values:
     - taxable_alimony_income
     # Taxable state and local income tax refunds (Schedule 1 line 1 / IRC § 111).
     - salt_refund_income
+    # Wages or payments in lieu of wages for permanent and total disability,
+    # which § 22(c)(2)(B)(iii) defines as amounts includible in gross income
+    # under § 72 or § 105(a). A disability pension from an employer-paid plan
+    # goes on Form 1040 line 1h until minimum retirement age (Pub. 525).
+    - total_disability_payments
 
 metadata:
   unit: list
@@ -49,6 +54,10 @@ metadata:
       href: https://www.law.cornell.edu/uscode/text/26/61
     - title: 26 U.S. Code § 111 - Recovery of tax benefit items
       href: https://www.law.cornell.edu/uscode/text/26/111
+    - title: 26 U.S. Code § 22(c)(2)(B)(iii) - Disability income
+      href: https://www.law.cornell.edu/uscode/text/26/22#c_2_B_iii
+    - title: IRS Publication 525, Disability pensions
+      href: https://www.irs.gov/publications/p525
     - title: 26 U.S. Code § 61(a)(14) - Income from an interest in an estate or trust
       href: https://www.law.cornell.edu/uscode/text/26/61#a_14
     - title: 2024 Schedule 1 (Form 1040), line 5 - Rental real estate, royalties, partnerships, S corporations, trusts, etc.

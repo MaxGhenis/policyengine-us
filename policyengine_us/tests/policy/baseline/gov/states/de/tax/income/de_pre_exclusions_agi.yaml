@@ -1,0 +1,38 @@
+- name: A filer's own additions are added
+  period: 2025
+  input:
+    people:
+      head:
+        is_tax_unit_head: true
+        age: 40
+        employment_income: 60_000
+        de_additions: 1_000
+    household:
+      state_code: DE
+  output:
+    # 60,000 + 1,000.
+    de_pre_exclusions_agi: [61_000]
+
+- name: A dependent's own additions are not added to the filer's return
+  # Delaware modifies the individual's "federal adjusted gross income"
+  # (30 Del. C. 1106(a)). A dependent's own income and additions are on the
+  # dependent's own federal and Delaware returns. de_agi_joint and
+  # de_agi_indiv pool every member's net income into the head's.
+  period: 2025
+  input:
+    people:
+      head:
+        is_tax_unit_head: true
+        age: 40
+        employment_income: 60_000
+        de_additions: 1_000
+      child:
+        is_tax_unit_dependent: true
+        age: 10
+        de_additions: 3_000
+    household:
+      state_code: DE
+  output:
+    de_pre_exclusions_agi: [61_000, 0]
+    de_agi_joint: [61_000, 0]
+    de_agi_indiv: [61_000, 0]

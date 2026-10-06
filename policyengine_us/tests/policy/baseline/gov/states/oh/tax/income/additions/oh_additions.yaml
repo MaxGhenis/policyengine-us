@@ -1,0 +1,40 @@
+- name: A filer's own add-backs are added
+  period: 2025
+  input:
+    people:
+      head:
+        is_tax_unit_head: true
+        age: 40
+        employment_income: 60_000
+        oh_bonus_depreciation_add_back: 1_000
+        oh_other_add_backs: 500
+    household:
+      state_code: OH
+  output:
+    oh_additions: [1_500]
+    # 60,000 + 1,500.
+    oh_agi: 61_500
+
+- name: A dependent's own add-backs are not added to the filer's return
+  # Ohio adjusts the taxpayer's "federal adjusted gross income" (R.C.
+  # 5747.01(A)). A dependent's own income and the add-backs that follow it
+  # are on the dependent's own federal and Ohio returns.
+  period: 2025
+  input:
+    people:
+      head:
+        is_tax_unit_head: true
+        age: 40
+        employment_income: 60_000
+        oh_other_add_backs: 1_000
+      child:
+        is_tax_unit_dependent: true
+        age: 10
+        oh_bonus_depreciation_add_back: 2_000
+        oh_other_add_backs: 3_000
+    household:
+      state_code: OH
+  output:
+    oh_additions: [1_000, 0]
+    # 60,000 + 1,000; the child's 5,000 stays off.
+    oh_agi: 61_000

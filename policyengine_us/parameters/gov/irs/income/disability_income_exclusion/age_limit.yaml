@@ -1,0 +1,13 @@
+description: IRS limits the disability income exclusion to taxpayers under this age at the end of the year.
+metadata:
+  unit: year
+  period: year
+  label: Disability income exclusion age limit
+  reference:
+    - title: 26 U.S. Code § 105 (d)(1)(A) (1976)
+      href: https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00702/uscode1976-007026001/uscode1976-007026001.pdf#page=118
+    - title: 2025 DC Form D-2440, Who may file
+      href: https://otr.cfo.dc.gov/sites/default/files/dc/sites/otr/publication/attachments/2025_D-2440_Form_012626.pdf#page=2
+    # 26 U.S. Code § 105 (d) was repealed in 1983, but some states continue using it as a standard when computing disability income exclusion
+values:
+  1976-01-01: 65

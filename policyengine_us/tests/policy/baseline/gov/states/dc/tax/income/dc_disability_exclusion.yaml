@@ -2,6 +2,8 @@
 # your spouse, and line 10 subtracts federal AGI less taxable Social Security
 # less $15,000. Each filer gets a share of the line 10 exclusion in proportion
 # to their capped payments, so the return's exclusion is counted once.
+# "Who may file": retired on disability and permanently and totally disabled
+# when retired, under 65 on December 31, and, if married, filing jointly.
 - name: disability payments are over the cap,and the reduced income is positive
   period: 2021
   absolute_error_margin: 0.01
@@ -9,11 +11,14 @@
     people:
       person1:
         is_tax_unit_head: true
+        age: 50
+        retired_on_total_disability: true
         total_disability_payments: 6_000
       person2:
         is_tax_unit_spouse: true
+        age: 60
+        retired_on_total_disability: true
         total_disability_payments: 4_000
-        age: 65
     tax_units:
       tax_unit:
         members: [person1, person2]
@@ -34,11 +39,14 @@
     people:
       person1:
         is_tax_unit_head: true
+        age: 50
+        retired_on_total_disability: true
         total_disability_payments: 7_000
       person2:
         is_tax_unit_spouse: true
+        age: 60
+        retired_on_total_disability: true
         total_disability_payments: 6_000
-        age: 65
     tax_units:
       tax_unit:
         members: [person1, person2]
@@ -58,11 +66,14 @@
     people:
       person1:
         is_tax_unit_head: true
+        age: 50
+        retired_on_total_disability: true
         total_disability_payments: 4_000
       person2:
         is_tax_unit_spouse: true
+        age: 60
+        retired_on_total_disability: true
         total_disability_payments: 3_000
-        age: 65
     tax_units:
       tax_unit:
         members: [person1, person2]
@@ -75,16 +86,115 @@
   output:
     dc_disability_exclusion: [4_000, 3_000]
 
+- name: A spouse who is 65 at the end of the year has no column on line 4
+  # "You were under the age of 65 on December 31". Line 4 is the head's
+  # 4,000; line 9 is 0, as 20,000 - 6,000 - 15,000 < 0.
+  period: 2025
+  input:
+    people:
+      person1:
+        is_tax_unit_head: true
+        age: 50
+        retired_on_total_disability: true
+        total_disability_payments: 4_000
+      person2:
+        is_tax_unit_spouse: true
+        age: 65
+        retired_on_total_disability: true
+        total_disability_payments: 3_000
+    tax_units:
+      tax_unit:
+        members: [person1, person2]
+        adjusted_gross_income: 20_000
+        tax_unit_taxable_social_security: 6_000
+    households:
+      household:
+        members: [person1, person2]
+        state_code: DC
+  output:
+    dc_disability_exclusion: [4_000, 0]
+
+- name: Payments to someone who did not retire on disability are not excluded
+  # "You retired on disability and were permanently and totally disabled
+  # when you retired".
+  period: 2025
+  input:
+    people:
+      person1:
+        is_tax_unit_head: true
+        age: 50
+        retired_on_total_disability: false
+        total_disability_payments: 4_000
+    tax_units:
+      tax_unit:
+        members: [person1]
+        adjusted_gross_income: 4_000
+    households:
+      household:
+        members: [person1]
+        state_code: DC
+  output:
+    dc_disability_exclusion: [0]
+
+- name: A married person filing a separate return cannot claim the exclusion
+  # "If you are married or registered domestic partners, you are filing a
+  # joint return".
+  period: 2025
+  input:
+    people:
+      person1:
+        is_tax_unit_head: true
+        age: 50
+        retired_on_total_disability: true
+        total_disability_payments: 4_000
+    tax_units:
+      tax_unit:
+        members: [person1]
+        filing_status: SEPARATE
+        adjusted_gross_income: 4_000
+    households:
+      household:
+        members: [person1]
+        state_code: DC
+  output:
+    dc_disability_exclusion: [0]
+
+- name: Federal AGI on line 5 includes the disability payments
+  # Disability income is includible in gross income (IRC 22(c)(2)(B)(iii);
+  # Schedule I, Calculation B, line 2: "If disability payments were included
+  # in your federal gross income"). Federal AGI: 12,000 + 5,000 = 17,000.
+  # Line 9: 17,000 - 15,000 = 2,000. Line 10: 5,000 - 2,000 = 3,000.
+  period: 2025
+  input:
+    people:
+      person1:
+        is_tax_unit_head: true
+        age: 50
+        retired_on_total_disability: true
+        employment_income: 12_000
+        total_disability_payments: 5_000
+    households:
+      household:
+        members: [person1]
+        state_code: DC
+  output:
+    adjusted_gross_income: 17_000
+    dc_disability_exclusion: [3_000]
+    # 17,000 - 3,000.
+    dc_agi: [14_000]
+
 - name: The exclusion is counted once in DC AGI
-  # Line 9: 18,000 - 15,000 = 3,000, so line 10 is 5,000 - 3,000 = 2,000.
-  # It used to go to every member, so a household of three subtracted 6,000.
+  # Federal AGI: 13,000 + 5,000 = 18,000. Line 9: 18,000 - 15,000 = 3,000,
+  # so line 10 is 5,000 - 3,000 = 2,000. It used to go to every member, so
+  # a household of three subtracted 6,000.
   period: 2025
   input:
     people:
       head:
         is_tax_unit_head: true
         age: 50
-        employment_income: 18_000
+        retired_on_total_disability: true
+        employment_income: 13_000
         total_disability_payments: 5_000
       spouse:
         is_tax_unit_spouse: true
@@ -101,6 +211,7 @@
   output:
     dc_disability_exclusion: [2_000, 0, 0]
     dc_income_subtractions: [2_000, 0, 0]
+    # 18,000 - 2,000.
     dc_agi: [16_000, 0, 0]
 
 - name: A dependent's disability payments are on their own return
@@ -109,9 +220,13 @@
     people:
       head:
         is_tax_unit_head: true
+        age: 50
+        retired_on_total_disability: true
         total_disability_payments: 4_000
       child:
         is_tax_unit_dependent: true
+        age: 20
+        retired_on_total_disability: true
         total_disability_payments: 5_000
     tax_units:
       tax_unit:
