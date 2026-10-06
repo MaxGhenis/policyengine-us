@@ -108,7 +108,15 @@
     snap_unit_size: 2
     # Massachusetts counts all of the undocumented member's income.
     snap_earned_income: 2_000
-    snap: 194
+    # No elderly/disabled member or utility expenses: the heat-and-eat
+    # route is closed under 7 U.S.C. 2014(e)(6)(C)(iv)(I), as amended by
+    # P.L. 119-21 sec. 10103(a), effective July 4, 2025.
+    snap_utility_allowance_type: NONE
+    snap_excess_shelter_expense_deduction: 0
+    # Net = 2,000 - 400 earned deduction - 209 standard deduction = 1,391.
+    # Benefit = 546 two-person maximum - ceil(1,391 * 0.3) = 128.
+    snap_net_income: 1_391
+    snap: 128
 
 - name: Case 5, undocumented earner in a hybrid gross-test state.
   period: 2026-01

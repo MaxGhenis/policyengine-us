@@ -1,0 +1,273 @@
+# 7 U.S.C. 2014(e)(6)(C)(iv)(I), amended by P.L. 119-21 sec. 10103(a),
+# limits the LIHEAP-triggered SUA to households with an elderly or disabled
+# member from July 4, 2025. The existing state flag models heat-and-eat
+# payments; these cases test the additional household eligibility condition.
+# https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+# 7 U.S.C. 2012(j) defines elderly/disabled status; bare is_disabled is
+# insufficient without qualifying benefit receipt or another listed status.
+# Unit cases hold SNAP membership fixed to isolate this provision from
+# work requirements and other membership exclusions.
+
+- name: Pennsylvania adult without an elderly or disabled member gets no heat-and-eat SUA
+  period: 2026-01
+  input:
+    state_code: PA
+    age: 41
+    is_usda_disabled: false
+    is_snap_excluded_member: false
+  output:
+    has_usda_elderly_disabled: false
+    snap_state_using_standard_utility_allowance: false
+    snap_utility_allowance_type: NONE
+    snap_standard_utility_allowance: 0
+
+- name: Pennsylvania adult aged 60 retains heat-and-eat eligibility
+  period: 2026-01
+  input:
+    state_code: PA
+    age: 60
+    is_usda_disabled: false
+    is_snap_excluded_member: false
+  output:
+    has_snap_elderly_disabled_member: true
+    snap_state_using_standard_utility_allowance: true
+    snap_utility_allowance_type: SUA
+    snap_standard_utility_allowance: 857
+
+- name: Pennsylvania adult aged 59 is below the elderly threshold
+  period: 2026-01
+  input:
+    state_code: PA
+    age: 59
+    is_usda_disabled: false
+    is_snap_excluded_member: false
+  output:
+    has_usda_elderly_disabled: false
+    snap_state_using_standard_utility_allowance: false
+    snap_utility_allowance_type: NONE
+
+- name: Qualifying SSI receipt retains heat-and-eat eligibility below age 60
+  period: 2026-01
+  input:
+    state_code: PA
+    age: 41
+    is_disabled: true
+    receives_ssi: true
+    is_snap_excluded_member: false
+  output:
+    is_usda_disabled: true
+    has_snap_elderly_disabled_member: true
+    snap_state_using_standard_utility_allowance: true
+    snap_utility_allowance_type: SUA
+
+# The amendment leaves the actual-cost route in 7 CFR 273.9(d)(6)(iii)(D)(1)
+# available regardless of elderly/disabled status (FNS memo, Aug. 29, 2025).
+- name: Actual heating or cooling expenses still qualify a younger adult for SUA
+  period: 2026-01
+  input:
+    state_code: PA
+    age: 41
+    is_usda_disabled: false
+    is_snap_excluded_member: false
+    has_heating_cooling_expense: true
+  output:
+    snap_state_using_standard_utility_allowance: false
+    snap_utility_allowance_type: SUA
+    snap_standard_utility_allowance: 857
+
+- name: A separately paid heating bill qualifies without heat-and-eat eligibility
+  period: 2026-01
+  input:
+    state_code: PA
+    age: 41
+    is_usda_disabled: false
+    is_snap_excluded_member: false
+    heating_type: NATURAL_GAS
+    gas_expense:
+      2026: 1_200
+    heat_expense_included_in_rent: false
+  output:
+    has_heating_cooling_expense: true
+    snap_state_using_standard_utility_allowance: false
+    snap_utility_allowance_type: SUA
+    snap_standard_utility_allowance: 857
+
+- name: Pennsylvania heat-and-eat does not require an elderly or disabled member before the amendment
+  period: 2025-06
+  input:
+    state_code:
+      2025: PA
+    age:
+      2025: 41
+    is_usda_disabled:
+      2025: false
+  output:
+    snap_state_using_standard_utility_allowance: true
+    snap_utility_allowance_type: SUA
+
+# Monthly parameters are evaluated at month start; August is the first full
+# calendar month after the statutory July 4 effective date.
+- name: Heat-and-eat restriction applies in 2025 after the amendment
+  period: 2025-08
+  input:
+    state_code:
+      2025: PA
+    age:
+      2025: 41
+    is_usda_disabled:
+      2025: false
+  output:
+    snap_state_using_standard_utility_allowance: false
+    snap_utility_allowance_type: NONE
+
+- name: Heat-and-eat restriction continues beyond 2026
+  period: 2027-01
+  input:
+    state_code: PA
+    age: 41
+    is_usda_disabled: false
+    is_snap_excluded_member: false
+  output:
+    snap_state_using_standard_utility_allowance: false
+    snap_utility_allowance_type: NONE
+
+- name: Mixed households apply the state and elderly or disabled conditions independently
+  period: 2026-01
+  input:
+    state_code: [PA, PA, TX, MT]
+    age: [41, 60, 60, 41]
+    is_usda_disabled: [false, false, false, true]
+    is_snap_excluded_member: [false, false, false, false]
+  output:
+    snap_state_using_standard_utility_allowance: [false, true, false, true]
+    snap_utility_allowance_type: [NONE, SUA, NONE, SUA]
+
+# A member excluded from the SNAP household does not confer household-wide
+# elderly/disabled status: 7 CFR 271.2, 273.1, and 273.11(c).
+- name: An excluded elderly person does not confer heat-and-eat eligibility
+  period: 2026-01
+  input:
+    people:
+      adult:
+        age: 41
+        is_usda_disabled: false
+        is_snap_excluded_member: false
+      excluded_person:
+        age: 60
+        is_usda_disabled: false
+        is_snap_excluded_member: true
+    spm_units:
+      unit:
+        members: [adult, excluded_person]
+    households:
+      household:
+        members: [adult, excluded_person]
+        state_code: PA
+  output:
+    has_usda_elderly_disabled: true
+    has_snap_elderly_disabled_member: false
+    snap_state_using_standard_utility_allowance: false
+    snap_utility_allowance_type: NONE
+
+- name: Non-heating utilities can still qualify for the limited allowance
+  period: 2026-01
+  input:
+    state_code: PA
+    age: 41
+    is_usda_disabled: false
+    is_snap_excluded_member: false
+    pre_subsidy_electricity_expense: 600
+    trash_expense: 120
+  output:
+    has_heating_cooling_expense: false
+    snap_state_using_standard_utility_allowance: false
+    snap_utility_allowance_type: LUA
+    snap_standard_utility_allowance: 0
+
+# PolicyBench scenario_080: the stated disability and generic energy subsidy
+# do not establish elderly/disabled status under 7 U.S.C. 2012(j).
+# SSI and SSDI are explicitly zero, as in the prompt's unlisted-facts rule.
+# With no housing or utility payments, max(0 - 0.5 * net income, 0) = 0.
+- name: PolicyBench scenario 080 Pennsylvania household receives no heat-and-eat deduction
+  period: 2026-01
+  input:
+    people:
+      head:
+        age: 41
+        is_disabled: true
+        bank_account_assets:
+          2026: 19_828
+        financial_assistance:
+          2026: 3_600
+        ssi:
+          2026: 0
+        receives_ssi: false
+        social_security_disability:
+          2026: 0
+    tax_units:
+      tax_unit:
+        members: [head]
+        first_home_mortgage_balance:
+          2026: 93_000
+    spm_units:
+      unit:
+        members: [head]
+        spm_unit_energy_subsidy:
+          2026: 2_000
+    households:
+      household:
+        members: [head]
+        state_code: PA
+  output:
+    has_usda_elderly_disabled: false
+    has_snap_elderly_disabled_member: false
+    has_heating_cooling_expense: false
+    snap_state_using_standard_utility_allowance: false
+    snap_utility_allowance_type: NONE
+    snap_standard_utility_allowance: 0
+    snap_utility_allowance: 0
+    snap_excess_shelter_expense_deduction: 0
+
+# PolicyBench scenario_100: no qualifying disability-benefit receipt, energy
+# assistance, housing payments, or utility costs. The same statutory gate
+# applies in Montana, and zero shelter costs imply a zero shelter deduction.
+- name: PolicyBench scenario 100 Montana household receives no heat-and-eat deduction
+  period: 2026-01
+  input:
+    people:
+      head:
+        age: 46
+        is_disabled: true
+        bank_account_assets:
+          2026: 2_800
+        employment_income:
+          2026: 5_915
+        ssi:
+          2026: 0
+        receives_ssi: false
+        social_security_disability:
+          2026: 0
+      child1:
+        age: 6
+        ssi:
+          2026: 0
+      child2:
+        age: 5
+        ssi:
+          2026: 0
+    spm_units:
+      unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: MT
+  output:
+    has_usda_elderly_disabled: false
+    has_snap_elderly_disabled_member: false
+    has_heating_cooling_expense: false
+    snap_state_using_standard_utility_allowance: false
+    snap_utility_allowance_type: NONE
+    snap_standard_utility_allowance: 0
+    snap_utility_allowance: 0
+    snap_excess_shelter_expense_deduction: 0

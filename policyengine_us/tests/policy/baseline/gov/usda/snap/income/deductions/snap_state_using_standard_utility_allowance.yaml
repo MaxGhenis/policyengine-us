@@ -1,5 +1,6 @@
 - name: Colorado uses the SUA as a Heat and Eat state (effective 2024-10-01).
-  period: 2025
+  # Isolate state participation before the July 2025 household restriction.
+  period: 2025-01
   input:
     state_code: CO
   output:

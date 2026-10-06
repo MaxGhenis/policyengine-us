@@ -1,4 +1,4 @@
-description: The following states always use the Standard Utility Allowance under the Supplemental Nutrition Assistance Program.
+description: The following states provide heat-and-eat LIHEAP payments that qualify households for the Supplemental Nutrition Assistance Program standard utility allowance. This flag models that payment route, which from 2025-07-04 requires an elderly or disabled household member.
 AK:
   2015-10-01: false
 AL:
@@ -112,10 +112,14 @@ metadata:
   propagate_metadata_to_children: true
   unit: bool
   period: month
-  label: SNAP states always using the standard utility allowance
+  label: SNAP states providing heat-and-eat utility allowance eligibility
   breakdown:
     - state_code
   reference:
+    - title: 7 U.S.C. 2014(e)(6)(C)(iv)(I) - Standard utility allowance through energy assistance
+      href: https://www.law.cornell.edu/uscode/text/7/2014#e_6_C_iv_I
+    - title: Public Law 119-21, Section 10103(a) - Availability of standard utility allowances based on receipt of energy assistance
+      href: https://www.congress.gov/119/plaws/publ21/PLAW-119publ21.pdf#page=12
     - title: 7 CFR § 273.9(d)(6)(iii)(E) - Standard utility allowances
       href: https://www.ecfr.gov/current/title-7/subtitle-B/chapter-II/subchapter-C/part-273/subpart-D/section-273.9#p-273.9(d)(6)(iii)
     - title: Agricultural Act of 2014 (Pub. L. 113-79) § 4006(b) - Minimum LIHEAP benefit for SUA eligibility

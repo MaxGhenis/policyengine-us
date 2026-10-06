@@ -1,0 +1,17 @@
+description: The Supplemental Nutrition Assistance Program requires an elderly or disabled household member for standard utility allowance eligibility through a qualifying heat-and-eat energy assistance payment when this is true.
+
+values:
+  2015-10-01: false
+  2025-07-04: true
+
+metadata:
+  unit: bool
+  period: month
+  label: SNAP heat-and-eat requires an elderly or disabled member
+  reference:
+    - title: 7 U.S.C. 2014(e)(6)(C)(iv)(I) - Standard utility allowance through energy assistance
+      href: https://www.law.cornell.edu/uscode/text/7/2014#e_6_C_iv_I
+    - title: Public Law 119-21, Section 10103(a) - Availability of standard utility allowances based on receipt of energy assistance
+      href: https://www.congress.gov/119/plaws/publ21/PLAW-119publ21.pdf#page=12
+    - title: USDA FNS - SNAP Implementation of the One Big Beautiful Bill Act of 2025, Treatment of Energy Assistance Payments (August 29, 2025)
+      href: https://fns-prod.azureedge.us/sites/default/files/resource-files/OBBB-LIHEAP-Implementation-Memo.pdf#page=2
