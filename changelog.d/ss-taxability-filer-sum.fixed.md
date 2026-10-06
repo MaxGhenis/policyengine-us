@@ -1,0 +1,1 @@
+Sum only the head's and spouse's Social Security benefits in the IRC 86 taxability base (`tax_unit_social_security_for_taxability`), so a dependent's benefits can no longer move the filer's base through float32 rounding of the tax unit total. A `tax_unit_social_security` amount supplied for the tax unit is no longer read by it.

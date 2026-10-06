@@ -36,3 +36,82 @@
   output:
     tax_unit_social_security: 8_400
     tax_unit_social_security_for_taxability: 0
+
+- name: A dependent's large benefits do not move the head's amount through float32 rounding.
+  period: 2025
+  absolute_error_margin: 0
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 22_000
+        social_security: 14_001
+      child:
+        age: 8
+        is_tax_unit_dependent: true
+        # A float32 tax unit total of 20,014,001 rounds to 20,014,000.
+        social_security: 20_000_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    tax_unit_social_security_for_taxability: 14_001
+    # Combined income 22,000 + 7,000.50 = 29,000.50 is $4,000.50 over the
+    # $25,000 base amount, and half of that is taxable (IRC 86(a)(1)).
+    tax_unit_taxable_social_security: 2_000.25
+    adjusted_gross_income: 24_000.25
+
+- name: Joint filers' benefits count and a dependent's do not.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 67
+        social_security: 10_000
+      spouse:
+        age: 66
+        social_security: 8_000
+      child:
+        age: 15
+        is_tax_unit_dependent: true
+        social_security: 3_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse, child]
+    marital_units:
+      marital_unit:
+        members: [head, spouse]
+      child_marital_unit:
+        members: [child]
+    households:
+      household:
+        members: [head, spouse, child]
+        state_code: TX
+  output:
+    tax_unit_social_security_for_taxability: 18_000
+
+- name: A dependent's negative benefits input does not change the head's amount.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 22_000
+        social_security: 14_001
+      child:
+        age: 8
+        is_tax_unit_dependent: true
+        social_security: -5_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    tax_unit_social_security_for_taxability: 14_001
