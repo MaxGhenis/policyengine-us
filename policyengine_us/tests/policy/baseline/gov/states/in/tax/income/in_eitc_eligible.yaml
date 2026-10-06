@@ -91,6 +91,10 @@
     in_eitc_eligible: false
 
 - name: in_eitc_eligible unit test 8
+  # IC 6-3.1-21-6(a) bases the credit on the federal credit the individual is
+  # eligible to receive and "claimed for the taxable year"; Schedule IN-EIC:
+  # "You must be eligible for and have claimed an EIC on your federal tax
+  # return. If not, STOP." With no federal EITC there is no Indiana EITC.
   period: 2025
   input:
     state_code: IN
@@ -103,4 +107,4 @@
     would_file_taxes_voluntarily: true
     takes_up_eitc: true
   output:
-    in_eitc_eligible: true
+    in_eitc_eligible: false
