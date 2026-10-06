@@ -1,0 +1,10 @@
+description: The IRS phases out the traditional IRA deduction over this modified adjusted gross income range for a joint filer covered only through their spouse's workplace retirement plan.
+values:
+  2010-01-01: 10_000
+metadata:
+  unit: currency-USD
+  period: year
+  label: Traditional IRA spouse-only coverage phase-out width
+  reference:
+    - title: 26 U.S. Code § 219 - Retirement savings (g)(7)(B)
+      href: https://www.law.cornell.edu/uscode/text/26/219#g_7_B

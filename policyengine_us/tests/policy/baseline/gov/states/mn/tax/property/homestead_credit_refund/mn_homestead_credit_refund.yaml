@@ -156,3 +156,90 @@
     traditional_ira_contributions: 3_500
     roth_ira_contributions: 3_500
     mn_homestead_credit_refund_household_income: 46_500
+
+# M1PR line 3 adds back the deductions on federal Schedule 1 lines 16 and 20,
+# not total IRA contributions; line 10 subtracts actual contributions.
+- name: Case 8, a fully phased-out IRA contribution is not added back twice.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 120_000
+        traditional_401k_contributions_desired: 5_000
+        traditional_ira_contributions_desired: 5_000
+        is_tax_unit_head: true
+    tax_units:
+      tax_unit:
+        members: [person1]
+        filing_status: SINGLE
+    households:
+      household:
+        members: [person1]
+        state_code: MN
+  output:
+    ira_active_participant: true
+    traditional_ira_contributions: 5_000
+    traditional_ira_deduction: 0
+    adjusted_gross_income: 115_000
+    # 115,000 AGI + 5,000 401(k) add-back + 0 IRA deduction
+    # - min(10,000 contributions, 7,000 line 10 cap) = 113,000.
+    mn_homestead_credit_refund_household_income: 113_000
+
+- name: Case 9, only the deductible part of a partly phased-out IRA contribution is added back.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 95_000
+        traditional_401k_contributions_desired: 5_000
+        traditional_ira_contributions_desired: 7_000
+        is_tax_unit_head: true
+    tax_units:
+      tax_unit:
+        members: [person1]
+        filing_status: SINGLE
+    households:
+      household:
+        members: [person1]
+        state_code: MN
+  output:
+    # IRA MAGI 90,000 is 9,000 into the $81,000-$91,000 range:
+    # 7,500 - 6,750 = 750 deductible.
+    traditional_ira_deduction: 750
+    adjusted_gross_income: 89_250
+    # 89,250 + 5,000 + 750 - min(12,000, 7,000) = 88,000.
+    mn_homestead_credit_refund_household_income: 88_000
+
+- name: Case 10, a dependent's IRA contribution is not added back.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 60_000
+      dependent:
+        age: 17
+        is_tax_unit_dependent: true
+        employment_income: 5_000
+        traditional_ira_contributions_desired: 2_000
+    tax_units:
+      tax_unit:
+        members: [head, dependent]
+    households:
+      household:
+        members: [head, dependent]
+        state_code: MN
+  output:
+    traditional_ira_contributions: [0, 2_000]
+    # The parent's return cannot deduct the dependent's contribution, so
+    # federal AGI keeps it and line 3 adds nothing back.
+    traditional_ira_deduction: [0, 0]
+    adjusted_gross_income: 60_000
+    # 60,000 - 5,300 * 1.4 dependent subtraction
+    # - min(2,000 contributions, 7,000 line 10 cap) = 50,580.
+    mn_homestead_credit_refund_household_income: 50_580

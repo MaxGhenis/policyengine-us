@@ -1,0 +1,65 @@
+# IRC 219(g)(5): elective deferrals and SEP contributions establish coverage.
+- name: Traditional 401k deferrals with wages imply coverage
+  period: 2026
+  input:
+    employment_income: 100_000
+    traditional_401k_contributions_desired: 1_000
+  output:
+    ira_active_participant: true
+
+- name: Roth 401k deferrals with wages imply coverage
+  period: 2026
+  input:
+    employment_income: 100_000
+    roth_401k_contributions_desired: 1_000
+  output:
+    ira_active_participant: true
+
+- name: Traditional 403b deferrals with wages imply coverage
+  period: 2026
+  input:
+    employment_income: 100_000
+    traditional_403b_contributions_desired: 1_000
+  output:
+    ira_active_participant: true
+
+- name: Roth 403b deferrals with wages imply coverage
+  period: 2026
+  input:
+    employment_income: 100_000
+    roth_403b_contributions_desired: 1_000
+  output:
+    ira_active_participant: true
+
+- name: Self-employed pension contributions imply coverage
+  period: 2026
+  input:
+    self_employment_income: 10_000
+    self_employed_pension_contributions_desired: 1_000
+  output:
+    ira_active_participant: true
+
+- name: Retirement income does not imply workplace plan coverage
+  period: 2026
+  input:
+    taxable_pension_income: 100_000
+    traditional_ira_contributions_desired: 1_000
+  output:
+    ira_active_participant: false
+
+- name: Desired deferrals without earnings do not establish coverage
+  period: 2026
+  input:
+    traditional_401k_contributions_desired: 1_000
+  output:
+    ira_active_participant: false
+
+- name: Explicit employer-only coverage phases out the IRA deduction
+  period: 2026
+  input:
+    age: 40
+    employment_income: 100_000
+    ira_active_participant: true
+    traditional_ira_contributions_desired: 1_000
+  output:
+    traditional_ira_deduction: 0

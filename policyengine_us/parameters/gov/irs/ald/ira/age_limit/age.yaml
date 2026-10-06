@@ -1,0 +1,12 @@
+description: The IRS disallows traditional IRA deductions and contributions for individuals who attain this age before the end of the taxable year, when the age limit is in effect.
+values:
+  2010-01-01: 70.5
+metadata:
+  unit: year
+  period: year
+  label: Traditional IRA age limit
+  reference:
+    - title: 26 U.S. Code § 219(d)(1) (2018 edition), Beneficiary must be under age 70½
+      href: https://www.govinfo.gov/content/pkg/USCODE-2018-title26/html/USCODE-2018-title26-subtitleA-chap1-subchapB-partVII-sec219.htm
+    - title: 26 U.S. Code § 408(o)(2)(B)(i) (2018 edition), nondeductible limit
+      href: https://www.govinfo.gov/content/pkg/USCODE-2018-title26/html/USCODE-2018-title26-subtitleA-chap1-subchapD-partI-subpartA-sec408.htm

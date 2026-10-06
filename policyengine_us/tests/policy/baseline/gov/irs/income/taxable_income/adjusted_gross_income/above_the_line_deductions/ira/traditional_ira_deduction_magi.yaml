@@ -1,0 +1,95 @@
+# IRC 219(g)(3)(A) and Pub. 590-A Appendix B Worksheets 1-3.
+- name: IRA MAGI disregards IRA and student loan deductions but allows other adjustments
+  period: 2026
+  input:
+    employment_income: 85_000
+    ira_active_participant: true
+    traditional_ira_contributions_desired: 7_500
+    student_loan_interest: 2_500
+    early_withdrawal_penalty: 1_000
+  output:
+    traditional_ira_deduction_magi: 84_000
+    traditional_ira_deduction: 5_250
+
+- name: IRA MAGI includes taxable Social Security before deducting the IRA
+  period: 2026
+  input:
+    age: 67
+    employment_income: 30_000
+    social_security_retirement: 20_000
+    traditional_ira_contributions_desired: 6_000
+  output:
+    # Provisional income = 30,000 + 10,000 = 40,000.
+    # SS = .5 * 9,000 + .85 * 6,000 = 9,600.
+    taxable_social_security_before_ira_deduction: 9_600
+    traditional_ira_deduction_magi: 39_600
+    traditional_ira_deduction: 6_000
+    # Final provisional income is 34,000 after the allowed IRA deduction.
+    tax_unit_taxable_social_security: 4_500
+    adjusted_gross_income: 28_500
+
+- name: Tax exempt interest affects provisional Social Security but is excluded from IRA MAGI
+  period: 2026
+  input:
+    age: 67
+    employment_income: 20_000
+    tax_exempt_interest_income: 10_000
+    social_security_retirement: 20_000
+  output:
+    taxable_social_security_before_ira_deduction: 9_600
+    traditional_ira_deduction_magi: 29_600
+
+# IRS 2020 unemployment compensation exclusion FAQs, Topic E, Q1: IRA
+# deduction MAGI includes unemployment compensation unreduced by the exclusion.
+- name: IRA MAGI disregards the 2020 unemployment exclusion under section 85(c)
+  period: 2020
+  input:
+    employment_income: 50_000
+    unemployment_compensation: 15_000
+  output:
+    traditional_ira_deduction_magi: 65_000
+
+- name: Historical IRA MAGI disregards tuition and domestic production deductions
+  period: 2017
+  input:
+    employment_income: 62_000
+    domestic_production_ald: 1_000
+    capped_qualified_tuition_expenses_ald: 2_000
+    ira_active_participant: true
+    traditional_ira_contributions_desired: 5_500
+  output:
+    traditional_ira_deduction_magi: 62_000
+    traditional_ira_deduction: 5_500
+
+- name: Dependent income does not enter parents IRA MAGI
+  period: 2026
+  input:
+    people:
+      parent:
+        age: 40
+        employment_income: 80_000
+        ira_active_participant: true
+        traditional_ira_contributions_desired: 7_500
+      child:
+        age: 16
+        employment_income: 20_000
+    tax_units:
+      family:
+        members: [parent, child]
+        filing_status: HEAD_OF_HOUSEHOLD
+  output:
+    traditional_ira_deduction_magi: 80_000
+    traditional_ira_deduction: [7_500, 0]
+
+- name: Territory exclusions are restored only for provisional Social Security
+  period: 2026
+  input:
+    employment_income: 40_000
+    puerto_rico_income: 10_000
+    specified_possession_income: 5_000
+    social_security: 20_000
+  output:
+    # Provisional income is 40,000 + half of SS; SS reaches its 85% cap.
+    traditional_ira_deduction_magi_before_social_security: 25_000
+    taxable_social_security_before_ira_deduction: 17_000
+    traditional_ira_deduction_magi: 42_000

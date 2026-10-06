@@ -54,13 +54,16 @@ class mn_homestead_credit_refund_household_income(Variable):
                 "self_employed_pension_contributions",
             ],
         )
+        # Line 3 adds back only the IRA deduction (Schedule 1, line 20);
+        # nondeductible contributions are already in federal AGI. Line 10
+        # subtracts actual contributions through retirement_contributions.
         retirement_additions = add(
             tax_unit,
             period,
             [
                 "traditional_401k_contributions",
                 "traditional_403b_contributions",
-                "traditional_ira_contributions",
+                "traditional_ira_deduction",
                 "self_employed_pension_contributions",
             ],
         )

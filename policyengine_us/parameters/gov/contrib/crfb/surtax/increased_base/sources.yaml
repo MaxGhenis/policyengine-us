@@ -1,8 +1,9 @@
 description: Additional income sources for CRFB surtax expanded base beyond IRS gross income.
 values:
   2010-01-01:
-    # Retirement contributions (IRA, 401k, 403b)
-    - traditional_ira_contributions
+    # Retirement contributions (IRA, 401k, 403b). Only the IRA deduction
+    # reduced AGI; nondeductible IRA contributions are already in AGI.
+    - traditional_ira_deduction
     - traditional_401k_contributions
     - traditional_403b_contributions
     # HSA contributions (no Archer MSA variable exists)

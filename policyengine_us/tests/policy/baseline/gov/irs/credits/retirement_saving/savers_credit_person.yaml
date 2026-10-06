@@ -1,13 +1,17 @@
+# Compensation satisfies IRC 219(b)(1)(B); AGI is supplied separately to
+# isolate the Saver's Credit rates and eligibility rules.
 - name: joint with one eligible person
   period: 2023
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 3_000
         roth_ira_contributions_desired: 2_000
         retirement_distributions: 1_000
       person2:
+        ira_compensation: 5_000
         savers_credit_eligible_person: false
         traditional_ira_contributions_desired: 0
         roth_ira_contributions_desired: 0
@@ -24,11 +28,13 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         adjusted_gross_income_person: 39_000
         traditional_ira_contributions_desired: 3_000
         roth_ira_contributions_desired: 2_000
       person2:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         adjusted_gross_income_person: 50_000
         traditional_ira_contributions_desired: 3_000
@@ -46,10 +52,12 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 3_000
         roth_ira_contributions_desired: 2_000
       person2:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 3_000
         roth_ira_contributions_desired: 2_000
@@ -66,11 +74,13 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 3_000
         roth_ira_contributions_desired: 2_000
         retirement_distributions: 4_000
       person2:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 3_000
         roth_ira_contributions_desired: 2_000
@@ -87,6 +97,7 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         roth_ira_contributions_desired: 500
         roth_401k_contributions_desired: 1_000
@@ -103,6 +114,7 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         roth_ira_contributions_desired: 500
         roth_401k_contributions_desired: 1_000
@@ -119,10 +131,12 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: false
         traditional_ira_contributions_desired: 3_000
         roth_ira_contributions_desired: 2_000
       person2:
+        ira_compensation: 5_000
         savers_credit_eligible_person: false
         traditional_ira_contributions_desired: 0
         roth_ira_contributions_desired: 0
@@ -142,6 +156,7 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 2_000
     tax_units:
@@ -160,6 +175,7 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 2_000
     tax_units:
@@ -178,6 +194,7 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 2_000
     tax_units:
@@ -196,6 +213,7 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 2_000
     tax_units:
@@ -213,6 +231,7 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 2_000
     tax_units:
@@ -231,6 +250,7 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 2_000
     tax_units:
@@ -248,6 +268,7 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 2_000
     tax_units:
@@ -266,6 +287,7 @@
   input:
     people:
       person1:
+        ira_compensation: 5_000
         savers_credit_eligible_person: true
         traditional_ira_contributions_desired: 2_000
     tax_units:

@@ -1,0 +1,17 @@
+description: The IRS disallows traditional IRA deductions and contributions for individuals who attain the age limit before the end of the taxable year, if this is true.
+values:
+  2010-01-01: true
+  # Pub. L. 116-94, div. O, section 107(a) and (d): repealed for
+  # contributions for taxable years beginning after December 31, 2019.
+  2020-01-01: false
+metadata:
+  unit: bool
+  period: year
+  label: Traditional IRA age limit in effect
+  reference:
+    - title: 26 U.S. Code § 219(d)(1) (2018 edition), Beneficiary must be under age 70½
+      href: https://www.govinfo.gov/content/pkg/USCODE-2018-title26/html/USCODE-2018-title26-subtitleA-chap1-subchapB-partVII-sec219.htm
+    - title: 26 U.S. Code § 408(o)(2)(B)(i) (2018 edition), nondeductible limit
+      href: https://www.govinfo.gov/content/pkg/USCODE-2018-title26/html/USCODE-2018-title26-subtitleA-chap1-subchapD-partI-subpartA-sec408.htm
+    - title: 26 U.S. Code § 219 (2023 edition), note on the effective date of the 2019 amendment (Pub. L. 116-94, div. O, § 107(a) and (d))
+      href: https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partVII-sec219.htm

@@ -1,0 +1,53 @@
+description: The IRS starts reducing the traditional IRA deduction at this modified adjusted gross income for a joint filer covered only through their spouse's workplace retirement plan.
+values:
+  2010-01-01: 167_000
+  2011-01-01: 169_000
+  2012-01-01: 173_000
+  2013-01-01: 178_000
+  2014-01-01: 181_000
+  2015-01-01: 183_000
+  2016-01-01: 184_000
+  2017-01-01: 186_000
+  2018-01-01: 189_000
+  2019-01-01: 193_000
+  2020-01-01: 196_000
+  2021-01-01: 198_000
+  2022-01-01: 204_000
+  2023-01-01: 218_000
+  2024-01-01: 230_000
+  2025-01-01: 236_000
+  2026-01-01: 242_000
+metadata:
+  unit: currency-USD
+  period: year
+  label: Traditional IRA spouse-only coverage phase-out start
+  uprating:
+    parameter: gov.irs.uprating
+    rounding:
+      type: nearest
+      interval: 1_000
+  reference:
+    - title: 26 U.S. Code § 219(g)(3), (7), and (8) - IRA deduction phase-out thresholds
+      href: https://www.law.cornell.edu/uscode/text/26/219#g
+    - title: IRS Publication 590 (2010), Table 1-2 and Table 1-3
+      href: https://www.irs.gov/pub/irs-prior/p590--2010.pdf#page=19
+    - title: IRS Publication 590 (2011), Table 1-2 and Table 1-3
+      href: https://www.irs.gov/pub/irs-prior/p590--2011.pdf
+    - title: IRS Publication 590 (2012), Table 1-2 and Table 1-3
+      href: https://www.irs.gov/pub/irs-prior/p590--2012.pdf#page=19
+    - title: IRS Publication 590 (2013), 2013 and 2014 phase-out ranges
+      href: https://www.irs.gov/pub/irs-prior/p590--2013.pdf#page=2
+    - title: IRS IR-2015-118, 2015 and 2016 phase-out ranges
+      href: https://www.irs.gov/pub/irs-news/IR-15-118.pdf
+    - title: IRS IR-2016-141, 2017 phase-out ranges
+      href: https://www.irs.gov/pub/irs-news/ir-16-141.pdf
+    - title: IRS Notice 2018-83, 2018 and 2019 phase-out ranges
+      href: https://www.irs.gov/pub/irs-drop/n-18-83.pdf
+    - title: IRS Notice 2020-79, 2020 and 2021 phase-out ranges
+      href: https://www.irs.gov/pub/irs-drop/n-20-79.pdf
+    - title: IRS Notice 2022-55, 2022 and 2023 phase-out ranges
+      href: https://www.irs.gov/pub/irs-drop/n-22-55.pdf
+    - title: IRS Notice 2024-80, 2024 and 2025 phase-out ranges
+      href: https://www.irs.gov/pub/irs-drop/n-24-80.pdf#page=4
+    - title: IRS Notice 2025-67, 2026 phase-out ranges
+      href: https://www.irs.gov/pub/irs-drop/n-25-67.pdf#page=4

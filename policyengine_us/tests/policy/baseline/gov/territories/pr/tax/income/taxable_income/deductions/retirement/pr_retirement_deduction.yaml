@@ -1,6 +1,9 @@
+# Compensation satisfies IRC 219(b)(1)(B); Puerto Rico AGI is supplied
+# separately to isolate the territory's retirement deduction limits.
 - name: Contributions are higher than maximum deduction
   period: 2024
   input:
+    ira_compensation: 10_000
     pr_agi_person: 10_000
     traditional_ira_contributions_desired: 3_001
     roth_ira_contributions_desired: 2_000
@@ -11,6 +14,7 @@
 - name: Contributions are lower than maximum deduction
   period: 2024
   input:
+    ira_compensation: 10_000
     pr_agi_person: 1_300
     traditional_ira_contributions_desired: 500
     roth_ira_contributions_desired: 300
@@ -21,6 +25,7 @@
 - name: Contributions are lower than AGI
   period: 2024
   input:
+    ira_compensation: 10_000
     pr_agi_person: 4_000
     traditional_ira_contributions_desired: 500
     roth_ira_contributions_desired: 301
@@ -31,6 +36,7 @@
 - name: Contributions are higher than AGI
   period: 2024
   input:
+    ira_compensation: 10_000
     pr_agi_person: 4_000
     traditional_ira_contributions_desired: 5000
     roth_ira_contributions_desired: 3000

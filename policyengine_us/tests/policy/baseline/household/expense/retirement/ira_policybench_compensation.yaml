@@ -1,0 +1,120 @@
+# PolicyBench r01 provision-level reproductions. IRC 219(b)(1)(B),
+# 219(c), and 219(f)(1): pensions, Social Security, distributions, and
+# investment income cannot support IRA contributions without compensation.
+- name: PolicyBench 003 joint retirees have no IRA compensation.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 64
+        traditional_ira_contributions_desired: 1_117.98
+        roth_ira_contributions_desired: 1_734
+        traditional_401k_contributions_desired: 23_926
+        social_security_retirement: 59_510
+        taxable_ira_distributions: 94_720
+        taxable_private_pension_income: 32_525
+        tax_exempt_private_pension_income: 18_995
+        taxable_interest_income: 2_740
+        tax_exempt_interest_income: 5_242
+        qualified_dividend_income: 3_760
+        non_qualified_dividend_income: 544
+        short_term_capital_gains: 1_080
+        long_term_capital_gains: -2_662
+      spouse:
+        age: 61
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+        filing_status: JOINT
+    households:
+      household:
+        members: [head, spouse]
+        state_code: TX
+  output:
+    ira_compensation: [0, 0]
+    ira_contribution_limit: [0, 0]
+    traditional_ira_contributions: [0, 0]
+    traditional_ira_deduction: [0, 0]
+
+# IRC 219(a) additionally bars attributing a dependent's deduction to
+# their parent. This models the scenario_064 joint tax unit (WI, 2026):
+# head 48, spouse 47, and three dependents, with the scenario's partnership
+# and S-corp income, 401(k) distributions, and capital loss. The scenario's
+# partnership_se_income input is entered as
+# partnership_self_employment_net_earnings, which replaced it in #8614; it
+# feeds self-employment tax and compensation, not gross income. Non-IRA
+# inputs (medical, insurance, assets, hours) are omitted.
+- name: PolicyBench 064 joint filers keep the head's deduction; the disabled dependent has no compensation.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 48
+        is_tax_unit_head: true
+        employment_income: 97_295
+        traditional_401k_contributions_desired: 2_315.40
+        roth_401k_contributions_desired: 408.60
+        traditional_ira_contributions_desired: 108.19
+        roth_ira_contributions_desired: 167.81
+        farm_operations_income: -16_800
+        partnership_s_corp_income: 19_350
+        partnership_self_employment_net_earnings: 14_000
+        taxable_401k_distributions: 20_000
+        long_term_capital_gains: -18_235.41
+      spouse:
+        age: 47
+        is_tax_unit_spouse: true
+      dependent1:
+        age: 27
+        is_disabled: true
+        is_tax_unit_dependent: true
+        traditional_401k_contributions_desired: 385.90
+        roth_401k_contributions_desired: 68.10
+        traditional_ira_contributions_desired: 18.03
+        roth_ira_contributions_desired: 27.97
+      dependent2:
+        age: 18
+        is_tax_unit_dependent: true
+      child1:
+        age: 12
+        is_tax_unit_dependent: true
+    tax_units:
+      tax_unit:
+        members: [head, spouse, dependent1, dependent2, child1]
+        filing_status: JOINT
+        domestic_production_ald: 1_795.50
+    households:
+      household:
+        members: [head, spouse, dependent1, dependent2, child1]
+        state_code: WI
+  output:
+    # Wages net of the traditional 401(k) deferral; the SE loss is ignored.
+    ira_compensation: [94_979.60, 0, 0, 0, 0]
+    ira_active_participant: [true, false, false, false, false]
+    # 94,979.60 + 19,350 + 20,000 - 16,800 farm loss - 3,000 capital loss.
+    traditional_ira_deduction_magi: 114_529.60
+    # Below the 2026 joint active-participant start of 129,000.
+    traditional_ira_deductible_limit: [7_500, 7_500, 7_500, 7_500, 7_500]
+    traditional_ira_contributions: [108.19, 0, 0, 0, 0]
+    traditional_ira_deduction: [108.19, 0, 0, 0, 0]
+
+- name: PolicyBench 085 retiree cannot deduct a fractional-dollar IRA contribution.
+  period: 2026
+  absolute_error_margin: 0.0001
+  input:
+    age: 67
+    social_security_survivors: 27_426
+    taxable_private_pension_income: 20_720
+    taxable_ira_distributions: 7_568
+    taxable_401k_distributions: 1_560
+    taxable_interest_income: 1_675
+    traditional_ira_contributions_desired: 0.3967
+    roth_ira_contributions_desired: 1
+    state_code: PA
+  output:
+    ira_compensation: 0
+    ira_contribution_limit: 0
+    traditional_ira_contributions: 0
+    traditional_ira_deduction: 0

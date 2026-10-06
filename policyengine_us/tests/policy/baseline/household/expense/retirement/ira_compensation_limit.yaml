@@ -1,0 +1,182 @@
+# IRC 219(b)(1)(B) and 408A(c)(2) cap combined traditional and Roth
+# contributions by compensation, including when positive requests are below $1.
+- name: A fractional-dollar contribution below compensation is preserved.
+  period: 2026
+  absolute_error_margin: 0.0001
+  input:
+    employment_income: 0.6
+    traditional_ira_contributions_desired: 0.4
+    roth_ira_contributions_desired: 0.1
+  output:
+    ira_contribution_scale: 1
+    traditional_ira_contributions: 0.4
+    roth_ira_contributions: 0.1
+    traditional_ira_deduction: 0.4
+
+- name: Fractional-dollar requests above compensation are allocated proportionally.
+  period: 2026
+  absolute_error_margin: 0.0001
+  input:
+    employment_income: 0.3
+    traditional_ira_contributions_desired: 0.4
+    roth_ira_contributions_desired: 0.2
+  output:
+    ira_contribution_scale: 0.5
+    traditional_ira_contributions: 0.2
+    roth_ira_contributions: 0.1
+
+# IRC 219(c) permits only a lower-compensation joint filer to use their
+# spouse's compensation after the spouse's traditional and Roth contributions.
+- name: Lower earning joint filer can use spouse compensation less spouse contributions.
+  period: 2026
+  input:
+    people:
+      head:
+        age: 40
+        traditional_ira_contributions_desired: 7_500
+      spouse:
+        age: 39
+        employment_income: 8_000
+        traditional_ira_contributions_desired: 1_500
+        roth_ira_contributions_desired: 500
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+        filing_status: JOINT
+  output:
+    ira_compensation: [0, 8_000]
+    ira_contribution_limit: [6_000, 7_500]
+    traditional_ira_contributions: [6_000, 1_500]
+    traditional_ira_deduction: [6_000, 1_500]
+
+- name: Excess spouse requests reserve only the spouse's capped contributions.
+  period: 2026
+  input:
+    people:
+      head:
+        age: 40
+        traditional_ira_contributions_desired: 7_500
+      spouse:
+        age: 39
+        employment_income: 8_000
+        traditional_ira_contributions_desired: 9_000
+        roth_ira_contributions_desired: 6_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+        filing_status: JOINT
+  output:
+    ira_contribution_limit: [500, 7_500]
+    traditional_ira_contributions: [500, 4_500]
+    roth_ira_contributions: [0, 3_000]
+
+- name: Equal earning spouses each use only their own compensation.
+  period: 2026
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 600
+        traditional_ira_contributions_desired: 1_000
+      spouse:
+        age: 39
+        employment_income: 600
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+        filing_status: JOINT
+  output:
+    ira_contribution_limit: [600, 600]
+    traditional_ira_contributions: [600, 0]
+
+- name: Separate filers cannot borrow compensation from a spouse.
+  period: 2026
+  input:
+    people:
+      head:
+        age: 40
+        traditional_ira_contributions_desired: 7_500
+      spouse:
+        age: 39
+        employment_income: 8_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+        filing_status: SEPARATE
+  output:
+    ira_contribution_limit: [0, 7_500]
+    traditional_ira_contributions: [0, 0]
+
+# IRC 219(a) permits the contributor's deduction on their own return.
+# A dependent's earned contribution remains an IRA contribution but is not
+# an above-the-line deduction on the parent's return.
+- name: A dependent with earnings contributes without reducing parent AGI.
+  period: 2026
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 30_000
+      dependent:
+        age: 16
+        employment_income: 600
+        traditional_ira_contributions_desired: 600
+    tax_units:
+      tax_unit:
+        members: [head, dependent]
+  output:
+    traditional_ira_contributions: [0, 600]
+    traditional_ira_deduction: [0, 0]
+    above_the_line_deductions: 0
+    adjusted_gross_income: 30_000
+
+# IRC 219(b)(5), as indexed in Notice 2025-67, page 4.
+- name: 2026 IRA dollar limit applies below age 50.
+  period: 2026
+  input:
+    age: 49
+    employment_income: 20_000
+    traditional_ira_contributions_desired: 10_000
+  output:
+    ira_annual_limit: 7_500
+    ira_contribution_limit: 7_500
+    traditional_ira_contributions: 7_500
+
+- name: 2026 IRA catch-up begins at age 50.
+  period: 2026
+  input:
+    age: 50
+    employment_income: 20_000
+    traditional_ira_contributions_desired: 10_000
+  output:
+    ira_annual_limit: 8_600
+    ira_contribution_limit: 8_600
+    traditional_ira_contributions: 8_600
+
+- name: 2025 IRA dollar and catch-up limits remain unchanged.
+  period: 2025
+  input:
+    age: 50
+    employment_income: 20_000
+    traditional_ira_contributions_desired: 10_000
+  output:
+    ira_annual_limit: 8_000
+    ira_contribution_limit: 8_000
+    traditional_ira_contributions: 8_000
+
+# IRC 219(b)(5); IRS Publication 590 (2010), page 12.
+- name: 2010 IRA dollar limit applies below age 50.
+  period: 2010
+  input:
+    age: 49
+    filing_status: SINGLE
+  output:
+    ira_annual_limit: 5_000
+
+- name: 2010 IRA catch-up begins at age 50.
+  period: 2010
+  input:
+    age: 50
+    filing_status: SINGLE
+  output:
+    ira_annual_limit: 6_000

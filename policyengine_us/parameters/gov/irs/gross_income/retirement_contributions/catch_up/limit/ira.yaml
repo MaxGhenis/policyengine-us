@@ -1,8 +1,10 @@
 description: The US allows for catch-up IRA contributions of this amount.
 values:
+  2010-01-01: 1_000
   2018-01-01: 1_000
   2024-01-01: 1_000
   2025-01-01: 1_000
+  2026-01-01: 1_100
 metadata:
   unit: currency-USD
   period: year
@@ -12,8 +14,12 @@ metadata:
     rounding:
       type: downwards
       interval: 100
-  references:
+  reference:
   - title: 26 U.S. Code § 219 - Retirement savings (b)(5)(B)
     href: https://www.law.cornell.edu/uscode/text/26/219
   - title: Cost-of-Living Adjustments for Retirement Items
     href: https://www.irs.gov/pub/irs-tege/cola-table.pdf#page=2
+  - title: IRS Publication 590 (2010), How Much Can You Deduct?
+    href: https://www.irs.gov/pub/irs-prior/p590--2010.pdf#page=12
+  - title: IRS Notice 2025-67, IRA catch-up contribution limit for 2026
+    href: https://www.irs.gov/pub/irs-drop/n-25-67.pdf#page=4

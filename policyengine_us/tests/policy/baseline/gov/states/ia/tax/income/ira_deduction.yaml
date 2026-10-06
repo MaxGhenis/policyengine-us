@@ -1,0 +1,52 @@
+# 2021 IA1040 instructions line 16 uses the amount claimed federally.
+# https://revenue.iowa.gov/media/2650/download#page=23
+- name: Iowa deducts the federally allowed IRA amount
+  period: 2021
+  input:
+    state_code: IA
+    employment_income: 40_000
+    traditional_ira_contributions_desired: 5_000
+  output:
+    traditional_ira_deduction: 5_000
+    ia_income_adjustments: 5_000
+
+- name: Iowa excludes nondeductible IRA contributions from adjustments
+  period: 2021
+  input:
+    state_code: IA
+    employment_income: 100_000
+    ira_active_participant: true
+    traditional_ira_contributions_desired: 5_000
+  output:
+    traditional_ira_contributions: 5_000
+    traditional_ira_deduction: 0
+    ia_income_adjustments: 0
+
+# ia_net_income moves a dependent's net income to the head, so the
+# dependent's own deductible IRA contribution stays in the adjustments.
+- name: Iowa keeps a dependent's deductible IRA contribution
+  period: 2022
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 30_000
+      dependent:
+        age: 17
+        is_tax_unit_dependent: true
+        employment_income: 5_000
+        traditional_ira_contributions_desired: 2_000
+    tax_units:
+      tax_unit:
+        members: [head, dependent]
+    households:
+      household:
+        members: [head, dependent]
+        state_code: IA
+  output:
+    traditional_ira_contributions: [0, 2_000]
+    traditional_ira_deduction: [0, 0]
+    traditional_ira_deductible_contributions: [0, 2_000]
+    ia_income_adjustments: [0, 2_000]
+    # 30,000 + (5,000 - 2,000) moved from the dependent.
+    ia_net_income: [33_000, 0]

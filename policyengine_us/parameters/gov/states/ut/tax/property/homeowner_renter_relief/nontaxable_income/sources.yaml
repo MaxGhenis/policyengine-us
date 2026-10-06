@@ -10,7 +10,9 @@ values:
     - tax_exempt_retirement_distributions
     - traditional_401k_contributions
     - traditional_403b_contributions
-    - traditional_ira_contributions
+    # Only the deducted part is excluded from AGI; nondeductible
+    # contributions are already in AGI.
+    - traditional_ira_deduction
     - self_employed_pension_contributions
     - veterans_benefits
     - workers_compensation

@@ -1,0 +1,10 @@
+description: The IRS retains at least this traditional IRA deduction dollar limit until the deduction is completely phased out.
+values:
+  2010-01-01: 200
+metadata:
+  unit: currency-USD
+  period: year
+  label: Traditional IRA deduction limit before complete phase-out
+  reference:
+    - title: 26 U.S. Code § 219 - Retirement savings (g)(2)(B)
+      href: https://www.law.cornell.edu/uscode/text/26/219#g_2_B

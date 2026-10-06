@@ -1,10 +1,15 @@
 description: The US limits catch-up pension contributions to individuals this age or older.
 values:
+  2010-01-01: 50
   2021-01-01: 50
 metadata:
   unit: year
   period: year
   label: Pension contribution catch-up age threshold
-  references:
+  reference:
   - title: 26 CFR § 1.414(v)-1 - Catch-up contributions. (g)(3)(ii)
     href: https://www.law.cornell.edu/cfr/text/26/1.414(v)-1#g_3_ii
+  - title: 26 U.S. Code § 219 - Retirement savings (b)(5)(B)
+    href: https://www.law.cornell.edu/uscode/text/26/219#b_5_B
+  - title: IRS Publication 590 (2010), How Much Can You Deduct?
+    href: https://www.irs.gov/pub/irs-prior/p590--2010.pdf#page=12

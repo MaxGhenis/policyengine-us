@@ -1,0 +1,144 @@
+# Provision-level reproductions using the supplied PolicyBench prompt facts.
+# Additional household facts and full federal/state tax totals are not asserted.
+# IRC 219(g)(1), (2), (3), and (5) phase out these contributors' deductions:
+# even the listed income alone exceeds their active-participant endpoints.
+- name: PolicyBench 005 - joint active participants above the income limit
+  period: 2026
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 180_000
+        traditional_401k_contributions_desired: 23_154
+        roth_401k_contributions_desired: 4_086
+        traditional_ira_contributions_desired: 1_082
+      spouse:
+        age: 40
+        employment_income: 250_000
+        traditional_401k_contributions_desired: 23_154
+        roth_401k_contributions_desired: 4_086
+        traditional_ira_contributions_desired: 1_082
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+        filing_status: JOINT
+  output:
+    ira_active_participant: [true, true]
+    traditional_ira_contributions: [1_082, 1_082]
+    traditional_ira_deduction: [0, 0]
+
+- name: PolicyBench 049 - the contributing spouse is personally covered
+  period: 2026
+  input:
+    people:
+      head:
+        age: 40
+      spouse:
+        age: 40
+        employment_income: 253_000
+        traditional_401k_contributions_desired: 15_436
+        roth_401k_contributions_desired: 2_724
+        traditional_ira_contributions_desired: 721
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+        filing_status: JOINT
+  output:
+    ira_active_participant: [false, true]
+    traditional_ira_contributions: [0, 721]
+    traditional_ira_deduction: [0, 0]
+
+- name: PolicyBench 052 - high wages fully phase out the IRA deduction
+  period: 2026
+  input:
+    age: 40
+    filing_status: JOINT
+    employment_income: 500_000
+    traditional_401k_contributions_desired: 926
+    roth_401k_contributions_desired: 163
+    traditional_ira_contributions_desired: 43
+  output:
+    ira_active_participant: true
+    traditional_ira_contributions: 43
+    traditional_ira_deduction: 0
+
+- name: PolicyBench 082 - head of household above the single endpoint
+  period: 2026
+  input:
+    people:
+      head:
+        age: 23
+        employment_income: 100_195
+        traditional_401k_contributions_desired: 181
+        roth_401k_contributions_desired: 32
+        traditional_ira_contributions_desired: 8
+        long_term_capital_gains: -33_000
+        short_term_capital_gains: 2_289
+        qualified_dividend_income: 13_424
+        non_qualified_dividend_income: 7_056
+      child:
+        age: 1
+    tax_units:
+      tax_unit:
+        members: [head, child]
+        filing_status: HEAD_OF_HOUSEHOLD
+  output:
+    ira_active_participant: [true, false]
+    traditional_ira_contributions: [8, 0]
+    traditional_ira_deduction: [0, 0]
+
+- name: PolicyBench 099 - both covered spouses exceed the joint endpoint
+  period: 2026
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 85_000
+        traditional_401k_contributions_desired: 1_544
+        roth_401k_contributions_desired: 272
+        traditional_ira_contributions_desired: 72
+      spouse:
+        age: 40
+        employment_income: 80_000
+        traditional_401k_contributions_desired: 1_544
+        roth_401k_contributions_desired: 272
+        traditional_ira_contributions_desired: 72
+        educator_expense: 338
+        long_term_capital_gains: -7_018
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+        filing_status: JOINT
+  output:
+    ira_active_participant: [true, true]
+    traditional_ira_contributions: [72, 72]
+    traditional_ira_deduction: [0, 0]
+
+- name: PolicyBench 110 - net wages exceed the single endpoint
+  period: 2026
+  input:
+    age: 40
+    filing_status: SINGLE
+    employment_income: 100_000
+    traditional_401k_contributions_desired: 4_245
+    roth_401k_contributions_desired: 749
+    traditional_ira_contributions_desired: 198
+  output:
+    ira_active_participant: true
+    traditional_ira_contributions: 198
+    traditional_ira_deduction: 0
+
+- name: PolicyBench 120 - an older active participant is fully phased out
+  period: 2026
+  input:
+    age: 76
+    filing_status: SINGLE
+    employment_income: 165_597
+    traditional_401k_contributions_desired: 617
+    roth_401k_contributions_desired: 109
+    traditional_ira_contributions_desired: 29
+    farm_rent_income: -2_447
+  output:
+    ira_active_participant: true
+    traditional_ira_contributions: 29
+    traditional_ira_deduction: 0

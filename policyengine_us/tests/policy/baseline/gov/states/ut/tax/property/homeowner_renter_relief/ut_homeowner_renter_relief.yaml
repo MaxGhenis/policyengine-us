@@ -232,3 +232,57 @@
   output:
     self_employed_pension_contributions: 72_000
     ut_homeowner_renter_relief_nontaxable_income: 72_000
+
+# Utah Code 59-2a-101(20)(a) counts amounts excluded from federal AGI.
+# A traditional IRA contribution is excluded only to the extent deducted.
+- name: Case 13, a fully phased-out IRA contribution is already in AGI.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 120_000
+        traditional_401k_contributions_desired: 5_000
+        traditional_ira_contributions_desired: 5_000
+        is_tax_unit_head: true
+    tax_units:
+      tax_unit:
+        members: [person1]
+        filing_status: SINGLE
+    households:
+      household:
+        members: [person1]
+        state_code: UT
+  output:
+    traditional_ira_deduction: 0
+    adjusted_gross_income: 115_000
+    # Only the excluded 401(k) deferral is added.
+    ut_homeowner_renter_relief_nontaxable_income: 5_000
+    ut_homeowner_renter_relief_household_income: 120_000
+
+- name: Case 14, only the deducted part of a partly phased-out IRA contribution is added.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 95_000
+        traditional_401k_contributions_desired: 5_000
+        traditional_ira_contributions_desired: 7_000
+        is_tax_unit_head: true
+    tax_units:
+      tax_unit:
+        members: [person1]
+        filing_status: SINGLE
+    households:
+      household:
+        members: [person1]
+        state_code: UT
+  output:
+    traditional_ira_deduction: 750
+    adjusted_gross_income: 89_250
+    # 5,000 401(k) deferral + 750 IRA deduction.
+    ut_homeowner_renter_relief_nontaxable_income: 5_750
+    ut_homeowner_renter_relief_household_income: 95_000

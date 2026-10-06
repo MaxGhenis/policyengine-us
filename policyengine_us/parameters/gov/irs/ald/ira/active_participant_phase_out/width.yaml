@@ -1,0 +1,28 @@
+description: The IRS phases out the traditional IRA deduction for active workplace plan participants over this modified adjusted gross income range, by filing status.
+SINGLE:
+  2007-01-01: 10_000
+HEAD_OF_HOUSEHOLD:
+  2007-01-01: 10_000
+JOINT:
+  2007-01-01: 20_000
+SURVIVING_SPOUSE:
+  2007-01-01: 20_000
+SEPARATE:
+  2007-01-01: 10_000
+metadata:
+  unit: currency-USD
+  period: year
+  label: Traditional IRA active participant phase-out width
+  breakdown:
+    - filing_status
+  reference:
+    - title: 26 U.S. Code § 219(g)(2)(A)(ii) - Amount of reduction
+      href: https://www.law.cornell.edu/uscode/text/26/219#g_2_A_ii
+    # The statute sets $20,000 for joint returns; IRS guidance extends the
+    # joint range to a qualifying surviving spouse.
+    - title: IRS Publication 590-A (2025), Worksheet 1-2, line 3 ($20,000 for married filing jointly or qualifying surviving spouse)
+      href: https://www.irs.gov/publications/p590a#en_US_2025_publink1000230533
+    - title: IRS Publication 590-A (2025), Table 1-2
+      href: https://www.irs.gov/publications/p590a#en_US_2025_publink1000230472
+    - title: IRS Notice 2025-67, section 219(g)(3)(B)(i) amount for joint filers and qualifying widow(er)s
+      href: https://www.irs.gov/pub/irs-drop/n-25-67.pdf#page=4

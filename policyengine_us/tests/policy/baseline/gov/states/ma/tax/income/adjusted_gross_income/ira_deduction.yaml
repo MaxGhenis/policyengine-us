@@ -1,0 +1,23 @@
+# M.G.L. c.62 section 2(d)(1)(A) disallows the federal IRA deduction.
+- name: Massachusetts does not deduct the federal IRA deduction
+  period: 2026
+  input:
+    state_code: MA
+    employment_income: 40_000
+    traditional_ira_contributions_desired: 5_000
+  output:
+    traditional_ira_deduction: 5_000
+    adjusted_gross_income: 35_000
+    ma_part_b_agi: 40_000
+
+- name: Massachusetts income stays unchanged when the federal IRA deduction phases out
+  period: 2026
+  input:
+    state_code: MA
+    employment_income: 100_000
+    ira_active_participant: true
+    traditional_ira_contributions_desired: 5_000
+  output:
+    traditional_ira_contributions: 5_000
+    traditional_ira_deduction: 0
+    ma_part_b_agi: 100_000

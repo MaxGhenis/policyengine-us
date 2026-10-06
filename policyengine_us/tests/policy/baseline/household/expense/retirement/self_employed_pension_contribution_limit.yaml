@@ -48,8 +48,9 @@
         traditional_ira_contributions_desired: 9_000
         self_employed_pension_contributions_desired: 72_000
   output:
-    ira_contribution_limit: 8_000
-    traditional_ira_contributions: 8_000
+    # Notice 2025-67: the 2026 IRA limit is $7,500 plus $1,100 at age 50.
+    ira_contribution_limit: 8_600
+    traditional_ira_contributions: 8_600
     self_employed_pension_contribution_limit: 72_000
     self_employed_pension_contributions: 72_000
 

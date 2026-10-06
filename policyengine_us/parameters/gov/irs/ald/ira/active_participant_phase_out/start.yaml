@@ -1,0 +1,140 @@
+description: The IRS starts reducing the traditional IRA deduction for active workplace plan participants at this modified adjusted gross income, by filing status.
+metadata:
+  unit: currency-USD
+  period: year
+  label: Traditional IRA active participant phase-out start
+  breakdown:
+    - filing_status
+  propagate_metadata_to_children: true
+  reference:
+    - title: 26 U.S. Code § 219(g)(3), (7), and (8) - IRA deduction phase-out thresholds
+      href: https://www.law.cornell.edu/uscode/text/26/219#g
+    - title: IRS Publication 590 (2010), Table 1-2 and Table 1-3
+      href: https://www.irs.gov/pub/irs-prior/p590--2010.pdf#page=19
+    - title: IRS Publication 590 (2011), Table 1-2 and Table 1-3
+      href: https://www.irs.gov/pub/irs-prior/p590--2011.pdf
+    - title: IRS Publication 590 (2012), Table 1-2 and Table 1-3
+      href: https://www.irs.gov/pub/irs-prior/p590--2012.pdf#page=19
+    - title: IRS Publication 590 (2013), 2013 and 2014 phase-out ranges
+      href: https://www.irs.gov/pub/irs-prior/p590--2013.pdf#page=2
+    - title: IRS IR-2015-118, 2015 and 2016 phase-out ranges
+      href: https://www.irs.gov/pub/irs-news/IR-15-118.pdf
+    - title: IRS IR-2016-141, 2017 phase-out ranges
+      href: https://www.irs.gov/pub/irs-news/ir-16-141.pdf
+    - title: IRS Notice 2018-83, 2018 and 2019 phase-out ranges
+      href: https://www.irs.gov/pub/irs-drop/n-18-83.pdf
+    - title: IRS Notice 2020-79, 2020 and 2021 phase-out ranges
+      href: https://www.irs.gov/pub/irs-drop/n-20-79.pdf
+    - title: IRS Notice 2022-55, 2022 and 2023 phase-out ranges
+      href: https://www.irs.gov/pub/irs-drop/n-22-55.pdf
+    - title: IRS Notice 2024-80, 2024 and 2025 phase-out ranges
+      href: https://www.irs.gov/pub/irs-drop/n-24-80.pdf#page=4
+    - title: IRS Notice 2025-67, 2026 phase-out ranges
+      href: https://www.irs.gov/pub/irs-drop/n-25-67.pdf#page=4
+
+SINGLE:
+  values:
+    2010-01-01: 56_000
+    2011-01-01: 56_000
+    2012-01-01: 58_000
+    2013-01-01: 59_000
+    2014-01-01: 60_000
+    2015-01-01: 61_000
+    2016-01-01: 61_000
+    2017-01-01: 62_000
+    2018-01-01: 63_000
+    2019-01-01: 64_000
+    2020-01-01: 65_000
+    2021-01-01: 66_000
+    2022-01-01: 68_000
+    2023-01-01: 73_000
+    2024-01-01: 77_000
+    2025-01-01: 79_000
+    2026-01-01: 81_000
+  metadata:
+    uprating:
+      parameter: gov.irs.uprating
+      rounding:
+        type: nearest
+        interval: 1_000
+
+HEAD_OF_HOUSEHOLD:
+  values:
+    2010-01-01: 56_000
+    2011-01-01: 56_000
+    2012-01-01: 58_000
+    2013-01-01: 59_000
+    2014-01-01: 60_000
+    2015-01-01: 61_000
+    2016-01-01: 61_000
+    2017-01-01: 62_000
+    2018-01-01: 63_000
+    2019-01-01: 64_000
+    2020-01-01: 65_000
+    2021-01-01: 66_000
+    2022-01-01: 68_000
+    2023-01-01: 73_000
+    2024-01-01: 77_000
+    2025-01-01: 79_000
+    2026-01-01: 81_000
+  metadata:
+    uprating:
+      parameter: gov.irs.uprating
+      rounding:
+        type: nearest
+        interval: 1_000
+
+JOINT:
+  values:
+    2010-01-01: 89_000
+    2011-01-01: 90_000
+    2012-01-01: 92_000
+    2013-01-01: 95_000
+    2014-01-01: 96_000
+    2015-01-01: 98_000
+    2016-01-01: 98_000
+    2017-01-01: 99_000
+    2018-01-01: 101_000
+    2019-01-01: 103_000
+    2020-01-01: 104_000
+    2021-01-01: 105_000
+    2022-01-01: 109_000
+    2023-01-01: 116_000
+    2024-01-01: 123_000
+    2025-01-01: 126_000
+    2026-01-01: 129_000
+  metadata:
+    uprating:
+      parameter: gov.irs.uprating
+      rounding:
+        type: nearest
+        interval: 1_000
+
+SURVIVING_SPOUSE:
+  values:
+    2010-01-01: 89_000
+    2011-01-01: 90_000
+    2012-01-01: 92_000
+    2013-01-01: 95_000
+    2014-01-01: 96_000
+    2015-01-01: 98_000
+    2016-01-01: 98_000
+    2017-01-01: 99_000
+    2018-01-01: 101_000
+    2019-01-01: 103_000
+    2020-01-01: 104_000
+    2021-01-01: 105_000
+    2022-01-01: 109_000
+    2023-01-01: 116_000
+    2024-01-01: 123_000
+    2025-01-01: 126_000
+    2026-01-01: 129_000
+  metadata:
+    uprating:
+      parameter: gov.irs.uprating
+      rounding:
+        type: nearest
+        interval: 1_000
+
+SEPARATE:
+  2010-01-01: 0

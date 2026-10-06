@@ -109,3 +109,47 @@
   output:
     # Only AGI 80k used, below 100k threshold
     agi_surtax: 0
+
+- name: Expanded base adds back only the deducted IRA amount
+  period: 2026
+  reforms: policyengine_us.reforms.crfb.agi_surtax.agi_surtax_reform_object
+  input:
+    gov.contrib.crfb.surtax.in_effect: true
+    gov.contrib.crfb.surtax.increased_base.in_effect: true
+    age: 40
+    employment_income: 150_000
+    traditional_401k_contributions_desired: 5_000
+    traditional_ira_contributions_desired: 7_000
+    filing_status: SINGLE
+    state_code: TX
+  output:
+    # The 401(k) deferral makes the filer an active participant, and IRA
+    # MAGI of 145k exceeds the 91k endpoint, so the $7,000 is nondeductible.
+    traditional_ira_contributions: 7_000
+    traditional_ira_deduction: 0
+    adjusted_gross_income: 145_000
+    # AGI 145k + 401k 5k + IRA deduction 0 = 150k expanded base
+    # (150k - 100k) * 1% = 500
+    agi_surtax: 500
+
+- name: Expanded base does not change adjusted gross income
+  period: 2026
+  reforms: policyengine_us.reforms.crfb.agi_surtax.agi_surtax_reform_object
+  input:
+    gov.contrib.crfb.surtax.in_effect: true
+    gov.contrib.crfb.surtax.increased_base.in_effect: true
+    age: 40
+    employment_income: 150_000
+    traditional_401k_contributions_desired: 5_000
+    traditional_ira_contributions_desired: 7_000
+    filing_status: SINGLE
+    state_code: TX
+  output:
+    # Computing the surtax first must not add the expanded-base sources to
+    # the AGI used by the regular rate schedule.
+    agi_surtax: 500
+    adjusted_gross_income: 145_000
+    # 145,000 AGI - 16,100 standard deduction = 128,900 taxable income;
+    # 23,534 regular tax + 500 surtax.
+    taxable_income: 128_900
+    income_tax_before_credits: 24_034

@@ -10,7 +10,8 @@ class ira_contribution_scale(Variable):
         "Scale factor applied to desired traditional and Roth IRA "
         "contributions when they exceed the combined IRA contribution limit. "
         "This preserves desired allocation shares rather than prioritizing "
-        "either IRA type."
+        "either IRA type. Traditional requests are disregarded while the "
+        "former age 70½ bar applies."
     )
     definition_period = YEAR
     reference = (
@@ -19,15 +20,16 @@ class ira_contribution_scale(Variable):
     )
 
     def formula(person, period, parameters):
-        total_desired = add(
-            person,
-            period,
-            [
-                "traditional_ira_contributions_desired",
-                "roth_ira_contributions_desired",
-            ],
+        # Before 2020, no traditional contribution is allowed after age 70½,
+        # so only Roth requests share the limit.
+        traditional_desired = person(
+            "traditional_ira_contributions_desired", period
+        ) * ~person("traditional_ira_age_barred", period)
+        total_desired = traditional_desired + person(
+            "roth_ira_contributions_desired", period
         )
         return min_(
-            person("ira_contribution_limit", period) / max_(total_desired, 1),
+            person("ira_contribution_limit", period)
+            / where(total_desired > 0, total_desired, 1),
             1,
         )
