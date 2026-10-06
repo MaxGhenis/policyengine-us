@@ -35,6 +35,9 @@
 #   3. Dependent care subtraction: childcare expenses minus CDCC.
 #   4. 530A distribution subtraction.
 #   5. New subtractions flow into az_subtractions / az_agi.
+# The base standard deduction is the $23,625 head-of-household amount that
+# HB 4168 sets in 43-1041(A)(2), indexed for 2026 under 43-1041(H) in the same
+# manner as the federal basic standard deduction: $24,150 (Rev. Proc. 2025-32).
 - name: HB 4168 (2026) combined effect - HOH with dependent
   period: 2026
   input:
@@ -62,8 +65,8 @@
     az_dependent_tax_credit: 125
     # Charitable add-on: min($1,500, $1,000 HOH cap) = $1,000
     az_increased_standard_deduction_for_charitable_contributions: 1_000
-    # Standard deduction: $23,625 base + $1,000 add-on = $24,625
-    az_standard_deduction: 24_625
+    # Standard deduction: $24,150 base + $1,000 add-on = $25,150
+    az_standard_deduction: 25_150
     # Dependent care: cdcc_relevant_expenses = min($5,000, $3,000 §21 cap for
     # 1 QI, $80,000 earnings) = $3,000; subtraction = max($3,000 - $1,200, 0)
     # = $1,800
@@ -74,12 +77,12 @@
     az_subtractions: 2_800
     # AZ AGI = $80,000 - $2,800 = $77,200
     az_agi: 77_200
-    # Taxable income = $77,200 - $24,625 = $52,575
-    az_taxable_income: 52_575
-    # Tax before credits = $52,575 * 2.5% = $1,314.375
-    az_income_tax_before_non_refundable_credits: 1_314.375
-    # AZ income tax = $1,314.375 - $125 dependent credit = $1,189.375
-    az_income_tax: 1_189.375
+    # Taxable income = $77,200 - $25,150 = $52,050
+    az_taxable_income: 52_050
+    # Tax before credits = $52,050 * 2.5% = $1,301.25
+    az_income_tax_before_non_refundable_credits: 1_301.25
+    # AZ income tax = $1,301.25 - $125 dependent credit = $1,176.25
+    az_income_tax: 1_176.25
 
 # Confirms the pre-2026 regime is UNCHANGED for the identical household.
 # In 2025: dependent credit is $100, charitable add-on uses the 0.34 rate
@@ -124,3 +127,42 @@
     az_income_tax_before_non_refundable_credits: 1_396.625
     # AZ income tax = $1,396.625 - $100 dependent credit = $1,296.625
     az_income_tax: 1_296.625
+
+# Single wage earner, TY2026: the household of PolicyBench scenario_018,
+# reduced to the inputs that set its income. AZ AGI equals federal AGI:
+# $61,542.09 wages + $50 interest = $61,592.09, with no Arizona additions or
+# subtractions. A.R.S. 43-1041(A)(1) sets $15,750 "subject to subsection H",
+# and 43-1041(H) indexes it in the same manner as the federal basic standard
+# deduction, so the 2026 amount is $16,100 (Rev. Proc. 2025-32), not $15,750.
+- name: AZ 2026 single filer uses the inflation-indexed standard deduction
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    people:
+      person1:
+        age: 53
+        employment_income: 61_542.09
+        taxable_interest_income: 50
+    tax_units:
+      tax_unit:
+        members: [person1]
+    households:
+      household:
+        members: [person1]
+        state_code: AZ
+  output:
+    az_filing_status: SINGLE
+    adjusted_gross_income: 61_592.09
+    az_agi: 61_592.09
+    # The Arizona amount equals the federal basic standard deduction.
+    basic_standard_deduction: 16_100
+    az_base_standard_deduction: 16_100
+    az_standard_deduction: 16_100
+    # The standard deduction exceeds itemized deductions, so it is taken.
+    az_deductions: 16_100
+    # $61,592.09 - $16,100 = $45,492.09
+    az_taxable_income: 45_492.09
+    # $45,492.09 * 2.5% = $1,137.30; no credits apply.
+    az_income_tax_before_non_refundable_credits: 1_137.30
+    az_income_tax_before_refundable_credits: 1_137.30
+    state_income_tax_before_refundable_credits: 1_137.30
