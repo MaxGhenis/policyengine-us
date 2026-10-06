@@ -1,0 +1,229 @@
+# 26 USC 6012(a)(1) and (f); 2025 Form 1040 instructions, Charts A and B.
+# Chart A ("For Most People") tests gross income only. Chart B adds an
+# unearned income test for someone another taxpayer can claim as a dependent
+# (IRC 63(c)(5)). A tax unit dependent's income is on their own return.
+
+- name: A dependent's wages do not change the head's filing requirement or EITC
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 5_000
+        taxable_interest_income: 2_000
+      child:
+        age: 8
+        is_tax_unit_dependent: true
+        employment_income: 3_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+        would_file_taxes_voluntarily: false
+        would_file_if_eligible_for_refundable_credit: false
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    # Chart A: gross income of $7,000 is under the $23,625 head of household
+    # threshold, and the head is no one's dependent, so the head need not
+    # file. Neither switch makes the unit file, so it claims no EITC.
+    tax_unit_is_required_to_file: false
+    eitc: 0
+
+- name: The head's filing requirement is the same when the dependent has no wages
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 5_000
+        taxable_interest_income: 2_000
+      child:
+        age: 8
+        is_tax_unit_dependent: true
+        employment_income: 0
+    tax_units:
+      tax_unit:
+        members: [head, child]
+        would_file_taxes_voluntarily: false
+        would_file_if_eligible_for_refundable_credit: false
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    tax_unit_is_required_to_file: false
+    eitc: 0
+
+- name: A head of household whose gross income reaches Chart A must file whatever the dependent earns
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 22_000
+        taxable_interest_income: 2_000
+      child:
+        age: 8
+        is_tax_unit_dependent: true
+        employment_income: 3_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+        would_file_taxes_voluntarily: false
+        would_file_if_eligible_for_refundable_credit: false
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    # $24,000 is over the $23,625 head of household threshold.
+    tax_unit_is_required_to_file: true
+
+- name: A filer who is no one's dependent has no unearned income test
+  period: 2025
+  input:
+    people:
+      head:
+        age: 30
+        taxable_interest_income: 5_000
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: TX
+  output:
+    # Chart A: $5,000 is under the $15,750 single threshold.
+    tax_unit_is_required_to_file: false
+
+- name: A dependent filer with unearned income over $1,350 must file
+  period: 2025
+  input:
+    people:
+      head:
+        age: 20
+        claimed_as_dependent_on_another_return: true
+        taxable_interest_income: 1_400
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: TX
+  output:
+    # Chart B, single dependents: unearned income over $1,350.
+    tax_unit_is_required_to_file: true
+
+- name: A dependent filer with unearned income of $1,350 or less need not file
+  period: 2025
+  input:
+    people:
+      head:
+        age: 20
+        claimed_as_dependent_on_another_return: true
+        taxable_interest_income: 1_000
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: TX
+  output:
+    # Chart B: $1,000 is not over $1,350, and gross income is not more than
+    # the larger of $1,350 or earned income plus $450.
+    tax_unit_is_required_to_file: false
+
+- name: A dependent filer 65 or older adds the additional standard deduction to the unearned income test
+  period: 2025
+  input:
+    people:
+      head:
+        age: 66
+        claimed_as_dependent_on_another_return: true
+        taxable_interest_income: 3_000
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: TX
+  output:
+    # Chart B, single dependents 65 or older: unearned income over $3,350.
+    tax_unit_is_required_to_file: false
+
+- name: A dependent filer 65 or older with unearned income over $3,350 must file
+  period: 2025
+  input:
+    people:
+      head:
+        age: 66
+        claimed_as_dependent_on_another_return: true
+        taxable_interest_income: 3_400
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: TX
+  output:
+    tax_unit_is_required_to_file: true
+
+- name: A spouse who is someone else's dependent is tested on their own unearned income
+  period: 2025
+  input:
+    people:
+      head:
+        age: 30
+        employment_income: 10_000
+      spouse:
+        age: 20
+        claimed_as_dependent_on_another_return: true
+        taxable_interest_income: 2_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    marital_units:
+      marital_unit:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: TX
+  output:
+    # Gross income of $12,000 is under the $31,500 joint threshold, but the
+    # spouse's own $2,000 of interest is over $1,350 (IRC 6012(f)(2)(D)).
+    tax_unit_is_required_to_file: true
+
+- name: A dependent spouse's unearned income test does not use the head's income
+  period: 2025
+  input:
+    people:
+      head:
+        age: 30
+        taxable_interest_income: 5_000
+      spouse:
+        age: 20
+        claimed_as_dependent_on_another_return: true
+        taxable_interest_income: 1_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    marital_units:
+      marital_unit:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: TX
+  output:
+    # Gross income of $6,000 is under the $31,500 joint threshold. The
+    # dependent spouse's own $1,000 is not over $1,350, and the head is no
+    # one's dependent.
+    tax_unit_is_required_to_file: false
