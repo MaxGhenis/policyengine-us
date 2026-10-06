@@ -19,7 +19,7 @@
   output:
     ar_agi_joint: [900, 1_800]
 
-- name: Dependent AGI gets attributed to the head, AGI capped at 0
+- name: Dependent income stays off the filers' return, AGI capped at 0
   period: 2022
   input:
     people:
@@ -43,4 +43,5 @@
         members: [person1, person2, person3]
         state_code: AR 
   output:
-    ar_agi_joint: [1_200, 0, 0]
+    # The dependent's 500 - 200 = 300 belongs on the dependent's own return.
+    ar_agi_joint: [900, 0, 0]

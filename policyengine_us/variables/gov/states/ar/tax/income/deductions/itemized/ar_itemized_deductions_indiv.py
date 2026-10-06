@@ -8,7 +8,9 @@ class ar_itemized_deductions_indiv(Variable):
     unit = USD
     definition_period = YEAR
     reference = (
-        "https://www.dfa.arkansas.gov/wp-content/uploads/2022_AR3_ItemizedDeduction.pdf"
+        "https://www.dfa.arkansas.gov/wp-content/uploads/2022_AR3_ItemizedDeduction.pdf",
+        # Form AR3 instructions, lines 31-35 (prorated itemized deductions)
+        "https://www.dfa.arkansas.gov/wp-content/uploads/2025_AR1000F_and_AR1000NR_Instructions.pdf#page=22",
     )
     defined_for = StateCode.AR
 
@@ -26,6 +28,7 @@ class ar_itemized_deductions_indiv(Variable):
         # Round prorate to the nearest percent and then divide by 100
         prorate = np.round(prorate * 100) / 100
 
-        # Dependents should always return 0 as their AGI is always
-        # attributed to the head of the tax unit in ar_agi
+        # Form AR3 lines 31-33 prorate between the spouses' AGIs (lines 25A
+        # and 25B). Dependents' AR AGI is zero (their income is on their own
+        # return), so they get no share.
         return unit_deds * prorate
