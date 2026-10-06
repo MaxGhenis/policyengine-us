@@ -835,3 +835,58 @@
   output:
     # Non-senior homeowner, income <= $150K: still $1,500 (change only affects seniors).
     nj_anchor: 1_500
+
+- name: Dependent case 1, a dependent's wages do not count toward the homeowner's ANCHOR income.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 200_000
+        real_estate_taxes: 5_000
+      child:
+        age: 15
+        employment_income: 60_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    spm_units:
+      spm_unit:
+        members: [head, child]
+        spm_unit_tenure_type: OWNER_WITH_MORTGAGE
+    households:
+      household:
+        members: [head, child]
+        state_code: NJ
+  output:
+    # ANCHOR uses line 29 of the filer's own NJ-1040; the child's 60,000 is
+    # on the child's own return. Income 200,000 is above 150,000 and at most
+    # 250,000: non-senior upper-tier homeowner benefit.
+    nj_anchor: 1_000
+
+- name: Dependent case 2, a dependent's wages do not push a renter over the ANCHOR income limit.
+  period: 2025
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 140_000
+        rent: 12_000
+      child:
+        age: 15
+        employment_income: 20_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    spm_units:
+      spm_unit:
+        members: [head, child]
+        spm_unit_tenure_type: RENTER
+    households:
+      household:
+        members: [head, child]
+        state_code: NJ
+  output:
+    # The renter's own income of 140,000 is within the 150,000 limit; the
+    # child's 20,000 is on the child's own NJ-1040.
+    nj_anchor: 450

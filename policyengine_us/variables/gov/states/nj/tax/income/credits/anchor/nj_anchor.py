@@ -16,8 +16,9 @@ class nj_anchor(Variable):
     def formula(tax_unit, period, parameters):
         p = parameters(period).gov.states.nj.tax.income.credits.anchor
 
-        # Get gross income
-        gross_income = add(tax_unit, period, ["nj_gross_income"])
+        # Get the filer's own gross income; a tax unit dependent's income is
+        # on the dependent's own NJ-1040.
+        gross_income = tax_unit_non_dep_add(tax_unit, period, ["nj_gross_income"])
 
         # Determine if senior (age 65+ for head or spouse)
         greater_age = tax_unit("greater_age_head_spouse", period)

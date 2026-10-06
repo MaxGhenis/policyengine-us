@@ -14,7 +14,9 @@ class nj_retirement_exclusion_fraction(Variable):
     defined_for = StateCode.NJ
 
     def formula(tax_unit, period, parameters):
-        total_income = add(tax_unit, period, ["nj_total_income"])
+        # Total income on line 27 of the filer's own NJ-1040, which leaves out
+        # tax unit dependents' income.
+        total_income = tax_unit_non_dep_add(tax_unit, period, ["nj_total_income"])
         filing_status = tax_unit("filing_status", period)
         status = filing_status.possible_values
         p = parameters(period).gov.states.nj.tax.income.exclusions.retirement.pension

@@ -31,7 +31,7 @@
   output:
     nj_medical_expense_deduction: 2_600
 
-- name: A dependent's self-employed health insurance counts where New Jersey counts the dependent's income
+- name: A dependent's self-employed health insurance stays on the dependent's own return
   period: 2025
   absolute_error_margin: 0.01
   input:
@@ -51,7 +51,37 @@
         members: [parent, child]
         state_code: NJ
   output:
-    # New Jersey AGI includes the child's 10,000 of Schedule C income, so the
-    # child's 1,000 of self-employed health insurance is deducted too.
-    nj_agi: 50_000
-    nj_medical_expense_deduction: 1_000
+    # The child's 10,000 of Schedule C income is on the child's own NJ-1040
+    # (N.J.S. 54A:8-3.1), so New Jersey AGI is the parent's 40,000 and the
+    # child's 1,000 of self-employed health insurance is not the parent's
+    # deduction (Worksheet F line 5: "your self-employed health insurance
+    # deduction"). No other medical expenses, so the deduction is 0.
+    nj_agi: 40_000
+    nj_medical_expense_deduction: 0
+
+- name: The filer's own self-employed health insurance counts when a dependent also has some
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    people:
+      parent:
+        age: 40
+        employment_income: 40_000
+        self_employment_income: 20_000
+        self_employed_health_insurance_premiums: 1_500
+      child:
+        age: 17
+        self_employment_income: 10_000
+        self_employed_health_insurance_premiums: 1_000
+    tax_units:
+      tax_unit:
+        members: [parent, child]
+    households:
+      household:
+        members: [parent, child]
+        state_code: NJ
+  output:
+    # The parent's 1,500 of premiums is below their 20,000 of
+    # self-employment income, so the parent's deduction is 1,500; the
+    # child's 1,000 stays on the child's own return.
+    nj_medical_expense_deduction: 1_500

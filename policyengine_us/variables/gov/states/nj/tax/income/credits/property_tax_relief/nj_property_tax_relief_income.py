@@ -18,10 +18,16 @@ class nj_property_tax_relief_income(Variable):
             period
         ).gov.states.nj.tax.income.credits.property_tax_relief.income
 
+        # PAS-1 income is the applicant's and spouse's own (lines 17a-17f and
+        # 18a-18f, starting from their NJ-1040); a tax unit dependent's
+        # income is on the dependent's own return.
         person = tax_unit.members
-        nj_gross_income = add(tax_unit, period, ["nj_gross_income"])
-        additional_sources = add(tax_unit, period, p.additional_sources)
+        nj_gross_income = tax_unit_non_dep_add(tax_unit, period, ["nj_gross_income"])
+        additional_sources = tax_unit_non_dep_add(
+            tax_unit, period, p.additional_sources
+        )
 
+        not_dependent = ~person("is_tax_unit_dependent", period)
         age = person("age", period)
         full_retirement_age = (
             person("ss_full_retirement_age_months", period) / MONTHS_IN_YEAR
@@ -29,7 +35,7 @@ class nj_property_tax_relief_income(Variable):
         # Covers permanent-disability wage substitutes, not VA or military benefits.
         total_disability_payments = person("total_disability_payments", period)
         disability_pension_before_retirement_age = tax_unit.sum(
-            (age < full_retirement_age) * total_disability_payments
+            not_dependent * (age < full_retirement_age) * total_disability_payments
         )
 
         return (

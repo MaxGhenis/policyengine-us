@@ -212,3 +212,58 @@
         state_code: NJ
   output:
     nj_other_retirement_income_exclusion: 0
+
+- name: A dependent's wages do not fail the filer's earned income test
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    people:
+      head:
+        is_tax_unit_head: true
+        age: 65
+        taxable_interest_income: 20_000
+      child:
+        age: 16
+        employment_income: 5_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: NJ
+  output:
+    # Worksheet D lines 4-8 add the filer's own NJ-1040 wages, business,
+    # partnership and S corporation income: 0, not over 3,000. The child's
+    # 5,000 of wages is on the child's own return. Line 27 income 20,000
+    # gives a 100% fraction, so the maximum exclusion is
+    # min(20,000, 75,000) = 20,000; no pension exclusion was used.
+    nj_other_retirement_income_exclusion: 20_000
+
+- name: A dependent aged 62 or older does not add their income to the filer's exclusion
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    people:
+      head:
+        is_tax_unit_head: true
+        is_tax_unit_spouse: false
+        age: 65
+        taxable_interest_income: 20_000
+      parent:
+        is_tax_unit_head: false
+        is_tax_unit_spouse: false
+        age: 85
+        taxable_interest_income: 30_000
+    tax_units:
+      tax_unit:
+        members: [head, parent]
+    households:
+      household:
+        members: [head, parent]
+        state_code: NJ
+  output:
+    # Only the age-eligible filer's (or spouse's) income can be excluded
+    # (Worksheet D). The dependent parent's 30,000 is on the parent's own
+    # return, so the exclusion is the head's 20,000.
+    nj_other_retirement_income_exclusion: 20_000

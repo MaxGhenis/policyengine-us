@@ -11,6 +11,9 @@ class nj_other_retirement_income_exclusion(Variable):
     reference = (
         "https://www.state.nj.us/treasury/taxation/pdf/current/1040i.pdf#page=21",
         "https://law.justia.com/codes/new-jersey/2022/title-54a/section-54a-6-15/",
+        # Worksheet D: earned income from the filer's NJ-1040 lines 15, 18,
+        # 21 and 22; only an age-eligible spouse's income can be excluded.
+        "https://www.nj.gov/treasury/taxation/pdf/other_forms/tgi-ee/2024/1040i.pdf#page=23",
     )
     defined_for = StateCode.NJ
 
@@ -32,8 +35,9 @@ class nj_other_retirement_income_exclusion(Variable):
         filing_status = tax_unit("filing_status", period)
         exclusion_cap = p.max_amount[filing_status]
 
-        # calculate maximum exclusion
-        total_income_person = age_eligible * person("nj_total_income", period)
+        # calculate maximum exclusion from the age-eligible head's and
+        # spouse's income; a dependent's income is on their own return
+        total_income_person = eligible_person * person("nj_total_income", period)
         total_income = tax_unit.sum(total_income_person)
         maximum_exclusion = min_(fraction * total_income, exclusion_cap)
 
@@ -41,8 +45,9 @@ class nj_other_retirement_income_exclusion(Variable):
         used = min_(pension_income * fraction, exclusion_cap)
         unused_exclusion = max_(0, maximum_exclusion - used)
 
-        # calculate earnings eligibility
-        earnings = add(tax_unit, period, ["earned_income"])
+        # calculate earnings eligibility from the filer's own NJ-1040 lines
+        # 15, 18, 21 and 22 (Worksheet D lines 4-8)
+        earnings = tax_unit_non_dep_add(tax_unit, period, ["earned_income"])
         limit = p.other_retirement_income.earned_income_threshold
         earnings_eligible = earnings <= limit
 

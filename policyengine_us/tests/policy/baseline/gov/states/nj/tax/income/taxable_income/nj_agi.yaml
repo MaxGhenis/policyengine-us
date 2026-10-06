@@ -103,3 +103,54 @@
     adjusted_gross_income: 10_001 # on federal form
     nj_agi: 7_001 # special exclusion reduces AGI by $3k
     # earned income > $3k makes other retirement income exclusion unavailable
+
+- name: 6 A dependent's wages stay off the head of household's New Jersey AGI
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 60_000
+      child:
+        age: 15
+        employment_income: 50_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: NJ
+  output:
+    # N.J.S. 54A:8-3.1: the child files their own NJ-1040; nj_total_income
+    # keeps each person's own amount, and nj_agi sums the head's only.
+    nj_total_income: [60_000, 50_000]
+    nj_agi: 60_000
+
+- name: 7 A dependent's interest stays off a joint New Jersey AGI
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 60_000
+      spouse:
+        age: 40
+        employment_income: 20_000
+      child:
+        age: 15
+        taxable_interest_income: 50_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse, child]
+    households:
+      household:
+        members: [head, spouse, child]
+        state_code: NJ
+  output:
+    # The joint return covers husband and wife only (N.J.S. 54A:8-3.1(c)):
+    # 60,000 + 20,000 = 80,000.
+    nj_total_income: [60_000, 20_000, 50_000]
+    nj_agi: 80_000

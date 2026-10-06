@@ -519,3 +519,31 @@
         state_code: NJ
   output:
     nj_pension_retirement_exclusion: 20_000
+
+- name: Case 19, a dependent's income does not lower the filer's exclusion percentage.
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    people:
+      head:
+        is_tax_unit_head: true
+        age: 65
+        taxable_pension_income: 50_000
+        taxable_interest_income: 40_000
+      child:
+        age: 15
+        employment_income: 20_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: NJ
+  output:
+    # The filer's line 27 total income is 50,000 + 40,000 = 90,000, at most
+    # 100,000, so the whole pension can be excluded up to the 75,000 head of
+    # household cap: min(50,000, 75,000) = 50,000. The child's 20,000 is on
+    # the child's own return (counting it would give 110,000 and 37.5%).
+    nj_retirement_exclusion_fraction: 1
+    nj_pension_retirement_exclusion: 50_000

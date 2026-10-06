@@ -166,3 +166,32 @@
         state_code: NJ
   output:
     nj_property_tax_relief_income: 0
+
+- name: Case dependent, a dependent's income is not the applicant's property tax relief income.
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 70
+        employment_income: 80_000
+        tax_exempt_interest_income: 1_000
+      child:
+        age: 16
+        employment_income: 5_000
+        tax_exempt_interest_income: 500
+        social_security_survivors: 6_000
+        total_disability_payments: 2_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: NJ
+  output:
+    # PAS-1 lines 17a-17f and 18a-18f report the applicant's (and spouse's)
+    # own NJ-1040 income, tax-exempt interest, Social Security and disability
+    # pension. The child's amounts are on the child's own return:
+    # 80,000 + 1,000 = 81,000.
+    nj_property_tax_relief_income: 81_000

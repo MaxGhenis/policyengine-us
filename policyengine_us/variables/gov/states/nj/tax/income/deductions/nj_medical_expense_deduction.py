@@ -7,19 +7,21 @@ class nj_medical_expense_deduction(Variable):
     label = "New Jersey medical expense deduction"
     unit = USD
     definition_period = YEAR
+    reference = (
+        # Worksheet F: medical expenses for the filer, spouse and dependents
+        # above 2% of line 29, plus the filer's own self-employed health
+        # insurance deduction.
+        "https://www.nj.gov/treasury/taxation/pdf/other_forms/tgi-ee/2024/1040i.pdf#page=25",
+    )
     defined_for = StateCode.NJ
 
     def formula(tax_unit, period, parameters):
         p = parameters(period).gov.states.nj.tax.income.deductions.medical_expenses
-        # nj_agi counts every member's income, dependents included, so the
-        # dependents' self-employed health insurance deductions count too.
-        self_employed_medical_expense_deduction = add(
-            tax_unit,
-            period,
-            [
-                "self_employed_health_insurance_ald",
-                "dependents_self_employed_health_insurance_ald",
-            ],
+        # nj_agi leaves out tax unit dependents' income, so a dependent's own
+        # self-employed health insurance deduction stays on their own return
+        # too; self_employed_health_insurance_ald covers the head and spouse.
+        self_employed_medical_expense_deduction = tax_unit(
+            "self_employed_health_insurance_ald", period
         )
         medical_expenses = tax_unit("itemized_medical_expenses", period)
         agi = tax_unit("nj_agi", period)
