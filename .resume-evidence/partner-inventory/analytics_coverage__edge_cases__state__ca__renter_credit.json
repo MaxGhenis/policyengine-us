@@ -1,0 +1,220 @@
+{
+  "format_version": 1,
+  "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+  "year": 2026,
+  "model_label": "3126a708c9 CA published 2026 calibration; fixtures unchanged",
+  "started_utc": "2026-10-06T23:37:18.716866+00:00",
+  "fixture_sha256": "105edf31d9490483e7e11f875fb84b4b9f16dccd5f3dc5a71d6c3df4a0658f2c",
+  "completed": true,
+  "cases_executed": 5,
+  "assertions": [
+    {
+      "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+      "case": "ca_renter_credit_joint_fully_usable_against_liability (ca)",
+      "case_index": 1,
+      "output": "tax_units.tax_unit.ca_renter_credit",
+      "variable": "ca_renter_credit",
+      "period": "2026",
+      "entity_index": 0,
+      "old": 120.0,
+      "tolerance": {
+        "absolute": 0.1,
+        "relative": null,
+        "semantics": "both supplied limits must pass; core assert_near determines result"
+      },
+      "new": 120.0,
+      "within_tolerance": true,
+      "display_changed": false
+    },
+    {
+      "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+      "case": "ca_renter_credit_joint_fully_usable_against_liability (ca)",
+      "case_index": 1,
+      "output": "tax_units.tax_unit.ca_income_tax_before_credits",
+      "variable": "ca_income_tax_before_credits",
+      "period": "2026",
+      "entity_index": 0,
+      "old": 539.99,
+      "tolerance": {
+        "absolute": 0.1,
+        "relative": null,
+        "semantics": "both supplied limits must pass; core assert_near determines result"
+      },
+      "new": 534.8800048828125,
+      "within_tolerance": false,
+      "assertion_message": "ca_income_tax_before_credits@2026: 534.8800048828125 differs from 539.989990234375 with an absolute margin 5.1099853515625 > 0.1",
+      "display_changed": true
+    },
+    {
+      "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+      "case": "ca_renter_credit_joint_fully_usable_against_liability (ca)",
+      "case_index": 1,
+      "output": "tax_units.tax_unit.ca_non_refundable_credits",
+      "variable": "ca_non_refundable_credits",
+      "period": "2026",
+      "entity_index": 0,
+      "old": 432.93,
+      "tolerance": {
+        "absolute": 0.1,
+        "relative": null,
+        "semantics": "both supplied limits must pass; core assert_near determines result"
+      },
+      "new": 436.0,
+      "within_tolerance": false,
+      "assertion_message": "ca_non_refundable_credits@2026: 436.0 differs from 432.92999267578125 with an absolute margin 3.07000732421875 > 0.1",
+      "display_changed": true
+    },
+    {
+      "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+      "case": "ca_renter_credit_joint_fully_usable_against_liability (ca)",
+      "case_index": 1,
+      "output": "tax_units.tax_unit.ca_income_tax_before_refundable_credits",
+      "variable": "ca_income_tax_before_refundable_credits",
+      "period": "2026",
+      "entity_index": 0,
+      "old": 107.05,
+      "tolerance": {
+        "absolute": 0.1,
+        "relative": null,
+        "semantics": "both supplied limits must pass; core assert_near determines result"
+      },
+      "new": 98.8800048828125,
+      "within_tolerance": false,
+      "assertion_message": "ca_income_tax_before_refundable_credits@2026: 98.8800048828125 differs from 107.05000305175781 with an absolute margin 8.169998168945312 > 0.1",
+      "display_changed": true
+    },
+    {
+      "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+      "case": "ca_renter_credit_single_at_income_cap_55217 (ca)",
+      "case_index": 2,
+      "output": "tax_units.tax_unit.ca_renter_credit",
+      "variable": "ca_renter_credit",
+      "period": "2026",
+      "entity_index": 0,
+      "old": 60.0,
+      "tolerance": {
+        "absolute": 0.1,
+        "relative": null,
+        "semantics": "both supplied limits must pass; core assert_near determines result"
+      },
+      "new": 60.0,
+      "within_tolerance": true,
+      "display_changed": false
+    },
+    {
+      "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+      "case": "ca_renter_credit_single_above_income_cap_55218 (ca)",
+      "case_index": 3,
+      "output": "tax_units.tax_unit.ca_renter_credit",
+      "variable": "ca_renter_credit",
+      "period": "2026",
+      "entity_index": 0,
+      "old": 0.0,
+      "tolerance": {
+        "absolute": 0.1,
+        "relative": null,
+        "semantics": "both supplied limits must pass; core assert_near determines result"
+      },
+      "new": 60.0,
+      "within_tolerance": false,
+      "assertion_message": "ca_renter_credit@2026: 60.0 differs from 0.0 with an absolute margin 60.0 > 0.1",
+      "display_changed": true
+    },
+    {
+      "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+      "case": "ca_renter_credit_no_rent_ineligible (ca)",
+      "case_index": 4,
+      "output": "tax_units.tax_unit.ca_renter_credit",
+      "variable": "ca_renter_credit",
+      "period": "2026",
+      "entity_index": 0,
+      "old": 0.0,
+      "tolerance": {
+        "absolute": 0.1,
+        "relative": null,
+        "semantics": "both supplied limits must pass; core assert_near determines result"
+      },
+      "new": 0.0,
+      "within_tolerance": true,
+      "display_changed": false
+    },
+    {
+      "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+      "case": "ca_renter_credit_limited_by_liability_single_12000 (ca)",
+      "case_index": 5,
+      "output": "tax_units.tax_unit.ca_renter_credit",
+      "variable": "ca_renter_credit",
+      "period": "2026",
+      "entity_index": 0,
+      "old": 60.0,
+      "tolerance": {
+        "absolute": 0.1,
+        "relative": null,
+        "semantics": "both supplied limits must pass; core assert_near determines result"
+      },
+      "new": 60.0,
+      "within_tolerance": true,
+      "display_changed": false
+    },
+    {
+      "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+      "case": "ca_renter_credit_limited_by_liability_single_12000 (ca)",
+      "case_index": 5,
+      "output": "tax_units.tax_unit.ca_income_tax_before_credits",
+      "variable": "ca_income_tax_before_credits",
+      "period": "2026",
+      "entity_index": 0,
+      "old": 61.65,
+      "tolerance": {
+        "absolute": 0.1,
+        "relative": null,
+        "semantics": "both supplied limits must pass; core assert_near determines result"
+      },
+      "new": 61.0,
+      "within_tolerance": false,
+      "assertion_message": "ca_income_tax_before_credits@2026: 61.0 differs from 61.650001525878906 with an absolute margin 0.6500015258789062 > 0.1",
+      "display_changed": true
+    },
+    {
+      "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+      "case": "ca_renter_credit_limited_by_liability_single_12000 (ca)",
+      "case_index": 5,
+      "output": "tax_units.tax_unit.ca_non_refundable_credits",
+      "variable": "ca_non_refundable_credits",
+      "period": "2026",
+      "entity_index": 0,
+      "old": 216.47,
+      "tolerance": {
+        "absolute": 0.1,
+        "relative": null,
+        "semantics": "both supplied limits must pass; core assert_near determines result"
+      },
+      "new": 218.0,
+      "within_tolerance": false,
+      "assertion_message": "ca_non_refundable_credits@2026: 218.0 differs from 216.47000122070312 with an absolute margin 1.529998779296875 > 0.1",
+      "display_changed": true
+    },
+    {
+      "file": "policyengine_us/tests/policy/baseline/partners/analytics_coverage/edge_cases/state/ca/renter_credit.yaml",
+      "case": "ca_renter_credit_limited_by_liability_single_12000 (ca)",
+      "case_index": 5,
+      "output": "tax_units.tax_unit.ca_income_tax_before_refundable_credits",
+      "variable": "ca_income_tax_before_refundable_credits",
+      "period": "2026",
+      "entity_index": 0,
+      "old": 0.0,
+      "tolerance": {
+        "absolute": 0.1,
+        "relative": null,
+        "semantics": "both supplied limits must pass; core assert_near determines result"
+      },
+      "new": 0.0,
+      "within_tolerance": true,
+      "display_changed": false
+    }
+  ],
+  "errors": [],
+  "core_version": "3.32.20",
+  "model_package": "/Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621/policyengine_us/__init__.py",
+  "finished_utc": "2026-10-06T23:39:26.568052+00:00"
+}

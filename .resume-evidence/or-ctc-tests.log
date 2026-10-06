@@ -1,0 +1,8 @@
+........                                                                 [100%]
+=============================== warnings summary ===============================
+policyengine_us/tests/policy/baseline/gov/states/or/tax/income/credits/test_or_ctc_sunset.py::test_or_ctc_pays_through_2028_and_stops_in_2029
+  /Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621/policyengine_us/variables/gov/irs/income/taxable_income/adjusted_gross_income/irs_gross_income/unemployment_insurance/taxable_unemployment_insurance.py:22: RuntimeWarning: invalid value encountered in divide
+    share = where(tax_unit_uc > 0, person_uc / tax_unit_uc, 0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+8 passed, 1 warning in 42.05s

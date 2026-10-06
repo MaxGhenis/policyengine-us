@@ -1,0 +1,3 @@
+/Users/maxghenis/reviews/us-hub/scripts/heavy_run.sh:9: operation not permitted: ps
+/Users/maxghenis/reviews/us-hub/scripts/heavy_run.sh:10: operation not permitted: ps
+heavy_run: refusing to run at nice ; the heavy-lock holder must run at nice 0. Run it in the foreground of an un-niced shell (zsh '&' adds +5 via BG_NICE).

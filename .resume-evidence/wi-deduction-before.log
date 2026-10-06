@@ -1,0 +1,3 @@
+BEFORE MODEL: /Users/maxghenis/.subfleet/worktrees/20261006-083854-hub-fix-9621/policyengine_us/__init__.py
+ImportError while loading conftest '/Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621/policyengine_us/conftest.py'.
+_pytest.pathlib.ImportPathMismatchError: ('policyengine_us.conftest', '/Users/maxghenis/.subfleet/worktrees/20261006-083854-hub-fix-9621/policyengine_us/conftest.py', PosixPath('/Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621/policyengine_us/conftest.py'))

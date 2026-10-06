@@ -1,0 +1,6 @@
+uv run ruff format .
+warning: Using incompatible environment (`/Users/maxghenis/.subfleet/worktrees/20261006-083854-hub-fix-9621/.venv`) due to `--no-sync` (The project environment's Python version does not satisfy the request: `Python 3.14`)
+6961 files left unchanged
+uv run ruff check .
+warning: Using incompatible environment (`/Users/maxghenis/.subfleet/worktrees/20261006-083854-hub-fix-9621/.venv`) due to `--no-sync` (The project environment's Python version does not satisfy the request: `Python 3.14`)
+All checks passed!

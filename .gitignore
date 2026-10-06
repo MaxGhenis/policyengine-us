@@ -73,3 +73,7 @@ tmpclaude-*-cwd
 
 # Hypothesis example database
 .hypothesis/
+
+# Workspace-local resume metadata and evidence (selected evidence is tracked).
+.resume-git/
+.resume-evidence/

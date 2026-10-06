@@ -343,9 +343,11 @@ def extend_vt_cpi_u_indexed_amounts(parameters: ParameterNode, end_year: int) ->
     """Extend Vermont amounts from statutory bases, preserving published anchors.
 
     32 V.S.A. 5811(21)(C)-(D) and 5822(a)-(b) substitute unchained CPI-U
-    in the federal September-August window. The 2017 base window and rounding
-    reproduce published 2021-2025 deductions and 2024-2026 brackets. Earlier
-    agency rounding differs in some years, so historical anchors are retained.
+    in the federal September-August window. The 2017 base window is inferred
+    from agency amounts, not expressly specified in the statute. That window
+    and rounding reproduce published 2021-2025 deductions and 2024-2026
+    brackets. Earlier agency rounding differs in some years, so historical
+    anchors are retained.
     The 2026 bracket anchors are explicitly labelled preliminary in the YAML;
     2026 deductions and exemptions are calculated estimates pending publication.
     """

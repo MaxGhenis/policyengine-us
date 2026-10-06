@@ -1,0 +1,44 @@
+....................F............                                        [100%]
+=================================== FAILURES ===================================
+______________ test_published_tax_parameters_survive_cpi_refresh _______________
+
+    def test_published_tax_parameters_survive_cpi_refresh():
+        """Revised CPI cannot overwrite the IRS amounts encoded in the source YAML."""
+        parameter_dir = Path(__file__).parents[4] / "parameters"
+        parameters = ParameterNode(
+            data={
+                "gov": {
+                    "irs": {
+                        "uprating": {"values": {"2026-01-01": 1}},
+                    },
+                }
+            }
+        )
+>       parameters.gov.add_child("bls", ParameterNode("gov.bls"))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^
+
+policyengine_us/tests/policy/baseline/parameters/test_uprating_extensions.py:599: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../20261006-083854-hub-fix-9621/.venv/lib/python3.13/site-packages/policyengine_core/parameters/parameter_node.py:134: in __init__
+    _validate_parameter(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+parameter = , data = None, data_type = <class 'dict'>, allowed_keys = None
+
+    def _validate_parameter(parameter, data, data_type=None, allowed_keys=None):
+        type_map = {
+            dict: "object",
+            list: "array",
+        }
+    
+        if data_type is not None and not isinstance(data, data_type):
+>           raise ParameterParsingError(
+                "'{}' must be of type {}.".format(parameter.name, type_map[data_type]),
+                parameter.file_path,
+            )
+E           policyengine_core.errors.parameter_parsing_error.ParameterParsingError: 'gov.bls' must be of type object.
+
+../20261006-083854-hub-fix-9621/.venv/lib/python3.13/site-packages/policyengine_core/parameters/helpers.py:88: ParameterParsingError
+=========================== short test summary info ============================
+FAILED policyengine_us/tests/policy/baseline/parameters/test_uprating_extensions.py::test_published_tax_parameters_survive_cpi_refresh
+1 failed, 32 passed, 1 deselected in 19.15s

@@ -1,0 +1,54 @@
+BEFORE MODEL: /Users/maxghenis/.subfleet/worktrees/20261006-083854-hub-fix-9621/policyengine_us/__init__.py
+============================= test session starts ==============================
+platform darwin -- Python 3.13.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, platformdirs-4.12.3, anyio-4.15.1
+collected 10 items
+
+.resume-evidence/wi_standard_deduction_before.yaml ...FFFFFFF
+
+=================================== FAILURES ===================================
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621/.resume-evidence/wi_standard_deduction_before.yaml:
+  Test 'WI standard deduction unit test 4':
+    wi_standard_deduction@2022: [6664.218] differs from 6664.2001953125 with an absolute margin [0.01757812] > 0.01
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621/.resume-evidence/wi_standard_deduction_before.yaml:
+  Test 'WI 2026 published single deduction before phaseout':
+    wi_standard_deduction@2026: [13870.] differs from 13960.0 with an absolute margin [90.] > 0.001
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621/.resume-evidence/wi_standard_deduction_before.yaml:
+  Test 'WI 2026 published joint deduction after phaseout':
+    wi_standard_deduction@2026: [25466.508] differs from 25650.130859375 with an absolute margin [183.62305] > 0.01
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621/.resume-evidence/wi_standard_deduction_before.yaml:
+  Test 'WI 2026 published head deduction after phaseout':
+    wi_standard_deduction@2026: [17900.73] differs from 18027.748046875 with an absolute margin [127.01758] > 0.01
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621/.resume-evidence/wi_standard_deduction_before.yaml:
+  Test 'WI 2026 published separate deduction after phaseout':
+    wi_standard_deduction@2026: [12150.666] differs from 12236.48828125 with an absolute margin [85.822266] > 0.01
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621/.resume-evidence/wi_standard_deduction_before.yaml:
+  Test 'WI 2026 surviving spouse shares joint schedule':
+    wi_standard_deduction@2026: [25466.508] differs from 25650.130859375 with an absolute margin [183.62305] > 0.01
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261006-181318-hub-resume-sol-9621/.resume-evidence/wi_standard_deduction_before.yaml:
+  Test 'WI 2026 head uses the exact single formula above published crossover':
+    wi_standard_deduction@2026: [9077.647] differs from 9174.400390625 with an absolute margin [96.75293] > 0.001
+=============================== warnings summary ===============================
+../20261006-083854-hub-fix-9621/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1345
+  /Users/maxghenis/.subfleet/worktrees/20261006-083854-hub-fix-9621/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1345: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED .resume-evidence/wi_standard_deduction_before.yaml:: - /Users/maxgheni...
+FAILED .resume-evidence/wi_standard_deduction_before.yaml:: - /Users/maxgheni...
+FAILED .resume-evidence/wi_standard_deduction_before.yaml:: - /Users/maxgheni...
+FAILED .resume-evidence/wi_standard_deduction_before.yaml:: - /Users/maxgheni...
+FAILED .resume-evidence/wi_standard_deduction_before.yaml:: - /Users/maxgheni...
+FAILED .resume-evidence/wi_standard_deduction_before.yaml:: - /Users/maxgheni...
+FAILED .resume-evidence/wi_standard_deduction_before.yaml:: - /Users/maxgheni...
+=================== 7 failed, 3 passed, 1 warning in 19.38s ====================

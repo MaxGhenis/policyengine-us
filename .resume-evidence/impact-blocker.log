@@ -1,0 +1,5 @@
+/Users/maxghenis/reviews/pe-us-merge-backlog-2026-10-02/impact/lockrun.sh:11: operation not permitted: ps
+/Users/maxghenis/reviews/pe-us-merge-backlog-2026-10-02/impact/lockrun.sh:12: operation not permitted: ps
+lockrun: refusing to run at nice ; the heavy-lock holder must run at nice 0. Start it in the foreground of an un-niced shell, or put 'setopt no_bg_nice' before a '&' in a zsh driver.
+/Users/maxghenis/reviews/pe-us-merge-backlog-2026-10-02/impact/lockrun.sh:13: operation not permitted: ps
+/Users/maxghenis/reviews/pe-us-merge-backlog-2026-10-02/impact/lockrun.sh:13: operation not permitted: /Users/maxghenis/reviews/pe-us-merge-backlog-2026-10-02/impact/progress.txt

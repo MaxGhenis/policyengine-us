@@ -56,6 +56,7 @@ class wi_standard_deduction(Variable):
         "https://docs.legis.wisconsin.gov/misc/lfb/informational_papers/january_2023/0002_individual_income_tax_informational_paper_2.pdf",
         # Standard Deduction Table (keyed to WI income, line 7) and the statute, corroborating the phaseout:
         "https://www.revenue.wi.gov/TaxForms2025/2025-Form1-inst.pdf#page=35",
+        "https://www.revenue.wi.gov/TaxForms2026/2026-Form1-ES-Inst.pdf#page=2",
         "https://docs.legis.wisconsin.gov/statutes/statutes/71/i/05/22",
     )
     defined_for = StateCode.WI

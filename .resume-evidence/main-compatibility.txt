@@ -1,0 +1,6 @@
+get_la_cpi_u_percentage_increase: identical to current main = True
+adjust_la_amount_for_inflation: identical to current main = True
+extend_la_cpi_u_indexed_amounts: identical to current main = True
+Louisiana extension invocation retained = True
+Main PROGRESS.md exact byte restoration = True
+Partner diff against comparison main = empty
