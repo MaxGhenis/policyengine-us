@@ -16,7 +16,7 @@ class wi_retirement_income_exclusion_amount(Variable):
     def formula(tax_unit, period, parameters):
         # Schedule SB Line 16: qualifying retirement income, capped.
         # This is NOT subtracted from income directly — instead it
-        # feeds into wi_retirement_income_exclusion_tax_reduction,
+        # feeds into wi_retirement_income_exclusion_elected,
         # which compares tax computed two ways (with vs without the
         # exclusion) because claiming Line 16 forfeits all credits.
         psri = parameters(

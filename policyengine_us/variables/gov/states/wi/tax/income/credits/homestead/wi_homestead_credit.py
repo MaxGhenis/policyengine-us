@@ -17,11 +17,9 @@ class wi_homestead_credit(Variable):
     defined_for = "wi_homestead_eligible"
 
     def formula(tax_unit, period, parameters):
-        p = parameters(period).gov.states.wi.tax.income.credits
-        uncapped_ptax = tax_unit("wi_homestead_property_tax", period)
-        capped_ptax = min_(p.homestead.property_tax.max, uncapped_ptax)
-        hincome = tax_unit("wi_homestead_income", period)
-        phase_out_start = p.homestead.phase_out.start
-        phase_out_rate = p.homestead.phase_out.rate
-        phase_out = max_(0, hincome - phase_out_start) * phase_out_rate
-        return max_(0, capped_ptax - phase_out) * p.homestead.rate
+        potential = tax_unit("wi_homestead_credit_potential", period)
+        # Wis. Stat. 71.05(6)(b)54m.d bars s. 71.07 credits, including the
+        # s. 71.07(4) homestead credit, on a return that claims the Schedule SB
+        # line 16 retirement income subtraction.
+        claimed = tax_unit("wi_retirement_income_exclusion_claimed", period)
+        return where(claimed, 0, potential)

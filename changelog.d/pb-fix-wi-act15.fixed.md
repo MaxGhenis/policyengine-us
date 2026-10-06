@@ -1,0 +1,1 @@
+Align Wisconsin income tax before refundable credits and refundable credits with the elected retirement income subtraction, including credit forfeiture. Prevent double subtraction of retirement income claimed on both Schedule SB lines 16 and 17.

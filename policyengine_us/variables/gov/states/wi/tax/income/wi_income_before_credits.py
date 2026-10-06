@@ -5,6 +5,11 @@ class wi_income_tax_before_credits(Variable):
     value_type = float
     entity = TaxUnit
     label = "Wisconsin income tax before credits"
+    documentation = (
+        "Tax on Wisconsin taxable income without the Schedule SB line 16 "
+        "retirement income subtraction. A return that claims that subtraction "
+        "owes wi_retirement_income_exclusion_tax instead and claims no credits."
+    )
     unit = USD
     definition_period = YEAR
     reference = (

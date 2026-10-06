@@ -1,0 +1,347 @@
+# Wis. Stat. 71.05(6)(b)54m.a-d: from 2025, eligible retirees may
+# subtract retirement income, but claiming it forfeits all s. 71.07 credits.
+# https://docs.legis.wisconsin.gov/statutes/statutes/71/i/05/6/b/54m
+# https://www.revenue.wi.gov/TaxForms2025/2025-ScheduleSB-Inst.pdf#page=7
+
+- name: PolicyBench scenario_042 uses the same elected return for all tax components
+  absolute_error_margin: 0.01
+  period: 2026
+  input:
+    age: 79
+    is_surviving_spouse: true
+    state_code: WI
+    taxable_ira_distributions: 19_200
+    taxable_private_pension_income: 4_886
+    tax_exempt_ira_distributions: 4_700
+    social_security_dependents: 29_580
+    non_qualified_dividend_income: 5_920
+    qualified_dividend_income: 928
+    taxable_interest_income: 175
+    farm_income: -1_127
+    real_estate_taxes: 5_011
+  output:
+    # Line 16 = min(24,000, 19,200 + 4,886) = 24,000.
+    # Even without deducting the farm loss, remaining WI income is
+    # 24,086 + 5,920 + 928 + 175 - 24,000 = 7,109, below the deduction.
+    wi_retirement_income_exclusion_amount: 24_000
+    wi_retirement_income_exclusion_tax: 0
+    wi_retirement_income_exclusion_elected: true
+    wi_retirement_income_exclusion_claimed: true
+    # The $300 school property tax credit, s. 71.07(9), is forfeited.
+    wi_property_tax_credit_potential: 300
+    wi_property_tax_credit: 0
+    wi_non_refundable_credits: 0
+    wi_income_tax_before_refundable_credits: 0
+    wi_refundable_credits: 0
+    wi_income_tax: 0
+    state_income_tax_before_refundable_credits: 0
+    state_non_refundable_credits: 0
+    state_refundable_credits: 0
+    state_income_tax: 0
+    taxsim_state_property_tax_credit: 0
+
+- name: PolicyBench scenario_042 frozen provision values elect zero tax
+  absolute_error_margin: 0.01
+  period: 2026
+  input:
+    state_code: WI
+    age: 79
+    taxable_ira_distributions: 19_200
+    taxable_private_pension_income: 4_886
+    wi_income_tax_before_credits: 584.740906
+    wi_property_tax_credit_potential: 300
+    wi_earned_income_credit_potential: 0
+    wi_homestead_credit_potential: 0
+  output:
+    # The audit's ordinary return has 584.740906 - 300 = 284.740906
+    # tax, while the line 16 return has no taxable income and no credits.
+    wi_retirement_income_exclusion_elected: true
+    wi_retirement_income_exclusion_tax: 0
+    wi_non_refundable_credits: 0
+    wi_income_tax_before_refundable_credits: 0
+    wi_refundable_credits: 0
+    wi_income_tax: 0
+    state_income_tax_before_refundable_credits: 0
+    state_refundable_credits: 0
+    state_income_tax: 0
+
+- name: Vectorized election compares complete returns and requires qualifying income
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    state_code: [WI, WI, WI, WI, WI]
+    age: [67, 67, 67, 66, 67]
+    taxable_ira_distributions: [8_000, 2_000, 2_000, 8_000, 0]
+    wi_income_tax_before_credits: [350, 350, 350, 350, 350]
+    wi_property_tax_credit_potential: [0, 0, 0, 0, 0]
+    wi_retirement_income_exclusion_tax: [70, 280, 280, 70, 70]
+    wi_earned_income_credit_potential: [25, 100, 20, 20, 20]
+    wi_homestead_eligible: [true, true, true, true, true]
+    wi_homestead_credit_potential: [25, 50, 50, 50, 50]
+  output:
+    # Standard net tax: [300, 200, 280, 280, 280]. Only the first
+    # benefits from election; ties, age 66 and zero income do not elect.
+    wi_retirement_income_exclusion_elected: [true, false, false, false, false]
+    wi_retirement_income_exclusion_claimed: [true, false, false, false, false]
+    wi_income_tax_before_refundable_credits: [70, 350, 350, 350, 350]
+    wi_earned_income_credit: [0, 100, 20, 20, 20]
+    wi_homestead_credit: [0, 50, 50, 50, 50]
+    wi_refundable_credits: [0, 150, 70, 70, 70]
+    wi_income_tax: [70, 200, 280, 280, 280]
+    state_income_tax_before_refundable_credits: [70, 350, 350, 350, 350]
+    state_refundable_credits: [0, 150, 70, 70, 70]
+    state_income_tax: [70, 200, 280, 280, 280]
+
+- name: Refundable homestead credit makes declining the subtraction beneficial
+  absolute_error_margin: 0.01
+  period: 2025
+  input:
+    state_code: WI
+    age: 67
+    taxable_ira_distributions: 8_000
+    wi_income_tax_before_credits: 100
+    wi_property_tax_credit_potential: 150
+    wi_retirement_income_exclusion_tax: 0
+    wi_earned_income_credit_potential: 0
+    wi_homestead_eligible: true
+    wi_homestead_credit_potential: 200
+  output:
+    # The 150 credit is capped at the 100 tax, so the ordinary return owes
+    # max(0, 100 - 100) - 200 = -200, which beats zero tax on line 16.
+    wi_retirement_income_exclusion_elected: false
+    wi_property_tax_credit: 100
+    wi_income_tax_before_refundable_credits: 0
+    wi_refundable_credits: 200
+    wi_income_tax: -200
+
+- name: Taxpayer can explicitly decline the tax minimizing retirement subtraction
+  absolute_error_margin: 0.01
+  period: 2026
+  input:
+    state_code: WI
+    age: 67
+    taxable_ira_distributions: 8_000
+    wi_retirement_income_exclusion_elected: false
+    wi_income_tax_before_credits: 350
+    wi_property_tax_credit_potential: 50
+    wi_retirement_income_exclusion_tax: 70
+    wi_earned_income_credit_potential: 20
+    wi_homestead_eligible: true
+    wi_homestead_credit_potential: 30
+  output:
+    wi_retirement_income_exclusion_claimed: false
+    wi_income_tax_before_refundable_credits: 300
+    wi_refundable_credits: 50
+    wi_income_tax: 250
+    state_income_tax: 250
+
+- name: Explicit election forfeits credits even when keeping them would lower tax
+  absolute_error_margin: 0.01
+  period: 2026
+  input:
+    state_code: WI
+    age: 67
+    taxable_ira_distributions: 2_000
+    wi_retirement_income_exclusion_elected: true
+    wi_income_tax_before_credits: 350
+    wi_property_tax_credit_potential: 50
+    wi_retirement_income_exclusion_tax: 280
+    wi_earned_income_credit_potential: 100
+    wi_homestead_eligible: true
+    wi_homestead_credit_potential: 50
+  output:
+    wi_retirement_income_exclusion_claimed: true
+    wi_property_tax_credit: 0
+    wi_non_refundable_credits: 0
+    wi_income_tax_before_refundable_credits: 280
+    wi_earned_income_credit: 0
+    wi_homestead_credit: 0
+    wi_refundable_credits: 0
+    wi_income_tax: 280
+    state_non_refundable_credits: 0
+    state_income_tax: 280
+
+- name: Explicit election without a line 16 amount keeps credits
+  absolute_error_margin: 0.01
+  period: 2026
+  input:
+    state_code: [WI, WI]
+    age: [66, 67]
+    taxable_ira_distributions: [8_000, 0]
+    wi_retirement_income_exclusion_elected: [true, true]
+    wi_income_tax_before_credits: [350, 350]
+    wi_property_tax_credit_potential: [50, 50]
+    wi_retirement_income_exclusion_tax: [70, 70]
+    wi_earned_income_credit_potential: [20, 20]
+    wi_homestead_eligible: [true, true]
+    wi_homestead_credit_potential: [30, 30]
+  output:
+    # Wis. Stat. 71.05(6)(b)54m.b-d: someone under 67, or with no qualifying
+    # retirement income, has no subtraction to claim and forfeits nothing.
+    wi_retirement_income_exclusion_amount: [0, 0]
+    wi_retirement_income_exclusion_claimed: [false, false]
+    wi_property_tax_credit: [50, 50]
+    wi_income_tax_before_refundable_credits: [300, 300]
+    wi_refundable_credits: [50, 50]
+    wi_income_tax: [250, 250]
+    state_income_tax: [250, 250]
+
+- name: Explicit election by a filer under 67 keeps the school property tax credit
+  absolute_error_margin: 0.01
+  period: 2026
+  input:
+    people:
+      person1:
+        age: 60
+        employment_income: 20_000
+        taxable_ira_distributions: 10_000
+        real_estate_taxes: 5_000
+    tax_units:
+      tax_unit:
+        members: [person1]
+        wi_retirement_income_exclusion_elected: true
+    households:
+      household:
+        members: [person1]
+        state_code: WI
+  output:
+    # Wis. Stat. 71.05(6)(b)54m.b allows the subtraction only at age 67.
+    wi_retirement_income_exclusion_amount: 0
+    wi_retirement_income_exclusion_claimed: false
+    wi_property_tax_credit: 300
+    state_non_refundable_credits: 300
+
+- name: Elected return forfeits the Wisconsin earned income credit
+  absolute_error_margin: 0.01
+  period: 2026
+  input:
+    people:
+      head:
+        age: 68
+        employment_income: 25_000
+        taxable_pension_income: 24_000
+      child1:
+        age: 8
+        is_tax_unit_dependent: true
+      child2:
+        age: 9
+        is_tax_unit_dependent: true
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: WI
+  output:
+    # Line 16 cuts tax by far more than the EITC is worth, so the return
+    # claims it and, under s. 71.05(6)(b)54m.d, forfeits the s. 71.07(9e)
+    # earned income credit (11% of the federal EITC with two children).
+    wi_retirement_income_exclusion_amount: 24_000
+    wi_retirement_income_exclusion_claimed: true
+    wi_earned_income_credit_potential: 223.06
+    wi_earned_income_credit: 0
+    wi_refundable_credits: 0
+    taxsim_state_eitc: 0
+
+- name: Explicit election forfeits the homestead and school property tax credits
+  absolute_error_margin: 0.01
+  period: 2026
+  input:
+    people:
+      person1:
+        age: 70
+        taxable_ira_distributions: 20_000
+        rent: 9_000
+    tax_units:
+      tax_unit:
+        members: [person1]
+        wi_retirement_income_exclusion_elected: true
+    households:
+      household:
+        members: [person1]
+        state_code: WI
+  output:
+    # Without the input this renter keeps the credits, which are worth more.
+    # s. 71.07(4) and (9) list the homestead and school property tax credits.
+    wi_retirement_income_exclusion_claimed: true
+    wi_property_tax_credit_potential: 216
+    wi_property_tax_credit: 0
+    wi_homestead_credit: 0
+    wi_income_tax: 0
+    taxsim_state_property_tax_credit: 0
+
+- name: Retirement subtraction election is unavailable before 2025
+  absolute_error_margin: 0.01
+  period: 2024
+  input:
+    state_code: WI
+    age: 79
+    taxable_ira_distributions: 19_200
+    wi_income_tax_before_credits: 350
+    wi_property_tax_credit_potential: 50
+    wi_earned_income_credit_potential: 20
+    wi_homestead_eligible: true
+    wi_homestead_credit_potential: 30
+  output:
+    wi_retirement_income_exclusion_elected: false
+    wi_retirement_income_exclusion_claimed: false
+    wi_income_tax_before_refundable_credits: 300
+    wi_refundable_credits: 50
+    wi_income_tax: 250
+
+- name: Retirement subtraction election continues after 2026
+  absolute_error_margin: 0.01
+  period: 2027
+  input:
+    state_code: WI
+    age: 67
+    taxable_ira_distributions: 8_000
+    wi_income_tax_before_credits: 350
+    wi_property_tax_credit_potential: 50
+    wi_retirement_income_exclusion_tax: 70
+    wi_earned_income_credit_potential: 20
+    wi_homestead_eligible: true
+    wi_homestead_credit_potential: 30
+  output:
+    # Standard net tax 350 - 50 - 50 = 250 > 70, so the return claims line 16.
+    wi_retirement_income_exclusion_elected: true
+    wi_retirement_income_exclusion_claimed: true
+    wi_income_tax_before_refundable_credits: 70
+    wi_refundable_credits: 0
+    wi_income_tax: 70
+
+- name: Explicit retirement election cannot forfeit credits before the law takes effect
+  absolute_error_margin: 0.01
+  period: 2024
+  input:
+    state_code: WI
+    age: 79
+    taxable_ira_distributions: 19_200
+    wi_retirement_income_exclusion_elected: true
+    wi_income_tax_before_credits: 350
+    wi_property_tax_credit_potential: 50
+    wi_earned_income_credit_potential: 20
+    wi_homestead_eligible: true
+    wi_homestead_credit_potential: 30
+  output:
+    wi_retirement_income_exclusion_claimed: false
+    wi_property_tax_credit: 50
+    wi_income_tax_before_refundable_credits: 300
+    wi_earned_income_credit: 20
+    wi_homestead_credit: 30
+    wi_refundable_credits: 50
+    wi_income_tax: 250
+
+- name: Retirement subtraction election only applies to Wisconsin returns
+  period: 2026
+  input:
+    state_code: IL
+    age: 79
+    taxable_ira_distributions: 19_200
+  output:
+    wi_retirement_income_exclusion_elected: false
+    wi_retirement_income_exclusion_claimed: false
+    wi_income_tax_before_refundable_credits: 0
+    wi_refundable_credits: 0
+    wi_income_tax: 0

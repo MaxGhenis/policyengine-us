@@ -19,42 +19,67 @@
     wi_income_tax_before_refundable_credits: 0
 
 - name: WI income tax before refundable credits with retirement exclusion
-  # This intermediate remains the standard pre-refundable-credit tax,
-  # even when the exclusion path wins in wi_income_tax.
-  # standard_before_refundable = max(0, 5000 - 500) = 4500
+  # Ordinary return: max(0, 5000 - 500) - 200 = 4300 > 3000, so the return
+  # claims Schedule SB line 16 and, under Wis. Stat. 71.05(6)(b)54m.d, no
+  # credits. Before refundable credits it owes the 3000 line 16 tax.
   absolute_error_margin: 0.01
   period: 2025
   input:
+    age: 67
+    taxable_ira_distributions: 24_000
     wi_income_tax_before_credits: 5_000
-    wi_non_refundable_credits: 500
+    wi_property_tax_credit_potential: 500
     wi_retirement_income_exclusion_tax: 3_000
-    wi_refundable_credits: 200
+    wi_earned_income_credit_potential: 0
+    wi_homestead_eligible: true
+    wi_homestead_credit_potential: 200
     state_code: WI
   output:
-    wi_income_tax_before_refundable_credits: 4_500
+    wi_retirement_income_exclusion_claimed: true
+    wi_property_tax_credit: 0
+    wi_non_refundable_credits: 0
+    wi_income_tax_before_refundable_credits: 3_000
+    wi_homestead_credit: 0
+    wi_refundable_credits: 0
 
 - name: WI income tax before refundable credits - standard path lower
-  # standard_before_refundable = max(0, 2000 - 500) = 1500
+  # Ordinary return: max(0, 2000 - 500) - 200 = 1300 < 5000, so the return
+  # keeps its credits: before refundable credits = 2000 - 500 = 1500.
   absolute_error_margin: 0.01
   period: 2025
   input:
+    age: 67
+    taxable_ira_distributions: 24_000
     wi_income_tax_before_credits: 2_000
-    wi_non_refundable_credits: 500
+    wi_property_tax_credit_potential: 500
     wi_retirement_income_exclusion_tax: 5_000
-    wi_refundable_credits: 200
+    wi_earned_income_credit_potential: 0
+    wi_homestead_eligible: true
+    wi_homestead_credit_potential: 200
     state_code: WI
   output:
+    wi_retirement_income_exclusion_claimed: false
+    wi_non_refundable_credits: 500
     wi_income_tax_before_refundable_credits: 1_500
+    wi_refundable_credits: 200
 
-- name: WI state income tax still follows the lower exclusion path
+- name: WI state income tax follows the claimed retirement subtraction
+  # state_income_tax adds the Wisconsin parts: 3000 - 0 = 3000.
   absolute_error_margin: 0.01
   period: 2025
   input:
+    age: 67
+    taxable_ira_distributions: 24_000
     wi_income_tax_before_credits: 5_000
-    wi_non_refundable_credits: 500
+    wi_property_tax_credit_potential: 500
     wi_retirement_income_exclusion_tax: 3_000
-    wi_refundable_credits: 200
+    wi_earned_income_credit_potential: 0
+    wi_homestead_eligible: true
+    wi_homestead_credit_potential: 200
     state_code: WI
   output:
     wi_income_tax: 3_000
+    state_income_tax_before_refundable_credits: 3_000
+    state_non_refundable_credits: 0
+    state_refundable_credits: 0
     state_income_tax: 3_000

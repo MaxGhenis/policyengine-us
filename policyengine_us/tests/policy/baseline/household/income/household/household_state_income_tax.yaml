@@ -10,14 +10,20 @@
   output:
     household_state_income_tax: 3_900
 
-- name: Wisconsin household state income tax follows the lower exclusion path
+- name: Wisconsin household state income tax follows the claimed retirement subtraction
+  # Wis. Stat. 71.05(6)(b)54m.d: a return that claims Schedule SB line 16
+  # claims no credits, so the household total is the 3000 line 16 tax.
   period: 2025
   input:
     state_code: WI
+    age: 67
+    taxable_ira_distributions: 24_000
     wi_income_tax_before_credits: 5_000
-    wi_non_refundable_credits: 500
+    wi_property_tax_credit_potential: 500
     wi_retirement_income_exclusion_tax: 3_000
-    wi_refundable_credits: 200
+    wi_earned_income_credit_potential: 0
+    wi_homestead_eligible: true
+    wi_homestead_credit_potential: 200
   output:
     household_state_income_tax: 3_000
 

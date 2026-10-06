@@ -21,7 +21,7 @@ class wi_itemized_deduction_credit(Variable):
         ordered_credits = parameters(
             period
         ).gov.states.wi.tax.income.credits.non_refundable
-        return applied_state_non_refundable_credit(
+        applied = applied_state_non_refundable_credit(
             tax_unit,
             period,
             ordered_credits,
@@ -29,3 +29,7 @@ class wi_itemized_deduction_credit(Variable):
             "wi_itemized_deduction_credit",
             "wi_itemized_deduction_credit_potential",
         )
+        # Wis. Stat. 71.05(6)(b)54m.d bars s. 71.07 credits on a return that
+        # claims the Schedule SB line 16 retirement income subtraction.
+        claimed = tax_unit("wi_retirement_income_exclusion_claimed", period)
+        return where(claimed, 0, applied)

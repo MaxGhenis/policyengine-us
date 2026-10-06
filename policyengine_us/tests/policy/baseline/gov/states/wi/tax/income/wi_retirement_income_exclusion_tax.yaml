@@ -57,12 +57,119 @@
     wi_taxable_income: 10_000
     wi_retirement_income_subtraction: 3_000
   output:
-    # Line 17 ($3k) is already subtracted in wi_taxable_income.
-    # Per the Line 17 worksheet step 4, Line 17 self-adjusts when
-    # Line 16 is claimed. We simply subtract Line 16:
-    # exclusion_taxinc = max(0, 10000 - 8000) = 2000
-    # exclusion_tax = 2000 * 0.035 = 70
-    wi_retirement_income_exclusion_tax: 70
+    # Wis. Stat. 71.05(6)(b)54 and Schedule SB line 17 worksheet step 4:
+    # Line 16 uses all $8,000 of retirement income, leaving no Line 17.
+    # Add back the $3,000 Line 17 already deducted in wi_taxable_income.
+    # exclusion_taxinc = 10000 - 8000 + 3000 = 5000; tax = 5000 * .035.
+    wi_retirement_income_exclusion_line17_offset: 3_000
+    wi_retirement_income_exclusion_tax: 175
+
+- name: Line 17 retains qualified income above the single Line 16 cap
+  period: 2025
+  input:
+    age: 68
+    taxable_pension_income: 26_000
+    is_tax_unit_head: true
+    filing_status: SINGLE
+    state_code: WI
+    adjusted_gross_income: 14_000
+  output:
+    # Provision-level AGI input establishes eligibility under
+    # Wis. Stat. 71.05(6)(b)54; unrelated federal deductions are abstracted.
+    # Schedule SB line 17 worksheet: min(5000, 26000 - 24000) = 2000.
+    # The regular return subtracts 5000, so the elected path adds back 3000.
+    wi_retirement_income_subtraction: 5_000
+    wi_retirement_income_exclusion_amount: 24_000
+    wi_retirement_income_exclusion_line17_offset: 3_000
+
+- name: Joint pooled Line 16 preserves the maximum remaining Line 17
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 68
+        taxable_pension_income: 49_000
+      person2:
+        age: 68
+        taxable_pension_income: 1_000
+    tax_units:
+      tax_unit:
+        members: [person1, person2]
+        filing_status: JOINT
+        adjusted_gross_income: 25_000
+    households:
+      household:
+        members: [person1, person2]
+        state_code: WI
+  output:
+    # Wis. Stat. 71.05(6)(b)54m.c permits a pooled $48,000 Line 16.
+    # Assigning it to person1 leaves $1,000 for each spouse on Line 17.
+    # The regular return has 5000 + 1000 = 6000 on Line 17; add back 4000.
+    wi_retirement_income_subtraction: 6_000
+    wi_retirement_income_exclusion_amount: 48_000
+    wi_retirement_income_exclusion_line17_offset: 4_000
+
+- name: Joint pooled Line 16 does not reduce Line 17 when enough income remains
+  period: 2026
+  input:
+    people:
+      person1:
+        age: 68
+        taxable_pension_income: 30_000
+      person2:
+        age: 68
+        taxable_pension_income: 30_000
+    tax_units:
+      tax_unit:
+        members: [person1, person2]
+        filing_status: JOINT
+        adjusted_gross_income: 25_000
+    households:
+      household:
+        members: [person1, person2]
+        state_code: WI
+  output:
+    # Wis. Stat. 71.05(6)(b)54 and 54m.c: each spouse retains $6,000
+    # after a $24,000 share of Line 16, enough for both $5,000 Line 17 caps.
+    wi_retirement_income_subtraction: 10_000
+    wi_retirement_income_exclusion_amount: 48_000
+    wi_retirement_income_exclusion_line17_offset: 0
+
+- name: Line 16 leaves the younger spouse's Line 17 subtraction available
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 68
+        taxable_pension_income: 23_000
+      person2:
+        age: 66
+        taxable_pension_income: 5_000
+    tax_units:
+      tax_unit:
+        members: [person1, person2]
+        filing_status: JOINT
+    households:
+      household:
+        members: [person1, person2]
+        state_code: WI
+  output:
+    # Wis. Stat. 71.05(6)(b)54m.b allows only person1's income on Line 16.
+    # Person2 remains eligible for the $5,000 subtraction under 54.
+    wi_retirement_income_subtraction: 10_000
+    wi_retirement_income_exclusion_amount: 23_000
+    wi_retirement_income_exclusion_line17_offset: 5_000
+
+- name: No Line 17 offset before the retirement exclusion takes effect
+  period: 2024
+  input:
+    age: 68
+    taxable_pension_income: 8_000
+    state_code: WI
+  output:
+    # Wis. Stat. 71.05(6)(b)54m.a applies only to tax years after 2024.
+    wi_retirement_income_subtraction: 5_000
+    wi_retirement_income_exclusion_line17_offset: 0
 
 - name: Joint filing - both spouses eligible
   absolute_error_margin: 0.01
