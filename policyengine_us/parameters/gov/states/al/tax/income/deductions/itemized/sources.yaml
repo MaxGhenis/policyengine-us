@@ -2,7 +2,12 @@ description: Alabama allows for the following itemized deductions.
 values:
   2021-01-01:
     - real_estate_taxes # Section (a), (3), (d)
-    - employee_payroll_tax # Section (a), (3), (a)
+    # FICA withheld on the filer's own wages and self-employment tax on
+    # their own earnings (Schedule A line 6), listed per person so a tax unit
+    # dependent's payroll taxes stay with the dependent's own return.
+    - employee_social_security_tax # Section (a), (3), (a)
+    - employee_medicare_tax # Section (a), (3), (a)
+    - additional_medicare_tax # Section (a), (3), (a)
     - self_employment_tax # Section (a), (3), (a)
     # Legal code specifies charitable contributions to the extent deductible in federal law.
     # Tax form allows deducting all contributions, not capped by AGI as in federal law.
@@ -28,3 +33,5 @@ metadata:
       href: https://www.revenue.alabama.gov/ultraviewer/viewer/basic_viewer/index.html?form=2024/01/23f40schabdc_blk.pdf#page=1
     - title: 2024 Alabama Income Tax Instructions
       href: https://www.revenue.alabama.gov/wp-content/uploads/2025/01/24f40bk.pdf#page=18
+    - title: 2025 Alabama Form 40 Booklet, Schedule A, FICA Tax and Federal Self-Employment Taxes (line 6)
+      href: https://www.revenue.alabama.gov/wp-content/uploads/2026/01/25f40bk.pdf#page=19
