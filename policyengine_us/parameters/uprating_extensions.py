@@ -34,13 +34,29 @@ def get_average_for_12_months_ending_august(
     ORS 315.273(5).
 
     The BLS index series hold monthly observations through the latest BLS
-    release, then CBO's calendar-year averages at February instants; a
-    monthly refresh that reaches a February replaces that instant's
-    projection with the observed value. Windows with observed months average
-    them, carrying the last observation flat through any unobserved tail.
-    Windows with no observed month read ``projection``, CBO's projection of
-    this 12-month average keyed by the tax year it indexes (``year + 1``);
-    a calendar-year average would run about four months of inflation high.
+    release, then (for the seasonally adjusted and chained series) CBO's
+    calendar-year averages at February instants; a monthly refresh that
+    reaches a February replaces that instant's projection with the observed
+    value. Windows with no observed month read ``projection``, CBO's
+    projection of this 12-month average keyed by the tax year it indexes
+    (``year + 1``); a calendar-year average would run about four months of
+    inflation high.
+
+    Windows with observed months average them, and complete any month
+    without an observation with the latest value published before it. Those
+    completed months are estimates, not observations, and the model's
+    completion policy rather than a statutory or agency rule:
+
+    - a month BLS did not publish inside the observed range takes the prior
+      month's value (October 2025, lost to the 2025 lapse in
+      appropriations, takes September 2025's);
+    - each month after the last observation takes the last observation, so
+      the unobserved tail of the latest window is held flat.
+
+    The levels averaged are those in the parameter file, one vintage per
+    month. Where BLS revises a series after first publication (the C-CPI-U
+    moves from initial to interim to final estimates), that vintage need not
+    be the one a statute reads; see ``get_irs_cpi``.
     """
     # February instants can hold annual projections, so only non-February
     # instants identify the end of the observed monthly series (one month
@@ -51,16 +67,19 @@ def get_average_for_12_months_ending_august(
         if not value.instant_str.endswith("-02-01")
     )
     window_start = instant(f"{year - 1}-09-01")
+    if window_start > last_observation:
+        return projection(f"{year + 1}-01-01")
     window_months = [
         window_start.offset(month, MONTH) for month in range(MONTHS_IN_YEAR)
     ]
-    observed = [month for month in window_months if month <= last_observation]
-    if not observed:
-        return projection(f"{year + 1}-01-01")
-    unobserved_tail = MONTHS_IN_YEAR - len(observed)
+    # A parameter lookup returns the latest value dated on or before the
+    # month, which is the completion policy above for a month inside the
+    # observed range; capping the month at the last observation extends it
+    # to the tail.
     return (
-        sum(cpi(month) for month in observed) + cpi(observed[-1]) * unobserved_tail
-    ) / MONTHS_IN_YEAR
+        sum(cpi(min(month, last_observation)) for month in window_months)
+        / MONTHS_IN_YEAR
+    )
 
 
 def get_irs_cpi(parameters: ParameterNode, year: int) -> float:
@@ -68,6 +87,17 @@ def get_irs_cpi(parameters: ParameterNode, year: int) -> float:
 
     The average over the 12 months ending August 31 of ``year``, which
     indexes tax parameters for ``year + 1``.
+
+    1(f)(6)(A) fixes the vintage: the C-CPI-U values to use are the latest
+    ones as of the date BLS publishes the initial August value for ``year``.
+    c_cpi_u.yaml holds one vintage per month, whichever was current when the
+    month was entered, and BLS revises C-CPI-U values after first
+    publication (August 2025 is 179.656 in the file and was 179.839 in the
+    BLS data API on 2026-10-06). So for a past year this reconstructs the
+    statutory index from the file's vintages, not necessarily from the
+    statutory vintage. Amounts the IRS has published are encoded in the
+    parameter files and take precedence for their own years; this index
+    only extends them.
     """
     cpi = parameters.gov.bls.cpi
     return get_average_for_12_months_ending_august(
@@ -170,6 +200,38 @@ def extend_dependent_standard_deduction_parameters(
             start=instant(f"{end_year}-01-01"),
             value=parameter(f"{end_year}-01-01"),
         )
+
+
+# 26 U.S.C. 62(d)(3) indexing of the 62(a)(2)(D) educator expense cap:
+# statutory dollar amount and 1(f)(3) base year.
+EDUCATOR_EXPENSE_CAP_STATUTORY_BASE = (250, 2014)
+
+
+def extend_educator_expense_cap(parameters: ParameterNode, end_year: int) -> None:
+    """Project the per-educator cap on the educator expense deduction.
+
+    26 U.S.C. 62(d)(3) increases the $250 amount in 62(a)(2)(D) by the
+    1(f)(3) cost-of-living adjustment, substituting calendar year 2014 for
+    2016, and rounds the increase to the nearest multiple of $50. Each year
+    is computed from the statutory base rather than chained from the last
+    rounded value, which can put a $50 step a year or more early or late;
+    IRS values encoded in the YAML take precedence for their own years.
+    """
+    ROUNDING_INTERVAL = 50
+    base, base_year = EDUCATOR_EXPENSE_CAP_STATUTORY_BASE
+    cap = parameters.gov.irs.ald.educator_expense.cap
+    first_projected_year = 1 + max(
+        int(value.instant_str[:4]) for value in cap.values_list
+    )
+    for year in range(first_projected_year, end_year + 1):
+        cola = get_irs_cola(parameters, year, base_year)
+        # Nearest multiple of $50; an exact half rounds up.
+        increase = math.floor(base * cola / ROUNDING_INTERVAL + 0.5) * ROUNDING_INTERVAL
+        cap.update(period=f"year:{year}-01-01:1", value=float(base + increase))
+    cap.update(
+        start=instant(f"{end_year}-01-01"),
+        value=cap(f"{end_year}-01-01"),
+    )
 
 
 def extend_or_ctc_parameters(parameters: ParameterNode, end_year: int) -> None:
@@ -812,5 +874,10 @@ def set_all_uprating_parameters(parameters: ParameterNode) -> ParameterNode:
     # 1997 bases. Must run after the tax-year CPI projection extension above
     # so projected windows are available.
     extend_dependent_standard_deduction_parameters(parameters, end_year=END_YEAR)
+
+    # The educator expense cap follows 26 U.S.C. 62(d)(3)'s chained CPI-U
+    # schedule, computed from the statutory $250 and 2014 base year. Must run
+    # after the Chained CPI-U extension above.
+    extend_educator_expense_cap(parameters, end_year=END_YEAR)
 
     return parameters
