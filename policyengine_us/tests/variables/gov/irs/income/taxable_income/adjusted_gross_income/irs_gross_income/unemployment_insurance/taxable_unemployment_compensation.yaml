@@ -82,3 +82,51 @@
         state_code: CA
   output:
     taxable_unemployment_compensation: [0]
+
+- name: A dependent's own 2020 exclusion is capped at $10,200
+  period: 2020
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 15_000
+        unemployment_compensation: 12_000
+      child:
+        age: 17
+        is_tax_unit_dependent: true
+        unemployment_compensation: 15_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    # The child's modified AGI is zero, under the $150,000 cutoff, so the
+    # child excludes $10,200 of their own $15,000 on their own return.
+    taxable_unemployment_compensation: [1_800, 4_800]
+    tax_unit_taxable_unemployment_compensation: 1_800
+
+- name: A dependent's compensation is fully taxable on their own return after 2020
+  period: 2025
+  input:
+    people:
+      head:
+        age: 35
+        employment_income: 15_000
+        unemployment_compensation: 12_000
+      child:
+        age: 17
+        is_tax_unit_dependent: true
+        unemployment_compensation: 4_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    taxable_unemployment_compensation: [12_000, 4_000]
+    tax_unit_taxable_unemployment_compensation: 12_000
