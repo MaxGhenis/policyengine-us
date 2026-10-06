@@ -179,7 +179,7 @@ def tin_rule_off_system():
         },
         country_id="us",
     )
-    return CountryTaxBenefitSystem(reform=(reform,))
+    return CountryTaxBenefitSystem(reform=reform)
 
 
 SETTINGS = settings(
