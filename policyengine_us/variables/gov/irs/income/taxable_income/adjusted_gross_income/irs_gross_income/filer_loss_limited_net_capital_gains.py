@@ -25,9 +25,9 @@ class filer_loss_limited_net_capital_gains(Variable):
         p = parameters(period).gov.irs
         filing_status = tax_unit("filing_status", period)
         loss_limit = p.capital_gains.loss_limit[filing_status]
-        net_capital_gains = tax_unit_non_dep_add(
-            tax_unit, period, ["long_term_capital_gains", "short_term_capital_gains"]
-        )
+        # Each filer's capital_gains is their long- and short-term gains, or
+        # the amount supplied for it, which AGI (irs_gross_income) also counts.
+        net_capital_gains = tax_unit_non_dep_add(tax_unit, period, ["capital_gains"])
         # Capital gain distributions go on Schedule D line 13 with the other
         # gains and losses, so they net before the limit. Each filer's input
         # is floored at zero, as in irs_gross_income.

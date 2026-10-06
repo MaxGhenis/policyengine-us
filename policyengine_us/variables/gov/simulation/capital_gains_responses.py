@@ -86,6 +86,10 @@ class marginal_tax_rate_on_capital_gains(Variable):
     label = "capital gains marginal tax rate"
     documentation = (
         "Percent of marginal capital gains that do not increase household net income."
+        " The marginal gain is an extra $1,000 of long-term capital gain, the"
+        " gain capital_gains_behavioral_response scales, so it gets the 26"
+        " U.S.C. 1(h) rates and counts toward net investment income and the"
+        " EITC investment income limit."
         " Simulated only for the two adults in each household with the largest"
         " long-term capital gains (adult_index_cg 1 and 2), regardless of"
         " simulation.marginal_tax_rate_adults; zero for everyone else."
@@ -111,11 +115,22 @@ class marginal_tax_rate_on_capital_gains(Variable):
                     and not variable_data.is_input_variable()
                 ):
                     alt_simulation.delete_arrays(variable)
+            # Raise long-term gains, which every reader of the gain sees: the
+            # 1(h) rates read them, and capital_gains adds them, so AGI, the
+            # NIIT base and the EITC investment income test count them.
             alt_simulation.set_input(
-                "capital_gains",
+                "long_term_capital_gains",
                 period,
-                person("capital_gains", period) + mask * DELTA,
+                person("long_term_capital_gains", period) + mask * DELTA,
             )
+            # A capital_gains amount supplied as an input is kept, not
+            # recomputed from long-term gains, so raise it too.
+            if "capital_gains" in simulation.input_variables:
+                alt_simulation.set_input(
+                    "capital_gains",
+                    period,
+                    person("capital_gains", period) + mask * DELTA,
+                )
             alt_person = alt_simulation.person
             household_net_income = person.household("household_net_income", period)
             household_net_income_higher_earnings = alt_person.household(

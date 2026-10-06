@@ -1,0 +1,164 @@
+# marginal_tax_rate_on_capital_gains is 1 minus the change in household net
+# income per dollar when an adult realizes $1,000 more long-term capital gain.
+# The gain goes through every reader of it: AGI, the 26 USC 1(h) rates, the net
+# investment income tax (26 USC 1411) and the EITC investment income limit (26
+# USC 32(i)).
+#
+# 2025 amounts used below:
+#   standard deduction 15,750 single, 23,625 head of household, 31,500 joint
+#   1(h) 15% rate from taxable income 48,350 single, 64,750 head of household,
+#     96,700 joint; 20% from 533,400 single
+#   NIIT 3.8% above modified AGI of 200,000 single, 250,000 joint
+#   EITC with one child: maximum 4,328, phase-out 15.98% from AGI 23,350,
+#     investment income limit 11,950
+# Each "Before" figure is the earlier formula, which raised person-level
+# capital_gains. Only AGI read that, so the gain was taxed at ordinary rates
+# and missed the NIIT and the EITC investment income limit.
+
+- name: The extra gain is taxed at the 15% rate
+  period: 2025
+  absolute_error_margin: 0.001
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 100_000
+        long_term_capital_gains: 10_000
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: TX
+  output:
+    # Taxable income 110,000 - 15,750 = 94,250, with the gain stacked on
+    # 84,250 of ordinary income, inside the 15% band. Modified AGI 111,000 is
+    # under the NIIT threshold. Before: 0.22, the ordinary rate on 84,250.
+    marginal_tax_rate_on_capital_gains: 0.15
+
+- name: The extra gain is net investment income above the NIIT threshold
+  period: 2025
+  absolute_error_margin: 0.001
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 250_000
+        long_term_capital_gains: 50_000
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: TX
+  output:
+    # The gain is stacked from 234,250 to 284,250 of taxable income, inside
+    # the 15% band. Modified AGI 300,000 exceeds 200,000 by more than net
+    # investment income, so NIIT is 3.8% of each extra dollar of gain:
+    # 0.15 + 0.038 = 0.188. Before: 0.32, the ordinary rate on 234,250.
+    marginal_tax_rate_on_capital_gains: 0.188
+
+- name: The extra gain is taxed at the 20% rate
+  period: 2025
+  absolute_error_margin: 0.001
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 600_000
+        long_term_capital_gains: 100_000
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: TX
+  output:
+    # Taxable income 700,000 - 15,750 = 684,250; the gain is stacked from
+    # 584,250, above the 533,400 start of the 20% band. With NIIT:
+    # 0.20 + 0.038 = 0.238. Before: 0.35, the ordinary rate on 584,250.
+    marginal_tax_rate_on_capital_gains: 0.238
+
+- name: At the EITC investment income limit, the extra gain costs the whole credit
+  period: 2025
+  absolute_error_margin: 0.001
+  input:
+    people:
+      head:
+        age: 30
+        employment_income: 20_000
+        taxable_interest_income: 11_000
+        long_term_capital_gains: 500
+      child:
+        age: 8
+        is_tax_unit_dependent: true
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    # Investment income 11,000 + 500 = 11,500 is under the 11,950 limit, so
+    # the EITC is 4,328 - 15.98% x (31,500 - 23,350) = 3,025.63. With 1,000
+    # more gain it is 12,500, over the limit, and the credit is lost. The gain
+    # is taxed at 0%: taxable income 32,500 - 23,625 = 8,875 is under 64,750.
+    # So household net income falls by 3,025.63 - 1,000 = 2,025.63, and the
+    # rate is 1 + 2.02563 = 3.02563. The child is not an adult, so the rate
+    # is not simulated for the child. Before: 0.2598, the 10% bracket plus the
+    # 15.98% EITC phase-out on 1,000 more AGI, missing the limit.
+    marginal_tax_rate_on_capital_gains: [3.02563, 0]
+
+- name: Joint filers' rate is simulated for each spouse
+  period: 2025
+  absolute_error_margin: 0.001
+  input:
+    people:
+      head:
+        age: 45
+        employment_income: 150_000
+        long_term_capital_gains: 20_000
+      spouse:
+        age: 45
+        long_term_capital_gains: 5_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: TX
+  output:
+    # Taxable income 175,000 - 31,500 = 143,500, with the gains stacked on
+    # 118,500 of ordinary income, inside the joint 15% band. Modified AGI is
+    # under 250,000. Each spouse's extra gain, raised in its own branch, is
+    # taxed at 15%. Before: 0.22 for each, the ordinary rate on 118,500.
+    marginal_tax_rate_on_capital_gains: [0.15, 0.15]
+
+- name: A capital_gains amount supplied directly is raised with the long-term gain
+  period: 2025
+  absolute_error_margin: 0.001
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 100_000
+        capital_gains: 10_000
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: TX
+  output:
+    # A supplied capital_gains has no holding period, so AGI counts it and it
+    # is taxed at ordinary rates. The branch adds 1,000 to it, so AGI rises by
+    # 1,000, and 1,000 to long_term_capital_gains, so the 1(h) rates apply to
+    # that 1,000. Taxable income 94,250 rises to 95,250, all of the increase
+    # long-term gain stacked above 48,350: 0.15. Before: 0.22.
+    marginal_tax_rate_on_capital_gains: 0.15

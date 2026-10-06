@@ -18,6 +18,8 @@
 #   maximum credit with one child 4,328 (34% x 12,730)
 #   phase-out start with one child 23,350 (30,470 for joint filers)
 # Each "Before" figure is the pre-change formula, which summed every member.
+# In the cases on a supplied capital_gains amount, "Before" is the formula that
+# summed the filers' long_term_capital_gains and short_term_capital_gains.
 
 - name: Control, no investment income
   period: 2025
@@ -354,3 +356,93 @@
     # Before: 12,000.
     eitc_relevant_investment_income: 0
     adjusted_gross_income: 0
+
+- name: A capital_gains amount supplied for the head counts, as in AGI
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 30
+        employment_income: 20_000
+        taxable_interest_income: 11_000
+        capital_gains: 1_500
+      child:
+        age: 8
+        is_tax_unit_dependent: true
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    # A capital_gains amount supplied for a person replaces their long- and
+    # short-term gains. AGI counts it, and so does Worksheet 1 line 5:
+    # 11,000 + 1,500 = 12,500 > 11,950.
+    # Before: 11,000, so the credit was 4,328 - 15.98% x (32,500 - 23,350)
+    # = 2,865.83.
+    eitc_relevant_investment_income: 12_500
+    eitc_investment_income_eligible: false
+    adjusted_gross_income: 32_500
+    eitc: 0
+
+- name: A capital_gains amount supplied for a dependent stays off the filer's investment income
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 30
+        employment_income: 20_000
+      child:
+        age: 8
+        is_tax_unit_dependent: true
+        capital_gains: 15_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    eitc_relevant_investment_income: 0
+    eitc_investment_income_eligible: true
+    adjusted_gross_income: 20_000
+    eitc: 4_328
+
+- name: A capital loss supplied for the head nets against the head's capital gain distributions
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 30
+        employment_income: 20_000
+        taxable_interest_income: 10_000
+        capital_gains: -5_000
+        non_sch_d_capital_gains: 2_000
+      child:
+        age: 8
+        is_tax_unit_dependent: true
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    # Form 1040 line 7a: the distributions go on Schedule D line 13, so the
+    # head's net is -5,000 + 2,000 = -3,000, a loss, and Worksheet 1 line 5 is
+    # zero. Investment income is the 10,000 of interest.
+    # Before: 10,000 + 2,000 = 12,000 > 11,950, so the credit was denied.
+    eitc_relevant_investment_income: 10_000
+    eitc_investment_income_eligible: true
+    # Gross income 20,000 + 10,000 + 2,000 = 32,000, less the capital loss
+    # deduction: 2,000 against the distributions plus 3,000 under 1211(b).
+    adjusted_gross_income: 27_000
+    # 4,328 - 15.98% x (27,000 - 23,350) = 4,328 - 583.27
+    eitc: 3_744.73

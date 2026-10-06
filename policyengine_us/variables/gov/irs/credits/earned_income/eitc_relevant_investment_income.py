@@ -15,10 +15,10 @@ class eitc_relevant_investment_income(Variable):
         "elected dividends and capital gain distributions reach lines 3 and 5 "
         "through Form 1040 lines 3b and 7a. The election is not modeled, which "
         "can overstate the credit for a parent who makes it. Capital gains "
-        "are the head's and spouse's own long_term_capital_gains and "
-        "short_term_capital_gains; a net_capital_gains amount supplied for "
-        "the tax unit, or a capital_gains amount set directly on a person, "
-        "is not read."
+        "are the head's and spouse's own capital_gains: their long- and "
+        "short-term gains, or the amount supplied for capital_gains, as in "
+        "AGI. A net_capital_gains amount supplied for the tax unit is not "
+        "read."
     )
     unit = USD
     definition_period = YEAR
@@ -50,10 +50,10 @@ class eitc_relevant_investment_income(Variable):
         # dependent's large gain move the filers' amount through float32
         # rounding of the total, and core does not record which tax units
         # supplied that total. So a net_capital_gains amount supplied for the
-        # tax unit is not read.
-        filer_gains = tax_unit_non_dep_add(
-            tax_unit, period, ["long_term_capital_gains", "short_term_capital_gains"]
-        )
+        # tax unit is not read. Each filer's capital_gains is their long- and
+        # short-term gains, or the amount supplied for it, which AGI
+        # (irs_gross_income) also counts.
+        filer_gains = tax_unit_non_dep_add(tax_unit, period, ["capital_gains"])
         # Capital gain distributions (Form 1099-DIV box 2a) are not negative,
         # so each filer's input is floored at zero, as in irs_gross_income.
         person = tax_unit.members
