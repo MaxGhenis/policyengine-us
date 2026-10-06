@@ -1,0 +1,114 @@
+# filer_loss_limited_net_capital_gains is the head's and spouse's Form 1040
+# line 7a, the capital gain line of the NIIT base (Form 8960 line 5a). Each
+# filer's gain is their person-level capital_gains, as in irs_gross_income:
+# their long- and short-term gains, or the amount supplied for capital_gains.
+# Each "Before" figure is the earlier formula, which summed long_term_capital_gains
+# and short_term_capital_gains and so missed a supplied capital_gains.
+#
+# 2025 amounts: capital loss limit 3,000 (26 USC 1211(b)); NIIT 3.8% above
+# modified AGI of 200,000 single and head of household (26 USC 1411(b)).
+
+- name: A capital_gains amount supplied for the head counts, as in AGI
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 250_000
+        capital_gains: 50_000
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: TX
+  output:
+    filer_loss_limited_net_capital_gains: 50_000
+    net_investment_income: 50_000
+    adjusted_gross_income: 300_000
+    # 3.8% x min(50,000, 300,000 - 200,000)
+    # Before: no net investment income and no NIIT.
+    net_investment_income_tax: 1_900
+
+- name: A capital loss supplied for the head is limited to 3,000
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 40
+        taxable_interest_income: 5_000
+        capital_gains: -10_000
+    tax_units:
+      tax_unit:
+        members: [head]
+    households:
+      household:
+        members: [head]
+        state_code: TX
+  output:
+    # Before: 0, so net investment income was 5,000.
+    filer_loss_limited_net_capital_gains: -3_000
+    net_investment_income: 2_000
+    adjusted_gross_income: 2_000
+
+- name: A capital_gains amount supplied for a dependent stays off the filer's line
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 250_000
+        capital_gains: 10_000
+      child:
+        age: 8
+        is_tax_unit_dependent: true
+        capital_gains: 40_000
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: TX
+  output:
+    # The child's gain is on the child's own return. Before: 0.
+    filer_loss_limited_net_capital_gains: 10_000
+    net_investment_income: 10_000
+    adjusted_gross_income: 260_000
+    # 3.8% x min(10,000, 260,000 - 200,000)
+    net_investment_income_tax: 380
+
+- name: Joint filers' supplied amounts net before the loss limit
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 40
+        taxable_interest_income: 8_000
+        capital_gains: 5_000
+      spouse:
+        age: 40
+        capital_gains: -9_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    marital_units:
+      couple:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: TX
+  output:
+    filing_status: JOINT
+    # 5,000 - 9,000 = -4,000, limited to -3,000. Before: 0.
+    filer_loss_limited_net_capital_gains: -3_000
+    net_investment_income: 5_000
+    # 8,000 + 5,000, less the 5,000 of loss allowed against the gain and
+    # 3,000 more under 1211(b)
+    adjusted_gross_income: 5_000
