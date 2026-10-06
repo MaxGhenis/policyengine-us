@@ -6,12 +6,204 @@
   output:
     ca_itemized_deductions_pre_limitation: 10_000
 
+# Investment expenses enter the Schedule CA (540), Part II, line 21
+# miscellaneous pool. FTB 3526, line 5, then uses the smaller of those
+# expenses or the line 25 total, so expenses the 2% floor absorbs do not
+# reduce net investment income.
+# https://www.ftb.ca.gov/forms/2025/2025-3526.pdf#page=2
 - name: Case 2, California investment interest replaces federal investment interest.
   period: 2026
   input:
     state_code: CA
+    adjusted_gross_income: 100_000
     investment_interest_expense: 10_000
     investment_expenses: 2_000
     real_estate_taxes: 5_000
   output:
-    ca_itemized_deductions_pre_limitation: 13_000
+    # Line 25: max(0, 2,000 - 0.02 * 100,000) = 0.
+    ca_misc_deduction: 0
+    # FTB 3526 line 5 is min(2,000, 0) = 0, so line 8 is 10,000.
+    ca_investment_interest_expense_deduction: 10_000
+    # 10,000 investment interest + 5,000 real estate taxes.
+    ca_itemized_deductions_pre_limitation: 15_000
+
+- name: Investment expenses above the floor add a California miscellaneous deduction.
+  period: 2026
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    investment_interest_expense: 10_000
+    investment_expenses: 3_000
+    real_estate_taxes: 5_000
+  output:
+    # Schedule CA line 25: 3,000 - 0.02 * 100,000.
+    ca_misc_deduction: 1_000
+    # FTB 3526 line 5 is min(3,000, 1,000); line 8 is min(10,000, 10,000 - 1,000).
+    ca_investment_interest_expense_deduction: 9_000
+    # 9,000 + 1,000 + 5,000.
+    ca_itemized_deductions_pre_limitation: 15_000
+
+# The federal 2020-2021 charitable deduction for non-itemizers (CARES Act
+# section 2204 for 2020 and IRC 170(p) for 2021) postdates California's
+# January 1, 2015 specified date (R&TC 17024.5(a)(1)(P)). The 2020 Schedule
+# CA (540) instructions, line 11, allow those gifts in California only as
+# itemized deductions, which ca_charitable_deduction already counts in full.
+# Before this fix, the federal list added the same gifts a second time,
+# giving 1,300 in the 2020 and 2021 cases, or 1,600 for the 2021 joint return.
+# https://www.ftb.ca.gov/forms/2020/2020-540-ca-instructions.html
+- name: 2020 California itemized deductions do not add the federal non-itemizer charity deduction
+  period: 2020
+  input:
+    state_code: [CA, CA]
+    filing_status: [SINGLE, JOINT]
+    adjusted_gross_income: [100_000, 100_000]
+    charitable_cash_donations: [1_000, 1_000]
+  output:
+    charitable_deduction_for_non_itemizers: [300, 300]
+    ca_charitable_deduction: [1_000, 1_000]
+    ca_itemized_deductions_pre_limitation: [1_000, 1_000]
+
+- name: 2021 California itemized deductions do not add the federal non-itemizer charity deduction
+  period: 2021
+  input:
+    state_code: [CA, CA]
+    filing_status: [SINGLE, JOINT]
+    adjusted_gross_income: [100_000, 100_000]
+    charitable_cash_donations: [1_000, 1_000]
+  output:
+    charitable_deduction_for_non_itemizers: [300, 600]
+    ca_charitable_deduction: [1_000, 1_000]
+    ca_itemized_deductions_pre_limitation: [1_000, 1_000]
+
+- name: 2022 control has no federal non-itemizer charity deduction
+  period: 2022
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_cash_donations: 1_000
+  output:
+    charitable_deduction_for_non_itemizers: 0
+    ca_itemized_deductions_pre_limitation: 1_000
+
+# From 2025, R&TC 17250.2 says IRC 170(p), the federal deduction for
+# taxpayers who do not itemize, does not apply in California.
+# https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=17250.2.&lawCode=RTC
+- name: 2026 federal non-itemizer charity deduction neither adds to nor reduces California itemized deductions
+  period: 2026
+  input:
+    state_code: [CA, CA]
+    filing_status: [SINGLE, JOINT]
+    adjusted_gross_income: [100_000, 100_000]
+    charitable_cash_donations: [1_000, 1_000]
+  output:
+    charitable_deduction_for_non_itemizers: [1_000, 1_000]
+    ca_charitable_deduction: [1_000, 1_000]
+    ca_itemized_deductions_pre_limitation: [1_000, 1_000]
+
+# Provision-level PolicyBench reproductions for tax year 2026 use the
+# deduction inputs stated in each prompt (whole dollars) and federal AGI, with
+# unrelated deductions set to zero. California charity has no 0.5% floor and a
+# 50%-of-federal-AGI ceiling (R&TC 17201(a), 17024.5(a)(1)(Q) and (h)(2)(A),
+# 17250.1(b)); R&TC 17076(a) and (c) retain miscellaneous deductions above 2%
+# of federal AGI. The benchmark engine carried unrounded inputs, so its
+# deltas differ from these cases by the prompt rounding noted per case.
+# https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=17076.&lawCode=RTC
+# https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=17250.1.&lawCode=RTC
+
+- name: PolicyBench scenario 005 at current federal AGI with prompt-rounded inputs
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    state_code: CA
+    filing_status: JOINT
+    # Federal AGI of the scenario 005 household on main, which includes
+    # salt_refund_income since #9422 (the 1.755.4 benchmark had 536,764.50).
+    adjusted_gross_income: 540_912.19
+    charitable_cash_donations: 1_070
+    charitable_non_cash_donations: 1_504
+    unreimbursed_business_employee_expenses: 13_848
+    tax_preparation_fees: 0
+    investment_expenses: 0
+    charitable_non_cash_donations_non_50_pct_orgs: 0
+    interest_deduction: 0
+    investment_interest_expense: 0
+    ca_investment_interest_expense_deduction: 0
+    medical_expense_deduction: 0
+    casualty_loss_deduction: 0
+    real_estate_taxes: 0
+  output:
+    # Gifts of 2,574 are below the federal floor of 0.005 * 540,912.19 =
+    # 2,704.56, so the federal deduction is zero.
+    charitable_deduction: 0
+    misc_deduction: 0
+    ca_charitable_deduction: 2_574
+    # 13,848 - 0.02 * 540,912.19 = 13,848 - 10,818.2438 = 3,029.7562.
+    ca_misc_deduction: 3_029.7562
+    # 2,574 + 3,029.7562. With the engine's unrounded inputs (employee
+    # expenses 13,847.8232, cash gifts 1,069.7646, noncash gifts 1,503.7646)
+    # the same formula gives 5,603.11, the increase measured on main; the
+    # 0.65 gap is the prompt's rounding of those three inputs.
+    ca_itemized_deductions_pre_limitation: 5_603.7562
+
+- name: PolicyBench scenario 022 uses federal AGI for California miscellaneous deductions
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    state_code: CA
+    filing_status: SINGLE
+    adjusted_gross_income: 109_149.16
+    ca_agi: 91_524.41
+    charitable_cash_donations: 14_693
+    charitable_non_cash_donations: 700
+    unreimbursed_business_employee_expenses: 8_351
+    tax_preparation_fees: 0
+    investment_expenses: 0
+    charitable_non_cash_donations_non_50_pct_orgs: 0
+    interest_deduction: 0
+    investment_interest_expense: 0
+    ca_investment_interest_expense_deduction: 0
+    medical_expense_deduction: 0
+    casualty_loss_deduction: 0
+    real_estate_taxes: 0
+  output:
+    # 15,393 - 0.005 * 109,149.16 = 14,847.2542 federally.
+    charitable_deduction: 14_847.2542
+    misc_deduction: 0
+    ca_charitable_deduction: 15_393
+    # 8,351 - 0.02 * 109,149.16 = 6,168.0168 in California.
+    ca_misc_deduction: 6_168.0168
+    # 15,393 + 6,168.0168, up 6,713.7626 from the federal-rule total of
+    # 14,847.2542. Unrounded employee expenses of 8,350.5439 give the
+    # 6,713.31 increase measured on main; rounding the gifts cancels, since
+    # both totals count them in full above a floor fixed by AGI.
+    ca_itemized_deductions_pre_limitation: 21_561.0168
+
+- name: PolicyBench scenario 099 charity deduction changes while miscellaneous expenses remain below the floor
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    state_code: CA
+    filing_status: JOINT
+    # Federal AGI of the scenario 099 household on main, 159,585.046875.
+    adjusted_gross_income: 159_585.05
+    charitable_cash_donations: 11_933
+    charitable_non_cash_donations: 688
+    unreimbursed_business_employee_expenses: 1_263
+    tax_preparation_fees: 0
+    investment_expenses: 0
+    charitable_non_cash_donations_non_50_pct_orgs: 0
+    interest_deduction: 0
+    investment_interest_expense: 0
+    ca_investment_interest_expense_deduction: 0
+    medical_expense_deduction: 0
+    casualty_loss_deduction: 0
+    real_estate_taxes: 0
+  output:
+    # 12,621 - 0.005 * 159,585.05 = 11,823.0748 federally.
+    charitable_deduction: 11_823.0748
+    misc_deduction: 0
+    ca_charitable_deduction: 12_621
+    # 1,263 is below 0.02 * 159,585.05 = 3,191.70.
+    ca_misc_deduction: 0
+    # Up 797.93 (0.005 * 159,585.05) from the federal-rule total.
+    ca_itemized_deductions_pre_limitation: 12_621

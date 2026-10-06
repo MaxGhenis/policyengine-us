@@ -7,7 +7,7 @@ values:
      # (home-equity) mortgage interest not used to buy, build, or improve the home,
      # mirroring federal Form 6251. PolicyEngine's deductible_mortgage_interest is
      # entirely acquisition interest, so there is no line 4 add-back.
-     - misc_deduction # line 5 Miscellaneous itemized deductions
+     - ca_misc_deduction # line 5 Miscellaneous itemized deductions
 
 
 metadata:

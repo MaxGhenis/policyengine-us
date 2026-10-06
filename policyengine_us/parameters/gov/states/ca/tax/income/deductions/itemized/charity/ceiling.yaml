@@ -1,0 +1,29 @@
+description: California limits charitable contribution deductions to this share of federal adjusted gross income.
+values:
+  2013-01-01: 0.5
+metadata:
+  unit: /1
+  period: year
+  label: California charitable contribution deduction ceiling
+  reference:
+    # R&TC 17201(a) adopts IRC Part VI, including section 170, as of the
+    # specified date in R&TC 17024.5(a)(1): January 1, 2009 for 2010-2014,
+    # January 1, 2015 for 2015-2024, and January 1, 2025 from 2025. IRC
+    # 170(b)(1)(A) sets a 50% limit. The 60% cash limit in IRC 170(b)(1)(G)
+    # postdates the 2009 and 2015 specified dates, and R&TC 17250.1(b)
+    # disapplies it from 2025. R&TC 17024.5(h)(2)(A) makes the base federal
+    # adjusted gross income.
+    - title: California Revenue and Taxation Code Section 17201(a)
+      href: https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=17201.
+    - title: California Revenue and Taxation Code Section 17024.5(a)(1)(O), (P), and (Q) and (h)(2)(A)
+      href: https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=17024.5.
+    - title: 26 U.S. Code 170(b)(1)(A), 2008 edition
+      href: https://www.govinfo.gov/content/pkg/USCODE-2008-title26/html/USCODE-2008-title26-subtitleA-chap1-subchapB-partVI-sec170.htm
+    - title: 26 U.S. Code 170(b)(1)(A), 2014 edition
+      href: https://www.govinfo.gov/content/pkg/USCODE-2014-title26/html/USCODE-2014-title26-subtitleA-chap1-subchapB-partVI-sec170.htm
+    - title: California Revenue and Taxation Code Section 17250.1(b)
+      href: https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=17250.1.
+    - title: 2021 Schedule CA (540) instructions, Part II, lines 11 and 12
+      href: https://www.ftb.ca.gov/forms/2021/2021-540-ca-instructions.html
+    - title: 2025 Schedule CA (540) instructions, Part II, lines 11 and 12
+      href: https://www.ftb.ca.gov/forms/2025/2025-540-ca-instructions.html

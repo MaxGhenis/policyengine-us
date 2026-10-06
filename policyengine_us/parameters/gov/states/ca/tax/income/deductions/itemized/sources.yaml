@@ -1,0 +1,23 @@
+description: California counts these deductions as itemized deductions before the high-income limitation.
+values:
+  2013-01-01:
+    - medical_expense_deduction # Schedule CA (540), Part II, line 4
+    - real_estate_taxes # line 5b (line 5a state income taxes are subtracted in column B)
+    - interest_deduction # lines 8 and 9, net of federal investment interest (subtracted in the formula)
+    - ca_investment_interest_expense_deduction # line 9, as figured on FTB 3526
+    - ca_charitable_deduction # lines 11 through 14
+    - casualty_loss_deduction # line 15
+    - ca_misc_deduction # lines 19 through 25
+metadata:
+  unit: list
+  period: year
+  label: California itemized deduction sources
+  reference:
+    - title: California Revenue and Taxation Code Section 17201(a)
+      href: https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=17201.
+    - title: 2021 Schedule CA (540) instructions, Part II
+      href: https://www.ftb.ca.gov/forms/2021/2021-540-ca-instructions.html
+    - title: 2025 Schedule CA (540), Part II, lines 1 through 26
+      href: https://www.ftb.ca.gov/forms/2025/2025-540-ca.pdf#page=5
+    - title: 2025 Schedule CA (540) instructions, Part II
+      href: https://www.ftb.ca.gov/forms/2025/2025-540-ca-instructions.html

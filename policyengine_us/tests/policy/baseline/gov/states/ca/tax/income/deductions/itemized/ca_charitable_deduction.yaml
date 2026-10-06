@@ -1,0 +1,162 @@
+# R&TC 17201(a) adopts IRC section 170 as of the specified date in R&TC
+# 17024.5(a)(1): January 1, 2009 for 2010-2014 ((O)), January 1, 2015 for
+# 2015-2024 ((P)), and January 1, 2025 from 2025 ((Q)). IRC 170(b)(1)(A)
+# limits gifts to 50% of the contribution base. The 60% cash limit in IRC
+# 170(b)(1)(G), the 2020-2021 federal increases and the 2026 federal 0.5%
+# floor all postdate the 2009 and 2015 specified dates; R&TC 17250.1(b)
+# disapplies 170(b)(1)(G) from 2025, and the floor postdates the January 1,
+# 2025 specified date. R&TC 17024.5(h)(2)(A) makes federal AGI the base.
+# The 2020, 2021 and 2025 Schedule CA (540) instructions, Part II, lines 11-12,
+# state the 50%-of-federal-AGI limit.
+# https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=17201.&lawCode=RTC
+# https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=17024.5.&lawCode=RTC
+# https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=17250.1.&lawCode=RTC
+# https://www.govinfo.gov/content/pkg/USCODE-2008-title26/html/USCODE-2008-title26-subtitleA-chap1-subchapB-partVI-sec170.htm
+# https://www.govinfo.gov/content/pkg/USCODE-2014-title26/html/USCODE-2014-title26-subtitleA-chap1-subchapB-partVI-sec170.htm
+# https://www.ftb.ca.gov/forms/2020/2020-540-ca-instructions.html
+# https://www.ftb.ca.gov/forms/2021/2021-540-ca-instructions.html
+# https://www.ftb.ca.gov/forms/2025/2025-540-ca-instructions.html
+
+- name: California charity ceiling is 50 percent of federal AGI in 2014
+  period: 2014
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_cash_donations: 70_000
+  output:
+    # IRC 170(b)(1)(A) as of the January 1, 2009 specified date
+    # (R&TC 17024.5(a)(1)(O)).
+    ca_charitable_deduction: 50_000
+
+- name: California charity ceiling is 50 percent of federal AGI in 2015
+  period: 2015
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_cash_donations: 70_000
+  output:
+    ca_charitable_deduction: 50_000
+
+- name: California retains its 50 percent charity ceiling in 2018
+  period: 2018
+  absolute_error_margin: 0.01
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_cash_donations: 70_000
+  output:
+    ca_charitable_deduction: 50_000
+    charitable_deduction: 60_000
+
+- name: California retains its 50 percent charity ceiling during the federal 2020 increase
+  period: 2020
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_cash_donations: 70_000
+  output:
+    ca_charitable_deduction: 50_000
+    charitable_deduction: 70_000
+
+- name: California retains its 50 percent charity ceiling in 2025
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_cash_donations: 70_000
+  output:
+    ca_charitable_deduction: 50_000
+    charitable_deduction: 60_000
+
+- name: California retains its 50 percent charity ceiling in 2026
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_cash_donations: 70_000
+  output:
+    ca_charitable_deduction: 50_000
+    charitable_deduction: 60_000
+
+- name: California retains its 50 percent charity ceiling in 2027
+  period: 2027
+  absolute_error_margin: 0.01
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_cash_donations: 70_000
+  output:
+    ca_charitable_deduction: 50_000
+    charitable_deduction: 60_000
+
+- name: California deducts a gift below the federal half-percent floor
+  period: 2026
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_cash_donations: 100
+  output:
+    ca_charitable_deduction: 100
+    charitable_deduction: 0
+
+- name: California charity ceiling uses federal AGI rather than California AGI
+  period: 2026
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    ca_agi: 80_000
+    charitable_cash_donations: 60_000
+  output:
+    ca_charitable_deduction: 50_000
+
+- name: Noncash gifts to 50-percent-limit organizations retain their modeled ceiling
+  period: 2026
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_non_cash_donations: 60_000
+  output:
+    ca_charitable_deduction: 50_000
+
+- name: Noncash gifts to other organizations retain their modeled 30 percent ceiling
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_non_cash_donations: 40_000
+    charitable_non_cash_donations_non_50_pct_orgs: 40_000
+  output:
+    ca_charitable_deduction: 30_000
+
+- name: Combined cash and noncash gifts remain subject to the California overall ceiling
+  period: 2026
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    charitable_cash_donations: 5_000
+    charitable_non_cash_donations: 70_000
+    charitable_non_cash_donations_non_50_pct_orgs: 40_000
+  output:
+    # min(5,000 + 30,000 + min(40,000, 30,000), 50,000).
+    ca_charitable_deduction: 50_000
+
+- name: No charity deduction without gifts or positive federal AGI
+  period: 2026
+  input:
+    state_code: [CA, CA, CA]
+    adjusted_gross_income: [100_000, 0, -10_000]
+    charitable_cash_donations: [0, 1_000, 1_000]
+  output:
+    ca_charitable_deduction: [0, 0, 0]
+
+- name: California charity deduction is restricted to California tax units
+  period: 2026
+  input:
+    state_code: [CA, NY]
+    adjusted_gross_income: [100_000, 100_000]
+    charitable_cash_donations: [100, 100]
+  output:
+    ca_charitable_deduction: [100, 0]

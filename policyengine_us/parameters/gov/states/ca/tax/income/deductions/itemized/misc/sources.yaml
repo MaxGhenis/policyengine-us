@@ -1,0 +1,21 @@
+description: California counts these expenses as miscellaneous itemized deductions subject to the two percent of federal adjusted gross income floor.
+values:
+  2013-01-01:
+    - unreimbursed_business_employee_expenses # Schedule CA (540), Part II, line 19
+    - tax_preparation_fees # line 20
+    - investment_expenses # line 21, other expenses including investment expenses
+metadata:
+  unit: list
+  period: year
+  label: California miscellaneous itemized deduction sources
+  reference:
+    - title: California Revenue and Taxation Code Section 17076(a) and (c)
+      href: https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=17076.
+    - title: 2021 Schedule CA (540) instructions, Part II, lines 19 through 22
+      href: https://www.ftb.ca.gov/forms/2021/2021-540-ca-instructions.html
+    - title: 2025 Schedule CA (540), Part II, lines 19 through 25
+      href: https://www.ftb.ca.gov/forms/2025/2025-540-ca.pdf#page=6
+    - title: 2025 Schedule CA (540) instructions, Part II, lines 19 through 22
+      href: https://www.ftb.ca.gov/forms/2025/2025-540-ca-instructions.html
+    - title: 2025 FTB 3526 instructions, line 5 (investment expenses on Schedule CA (540), Part II, line 21)
+      href: https://www.ftb.ca.gov/forms/2025/2025-3526.pdf#page=2

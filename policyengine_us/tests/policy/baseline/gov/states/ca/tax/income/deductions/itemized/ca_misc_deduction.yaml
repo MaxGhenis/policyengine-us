@@ -1,0 +1,135 @@
+# R&TC 17076(a) applies the IRC 67(a) 2% floor on miscellaneous itemized
+# deductions. IRC 67(g) (TCJA, enacted December 22, 2017) suspended them
+# federally from 2018. For 2018-2024 California follows the IRC as of the
+# January 1, 2015 specified date (R&TC 17024.5(a)(1)(P)), which predates
+# 67(g); the 2021 Schedule CA (540) instructions, lines 19-22, say
+# "California does not conform." From 2025, R&TC 17076(c) says 67(g) does
+# not apply. R&TC 17024.5(h)(2)(A) bases the floor on federal AGI (Schedule
+# CA (540), Part II, line 23). Lines 19-21 cover unreimbursed employee
+# expenses, tax preparation fees and other expenses, including investment
+# expenses (2025 FTB 3526 instructions, line 5).
+# https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=17076.&lawCode=RTC
+# https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=17024.5.&lawCode=RTC
+# https://www.ftb.ca.gov/forms/2021/2021-540-ca-instructions.html
+# https://www.ftb.ca.gov/forms/2025/2025-540-ca.pdf#page=6
+# https://www.ftb.ca.gov/forms/2025/2025-3526.pdf#page=2
+
+- name: California allows miscellaneous deductions from the federal suspension's first year
+  period: 2018
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    unreimbursed_business_employee_expenses: 3_000
+  output:
+    ca_misc_deduction: 1_000
+    misc_deduction: 0
+
+- name: California allows miscellaneous deductions in 2025
+  period: 2025
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    unreimbursed_business_employee_expenses: 3_000
+  output:
+    ca_misc_deduction: 1_000
+    misc_deduction: 0
+
+- name: California allows miscellaneous deductions in 2026
+  period: 2026
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    unreimbursed_business_employee_expenses: 3_000
+  output:
+    ca_misc_deduction: 1_000
+    misc_deduction: 0
+
+- name: California allows miscellaneous deductions in 2027
+  period: 2027
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    unreimbursed_business_employee_expenses: 3_000
+  output:
+    ca_misc_deduction: 1_000
+    misc_deduction: 0
+
+- name: Miscellaneous expenses below at and above two percent of federal AGI
+  period: 2026
+  input:
+    state_code: [CA, CA, CA]
+    adjusted_gross_income: [100_000, 100_000, 100_000]
+    unreimbursed_business_employee_expenses: [1_999, 2_000, 2_001]
+  output:
+    ca_misc_deduction: [0, 0, 1]
+
+- name: Tax preparation fees and employee expenses share one miscellaneous floor
+  period: 2026
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    unreimbursed_business_employee_expenses: 1_800
+    tax_preparation_fees: 500
+  output:
+    total_misc_deductions: 2_300
+    ca_misc_deduction: 300
+
+- name: Investment expenses on line 21 join the miscellaneous pool
+  period: 2026
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    investment_expenses: 3_000
+  output:
+    # The federal pool, gov.irs.deductions.itemized.misc.sources, omits them.
+    total_misc_deductions: 0
+    # 3,000 - 0.02 * 100,000.
+    ca_misc_deduction: 1_000
+
+- name: Investment expenses share one floor with employee expenses and preparation fees
+  period: 2021
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    unreimbursed_business_employee_expenses: 1_000
+    tax_preparation_fees: 500
+    investment_expenses: 1_500
+  output:
+    # 1,000 + 500 + 1,500 - 0.02 * 100,000.
+    ca_misc_deduction: 1_000
+
+- name: Miscellaneous floor uses federal AGI rather than California AGI
+  period: 2026
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+    ca_agi: 80_000
+    unreimbursed_business_employee_expenses: 3_000
+  output:
+    ca_misc_deduction: 1_000
+
+- name: No miscellaneous expenses yields no California deduction
+  period: 2026
+  input:
+    state_code: CA
+    adjusted_gross_income: 100_000
+  output:
+    ca_misc_deduction: 0
+
+- name: Zero and negative federal AGI do not create a negative miscellaneous floor
+  period: 2026
+  input:
+    state_code: [CA, CA]
+    adjusted_gross_income: [0, -10_000]
+    unreimbursed_business_employee_expenses: [1_000, 1_000]
+  output:
+    ca_misc_deduction: [1_000, 1_000]
+
+- name: California miscellaneous deduction is restricted to California tax units
+  period: 2026
+  input:
+    state_code: [CA, NY]
+    adjusted_gross_income: [100_000, 100_000]
+    unreimbursed_business_employee_expenses: [3_000, 3_000]
+  output:
+    ca_misc_deduction: [1_000, 0]
