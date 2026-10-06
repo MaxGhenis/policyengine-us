@@ -1,24 +1,498 @@
-- name: 20% of state sales tax in a state with local sales taxes
-  period: 2023
+# State and Local General Sales Tax Deduction Worksheet, Instructions for
+# Schedule A (Form 1040), 2022-2025:
+# - Line 2, for the local-table states: "Enter your base local general sales
+#   taxes from the [year] Optional Local Sales Tax Tables."
+# - Line 3: "Enter your local general sales tax rate, but omit the percentage
+#   sign. For example, if your local general sales tax rate was 2.5%, enter
+#   2.5."
+# - Line 4, if line 2 is 0: "Enter your state general sales tax rate (shown in
+#   the table heading for your state)".
+# - Line 5: "Divide line 3 by line 4."
+# - Line 6: if line 2 is not 0, "Multiply line 2 by line 3"; otherwise
+#   "Multiply line 1 by line 5."
+# Line 3 is the combined rate minus the heading rate, in percentage points.
+# Local table cells are quoted as the printed row for the family-size columns
+# 1 2 3 4 5 "Over 5".
+
+# Local-table states, default table (Which Optional Local Sales Tax Table
+# Should I Use?). Line 6 = local table cell x line 3.
+
+- name: Colorado 2022, Local Table A
+  # 2022 Local Table A (p17), $50,000-$60,000: 104 119 129 136 142 151.
+  # Colorado heading 2.9000%; line 3 = 7.9 - 2.9 = 5.0; 104 x 5.0 = 520.
+  period: 2022
+  absolute_error_margin: 0.01
   input:
+    state_code: CO
+    combined_sales_tax_rate: 0.079
+    tax_unit_size: 1
+    state_sales_tax_income_bracket: 5
+  output:
+    local_sales_tax_table: A
+    local_sales_tax: 520
+
+- name: North Carolina 2022, Local Table B
+  # 2022 Local Table B (p17), $100,000-$120,000: 157 183 201 215 226 242.
+  # North Carolina heading 4.7500%; line 3 = 7.0 - 4.75 = 2.25;
+  # 201 x 2.25 = 452.25.
+  period: 2022
+  absolute_error_margin: 0.01
+  input:
+    state_code: NC
+    combined_sales_tax_rate: 0.07
+    tax_unit_size: 3
+    state_sales_tax_income_bracket: 10
+  output:
+    local_sales_tax_table: B
+    local_sales_tax: 452.25
+
+- name: Georgia 2022, Local Table C
+  # 2022 Local Table C (p17), $30,000-$40,000: 125 148 164 176 186 200.
+  # Georgia heading 4.0000%; line 3 = 8.0 - 4.0 = 4.0; 176 x 4.0 = 704.
+  period: 2022
+  absolute_error_margin: 0.01
+  input:
+    state_code: GA
+    combined_sales_tax_rate: 0.08
+    tax_unit_size: 4
+    state_sales_tax_income_bracket: 3
+  output:
+    local_sales_tax_table: C
+    local_sales_tax: 704
+
+- name: New York 2022, Local Table D
+  # 2022 Local Table D (p17), $140,000-$160,000: 172 191 204 213 220 230.
+  # New York heading 4.0000%; line 3 = 8.0 - 4.0 = 4.0; 191 x 4.0 = 764.
+  period: 2022
+  absolute_error_margin: 0.01
+  input:
+    state_code: NY
+    combined_sales_tax_rate: 0.08
+    tax_unit_size: 2
+    state_sales_tax_income_bracket: 12
+  output:
+    local_sales_tax_table: D
+    local_sales_tax: 764
+
+- name: Illinois 2023, Local Table A
+  # 2023 Local Table A (p17), $60,000-$70,000: 131 151 164 173 181 192.
+  # Illinois heading 6.2500%; line 3 = 8.25 - 6.25 = 2.0; 151 x 2.0 = 302.
+  period: 2023
+  absolute_error_margin: 0.01
+  input:
+    state_code: IL
+    combined_sales_tax_rate: 0.0825
+    tax_unit_size: 2
+    state_sales_tax_income_bracket: 6
+  output:
+    local_sales_tax_table: A
+    local_sales_tax: 302
+
+- name: Tennessee 2023, Local Table B
+  # 2023 Local Table B (p17), $80,000-$90,000: 171 200 220 236 248 267.
+  # Tennessee heading 7.0000%; line 3 = 9.75 - 7.0 = 2.75; 200 x 2.75 = 550.
+  period: 2023
+  absolute_error_margin: 0.01
+  input:
+    state_code: TN
+    combined_sales_tax_rate: 0.0975
+    tax_unit_size: 2
+    state_sales_tax_income_bracket: 8
+  output:
+    local_sales_tax_table: B
+    local_sales_tax: 550
+
+- name: Arkansas 2023, Local Table C
+  # 2023 Local Table C (p17), $40,000-$50,000: 162 191 211 226 239 257.
+  # Arkansas heading 6.5000%; line 3 = 9.5 - 6.5 = 3.0; 162 x 3.0 = 486.
+  period: 2023
+  absolute_error_margin: 0.01
+  input:
+    state_code: AR
+    combined_sales_tax_rate: 0.095
+    tax_unit_size: 1
+    state_sales_tax_income_bracket: 4
+  output:
+    local_sales_tax_table: C
+    local_sales_tax: 486
+
+- name: New York 2023, Local Table D
+  # 2023 Local Table D (p17), $200,000-$225,000: 242 263 276 286 293 304.
+  # New York heading 4.0000%; line 3 = 8.0 - 4.0 = 4.0; 293 x 4.0 = 1,172.
+  period: 2023
+  absolute_error_margin: 0.01
+  input:
+    state_code: NY
+    combined_sales_tax_rate: 0.08
+    tax_unit_size: 5
+    state_sales_tax_income_bracket: 15
+  output:
+    local_sales_tax_table: D
+    local_sales_tax: 1_172
+
+- name: Louisiana 2024, Local Table A
+  # 2024 Local Table A (p17), $90,000-$100,000: 123 143 156 166 174 186.
+  # Louisiana heading 4.45%; line 3 = 9.45 - 4.45 = 5.0; 156 x 5.0 = 780.
+  period: 2024
+  absolute_error_margin: 0.01
+  input:
+    state_code: LA
+    combined_sales_tax_rate: 0.0945
+    tax_unit_size: 3
+    state_sales_tax_income_bracket: 9
+  output:
+    local_sales_tax_table: A
+    local_sales_tax: 780
+
+- name: Utah 2024, Local Table B, statewide local rate counts on line 3
+  # 2024 Local Table B (p17), $120,000-$140,000: 162 193 215 232 246 266.
+  # Utah heading 4.85%, which leaves out Utah's statewide local rate; line 3
+  # = 7.75 - 4.85 = 2.90; 232 x 2.90 = 672.80.
+  period: 2024
+  absolute_error_margin: 0.01
+  input:
+    state_code: UT
+    combined_sales_tax_rate: 0.0775
+    tax_unit_size: 4
+    state_sales_tax_income_bracket: 11
+  output:
+    local_sales_tax_table: B
+    local_sales_tax: 672.8
+
+- name: Alaska 2024, Local Table C, no state sales tax
+  # Alaska has no state table: "Residents of Alaska do not have a state sales
+  # tax, but should follow the instructions on the next page to determine
+  # their local sales tax amount." Line 1 = 0 and line 3 = the local rate.
+  # 2024 Local Table C (p17), $70,000-$80,000: 169 203 227 245 261 284.
+  # Line 3 = 5.0; 203 x 5.0 = 1,015.
+  period: 2024
+  absolute_error_margin: 0.01
+  input:
+    state_code: AK
+    combined_sales_tax_rate: 0.05
+    tax_unit_size: 2
+    state_sales_tax_income_bracket: 7
+  output:
+    state_sales_tax: 0
+    local_sales_tax_table: C
+    local_sales_tax: 1_015
+
+- name: New York 2024, Local Table D
+  # 2024 Local Table D (p17), $300,000 or more: 251 280 299 313 325 342.
+  # New York heading 4.00%; line 3 = 8.0 - 4.0 = 4.0; 251 x 4.0 = 1,004.
+  period: 2024
+  absolute_error_margin: 0.01
+  input:
+    state_code: NY
+    combined_sales_tax_rate: 0.08
+    tax_unit_size: 1
+    state_sales_tax_income_bracket: 19
+  output:
+    local_sales_tax_table: D
+    local_sales_tax: 1_004
+
+- name: New York City 2024, Local Table A given as input
+  # 2024 selector: "Counties: Chautauqua, ... Tioga Cities: New York, Norwich
+  # (Chenango County)" use Local Table A.
+  # 2024 Local Table A (p17), $80,000-$90,000: 118 137 149 159 167 179.
+  # Line 3 = 8.875 - 4.0 = 4.875; 137 x 4.875 = 667.875.
+  period: 2024
+  absolute_error_margin: 0.01
+  input:
+    state_code: NY
+    local_sales_tax_table: A
+    combined_sales_tax_rate: 0.08875
+    tax_unit_size: 2
+    state_sales_tax_income_bracket: 8
+  output:
+    local_sales_tax: 667.875
+
+- name: Virginia 2025, Local Table A, statewide local rate counts on line 3
+  # 2025 Local Table A (p18), $160,000-$180,000: 155 179 195 208 218 234.
+  # Virginia heading 4.30%, which leaves out Virginia's statewide local rate;
+  # line 3 = 5.3 - 4.3 = 1.0; 234 x 1.0 = 234.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    state_code: VA
+    combined_sales_tax_rate: 0.053
+    tax_unit_size: 6
+    state_sales_tax_income_bracket: 13
+  output:
+    local_sales_tax_table: A
+    local_sales_tax: 234
+
+- name: Alabama 2025, Local Table B
+  # 2025 Local Table B (p18), $20,000-$30,000: 93 112 124 134 142 154.
+  # Alabama heading 4.00%; line 3 = 9.25 - 4.0 = 5.25; 112 x 5.25 = 588.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    state_code: AL
+    combined_sales_tax_rate: 0.0925
+    tax_unit_size: 2
+    state_sales_tax_income_bracket: 2
+  output:
+    local_sales_tax_table: B
+    local_sales_tax: 588
+
+- name: Mississippi 2025 uses the City of Jackson table, Local Table C
+  # 2025 selector for Mississippi: "City of Jackson only" C, "City of Tupelo
+  # only" A; PolicyEngine defaults to the Jackson table.
+  # 2025 Local Table C (p18), $225,000-$250,000: 252 303 338 366 389 422.
+  # Mississippi heading 7.00%; line 3 = 8.0 - 7.0 = 1.0; 338 x 1.0 = 338.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    state_code: MS
+    combined_sales_tax_rate: 0.08
+    tax_unit_size: 3
+    state_sales_tax_income_bracket: 16
+  output:
+    local_sales_tax_table: C
+    local_sales_tax: 338
+
+- name: Mississippi 2022 uses the City of Jackson table, Local Table A
+  # 2022 selector for Mississippi: "City of Jackson only" A, "City of Tupelo
+  # only" C.
+  # 2022 Local Table A (p17), $40,000-$50,000: 96 110 119 126 131 139.
+  # Mississippi heading 7.0000%; line 3 = 8.0 - 7.0 = 1.0; 110 x 1.0 = 110.
+  period: 2022
+  absolute_error_margin: 0.01
+  input:
+    state_code: MS
+    combined_sales_tax_rate: 0.08
+    tax_unit_size: 2
+    state_sales_tax_income_bracket: 4
+  output:
+    local_sales_tax_table: A
+    local_sales_tax: 110
+
+- name: New York 2025, Local Table D
+  # 2025 Local Table D (p18), $100,000-$120,000: 148 166 177 185 192 202.
+  # New York heading 4.00%; line 3 = 8.0 - 4.0 = 4.0; 185 x 4.0 = 740.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    state_code: NY
+    combined_sales_tax_rate: 0.08
+    tax_unit_size: 4
+    state_sales_tax_income_bracket: 10
+  output:
+    local_sales_tax_table: D
+    local_sales_tax: 740
+
+# Alabama and Kansas joined the line 2 list in 2023. Their 2022 tables carry
+# footnote 1 ("Use the Ratio Method"), so in 2022 line 6 = line 1 x line 5.
+
+- name: Alabama 2022 uses the ratio method
+  # Alabama heading 4.0000%; line 3 = 9.0 - 4.0 = 5.0; line 5 = 5.0 / 4.0;
+  # 1,000 x 1.25 = 1,250.
+  period: 2022
+  absolute_error_margin: 0.01
+  input:
+    state_code: AL
+    combined_sales_tax_rate: 0.09
     state_sales_tax: 1_000
   output:
-    local_sales_tax: 200
+    local_sales_tax: 1_250
 
-- name: No state sales tax
+- name: Alabama 2023 uses Local Table B
+  # 2023 Local Table B (p17), $50,000-$60,000: 145 171 188 201 212 228.
+  # Line 3 = 9.0 - 4.0 = 5.0; 188 x 5.0 = 940. Line 1 does not enter line 6.
+  period: 2023
+  absolute_error_margin: 0.01
+  input:
+    state_code: AL
+    combined_sales_tax_rate: 0.09
+    state_sales_tax: 1_000
+    tax_unit_size: 3
+    state_sales_tax_income_bracket: 5
+  output:
+    local_sales_tax_table: B
+    local_sales_tax: 940
+
+- name: Kansas 2022 uses the ratio method
+  # Kansas heading 6.5000%; line 3 = 8.7 - 6.5 = 2.2; line 5 = 2.2 / 6.5;
+  # 1,000 x 2.2 / 6.5 = 338.46.
+  period: 2022
+  absolute_error_margin: 0.01
+  input:
+    state_code: KS
+    combined_sales_tax_rate: 0.087
+    state_sales_tax: 1_000
+  output:
+    local_sales_tax: 338.46
+
+- name: Kansas 2023 uses Local Table B
+  # 2023 Local Table B (p17), $80,000-$90,000: 171 200 220 236 248 267.
+  # Line 3 = 8.7 - 6.5 = 2.2; 200 x 2.2 = 440.
+  period: 2023
+  absolute_error_margin: 0.01
+  input:
+    state_code: KS
+    combined_sales_tax_rate: 0.087
+    state_sales_tax: 1_000
+    tax_unit_size: 2
+    state_sales_tax_income_bracket: 8
+  output:
+    local_sales_tax_table: B
+    local_sales_tax: 440
+
+# Ratio states (table footnote 1): line 6 = line 1 x line 3 / line 4.
+
+- name: Texas 2025 ratio method
+  # Texas heading 6.25%; line 3 = 8.25 - 6.25 = 2.0; 1,000 x 2.0 / 6.25 = 320.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    state_code: TX
+    combined_sales_tax_rate: 0.0825
+    state_sales_tax: 1_000
+  output:
+    local_sales_tax: 320
+
+- name: Florida 2022 ratio method
+  # Florida heading 6.0000%; line 3 = 7.0 - 6.0 = 1.0; 1,000 x 1.0 / 6.0 =
+  # 166.67.
+  period: 2022
+  absolute_error_margin: 0.01
+  input:
+    state_code: FL
+    combined_sales_tax_rate: 0.07
+    state_sales_tax: 1_000
+  output:
+    local_sales_tax: 166.67
+
+- name: Washington 2023 ratio method
+  # Washington heading 6.5000%; line 3 = 9.2 - 6.5 = 2.7; 1,000 x 2.7 / 6.5 =
+  # 415.38.
+  period: 2023
+  absolute_error_margin: 0.01
+  input:
+    state_code: WA
+    combined_sales_tax_rate: 0.092
+    state_sales_tax: 1_000
+  output:
+    local_sales_tax: 415.38
+
+- name: Hawaii 2024 ratio method
+  # Hawaii heading 4.00%; line 3 = 4.5 - 4.0 = 0.5; 1,000 x 0.5 / 4.0 = 125.
+  period: 2024
+  absolute_error_margin: 0.01
+  input:
+    state_code: HI
+    combined_sales_tax_rate: 0.045
+    state_sales_tax: 1_000
+  output:
+    local_sales_tax: 125
+
+# California and Nevada (table footnotes 3 and 5): the tables include the
+# uniform local rates, and the line 3 instructions have residents "include on
+# line 3 only the part of the combined rate that is more than 7.2500%"
+# (California) or "6.8500%" (Nevada), and check "No" at exactly that rate.
+
+- name: California 2023, combined rate above 7.25%
+  # Line 3 = 9.5 - 7.25 = 2.25; 1,000 x 2.25 / 7.25 = 310.34.
+  period: 2023
+  absolute_error_margin: 0.01
+  input:
+    state_code: CA
+    combined_sales_tax_rate: 0.095
+    state_sales_tax: 1_000
+  output:
+    local_sales_tax: 310.34
+
+- name: California 2023, combined rate of 7.25% is the "No" box
   period: 2023
   input:
-    state_sales_tax: 0
+    state_code: CA
+    combined_sales_tax_rate: 0.0725
+    state_sales_tax: 1_000
   output:
     local_sales_tax: 0
 
-- name: Texas has local sales taxes, so the 20% estimate applies
-  period: 2025
+- name: Nevada 2024, combined rate above 6.85%
+  # Line 3 = 8.375 - 6.85 = 1.525; 1,000 x 1.525 / 6.85 = 222.63.
+  period: 2024
+  absolute_error_margin: 0.01
   input:
-    state_code: TX
+    state_code: NV
+    combined_sales_tax_rate: 0.08375
     state_sales_tax: 1_000
   output:
-    local_sales_tax: 200
+    local_sales_tax: 222.63
+
+- name: Nevada 2024, combined rate of 6.85% is the "No" box
+  period: 2024
+  input:
+    state_code: NV
+    combined_sales_tax_rate: 0.0685
+    state_sales_tax: 1_000
+  output:
+    local_sales_tax: 0
+
+# A combined rate at or below the heading rate leaves no local rate.
+
+- name: Tennessee 2024, combined rate below the heading rate
+  # Tennessee heading 7.00% exceeds the 6.5% combined rate.
+  period: 2024
+  input:
+    state_code: TN
+    combined_sales_tax_rate: 0.065
+    tax_unit_size: 2
+    state_sales_tax_income_bracket: 8
+  output:
+    local_sales_tax: 0
+
+- name: Texas 2023, combined rate below the heading rate
+  # Texas heading 6.2500% exceeds the 6.0% combined rate.
+  period: 2023
+  input:
+    state_code: TX
+    combined_sales_tax_rate: 0.06
+    state_sales_tax: 1_000
+  output:
+    local_sales_tax: 0
+
+# Delaware, Montana, New Hampshire, and Oregon have no IRS state table and so
+# no heading rate for line 4.
+
+- name: No local amount in Delaware
+  period: 2023
+  input:
+    state_code: DE
+    combined_sales_tax_rate: 0.02
+    state_sales_tax: 500
+  output:
+    local_sales_tax: 0
+
+- name: No local amount in Montana
+  period: 2024
+  input:
+    state_code: MT
+    combined_sales_tax_rate: 0.02
+    state_sales_tax: 500
+  output:
+    local_sales_tax: 0
+
+- name: No local amount in New Hampshire
+  period: 2025
+  input:
+    state_code: NH
+    combined_sales_tax_rate: 0.02
+    state_sales_tax: 500
+  output:
+    local_sales_tax: 0
+
+- name: No local amount in Oregon
+  period: 2022
+  input:
+    state_code: OR
+    combined_sales_tax_rate: 0.02
+    state_sales_tax: 500
+  output:
+    local_sales_tax: 0
 
 # The worksheet enters -0- on line 6 for residents of these ten states, whose
 # table entries carry footnote 4: "This state does not have a local general
@@ -29,6 +503,7 @@
   period: 2022
   input:
     state_code: CT
+    combined_sales_tax_rate: 0.09
     state_sales_tax: 1_000
   output:
     local_sales_tax: 0
@@ -37,6 +512,7 @@
   period: 2023
   input:
     state_code: DC
+    combined_sales_tax_rate: 0.09
     state_sales_tax: 1_000
   output:
     local_sales_tax: 0
@@ -45,6 +521,7 @@
   period: 2024
   input:
     state_code: IN
+    combined_sales_tax_rate: 0.09
     state_sales_tax: 1_000
   output:
     local_sales_tax: 0
@@ -53,6 +530,7 @@
   period: 2025
   input:
     state_code: KY
+    combined_sales_tax_rate: 0.09
     state_sales_tax: 1_000
   output:
     local_sales_tax: 0
@@ -61,6 +539,7 @@
   period: 2022
   input:
     state_code: MA
+    combined_sales_tax_rate: 0.09
     state_sales_tax: 1_000
   output:
     local_sales_tax: 0
@@ -69,6 +548,7 @@
   period: 2023
   input:
     state_code: MD
+    combined_sales_tax_rate: 0.09
     state_sales_tax: 1_000
   output:
     local_sales_tax: 0
@@ -77,6 +557,7 @@
   period: 2024
   input:
     state_code: ME
+    combined_sales_tax_rate: 0.09
     state_sales_tax: 1_000
   output:
     local_sales_tax: 0
@@ -85,6 +566,7 @@
   period: 2025
   input:
     state_code: MI
+    combined_sales_tax_rate: 0.09
     state_sales_tax: 1_000
   output:
     local_sales_tax: 0
@@ -93,6 +575,7 @@
   period: 2023
   input:
     state_code: NJ
+    combined_sales_tax_rate: 0.09
     state_sales_tax: 1_000
   output:
     local_sales_tax: 0
@@ -101,6 +584,43 @@
   period: 2024
   input:
     state_code: RI
+    combined_sales_tax_rate: 0.09
     state_sales_tax: 1_000
   output:
     local_sales_tax: 0
+
+# Worksheet end to end for a household: income picks the row, the tax unit
+# size picks the column, and line 8 adds the state and local amounts.
+
+- name: Tennessee couple 2024, state table plus Local Table B
+  # Income $50,000 + $35,000 = $85,000, family size 2.
+  # 2024 Tennessee state table (p15, heading 7.00%), $80,000-$90,000:
+  #   1108 1317 1461 1574 1669 1804 -> line 1 = 1,317.
+  # 2024 Local Table B (p17), $80,000-$90,000: 140 167 186 201 213 231
+  #   -> line 2 = 167.
+  # Line 3 = 9.75 - 7.0 = 2.75; line 6 = 167 x 2.75 = 459.25.
+  # Tennessee levies no income tax, so the sales tax amount is
+  # 1,317 + 459.25 = 1,776.25.
+  period: 2024
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 50_000
+      spouse:
+        age: 40
+        employment_income: 35_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: TN
+        combined_sales_tax_rate: 0.0975
+  output:
+    state_sales_tax_income_bracket: 8
+    state_sales_tax: 1_317
+    local_sales_tax: 459.25
+    state_and_local_sales_or_income_tax: 1_776.25

@@ -1,0 +1,111 @@
+# The default combined sales tax rate is the mean of the Tax Foundation
+# combined rates (state rate plus population-weighted average local rate) as
+# of January 1 and July 1 of the year. Expected values use the rates printed
+# in the Tax Foundation web tables, quoted below as state + average local =
+# combined; the parameter keeps the full-precision XLSX values where Tax
+# Foundation published them, so the margin covers the tables' display
+# rounding.
+
+- name: Tennessee 2024, mean of January and July rates
+  # January 1, 2024: 7.00% + 2.548% = 9.548%.
+  # July 1, 2024: 7.00% + 2.556% = 9.556%.
+  # Mean: 9.552% -> 0.09552.
+  period: 2024
+  absolute_error_margin: 0.0001
+  input:
+    state_code: TN
+  output:
+    combined_sales_tax_rate: 0.09552
+
+- name: South Dakota 2023, state rate cut on July 1
+  # January 1, 2023: 4.50% + 1.90% = 6.40%.
+  # July 1, 2023: 4.20% + 1.908% = 6.108%.
+  # Mean: 6.254% -> 0.06254.
+  period: 2023
+  absolute_error_margin: 0.0001
+  input:
+    state_code: SD
+  output:
+    combined_sales_tax_rate: 0.06254
+
+- name: Louisiana 2025, state rate raised on January 1
+  # January 1, 2025: 5.00% + 5.116% = 10.116%.
+  # July 1, 2025: 5.00% + 5.11% = 10.11%.
+  # Mean: 10.113% -> 0.10113.
+  period: 2025
+  absolute_error_margin: 0.0001
+  input:
+    state_code: LA
+  output:
+    combined_sales_tax_rate: 0.10113
+
+- name: California 2022, uniform local rate included
+  # January 1 and July 1, 2022: 7.25% + 1.57% = 8.82%.
+  period: 2022
+  absolute_error_margin: 0.0001
+  input:
+    state_code: CA
+  output:
+    combined_sales_tax_rate: 0.0882
+
+- name: Alaska 2023, local rates only
+  # January 1, 2023: 0.00% + 1.76% = 1.76%.
+  # July 1, 2023: 0.00% + 1.813% = 1.813%.
+  # Mean: 1.7865% -> 0.017865.
+  period: 2023
+  absolute_error_margin: 0.0001
+  input:
+    state_code: AK
+  output:
+    combined_sales_tax_rate: 0.017865
+
+- name: New Jersey 2024, negative average local rate
+  # January 1 and July 1, 2024: 6.625% + -0.024% = 6.601%.
+  period: 2024
+  absolute_error_margin: 0.0001
+  input:
+    state_code: NJ
+  output:
+    combined_sales_tax_rate: 0.06601
+
+- name: Delaware 2025, no sales tax
+  # January 1, 2025: 0.00% + 0.000% = 0.000%; July 1, 2025: 0.00% + 0.00% =
+  # 0.00%.
+  period: 2025
+  input:
+    state_code: DE
+  output:
+    combined_sales_tax_rate: 0
+
+- name: Years before 2022 use the January 2022 rates
+  # January 1, 2022: 6.25% + 1.95% = 8.20% (Texas).
+  period: 2021
+  absolute_error_margin: 0.0001
+  input:
+    state_code: TX
+  output:
+    combined_sales_tax_rate: 0.082
+
+- name: Years after 2026 use the July 2026 rates
+  # July 1, 2026: 4.00% + 4.54% = 8.54% (New York).
+  period: 2030
+  absolute_error_margin: 0.0001
+  input:
+    state_code: NY
+  output:
+    combined_sales_tax_rate: 0.0854
+
+- name: Territories have no rate
+  period: 2024
+  input:
+    state_code: PR
+  output:
+    combined_sales_tax_rate: 0
+
+- name: An input rate overrides the default
+  period: 2025
+  input:
+    state_code: TX
+    combined_sales_tax_rate: 0.0825
+  output:
+    combined_sales_tax_rate: 0.0825
