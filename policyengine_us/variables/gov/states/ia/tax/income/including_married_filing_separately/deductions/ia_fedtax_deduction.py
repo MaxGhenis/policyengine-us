@@ -29,7 +29,8 @@ class ia_fedtax_deduction(Variable):
             us_tax = ustax
         # remove SECA and Additional Medicare taxes
         amtax = person.tax_unit("additional_medicare_tax", period)
-        setax = add(person.tax_unit, period, ["self_employment_tax"])
+        # A dependent's self-employment tax is on the dependent's own return.
+        setax = tax_unit_non_dep_add(person.tax_unit, period, ["self_employment_tax"])
         agg_tax = max_(0.0, us_tax - amtax - setax)
         # project agg_tax to head and spouse in net_tax variable
         is_head = person("is_tax_unit_head", period)

@@ -24,7 +24,9 @@
         members: [person1, person2, person3]
         state_code: IA
   output:
-    ia_net_income: [9_400, 0, 0]
+    # A dependent's income is on the dependent's own return (Iowa Code
+    # 422.13(1)(a)), not added to the head's: 10,000 - 2,000.
+    ia_net_income: [8_000, 0, 0]
 
 - name: IA net income unit test 2
   absolute_error_margin: 0.01
@@ -52,7 +54,7 @@
         members: [person1, person2, person3]
         state_code: IA
   output:
-    ia_net_income: [8_600, 8_000, 0]
+    ia_net_income: [8_000, 8_000, 0]
 
 - name: 2022 single filer with wages and traditional IRA distribution
   period: 2022
