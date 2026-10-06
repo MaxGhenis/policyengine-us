@@ -2,16 +2,35 @@
   period: 2026
   input:
     state_code: CA
+    taxable_interest_income: 10_000
     investment_interest_expense: 10_000
   output:
+    # FTB 3526 line 8 = smaller of 10,000 or 10,000 = line 9, so Schedule CA
+    # line 9 keeps the 10,000 federal amount with no adjustment.
     ca_itemized_deductions_pre_limitation: 10_000
 
 - name: Case 2, California investment interest replaces federal investment interest.
   period: 2026
   input:
     state_code: CA
+    adjusted_gross_income: 50_000
+    taxable_interest_income: 9_000
     investment_interest_expense: 10_000
     investment_expenses: 2_000
     real_estate_taxes: 5_000
   output:
+    # FTB 3526 line 5 = smaller of 2,000 or Schedule CA line 25
+    # (2,000 - 2% x 50,000 = 1,000) = 1,000; line 6 = 9,000 - 1,000 = 8,000.
+    # Line 8 = 8,000; line 10 = 10,000 - 8,000 = 2,000 in column B.
+    # 10,000 - 2,000 + 5,000 real estate taxes.
     ca_itemized_deductions_pre_limitation: 13_000
+
+- name: Case 3, investment interest without investment income is not deductible.
+  period: 2026
+  input:
+    state_code: CA
+    investment_interest_expense: 10_000
+  output:
+    # FTB 3526 line 6 = 0, so line 8 = 0 and all 10,000 goes to column B.
+    ca_investment_interest_deduction_subtraction: 10_000
+    ca_itemized_deductions_pre_limitation: 0

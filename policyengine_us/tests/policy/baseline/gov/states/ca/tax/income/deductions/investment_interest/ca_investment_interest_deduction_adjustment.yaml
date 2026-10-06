@@ -1,0 +1,92 @@
+# Form FTB 3526, lines 9 and 10, and where line 10 goes on Schedule CA (540)
+# Part II line 9.
+
+- name: Line 9 more than line 8 goes to column B (subtraction).
+  period: 2025
+  input:
+    people:
+      person1:
+        taxable_interest_income: 4_000
+        investment_interest_expense: 10_000
+    tax_units:
+      tax_unit:
+        members: [person1]
+    households:
+      household:
+        members: [person1]
+        state_code: CA
+  output:
+    # Line 8 = smaller of 10,000 or 4,000.
+    ca_investment_interest_expense_deduction: 4_000
+    # Line 9 = federal Schedule A investment interest, 10,000.
+    ca_federal_investment_interest_deduction: 10_000
+    # Line 10 = 10,000 - 4,000, in column B.
+    ca_investment_interest_deduction_subtraction: 6_000
+    ca_investment_interest_deduction_addition: 0
+    # Column A 10,000 less column B 6,000.
+    ca_itemized_deductions_pre_limitation: 4_000
+
+- name: Line 8 more than line 9 goes to column C (addition).
+  period: 2025
+  input:
+    people:
+      person1:
+        taxable_interest_income: 10_000
+        investment_interest_expense: 2_000
+    tax_units:
+      tax_unit:
+        members: [person1]
+        ca_disallowed_investment_interest_expense_prior_year: 3_000
+    households:
+      household:
+        members: [person1]
+        state_code: CA
+  output:
+    # Line 8 = 5,000 (see the line 2 case); line 9 = 2,000.
+    ca_federal_investment_interest_deduction: 2_000
+    # Line 10 = 5,000 - 2,000, in column C.
+    ca_investment_interest_deduction_addition: 3_000
+    ca_investment_interest_deduction_subtraction: 0
+    # Column A 2,000 plus column C 3,000.
+    ca_itemized_deductions_pre_limitation: 5_000
+
+- name: Equal lines 8 and 9 need no adjustment.
+  period: 2025
+  input:
+    people:
+      person1:
+        taxable_interest_income: 10_000
+        investment_interest_expense: 4_000
+    tax_units:
+      tax_unit:
+        members: [person1]
+    households:
+      household:
+        members: [person1]
+        state_code: CA
+  output:
+    ca_investment_interest_deduction_addition: 0
+    ca_investment_interest_deduction_subtraction: 0
+    ca_itemized_deductions_pre_limitation: 4_000
+
+- name: The California investment interest deduction is excluded from the high-AGI limitation.
+  period: 2025
+  input:
+    people:
+      person1:
+        taxable_interest_income: 10_000
+        investment_interest_expense: 2_000
+    tax_units:
+      tax_unit:
+        members: [person1]
+        adjusted_gross_income: 1_000_000
+        ca_disallowed_investment_interest_expense_prior_year: 3_000
+    households:
+      household:
+        members: [person1]
+        state_code: CA
+  output:
+    # Schedule CA line 9 = 2,000 federal + 3,000 column C = 5,000, all of
+    # it investment interest, which the limitation excludes.
+    ca_itemized_deductions_pre_limitation: 5_000
+    ca_itemized_deductions: 5_000

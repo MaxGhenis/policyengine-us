@@ -3,7 +3,7 @@ values:
   2021-01-01:
     - medical_expense_deduction
     - casualty_loss_deduction
-    - non_mortgage_interest
+    - ca_investment_interest_expense_deduction # Schedule CA (540) Part II line 9, from form FTB 3526 line 8
 
 metadata:
   unit: list

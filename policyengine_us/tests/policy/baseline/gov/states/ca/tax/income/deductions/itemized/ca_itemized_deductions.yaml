@@ -18,7 +18,8 @@
     medical_expense_deduction: 10_000
     ca_investment_interest_expense_deduction: 5_000
   output:
-    ca_itemized_deductions: 12_000  # medical expenses not subject to limitation
+    # Medical expenses and investment interest are not subject to the limitation.
+    ca_itemized_deductions: 15_000
 
 - name: Single filer with low AGI and large charitable_deduction
   period: 2021

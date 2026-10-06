@@ -21,6 +21,6 @@ class ca_amti_adjustments(Variable):
         # Line 6
         deductions = where(itemizes, itemized_sources, standard_ded)
         # Line 7
-        investment_ded = tax_unit("ca_investment_interest_deduction", period)
+        investment_interest = tax_unit("ca_amt_investment_interest_adjustment", period)
         # line 14
-        return investment_ded + deductions
+        return investment_interest + deductions
