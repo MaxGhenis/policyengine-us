@@ -313,6 +313,135 @@ def get_projected_cpi_u_for_month(cpi: Parameter, month: Instant) -> float:
     return anchors[-1][1]
 
 
+def extend_nsa_cpi_u_projections(parameters: ParameterNode) -> None:
+    """Append calendar-year CPI-U forecast points to the independent NSA series.
+
+    BLS CUUR0000SA0 observations take precedence. After the last observation,
+    use the existing CBO calendar-year CPI-U forecast and monthly interpolation
+    policy as a proxy for future NSA months; CBO does not forecast individual
+    August observations. These appended February points are forecasts, not BLS
+    observations. Vermont uses the separate CBO tax-year averages instead.
+    """
+    cpi = parameters.gov.bls.cpi
+    nsa = cpi.cpi_u_nsa
+    last_observation = max(instant(value.instant_str) for value in nsa.values_list)
+    for value in sorted(cpi.cpi_u.values_list, key=lambda value: value.instant_str):
+        date = instant(value.instant_str)
+        if date > last_observation and value.instant_str.endswith("-02-01"):
+            nsa.update(start=date, value=value.value)
+
+
+def get_vt_cpi(parameters: ParameterNode, tax_year: int) -> float:
+    """Vermont's unchained NSA CPI-U average under 32 V.S.A. 5811 and 5822."""
+    cpi = parameters.gov.bls.cpi
+    return get_average_for_12_months_ending_august(
+        cpi.cpi_u_nsa, tax_year - 1, cpi.tax_year_projection.cpi_u
+    )
+
+
+def extend_vt_cpi_u_indexed_amounts(parameters: ParameterNode, end_year: int) -> None:
+    """Extend Vermont amounts from statutory bases, preserving published anchors.
+
+    32 V.S.A. 5811(21)(C)-(D) and 5822(a)-(b) substitute unchained CPI-U
+    in the federal September-August window. The 2017 base window and rounding
+    reproduce published 2021-2025 deductions and 2024-2026 brackets. Earlier
+    agency rounding differs in some years, so historical anchors are retained.
+    The 2026 bracket anchors are explicitly labelled preliminary in the YAML;
+    2026 deductions and exemptions are calculated estimates pending publication.
+    """
+    tax = parameters.gov.states.vt.tax.income
+    standard = tax.deductions.standard
+    amounts = [(standard.additional, 1_000, 50), (tax.exemption.personal, 4_150, 50)]
+    for status, base in (
+        ("SINGLE", 6_000),
+        ("SEPARATE", 6_000),
+        ("HEAD_OF_HOUSEHOLD", 9_000),
+        ("JOINT", 12_000),
+        ("SURVIVING_SPOUSE", 12_000),
+    ):
+        amounts.append((standard.base.children[status], base, 50))
+    for status, bases in (
+        ("single", (38_700, 93_700, 195_450)),
+        ("head_of_household", (51_850, 133_850, 216_700)),
+        ("joint", (64_600, 156_150, 237_950)),
+        ("surviving_spouse", (64_600, 156_150, 237_950)),
+        ("separate", (32_300, 78_075, 118_975)),
+    ):
+        scale = getattr(tax.rates, status)
+        for bracket, base in zip(scale.brackets[1:], bases):
+            amounts.append(
+                (bracket.threshold, base, 25 if status == "separate" else 50)
+            )
+    denominator = get_vt_cpi(parameters, 2018)
+    for parameter, base, interval in amounts:
+        first_year = 1 + max(
+            int(value.instant_str[:4]) for value in parameter.values_list
+        )
+        for year in range(first_year, end_year + 1):
+            cola = max(get_vt_cpi(parameters, year) / denominator - 1, 0)
+            value = base + math.floor(base * cola / interval) * interval
+            parameter.update(start=instant(f"{year}-01-01"), value=float(value))
+
+
+def round_wi_amount(amount: float) -> float:
+    """Wis. Stat. 71.05(22)(dt), 71.06(2e)(c): nearest $10, $5 ties upward."""
+    return float(
+        (Decimal(str(amount)) / 10).quantize(Decimal(1), rounding=ROUND_HALF_UP) * 10
+    )
+
+
+def get_wi_august_cpi(parameters: ParameterNode, tax_year: int) -> float:
+    """Prior-August NSA CPI-U; unobserved August levels are forecast proxies."""
+    return get_projected_cpi_u_for_month(
+        parameters.gov.bls.cpi.cpi_u_nsa, instant(f"{tax_year - 1}-08-01")
+    )
+
+
+def extend_wi_cpi_u_indexed_amounts(parameters: ParameterNode, end_year: int) -> None:
+    """Apply Wisconsin's statutory bases, August index, rounding and no decrease.
+
+    71.05(22)(dp)-(dt) uses August 1999 for single/head amounts and August
+    2015 for joint/separate amounts. 71.06(2e)(bm) indexes the Act 15 bracket
+    bases against August 2024. Only years beyond each published anchor are
+    generated. The dependent limitation in 71.05(22)(f) uses federal indexing
+    and is outside this helper.
+    """
+    tax = parameters.gov.states.wi.tax.income
+    for parameter in tax.get_descendants():
+        if not isinstance(parameter, Parameter):
+            continue
+        rule = parameter.metadata.get("wisconsin_indexing")
+        if not rule or "base" not in rule:
+            continue
+        first_year = 1 + max(
+            int(value.instant_str[:4]) for value in parameter.values_list
+        )
+        base_index = parameters.gov.bls.cpi.cpi_u_nsa(f"{rule['base_year']}-08-01")
+        for year in range(first_year, end_year + 1):
+            unrounded = (
+                Decimal(str(rule["base"]))
+                * Decimal(str(get_wi_august_cpi(parameters, year)))
+                / Decimal(str(base_index))
+            )
+            value = max(parameter(f"{year - 1}-01-01"), round_wi_amount(unrounded))
+            parameter.update(start=instant(f"{year}-01-01"), value=value)
+
+    standard = tax.deductions.standard
+    crossover = standard.phase_out.head_of_household.brackets[2].threshold
+    first_year = 1 + max(int(value.instant_str[:4]) for value in crossover.values_list)
+    for year in range(first_year, end_year + 1):
+        date = f"{year}-01-01"
+        difference = standard.max.HEAD_OF_HOUSEHOLD(date) - standard.max.SINGLE(date)
+        rate_difference = standard.phase_out.head_of_household.brackets[1].rate(
+            date
+        ) - standard.phase_out.single.brackets[1].rate(date)
+        value = (
+            standard.phase_out.single.brackets[1].threshold(date)
+            + difference / rate_difference
+        )
+        crossover.update(start=instant(date), value=float(math.floor(value + 0.5)))
+
+
 def get_la_cpi_u_percentage_increase(cpi: ParameterNode, year: int) -> float:
     """The CPI-U percentage increase for calendar ``year``, as BLS reports it.
 
@@ -771,19 +900,19 @@ def set_all_uprating_parameters(parameters: ParameterNode) -> ParameterNode:
         period_day=1,
     )
 
-    # CPI-U (February values, last projection year 2034)
+    # CPI-U (February values, last projection year 2035)
     extend_parameter_values(
         parameters.gov.bls.cpi.cpi_u,
-        last_projected_year=2034,
+        last_projected_year=2035,
         end_year=END_YEAR,
         period_month=2,
         period_day=1,
     )
 
-    # Chained CPI-U (February values, last projection year 2034)
+    # Chained CPI-U (February values, last projection year 2035)
     extend_parameter_values(
         parameters.gov.bls.cpi.c_cpi_u,
-        last_projected_year=2034,
+        last_projected_year=2035,
         end_year=END_YEAR,
         period_month=2,
         period_day=1,
@@ -862,6 +991,12 @@ def set_all_uprating_parameters(parameters: ParameterNode) -> ParameterNode:
     # from the statutory base amounts. Must run after the tax-year CPI
     # projection extension above so projected windows are available.
     extend_or_ctc_parameters(parameters, end_year=END_YEAR)
+
+    # Independent state schedules use unchained NSA observations and keep
+    # published anchors; future monthly NSA values are explicitly forecasts.
+    extend_nsa_cpi_u_projections(parameters)
+    extend_vt_cpi_u_indexed_amounts(parameters, end_year=END_YEAR)
+    extend_wi_cpi_u_indexed_amounts(parameters, end_year=END_YEAR)
 
     # Louisiana's standard deduction and age-65 retirement income exemption
     # follow R.S. 47:294(B) and 47:44.1(A): the prior year's amount times the

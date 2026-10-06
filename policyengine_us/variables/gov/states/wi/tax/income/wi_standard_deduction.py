@@ -26,7 +26,20 @@ def wi_standard_deduction_for_income(income, filing_status, parameters, period):
             deduction.standard.phase_out.head_of_household.calc(income),
         ],
     )
-    return max_(0, max_amount - phase_out_amount)
+    amount = max_amount - phase_out_amount
+    # 71.05(22)(dp)1 and Form 1-ES use the single formula above the
+    # published HOH crossover. Continuing the HOH marginal scale after a
+    # rounded crossover retains a small rounding offset from that formula.
+    hoh_switch = deduction.standard.phase_out.head_of_household.thresholds[2]
+    single_amount = (
+        deduction.standard.max.SINGLE - deduction.standard.phase_out.single.calc(income)
+    )
+    amount = where(
+        (filing_status == statuses.HEAD_OF_HOUSEHOLD) & (income > hoh_switch),
+        single_amount,
+        amount,
+    )
+    return max_(0, amount)
 
 
 class wi_standard_deduction(Variable):

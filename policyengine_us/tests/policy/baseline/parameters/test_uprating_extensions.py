@@ -7,6 +7,10 @@ import pytest
 import yaml
 
 from policyengine_core.parameters import Parameter, ParameterNode
+from policyengine_core.parameters.operations.propagate_parameter_metadata import (
+    propagate_parameter_metadata,
+)
+from policyengine_core.parameters.operations.uprate_parameters import uprate_parameters
 
 from policyengine_us.system import system
 from policyengine_us.tools.per_capita_uprating import per_capita_path
@@ -16,14 +20,26 @@ from policyengine_us.parameters.uprating_extensions import (
     LONG_RUN_CBO_INCOME_BY_SOURCE_PARAMETERS,
     extend_dependent_standard_deduction_parameters,
     extend_educator_expense_cap,
+    get_average_for_12_months_ending_august,
     get_irs_cola,
     get_irs_cola_denominator,
+    get_irs_cpi,
     round_social_security_amount,
     round_social_security_payroll_cap,
 )
 
 
 PARAMETERS = system.parameters
+
+
+@pytest.mark.parametrize("name", ("cpi_u", "c_cpi_u"))
+def test_last_published_calendar_cbo_forecast_survives_extension(name):
+    source = Path(__file__).parents[4] / "parameters/gov/bls/cpi" / f"{name}.yaml"
+    with source.open() as stream:
+        encoded = yaml.safe_load(stream)["values"]
+    date = "2035-02-01"
+    published = next(value for key, value in encoded.items() if str(key) == date)
+    assert getattr(PARAMETERS.gov.bls.cpi, name)(date) == published
 
 
 def test_all_uprating_factors_extend_to_2100():
@@ -497,6 +513,140 @@ def _synthetic_irs_parameters():
         ),
     )
     return SimpleNamespace(gov=SimpleNamespace(bls=SimpleNamespace(cpi=cpi)))
+
+
+def test_irs_window_includes_august_excludes_prior_august():
+    """1(f)(6)(B) includes the ending August in the twelve-month average."""
+    monthly = Parameter(
+        "c_cpi_u",
+        data={
+            "2024-08-01": 1_000,
+            **{f"2024-{month:02d}-01": 100 for month in range(9, 13)},
+            **{f"2025-{month:02d}-01": 100 for month in range(1, 8)},
+            "2025-08-01": 220,
+        },
+    )
+    cpi = SimpleNamespace(
+        c_cpi_u=monthly,
+        tax_year_projection=SimpleNamespace(
+            c_cpi_u=Parameter("projection", data={"2026-01-01": 999})
+        ),
+    )
+    parameters = SimpleNamespace(gov=SimpleNamespace(bls=SimpleNamespace(cpi=cpi)))
+
+    # September-July contribute 11 x 100, and the ending August 220:
+    # 1,320 / 12 = 110. Including the prior August instead gives 175.
+    assert get_irs_cpi(parameters, 2025) == 110
+
+
+def test_tax_year_projection_is_distinct_from_calendar_year_projection():
+    """Forecast windows read the dedicated tax-year series, even after a refresh."""
+    parameters = _synthetic_irs_parameters()
+    cpi = parameters.gov.bls.cpi
+    assert cpi.c_cpi_u("2032-02-01") == 199
+    assert get_irs_cpi(parameters, 2032) == 195
+
+    # Refreshing a calendar-year forecast cannot change this tax window.
+    cpi.c_cpi_u = Parameter(
+        "c_cpi_u",
+        data={
+            **{value.instant_str: value.value for value in cpi.c_cpi_u.values_list},
+            "2032-02-01": 9_999,
+        },
+    )
+    assert get_irs_cpi(parameters, 2032) == 195
+    # Refreshing the tax-year forecast changes the window itself.
+    cpi.tax_year_projection.c_cpi_u = Parameter(
+        "c_cpi_u_projection", data={"2033-01-01": 205}
+    )
+    assert get_irs_cpi(parameters, 2032) == 205
+
+
+def test_missing_month_and_partial_window_completion_are_flat_estimates():
+    """A missing interior month and an unobserved tail carry prior observations."""
+    monthly = Parameter(
+        "c_cpi_u",
+        data={
+            "2025-09-01": 100,
+            # October has no observation, as in the 2025 BLS series.
+            "2025-11-01": 120,
+            "2025-12-01": 130,
+            **{f"2026-{month:02d}-01": 130 + month * 10 for month in range(1, 7)},
+            # Calendar-year forecasts must not fill July and August.
+            "2027-02-01": 999,
+        },
+    )
+    projection = Parameter("projection", data={"2027-01-01": 888})
+
+    # October carries September's 100; July and August carry June's 190.
+    assert get_average_for_12_months_ending_august(
+        monthly, 2026, projection
+    ) == pytest.approx(1_820 / 12)
+
+
+def test_published_tax_parameters_survive_cpi_refresh():
+    """Revised CPI cannot overwrite the IRS amounts encoded in the source YAML."""
+    parameter_dir = Path(__file__).parents[4] / "parameters"
+    parameters = ParameterNode(
+        data={
+            "gov": {
+                "irs": {
+                    "uprating": {"values": {"2026-01-01": 1}},
+                },
+            }
+        }
+    )
+    parameters.gov.add_child("bls", ParameterNode("gov.bls"))
+    parameters.gov.bls.add_child("cpi", PARAMETERS.gov.bls.cpi.clone())
+    irs = parameters.gov.irs
+    irs.add_child("deductions", ParameterNode("gov.irs.deductions"))
+    irs.add_child("ald", ParameterNode("gov.irs.ald"))
+    irs.deductions.add_child(
+        "standard",
+        ParameterNode(
+            "gov.irs.deductions.standard",
+            directory_path=str(parameter_dir / "gov/irs/deductions/standard"),
+        ),
+    )
+    irs.ald.add_child(
+        "educator_expense",
+        ParameterNode(
+            "gov.irs.ald.educator_expense",
+            directory_path=str(parameter_dir / "gov/irs/ald/educator_expense"),
+        ),
+    )
+    published = [
+        (parameter, value.instant_str, value.value)
+        for subtree in (irs.deductions.standard, irs.ald.educator_expense)
+        for parameter in subtree.get_descendants()
+        if isinstance(parameter, Parameter)
+        for value in parameter.values_list
+    ]
+
+    original_index = get_irs_cpi(parameters, 2025)
+    cpi = parameters.gov.bls.cpi.c_cpi_u
+    cpi.update(period="month:2025-08-01:1", value=2 * cpi("2025-08-01"))
+    assert get_irs_cpi(parameters, 2025) != original_index
+    for year in (2026, 2027):
+        irs.uprating.update(
+            period=f"year:{year}-01-01:1", value=get_irs_cpi(parameters, year - 1)
+        )
+
+    # Re-run the statutory extensions and ordinary metadata uprating from
+    # the source amounts, rather than a tree that already contains forecasts.
+    extend_dependent_standard_deduction_parameters(parameters, 2027)
+    extend_educator_expense_cap(parameters, 2027)
+    propagate_parameter_metadata(parameters)
+    uprate_parameters(parameters)
+
+    for parameter, date, value in published:
+        assert parameter(date) == value, (parameter.name, date)
+    assert irs.deductions.standard.amount.SINGLE("2026-01-01") == 16_100
+    assert irs.deductions.standard.dependent.amount("2026-01-01") == 1_350
+    assert (
+        irs.deductions.standard.dependent.additional_earned_income("2026-01-01") == 450
+    )
+    assert irs.ald.educator_expense.cap("2026-01-01") == 350
 
 
 def test_irs_cola_follows_1f3_on_a_synthetic_index():
