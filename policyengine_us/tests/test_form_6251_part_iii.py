@@ -211,16 +211,78 @@ def schedule_d_tax_worksheet_2025(household, line_1, status):
     (collectibles) and unrecaptured section 1250 gain. Returns the lines.
     """
     long_term = household["long_term_gains"]
-    schedule_d_18 = max(0, long_term) * household.get("collectibles_share", 0) / 100
-    schedule_d_19 = max(0, long_term) * household.get("section_1250_share", 0) / 100
+    return schedule_d_tax_worksheet_lines_2025(
+        line_1,
+        qualified_dividends=household["qualified_dividends"],
+        form_4952_line_4g=0,
+        form_4952_line_4e=0,
+        # Schedule D line 15 is the long-term gain, line 16 the net gain.
+        schedule_d_line_15=long_term,
+        schedule_d_line_16=long_term + household["short_term_gains"],
+        schedule_d_line_18=max(0, long_term)
+        * household.get("collectibles_share", 0)
+        / 100,
+        schedule_d_line_19=max(0, long_term)
+        * household.get("section_1250_share", 0)
+        / 100,
+        status=status,
+    )
+
+
+def schedule_d_tax_worksheet_lines_2025(
+    line_1,
+    qualified_dividends,
+    form_4952_line_4g,
+    form_4952_line_4e,
+    schedule_d_line_15,
+    schedule_d_line_16,
+    schedule_d_line_18,
+    schedule_d_line_19,
+    status,
+    capital_gain_excess=0,
+):
+    """2025 Schedule D Tax Worksheet, lines 1 to 47.
+
+    Lines 3 and 4 are Form 4952 lines 4g (the amount elected as investment
+    income) and 4e. Schedule D lines 18 and 19 are as figured with no
+    short-term loss or loss carryover, so line 18 is also line 14 of the
+    Unrecaptured Section 1250 Gain Worksheet (lines 1 to 4 of the 28% Rate
+    Gain Worksheet).
+
+    `capital_gain_excess` is for a Form 2555 filer's second worksheet (2025
+    Instructions for Form 1040, page 37, footnote to the Foreign Earned
+    Income Tax Worksheet): line 1 is then that worksheet's line 3, and the
+    four modifications apply. Returns the lines, with Schedule D line 19 as
+    used.
+    """
     line = {1: line_1}
-    line[2] = household["qualified_dividends"]
-    line[3] = line[4] = line[5] = 0
+    line[2] = qualified_dividends
+    line[3] = form_4952_line_4g
+    line[4] = form_4952_line_4e
+    line[5] = max(0, line[3] - line[4])
     line[6] = max(0, line[2] - line[5])
-    # Schedule D line 15 is the long-term gain, line 16 the net gain.
-    line[7] = min(long_term, long_term + household["short_term_gains"])
+    line[7] = min(schedule_d_line_15, schedule_d_line_16)
     line[8] = min(line[3], line[4])
     line[9] = max(0, line[7] - line[8])
+    schedule_d_18, schedule_d_19 = schedule_d_line_18, schedule_d_line_19
+    if capital_gain_excess > 0:
+        # "1. Reduce (but not below zero) the amount you would otherwise
+        # enter on ... line 9 of your Schedule D Tax Worksheet by your
+        # capital gain excess. 2. Reduce (but not below zero) the amount you
+        # would otherwise enter on ... line 6 ... by any of your capital gain
+        # excess not used in (1) above."
+        unused = max(0, capital_gain_excess - line[9])
+        line[9] = max(0, line[9] - capital_gain_excess)
+        line[6] = max(0, line[6] - unused)
+        # "3. Reduce (but not below zero) the amount on your Schedule D, line
+        # 18, by your capital gain excess. 4. Include your capital gain
+        # excess as a loss on line 16 of your Unrecaptured Section 1250 Gain
+        # Worksheet": its line 17 nets the excess against line 14, the 28%
+        # rate gain, and line 18 subtracts what is left.
+        schedule_d_19 = max(
+            0, schedule_d_19 - max(0, capital_gain_excess - schedule_d_18)
+        )
+        schedule_d_18 = max(0, schedule_d_18 - capital_gain_excess)
     line[10] = line[6] + line[9]
     line[11] = schedule_d_18 + schedule_d_19
     line[12] = min(line[9], line[11])
@@ -303,6 +365,7 @@ OUTPUTS = [
     "dwks14",
     "dwks19",
     "income_tax_main_rates",
+    "income_tax_main_rates_on_taxable_income",
     "regular_tax_before_credits",
     "capital_gains_tax",
     "amt_income_less_exemptions",
@@ -458,10 +521,8 @@ def assert_matches_schedule_d_tax_worksheet(households, law):
                 assert float(law[model_line][i]) == pytest.approx(
                     worksheet[worksheet_line], abs=tolerance(line_1)
                 ), (i, h, model_line)
-        # Line 45. The model does not take the smaller of lines 45 and 46,
-        # which differ only when a little gain taxed at 15 percent sits where
-        # the regular rate is 12 percent.
-        assert regular_tax == pytest.approx(worksheet[45], abs=tolerance(line_1)), (
+        # Line 47, the smaller of line 45 and line 46.
+        assert regular_tax == pytest.approx(worksheet[47], abs=tolerance(line_1)), (
             i,
             h,
             worksheet,
@@ -483,9 +544,9 @@ def assert_matches_schedule_d_tax_worksheet(households, law):
         assert float(law["amt_base_tax"][i]) == pytest.approx(
             line_39, abs=tolerance(line_12)
         ), (i, h)
-        # Line 11, with line 10 the worksheet's regular tax (line 45, as
+        # Line 11, with line 10 the worksheet's regular tax (line 47, as
         # above) and no foreign tax credit.
-        amt = max(0, line_40 - worksheet[45])
+        amt = max(0, line_40 - worksheet[47])
         assert float(law["alternative_minimum_tax"][i]) == pytest.approx(
             amt, abs=tolerance(line_12, line_1)
         ), (i, h)
@@ -514,6 +575,13 @@ def assert_schedule_d_properties(households, law):
         ]
     )
     assert np.array_equal(line_21[plain], line_14[plain])
+    # 26 U.S.C. 1(h)(1), "shall not exceed": the regular tax is at most the
+    # tax on all taxable income at the regular rates (line 46).
+    regular_tax = law["income_tax_main_rates"].astype(float) + law[
+        "capital_gains_tax"
+    ].astype(float)
+    tax_on_line_1 = law["income_tax_main_rates_on_taxable_income"].astype(float)
+    assert (regular_tax <= tax_on_line_1 + tol).all()
 
 
 # ---------------------------------------------------------------------------
