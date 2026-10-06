@@ -596,11 +596,11 @@ def test_published_tax_parameters_survive_cpi_refresh():
             }
         }
     )
-    parameters.gov.add_child("bls", ParameterNode("gov.bls"))
+    parameters.gov.add_child("bls", ParameterNode("gov.bls", data={}))
     parameters.gov.bls.add_child("cpi", PARAMETERS.gov.bls.cpi.clone())
     irs = parameters.gov.irs
-    irs.add_child("deductions", ParameterNode("gov.irs.deductions"))
-    irs.add_child("ald", ParameterNode("gov.irs.ald"))
+    irs.add_child("deductions", ParameterNode("gov.irs.deductions", data={}))
+    irs.add_child("ald", ParameterNode("gov.irs.ald", data={}))
     irs.deductions.add_child(
         "standard",
         ParameterNode(
