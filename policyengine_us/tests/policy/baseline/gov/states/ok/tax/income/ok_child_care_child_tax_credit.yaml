@@ -167,7 +167,11 @@
         members: [head, child1, child2]
         state_code: OK
   output:
-    ctc_value: 4_400
+    # The non-refundable CTC is limited by the actual tax liability, after the
+    # itemized deduction including SALT (26 U.S.C. 26(a)); with no earned
+    # income there is no refundable part, so the credit's value equals
+    # ok_federal_ctc.
+    ctc_value: 2_799
     ok_federal_ctc: 2_799
     ok_child_care_child_tax_credit: 140
     taxsim_ok_child_tax_credit_component: 140

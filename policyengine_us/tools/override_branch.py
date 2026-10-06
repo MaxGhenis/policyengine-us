@@ -43,8 +43,6 @@ def _overrides(period: Period, inputs: Dict[str, Override]):
 
 def _is_known(simulation: Simulation, variable: str, period: Period) -> bool:
     holder = simulation.get_holder(variable)
-    if holder.variable.is_neutralized:
-        return False
     return holder.get_array(period, simulation.branch_name) is not None
 
 

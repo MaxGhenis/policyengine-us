@@ -36,6 +36,7 @@ import pytest
 from policyengine_us import Simulation
 from policyengine_us.tools.override_branch import (
     drop_inherited_values,
+    get_branch_for_period,
     get_override_branch,
 )
 
@@ -319,6 +320,39 @@ def test_get_override_branch_reuses_within_period_and_recreates_otherwise(
     )
     assert other_period is not other_inputs
     assert simulation.branches["test_branch"] is other_period
+    more_inputs = get_override_branch(
+        simulation,
+        "test_branch",
+        2025,
+        {"tax_unit_itemizes": ones, "salt_deduction": np.zeros(n)},
+    )
+    assert more_inputs is not other_period
+    # A branch made with plain get_branch carries no record of its inputs.
+    plain = simulation.get_branch("plain_branch")
+    assert (
+        get_override_branch(
+            simulation, "plain_branch", YEAR, {"tax_unit_itemizes": ones}
+        )
+        is not plain
+    )
+
+
+def test_branch_named_like_the_simulation_is_the_simulation(households):
+    # Core's get_branch returns the simulation itself for its own name.
+    n = len(households)
+    simulation = Simulation(situation=_situation(households))
+    branch = simulation.get_branch("same_name")
+    assert (
+        get_override_branch(
+            branch,
+            "same_name",
+            YEAR,
+            {"tax_unit_itemizes": np.ones(n, dtype=bool)},
+        )
+        is branch
+    )
+    assert branch.get_array("tax_unit_itemizes", YEAR).all()
+    assert get_branch_for_period(branch, "same_name", YEAR) is branch
 
 
 def test_drop_inherited_values_keeps_inputs_only(households):
@@ -344,4 +378,160 @@ def test_drop_inherited_values_keeps_inputs_only(households):
         child.calculate("taxable_income", YEAR),
         _fresh(households, "taxable_income", {"tax_unit_itemizes": itemizes}),
         atol=0.01,
+    )
+
+
+def test_drop_inherited_values_drops_arrays_stored_on_disk(households, tmp_path):
+    simulation = Simulation(situation=_situation(households))
+    taxable_income = simulation.calculate("taxable_income", YEAR)
+    holder = simulation.get_holder("taxable_income")
+    holder._disk_storage = holder.create_disk_storage(directory=str(tmp_path))
+    holder._disk_storage.put(taxable_income, YEAR, "default")
+    holder._memory_storage.delete(YEAR, "default")
+    branch = simulation.get_branch("disk_branch")
+    np.testing.assert_array_equal(
+        branch.get_array("taxable_income", YEAR), taxable_income
+    )
+    drop_inherited_values(branch)
+    assert branch.get_array("taxable_income", YEAR) is None
+
+
+def _one_household(state, people, years, couple=None):
+    names = list(people)
+    marital = [list(couple)] if couple else []
+    marital += [[n] for n in names if not couple or n not in couple]
+    return {
+        "people": {
+            n: {k: {y: v for y in years} for k, v in inputs.items()}
+            for n, inputs in people.items()
+        },
+        "tax_units": {"tu": {"members": names}},
+        "spm_units": {"spm": {"members": names}},
+        "families": {"fam": {"members": names}},
+        "marital_units": {f"mu{i}": {"members": m} for i, m in enumerate(marital)},
+        "households": {
+            "hh": {"members": names, "state_code": {y: state for y in years}}
+        },
+    }
+
+
+ITEMIZING_COUPLE_WITH_CHILDREN = dict(
+    people={
+        "head": {
+            "age": 38,
+            "employment_income": 70_000,
+            "deductible_mortgage_interest": 20_000,
+            "real_estate_taxes": 6_000,
+        },
+        "spouse": {"age": 36, "employment_income": 9_000},
+        "kid1": {"age": 3, "pre_subsidy_childcare_expenses": 6_000},
+        "kid2": {"age": 9},
+    },
+    couple=("head", "spouse"),
+)
+
+
+@pytest.mark.parametrize(
+    "state,year,variable,branch,earnings",
+    [
+        # Alabama Act 2022-37: credits recomputed under the 2020 IRC, TY2021.
+        ("AL", 2021, "al_federal_income_tax_deduction", "al_2020_irc", 70_000),
+        # New York's TY2021 EITC on pre-ARPA federal parameters.
+        ("NY", 2021, "ny_eitc", "ny_pre_arpa_eitc", 14_000),
+        # New York's Empire State child credit on pre-TCJA federal rules.
+        ("NY", 2024, "ny_ctc", "pre_tcja_ctc", 70_000),
+    ],
+)
+def test_pinned_system_branches_are_created_for_each_period(
+    state, year, variable, branch, earnings
+):
+    def situation(years):
+        people = {
+            name: dict(inputs)
+            for name, inputs in ITEMIZING_COUPLE_WITH_CHILDREN["people"].items()
+        }
+        people["head"]["employment_income"] = earnings
+        return _one_household(
+            state, people, years, couple=ITEMIZING_COUPLE_WITH_CHILDREN["couple"]
+        )
+
+    expected = Simulation(situation=situation((year,))).calculate(variable, year)
+    assert (expected > 0).all()
+    simulation = Simulation(situation=situation((year - 1, year)))
+    simulation.calculate("household_net_income", year - 1)
+    simulation.calculate(variable, year - 1)
+    np.testing.assert_array_equal(simulation.calculate(variable, year), expected)
+    assert simulation.branches[branch].branch_period.start.year == year
+
+
+MO_NON_PARENT_CARETAKER = {
+    "grandparent": {"age": 55, "mo_tanf_is_non_parent_caretaker": True},
+    "grandchild1": {"age": 6, "is_tax_unit_dependent": True},
+    "grandchild2": {"age": 8, "is_tax_unit_dependent": True},
+}
+
+
+def test_missouri_caretaker_branches_match_fresh_simulations():
+    month = "2026-01"
+    situation = _one_household("MO", MO_NON_PARENT_CARETAKER, (2026,))
+    simulation = Simulation(situation=situation)
+    simulation.calculate("mo_tanf", month)
+    needy = simulation.calculate("mo_tanf_non_parent_caretaker_needy", month)
+    for comparison, included in (
+        ("mo_tanf_if_non_parent_caretaker_included", needy),
+        ("mo_tanf_if_non_parent_caretaker_excluded", np.zeros(1, dtype=bool)),
+    ):
+        fresh = Simulation(situation=situation)
+        fresh.set_input("mo_tanf_non_parent_caretaker_included", month, included)
+        np.testing.assert_allclose(
+            simulation.calculate(comparison, month),
+            fresh.calculate("mo_tanf", month),
+            err_msg=comparison,
+        )
+    assert simulation.calculate("mo_tanf", month)[0] > 0
+    assert not any("mo_tanf_npcr" in name for name in simulation.branches)
+
+
+def _ssp_situation(year):
+    # policyengine_us/tests/core/test_ssi_state_supplement_medicaid_dependency.py
+    people = {
+        "recipient": {
+            "age": {year: 45},
+            "meets_ssi_disability_criteria": {year: True},
+            "ssi_lives_in_medical_treatment_facility": {year: True},
+            "ssi_medicaid_pays_majority_of_care": {year: True},
+        },
+        "adult": {
+            "age": {year: 40},
+            "employment_income": {year: 5_000},
+            "is_snap_workfare_participant": {year: True},
+        },
+    }
+    return {
+        "people": people,
+        **{
+            entity: {name: {"members": [name]} for name in people}
+            for entity in ("tax_units", "spm_units", "families")
+        },
+        "households": {
+            name: {"members": [name], "state_code": {year: "IN"}} for name in people
+        },
+    }
+
+
+def test_ssi_state_supplement_medicaid_branch_matches_fresh_simulation():
+    year = 2027
+    simulation = Simulation(situation=_ssp_situation(year))
+    enrolled = simulation.calculate("medicaid_enrolled_for_ssi_state_supplement", year)
+    fresh = Simulation(situation=_ssp_situation(year))
+    fresh.set_input(
+        "medicaid_community_engagement_pass_through_eligible",
+        f"{year}-01",
+        np.zeros(2, dtype=bool),
+    )
+    np.testing.assert_array_equal(enrolled, fresh.calculate("medicaid_enrolled", year))
+    assert enrolled[0]
+    assert simulation.calculate("in_ssp", year)[0] > 0
+    assert not any(
+        "ssi_state_supplement_medicaid" in name for name in simulation.branches
     )
