@@ -151,10 +151,60 @@
         members: [person1]
         state_code: MT
   output:
-    # The $5,500 subtraction for taxpayers 65 and older reduces Montana AGI
-    # but not federal AGI.
+    # PE's mt_agi_joint takes off the $5,500 subtraction for taxpayers 65 and
+    # older. From 2024 Form 2 applies it to federal taxable income instead,
+    # and has no Montana AGI line.
     adjusted_gross_income: 100_000
     mt_agi_joint: 94_500
     # Form 2 line 2, Worksheet A, takes federal Schedule A:
     # 10,000 - 7.5% x 100,000 = 2,500.
     mt_medical_expense_deduction_joint: 2_500
+
+- name: A dependent's U.S. government interest does not lower the parents' Montana AGI
+  period: 2022
+  absolute_error_margin: 1
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 50_000
+        other_medical_expenses: 10_000
+      spouse:
+        age: 40
+      child:
+        age: 10
+        taxable_interest_income: 10_000
+        us_govt_interest_person: 10_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse, child]
+    households:
+      household:
+        members: [head, spouse, child]
+        state_code: MT
+  output:
+    # The child's interest is on the child's own return, so it is neither in
+    # the parents' federal AGI nor subtracted on their Montana return.
+    mt_agi_joint: 50_000
+    # 10,000 - 7.5% x 50,000 = 6,250
+    mt_medical_expense_deduction_joint: [6_250, 0, 0]
+
+- name: In 2026 the federal floor applies to federal AGI
+  period: 2026
+  absolute_error_margin: 1
+  input:
+    people:
+      person1:
+        age: 40
+        employment_income: 100_000
+        other_medical_expenses: 11_000
+    tax_units:
+      tax_unit:
+        members: [person1]
+    households:
+      household:
+        members: [person1]
+        state_code: MT
+  output:
+    # 11,000 - 7.5% x 100,000 = 3,500
+    mt_medical_expense_deduction_joint: 3_500
