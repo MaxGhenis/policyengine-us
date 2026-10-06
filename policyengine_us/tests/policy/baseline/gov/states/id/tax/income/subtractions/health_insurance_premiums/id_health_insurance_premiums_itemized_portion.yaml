@@ -1,0 +1,33 @@
+# Form 39R health insurance worksheet line 8: the lesser of the premiums
+# claimed on federal Schedule A (line 1) and the medical expense deduction
+# allowed after the 7.5% of AGI floor (line 6). Itemized deductions apply to
+# premiums first.
+
+- name: Medical expense deduction smaller than premiums.
+  period: 2026
+  input:
+    state_code: ID
+    id_eligible_health_insurance_premiums: 10_000
+    medical_expense_deduction: 5_500
+  output:
+    # min(10,000, 5,500) = 5,500
+    id_health_insurance_premiums_itemized_portion: 5_500
+
+- name: Medical expense deduction larger than premiums.
+  period: 2026
+  input:
+    state_code: ID
+    id_eligible_health_insurance_premiums: 10_000
+    medical_expense_deduction: 12_000
+  output:
+    # min(10,000, 12,000) = 10,000; the rest is other medical expenses.
+    id_health_insurance_premiums_itemized_portion: 10_000
+
+- name: No medical expense deduction.
+  period: 2026
+  input:
+    state_code: ID
+    id_eligible_health_insurance_premiums: 10_000
+    medical_expense_deduction: 0
+  output:
+    id_health_insurance_premiums_itemized_portion: 0

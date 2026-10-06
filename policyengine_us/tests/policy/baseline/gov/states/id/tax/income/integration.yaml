@@ -265,4 +265,8 @@
     additional_senior_deduction: 6_000
     id_additional_senior_deduction: 6_000
     id_qualified_business_income_and_federal_schedule_1a_deductions: 6_000
-    id_taxable_income: 134_000
+    # Both spouses pay the 2025 Medicare Part B standard premium,
+    # 2 * $185 * 12 = 4,440, which Idaho subtracts (Form 39R line 18).
+    id_health_insurance_premiums_subtraction: 4_440
+    # 200,000 - 4,440 - 60,000 itemized - 6,000 senior deduction = 129,560
+    id_taxable_income: 129_560

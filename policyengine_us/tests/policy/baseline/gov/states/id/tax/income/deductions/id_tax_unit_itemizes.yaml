@@ -1,0 +1,60 @@
+# Idaho Form 40 lines 13-16: filers use federal itemized deductions or the
+# standard deduction, "whichever benefits you more," and must itemize if
+# married filing separately with a spouse who itemizes. Itemizing also costs
+# the premiums already deducted on Schedule A (Form 39R health insurance
+# worksheet line 8), so the comparison nets that loss.
+
+- name: Itemized deductions exceed the standard deduction but not after the premium loss.
+  period: 2026
+  input:
+    state_code: ID
+    id_itemized_deductions: 20_200
+    standard_deduction: 16_100
+    id_health_insurance_premiums_itemized_portion: 5_500
+  output:
+    # 20,200 - 5,500 = 14,700 < 16,100
+    id_tax_unit_itemizes: false
+
+- name: Itemized deductions exceed the standard deduction even after the premium loss.
+  period: 2026
+  input:
+    state_code: ID
+    id_itemized_deductions: 30_200
+    standard_deduction: 16_100
+    id_health_insurance_premiums_itemized_portion: 5_500
+  output:
+    # 30,200 - 5,500 = 24,700 > 16,100
+    id_tax_unit_itemizes: true
+
+- name: Ties keep the standard deduction.
+  period: 2026
+  input:
+    state_code: ID
+    id_itemized_deductions: 21_600
+    standard_deduction: 16_100
+    id_health_insurance_premiums_itemized_portion: 5_500
+  output:
+    # 21,600 - 5,500 = 16,100 = 16,100
+    id_tax_unit_itemizes: false
+
+- name: Without premiums the comparison is itemized against standard.
+  period: 2026
+  input:
+    state_code: ID
+    id_itemized_deductions: 17_000
+    standard_deduction: 16_100
+    id_health_insurance_premiums_itemized_portion: 0
+  output:
+    id_tax_unit_itemizes: true
+
+- name: Married filing separately with a spouse who itemizes must itemize.
+  period: 2026
+  input:
+    state_code: ID
+    filing_status: SEPARATE
+    separate_filer_itemizes: true
+    id_itemized_deductions: 1_000
+    standard_deduction: 2_000
+    id_health_insurance_premiums_itemized_portion: 0
+  output:
+    id_tax_unit_itemizes: true
