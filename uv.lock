@@ -1924,7 +1924,7 @@ wheels = [
 
 [[package]]
 name = "policyengine-us"
-version = "1.642.0"
+version = "1.653.3"
 source = { editable = "." }
 dependencies = [
     { name = "microdf-python", marker = "python_full_version >= '3.11'" },
