@@ -4,7 +4,9 @@ values:
     - employment_income  # Line 15: Wages, salaries, tips (Category a)
     - taxable_interest_income  # Line 16a: Interest (Category e)
     - dividend_income  # Line 17: Dividends (Category f)
-    - taxable_pension_income  # Line 20a: Pensions, annuities (Category j)
+    # U.S. military pensions are exempt (N.J.S.A. 54A:6-26) and are not reported on line 20a.
+    - taxable_public_pension_income # Line 20a: Pensions, annuities (Category j)
+    - taxable_private_pension_income # Line 20a: Pensions, annuities (Category j)
     - taxable_ira_distributions  # Line 20a: IRA distributions (Category j)
     - taxable_roth_conversions  # Line 20a: Roth conversions (Category j)
     - taxable_401k_distributions  # Line 20a: 401(k) distributions (Category j)
@@ -25,3 +27,7 @@ metadata:
       href: https://www.nj.gov/treasury/taxation/pdf/current/1040.pdf
     - title: New Jersey Division of Taxation Technical Bulletin GIT-1 & 2, Retirement Income
       href: https://www.nj.gov/treasury/taxation/pdf/pubs/tgi-ee/git1&2.pdf#page=18
+    - title: 2025 NJ-1040 Instructions, Line 20a (U.S. military pensions and survivor's benefit payments are not taxable)
+      href: https://www.nj.gov/treasury/taxation/pdf/current/1040i.pdf#page=15
+    - title: N.J.S.A. 54A:6-26
+      href: https://law.justia.com/codes/new-jersey/title-54a/section-54a-6-26/

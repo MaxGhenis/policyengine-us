@@ -13,11 +13,10 @@ values:
     - dividend_income
     - interest_income
     - rental_income
+    # HAR 17-798.2-10(b) item (5), pensions and annuities, including military
+    # retirement pay (not item (7), allotments).
     - pension_income
     - veterans_benefits
-    # Military retirement pay maps to HAR 17-798.2-10(b) item (5)
-    # (pensions and annuities), not item (7) (allotments).
-    - military_retirement_pay
     - unemployment_compensation
     - workers_compensation
     - alimony_income

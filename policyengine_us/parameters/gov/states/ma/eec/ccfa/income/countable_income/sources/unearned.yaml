@@ -8,7 +8,6 @@ values:
     - rental_income
     - pension_income
     - veterans_benefits
-    - military_retirement_pay
     - alimony_income
     - child_support_received
     - social_security
@@ -25,7 +24,6 @@ values:
     - dividend_income
     - rental_income
     - pension_income
-    - military_retirement_pay
     - alimony_income
     - unemployment_compensation
     - workers_compensation
@@ -35,7 +33,6 @@ values:
     - dividend_income
     - rental_income
     - pension_income
-    - military_retirement_pay
     - alimony_income
     - unemployment_compensation
     - workers_compensation

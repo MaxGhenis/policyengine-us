@@ -13,7 +13,6 @@ values:
     - disability_benefits
     - ssi
     - veterans_benefits
-    - military_retirement_pay
     - unemployment_compensation
     - workers_compensation
     - interest_income

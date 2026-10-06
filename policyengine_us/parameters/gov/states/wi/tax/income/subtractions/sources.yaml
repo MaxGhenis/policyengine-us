@@ -6,6 +6,8 @@ values:
     - wi_capital_gain_loss_subtraction
     - wi_childcare_expense_subtraction
     - wi_retirement_income_subtraction
+    # Wis. Stat. 71.05(1)(am): all U.S. military retirement payments.
+    - military_retirement_pay
     - us_govt_interest
     - wi_529_plan_deduction
     - salt_refund_income
@@ -14,6 +16,8 @@ values:
     - tax_unit_taxable_social_security
     - wi_capital_gain_loss_subtraction
     - wi_retirement_income_subtraction
+    # Wis. Stat. 71.05(1)(am): all U.S. military retirement payments.
+    - military_retirement_pay
     - us_govt_interest
     - wi_529_plan_deduction
     - salt_refund_income
@@ -34,3 +38,7 @@ metadata:
     href: https://www.revenue.wi.gov/TaxForms2024/2024-ScheduleSB-Inst.pdf
   - title: 2025 Wisconsin Form 1 Schedule SB instructions
     href: https://www.revenue.wi.gov/TaxForms2025/2025-ScheduleSB-inst.pdf
+  - title: Wis. Stat. § 71.05(1)(am)
+    href: https://docs.legis.wisconsin.gov/statutes/statutes/71/i/05/1/am
+  - title: Wisconsin Department of Revenue Publication 106, Tax Information for Retirees
+    href: https://www.revenue.wi.gov/DOR%20Publications/pb106.pdf#page=4

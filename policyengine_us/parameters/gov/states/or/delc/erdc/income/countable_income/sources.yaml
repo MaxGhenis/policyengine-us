@@ -9,7 +9,6 @@ values:
     - ssi
     - pension_income
     - retirement_distributions
-    - military_retirement_pay
     - unemployment_compensation
     - workers_compensation
     - alimony_income

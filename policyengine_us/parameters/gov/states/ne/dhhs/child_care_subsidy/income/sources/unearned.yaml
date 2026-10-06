@@ -10,7 +10,6 @@ values:
     - rental_income
     - farm_rent_income
     - pension_income
-    - military_retirement_pay
     - veterans_benefits
     - strike_benefits
     - unemployment_compensation

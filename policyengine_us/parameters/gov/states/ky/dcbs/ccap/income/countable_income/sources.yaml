@@ -14,9 +14,6 @@ values:
     - interest_income
     - rental_income
     - veterans_benefits
-    # PolicyEngine records military retirement separately from pension_income,
-    # so it is listed on its own here.
-    - military_retirement_pay
     # Sources excluded under Section 8(4):
     # - ssi  # §8(4)(ll) excludes Supplemental Security Income for a child;
     #   KY (unlike WV) does not count child SSI.

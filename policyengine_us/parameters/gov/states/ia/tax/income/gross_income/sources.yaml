@@ -8,7 +8,9 @@ values:
     - self_employment_income
     - sstb_self_employment_income
     - capital_gains
-    - taxable_pension_income
+    # Military retirement pay is excluded under Iowa Code 422.7(20) and is not reported with pensions.
+    - taxable_public_pension_income
+    - taxable_private_pension_income
     - taxable_retirement_distributions
     - taxable_roth_conversions
     - partnership_s_corp_income
@@ -29,3 +31,5 @@ metadata:
     href: https://revenue.iowa.gov/sites/default/files/2023-01/2022IA1040%2841001%29.pdf#page=1
   - title: 2022 IA1040 Income Tax Return instructions
     href: https://revenue.iowa.gov/media/2721/download?inline#page=11
+  - title: Iowa Code § 422.7(20) (military retirement pay)
+    href: https://www.legis.iowa.gov/docs/code/422.7.pdf#page=7

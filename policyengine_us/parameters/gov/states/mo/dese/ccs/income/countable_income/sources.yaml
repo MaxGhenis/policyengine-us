@@ -8,8 +8,6 @@ values:
     # burial lump sums are excluded (Manual sec. 5.6.1).
     - social_security
     - pension_income
-    # PolicyEngine records military retirement separately from pension_income.
-    - military_retirement_pay
     - unemployment_compensation
     - workers_compensation
     - child_support_received

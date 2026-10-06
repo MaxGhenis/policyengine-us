@@ -11,7 +11,6 @@ values:
     - interest_income
     - pension_income
     - veterans_benefits
-    - military_retirement_pay
     - unemployment_compensation
     - workers_compensation
     # Child or spousal support not assigned to the state.

@@ -5,12 +5,22 @@ values:
     - us_govt_interest_person
     - mo_529_deduction
     - salt_refund_income # 143.121 RSMo / Form MO-A Line 9
+  # From 2021 the taxable military pension is subtracted on Form MO-A Part 1
+  # line 10; before 2021 it was a partial exemption on Part 3 Section D, which
+  # is not modeled.
+  2021-01-01:
+    - mo_qualified_health_insurance_premiums
+    - us_govt_interest_person
+    - mo_529_deduction
+    - salt_refund_income # 143.121 RSMo / Form MO-A Line 9
+    - military_retirement_pay # Form MO-A Line 10
   2025-01-01:
     - mo_qualified_health_insurance_premiums
     - mo_capital_gains_subtraction_person
     - us_govt_interest_person
     - mo_529_deduction
     - salt_refund_income # 143.121 RSMo / Form MO-A Line 9
+    - military_retirement_pay # Form MO-A Line 10
 
 
 metadata:
@@ -24,3 +34,7 @@ metadata:
       href: https://www.revisor.mo.gov/main/OneSection.aspx?section=143.121&bid=57543
     - title: 2025 MO-1040 Book - Individual Income Tax Long Form
       href: https://dor.mo.gov/forms/MO-1040%20Instructions_2025.pdf#page=12
+    - title: 2025 MO-1040 Book, Line 10 - Military Retirement Benefits
+      href: https://dor.mo.gov/forms/MO-1040%20Instructions_2025.pdf#page=14
+    - title: Missouri Department of Revenue, Pension FAQ (military pensions subtracted on Form MO-A Part 1 Line 10 from 2021)
+      href: https://dor.mo.gov/faq/taxation/individual/pension.html

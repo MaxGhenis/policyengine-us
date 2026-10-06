@@ -4,7 +4,9 @@ values:
     # 36 M.R.S. § 5122(2)(M-2)(1)(a)(i) limits the deduction to benefits
     # included in federal adjusted gross income, so tax-exempt pension income
     # is not a source.
-    - taxable_pension_income
+    # 36 M.R.S. 5122(2)(M-2)(1)(a) excludes military retirement plan benefits, which (1)(b) deducts separately.
+    - taxable_public_pension_income
+    - taxable_private_pension_income
     - taxable_retirement_distributions
 metadata:
   unit: list
@@ -15,4 +17,5 @@ metadata:
       href: https://legislature.maine.gov/statutes/36/title36sec5122.html
     - title: 36 M.R.S. § 5122(2)(M-2)(2)(f)
       href: https://legislature.maine.gov/statutes/36/title36sec5122.html
-
+    - title: 36 M.R.S. § 5122(2)(M-2)(1)(a)-(b)
+      href: https://legislature.maine.gov/statutes/36/title36sec5122.html

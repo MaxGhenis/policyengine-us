@@ -10,7 +10,6 @@ values:
     - social_security
     - pension_income
     - retirement_distributions
-    - military_retirement_pay
     - unemployment_compensation
     - workers_compensation
     - child_support_received

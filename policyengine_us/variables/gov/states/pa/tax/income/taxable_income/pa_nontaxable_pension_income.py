@@ -16,7 +16,9 @@ class pa_nontaxable_pension_income(Variable):
         "Personal Income Tax Guide applies to plans that are not employer "
         "provided and have no specific retirement criteria, such as an IRA. "
         "Employer pension recipients below that age who have already met "
-        "their plan's retirement conditions are still taxed by the model."
+        "their plan's retirement conditions are still taxed by the model. "
+        "Military pension benefits are nontaxable at any age, so the age "
+        "approximation does not apply to them."
     )
     definition_period = YEAR
     reference = (
@@ -27,6 +29,9 @@ class pa_nontaxable_pension_income(Variable):
         "https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/061/chapter101/s101.6.html",
         # 2023 PA-40 IN - Retirement, pensions, and deferred compensation.
         "https://www.pa.gov/content/dam/copapwp-pagov/en/revenue/documents/formsandpublications/formsforindividuals/pit/documents/2023/2023_pa-40in.pdf",
+        # 2025 PA-40 IN: "Military pension benefits" are listed as nontaxable
+        # income separately from age-conditioned retirement benefits.
+        "https://www.pa.gov/content/dam/copapwp-pagov/en/revenue/documents/formsandpublications/formsforindividuals/pit/documents/2025/2025_pa-40in.pdf#page=8",
     )
     defined_for = StateCode.PA
 
@@ -35,5 +40,8 @@ class pa_nontaxable_pension_income(Variable):
         # documentation above: this is an approximation, not a statutory age.
         p = parameters(period).gov.states.pa.tax.income
         retired = person("age", period) >= p.retirement_age_threshold
-        us_taxable_pension = person("taxable_pension_income", period)
-        return where(retired, us_taxable_pension, 0)
+        military_pension = person("military_retirement_pay", period)
+        other_us_taxable_pension = (
+            person("taxable_pension_income", period) - military_pension
+        )
+        return military_pension + where(retired, other_us_taxable_pension, 0)

@@ -1,7 +1,9 @@
 description: New Jersey excludes these retirement income sources under the individual income tax pension and retirement exclusion program.
 values:
   2021-01-01:
-    - taxable_pension_income
+    # U.S. military pensions are exempt from gross income (N.J.S.A. 54A:6-26), so they are not part of this exclusion.
+    - taxable_public_pension_income
+    - taxable_private_pension_income
     - taxable_ira_distributions
     - taxable_401k_distributions
     - taxable_403b_distributions
@@ -17,3 +19,5 @@ metadata:
       href: https://law.justia.com/codes/new-jersey/2022/title-54a/section-54a-6-10/
     - title: New Jersey Division of Taxation Technical Bulletin GIT-1 & 2, Retirement Income
       href: https://www.nj.gov/treasury/taxation/pdf/pubs/tgi-ee/git1&2.pdf#page=18
+    - title: 2025 NJ-1040 Instructions, Line 20a (U.S. military pensions and survivor's benefit payments are not taxable)
+      href: https://www.nj.gov/treasury/taxation/pdf/current/1040i.pdf#page=15

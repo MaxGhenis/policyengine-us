@@ -14,7 +14,6 @@ values:
     - unemployment_compensation
     - workers_compensation
     - veterans_benefits
-    - military_retirement_pay
     # Excluded: SSI, SNAP, Medicaid, Reach Up, EITC, tax refunds,
     # education grants/scholarships, foster care payments,
     # adoption assistance, child support paid out

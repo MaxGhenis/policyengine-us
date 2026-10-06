@@ -12,7 +12,9 @@ values:
     - taxable_ira_distributions # Line 16
     - taxable_roth_conversions # Line 16
     - military_retirement_pay # Line 17
-    - taxable_pension_income # Line 18
+    # Line 18 excludes military retirement, which is reported on line 17.
+    - taxable_public_pension_income # Line 18
+    - taxable_private_pension_income # Line 18
     - disability_benefits # Line 18b
     - rental_income # Line 19
     - estate_income # Line 19
@@ -32,7 +34,9 @@ values:
     - taxable_ira_distributions # Line 16
     - taxable_roth_conversions # Line 16
     - military_retirement_pay # Line 17
-    - taxable_pension_income # Line 18
+    # Line 18 excludes military retirement, which is reported on line 17.
+    - taxable_public_pension_income # Line 18
+    - taxable_private_pension_income # Line 18
     - disability_benefits # Line 18b
     - rental_income # Line 19
     - estate_income # Line 19
@@ -50,7 +54,9 @@ values:
     - taxable_ira_distributions # Line 16
     - taxable_roth_conversions # Line 16
     - military_retirement_pay # Line 17
-    - taxable_pension_income # Line 18
+    # Line 18 excludes military retirement, which is reported on line 17.
+    - taxable_public_pension_income # Line 18
+    - taxable_private_pension_income # Line 18
     - disability_benefits # Line 18b
     - rental_income # Line 19
     - estate_income # Line 19
@@ -67,7 +73,9 @@ values:
     - taxable_ira_distributions # Line 16
     - taxable_roth_conversions # Line 16
     - military_retirement_pay # Line 17
-    - taxable_pension_income # Line 18
+    # Line 18 excludes military retirement, which is reported on line 17.
+    - taxable_public_pension_income # Line 18
+    - taxable_private_pension_income # Line 18
     - taxable_401k_distributions # Line 18
     - taxable_403b_distributions # Line 18
     - taxable_sep_distributions # Line 18
@@ -108,3 +116,5 @@ metadata:
       href: https://www.arkleg.state.ar.us/Acts/FTPDocument?path=%2FACTS%2F2017R%2FPublic%2F&file=141.pdf&ddBienniumSession=2017%2F2017R
     - title: Arkansas Code § 26-51-404
       href: https://law.justia.com/codes/arkansas/title-26/subtitle-5/chapter-51/subchapter-4/section-26-51-404/
+    - title: Arkansas 2025 AR1000F and AR1000NR Instructions, Line 17 (uniformed services retirement benefits) and Line 18A
+      href: https://www.dfa.arkansas.gov/wp-content/uploads/2025_AR1000F_and_AR1000NR_Instructions.pdf#page=10

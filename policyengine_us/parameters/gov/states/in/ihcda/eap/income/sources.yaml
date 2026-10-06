@@ -18,12 +18,9 @@ values:
     - farm_rent_income
     - unemployment_compensation
     - strike_benefits
+    # Section 6.1 (pages 54-55) counts ongoing pension and retirement payments,
+    # including military retirement pay, which pension_income includes.
     - pension_income
-    # Section 6.1 (pages 54-55) counts ongoing pension and retirement payments.
-    # Military retirement pay is a separate input from the pension inputs that
-    # pension_income adds, so both are listed; a household reports the amount
-    # in one or the other.
-    - military_retirement_pay
     # Section 6.1 (pages 54-55) and Section 6.2 (page 59) exclude lump-sum retirement
     # payments of the employee's contributions and interest, and withdrawals of
     # principal. This input cannot separate them from recurring payments, so every

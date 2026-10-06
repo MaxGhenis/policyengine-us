@@ -31,11 +31,9 @@ class mi_interest_dividends_capital_gains_deduction(Variable):
         # Military (including Michigan National Guard) retirement benefits
         # Public and private retirement and pension benefits
         # Amount used for the federal credit for the elderly and totally and permanently disabled
-        reductions_pay = add(
-            person,
-            period,
-            ["military_retirement_pay", "taxable_pension_income"],
-        )
+        # taxable_pension_income includes military_retirement_pay, so military
+        # retirement and other pension benefits are each counted once.
+        reductions_pay = person("taxable_pension_income", period)
         elderly_disabled_credit = tax_unit("elderly_disabled_credit", period)
 
         is_head_or_spouse = person("is_tax_unit_head_or_spouse", period)

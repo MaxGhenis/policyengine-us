@@ -5,6 +5,13 @@ values:
     - taxable_unemployment_compensation
     - us_govt_interest
     - salt_refund_income
+  2025-01-01:
+    - taxable_social_security
+    - taxable_unemployment_compensation
+    - us_govt_interest
+    - salt_refund_income
+    # Schedule CA line 5, column B (R&TC 17132.9).
+    - ca_military_retirement_exclusion
 
 metadata:
   reference:

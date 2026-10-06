@@ -4,6 +4,13 @@ values:
     - taxable_pension_income
     - taxable_401k_distributions
     - taxable_403b_distributions
+  2023-01-01:
+    # From 2023, military service pensions are modified out in full under
+    # 44-30-12(c)(11), and income used for that modification is excluded here.
+    - taxable_public_pension_income
+    - taxable_private_pension_income
+    - taxable_401k_distributions
+    - taxable_403b_distributions
 metadata:
   unit: list
   period: year
@@ -13,3 +20,7 @@ metadata:
       href: https://webserver.rilegislature.gov/Statutes/TITLE44/44-30/44-II/44-30-12.htm
     - title: Rhode Island Division of Taxation Publication 2021-02 Line 5b
       href: https://tax.ri.gov/sites/g/files/xkgbur541/files/notice/Pub_2021_02_pension_income_guide_04_06_21.pdf#page=5
+    - title: R.I. Gen. Laws § 44-30-12(c)(11)
+      href: https://webserver.rilegislature.gov/Statutes/TITLE44/44-30/44-II/44-30-12.htm
+    - title: Rhode Island Division of Taxation Publication 2026-01, Retirement Income Guide (Tax Year 2025), Pension and Annuity Income Modification
+      href: https://tax.ri.gov/sites/g/files/xkgbur541/files/2026-02/PUB_2026-01_Retirement_Income_Guide.pdf#page=6

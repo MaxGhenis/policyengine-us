@@ -23,10 +23,9 @@ values:
     - dividend_income
     - interest_income
     - rental_income
-    # 404.5(b)(5)(vii): pensions and annuities. PolicyEngine records military
-    # retirement separately from pension_income.
+    # 404.5(b)(5)(vii): pensions and annuities, including military retirement
+    # pay, which pension_income includes.
     - pension_income
-    - military_retirement_pay
     # 404.5(b)(5)(viii): unemployment compensation, including strike benefits
     # received from union funds.
     - unemployment_compensation

@@ -1,7 +1,9 @@
 description: Michigan counts these sources as qualifying retirement and pension benefits under MCL 206.30 and Form 4884. Under Michigan RAB 2023-22, distributions from defined contribution plans are deductible only to the extent attributable to employer or mandatory contributions; all distributions from such plans are modeled as eligible.
 values:
   2012-01-01:
-    - taxable_pension_income
+    # Military retirement is subtracted on Schedule 1 line 11, not on Form 4884.
+    - taxable_public_pension_income
+    - taxable_private_pension_income
     - taxable_ira_distributions
     - taxable_401k_distributions
     - taxable_403b_distributions
@@ -19,4 +21,5 @@ metadata:
       href: https://www.michigan.gov/taxes/-/media/Project/Websites/taxes/Forms/IIT/TY2024/4884-Instructions.pdf#page=1
     - title: 2025 Michigan Individual Income Tax Return Booklet MI-1040
       href: https://www.michigan.gov/taxes/-/media/Project/Websites/taxes/Forms/IIT/TY2025/MI-1040-Book.pdf#page=19
-
+    - title: 2024 Michigan Pension Schedule (Form 4884) Instructions, military pensions reported on Schedule 1 line 11
+      href: https://www.michigan.gov/taxes/-/media/Project/Websites/taxes/Forms/IIT/TY2024/4884-Instructions.pdf#page=1

@@ -23,8 +23,12 @@ class ks_agi_subtractions(Variable):
         # Proxy note: Kansas exempts KPERS, Kansas police/firemen, Kansas judges, and federal
         # civil service/military pensions; out-of-state public pensions are not exempt.
         # PolicyEngine models this by subtracting taxable_public_pension_income as an in-state proxy.
+        # Military retirement pay is its own input; (c)(vii) exempts retirement benefits
+        # "for service in the armed forces of the United States".
         taxable_public_pension_income = add(
-            tax_unit, period, ["taxable_public_pension_income"]
+            tax_unit,
+            period,
+            ["taxable_public_pension_income", "military_retirement_pay"],
         )
         return (
             oasdi_subtraction

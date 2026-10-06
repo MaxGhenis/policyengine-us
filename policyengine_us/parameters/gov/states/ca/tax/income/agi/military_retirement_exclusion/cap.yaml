@@ -1,0 +1,13 @@
+description: California excludes up to this amount of uniformed services retirement pay from gross income per return.
+values:
+  2025-01-01: 20_000
+  2030-01-01: 0
+metadata:
+  period: year
+  unit: currency-USD
+  label: California military retirement exclusion cap
+  reference:
+    - title: Cal. Rev. & Tax. Code § 17132.9 (added by SB 132, Stats. 2025, ch. 17)
+      href: https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=17132.9.
+    - title: 2025 California Form 540 Booklet, Schedule CA line 5 instructions (capped at $20,000 for a surviving spouse, spouses filing a joint return, and any other individual)
+      href: https://www.ftb.ca.gov/forms/2025/2025-540-booklet.pdf#page=60

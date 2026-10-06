@@ -1,0 +1,16 @@
+description: Indiana deducts this share of military retirement benefits above the base amount under the military retirement deduction.
+values:
+  2018-01-01: 0
+  2019-01-01: 0.25
+  2020-01-01: 0.5
+  2021-01-01: 0.75
+  2022-01-01: 1
+metadata:
+  period: year
+  unit: /1
+  label: Indiana military retirement deduction rate above the base amount
+  reference:
+    - title: IC 6-3-2-4(a)(2)
+      href: https://law.justia.com/codes/indiana/title-6/article-3/chapter-2/section-6-3-2-4
+    - title: Indiana Department of Revenue Income Tax Information Bulletin #6 (June 2025), Military Retirement or Survivor's Benefits
+      href: https://www.in.gov/dor/files/ib06.pdf#page=2

@@ -25,6 +25,9 @@ values:
     - tax_exempt_unemployment_compensation
     - tax_exempt_pension_income
     - taxable_public_pension_income
+    # Uniformed services retirement pay is excluded from MA gross income under
+    # c. 62 § 2(a)(2)(E), so it is re-added like other exempt public pensions.
+    - military_retirement_pay
     - tax_exempt_interest_income
     - ssi
     - ma_state_supplement

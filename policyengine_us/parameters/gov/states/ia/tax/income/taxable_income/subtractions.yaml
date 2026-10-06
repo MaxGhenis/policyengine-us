@@ -15,7 +15,9 @@ values:
     # Iowa Health Insurance Deduction
     # Iowa capital gains deduction
     - ia_529_plan_subtraction
-  2024-01-01: # military_retirement_pay added in 2024.
+  # Iowa Code 422.7(20) excludes military retirement pay regardless of age.
+  # The 2023 IA 1040 reported it inside line 7; from 2024 it has its own line.
+  2023-01-01:
     # Line 1B
     - us_govt_interest
     # Dividends from federal securities
@@ -44,3 +46,5 @@ metadata:
     href: https://www.legis.iowa.gov/docs/code/422.7.pdf
   - title: 2024 IA1040 Iowa Income Tax Return Instruction
     href: https://revenue.iowa.gov/media/4152/download?inline#page=61
+  - title: Iowa Code § 422.7(20) (military retirement pay)
+    href: https://www.legis.iowa.gov/docs/code/422.7.pdf#page=7

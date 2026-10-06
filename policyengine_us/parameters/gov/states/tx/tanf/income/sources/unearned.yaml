@@ -12,7 +12,6 @@ values:
     - veterans_benefits
     # A-1326.9: pensions, including military retirement and recurring withdrawals.
     - pension_income
-    - military_retirement_pay
     - retirement_distributions
     # A-1324.23: railroad retirement benefits.
     - railroad_benefits

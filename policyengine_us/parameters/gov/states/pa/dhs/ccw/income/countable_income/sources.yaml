@@ -9,7 +9,6 @@ values:
     - social_security_survivors
     - ssi
     - pension_income
-    - military_retirement_pay
     - unemployment_compensation
     - workers_compensation
     - veterans_benefits

@@ -10,6 +10,9 @@ values:
     # local governments, or the federal government. Pensions from other states are not exempt.
     # PolicyEngine subtracts taxable_public_pension_income as an in-state/federal proxy.
     - taxable_public_pension_income
+    # IT-201 line 26 covers pensions of the United States "including the
+    # military"; military retirement pay is its own input.
+    - military_retirement_pay
 metadata:
   unit: list
   period: year
@@ -19,6 +22,8 @@ metadata:
       href: https://newyork.public.law/laws/n.y._tax_law_section_612
     - title: 2023 New York Instructions for Form IT-201 Line 29
       href: https://www.tax.ny.gov/forms/html-instructions/2023/it/it201i-2023.htm#line-29
+    - title: 2025 NY Form IT-201 Instructions, Line 26 (pensions of the federal government, including the military)
+      href: https://www.tax.ny.gov/pdf/2025/inc/it201i_2025.pdf#page=9
     - title: 2024 NY Form IT-201 Instructions Line 29
       href: https://www.tax.ny.gov/pdf/2024/inc/it201i_2024.pdf#page=9
     - title: 2024 NY Form IT-201, Line 25 (Taxable refunds, credits, or offsets of state and local income taxes)

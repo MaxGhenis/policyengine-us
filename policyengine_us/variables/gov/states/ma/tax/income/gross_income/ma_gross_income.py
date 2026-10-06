@@ -23,10 +23,16 @@ class ma_gross_income(Variable):
         # Massachusetts, or reciprocal states are excluded from MA gross income.
         # Noncontributory or non-reciprocal public pensions are not exempt.
         # PolicyEngine treats taxable_public_pension_income as exempt public pensions.
+        # The same subparagraph excludes retirement pay of a retired member of the
+        # Uniformed Services, contributory or not.
         foreign_earned_income = tax_unit("foreign_earned_income_exclusion", period)
         social_security_in_agi = add(tax_unit, period, ["taxable_social_security"])
         salt_refund_income = add(tax_unit, period, ["salt_refund_income"])
-        public_pension = add(tax_unit, period, ["taxable_public_pension_income"])
+        public_pension = add(
+            tax_unit,
+            period,
+            ["taxable_public_pension_income", "military_retirement_pay"],
+        )
         deductions = (
             foreign_earned_income
             + social_security_in_agi

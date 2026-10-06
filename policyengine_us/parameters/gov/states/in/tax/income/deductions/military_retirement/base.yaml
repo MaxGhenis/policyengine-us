@@ -1,0 +1,12 @@
+description: Indiana allows a military retirement deduction of at least the lesser of the benefits and this amount per person.
+values:
+  2018-01-01: 6_250
+metadata:
+  period: year
+  unit: currency-USD
+  label: Indiana military retirement deduction base amount
+  reference:
+    - title: IC 6-3-2-4(a)(2)
+      href: https://law.justia.com/codes/indiana/title-6/article-3/chapter-2/section-6-3-2-4
+    - title: Indiana Department of Revenue Income Tax Information Bulletin #6 (June 2025), Military Retirement or Survivor's Benefits
+      href: https://www.in.gov/dor/files/ib06.pdf#page=2
