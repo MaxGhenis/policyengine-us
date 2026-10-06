@@ -71,3 +71,27 @@
     # line 9 = 6,000 + 500 = 6,500; Schedule 1, line 11 = 300, line 18 = 100,
     # line 20 = 2,000, line 26 = 2,400; line 11 = 4,100.
     medicaid_adjusted_gross_income_person: [50_000, 4_100]
+
+- name: Case 4, one spouse's IRA deduction lowers only that spouse's AGI.
+  period: 2024
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 40
+        employment_income: 30_000
+        traditional_ira_contributions: 6_000
+      spouse:
+        age: 40
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: TX
+  output:
+    # Before, each spouse took $3,000, and the spouse's -$3,000 was lost when
+    # medicaid_magi_person floored it at zero.
+    medicaid_adjusted_gross_income_person: [24_000, 0]
+    medicaid_magi_person: [24_000, 0]
