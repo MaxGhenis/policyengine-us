@@ -1,0 +1,93 @@
+......FFFFFsF                                                            [100%]
+=================================== FAILURES ===================================
+E   AssertionError: ('single', 2031)
+    assert [0.01, 0.02, ...8, 0.093, ...] == approx([0.01 ...23 ± 1.2e-07])
+      
+      comparison failed. Mismatched elements: 3 / 9:
+      Max absolute difference: 0.03
+      Max relative difference: 0.3225806451612903
+      Index | Obtained | Expected       
+      6     | 0.093    | 0.103 ± 1.0e-07
+      7     | 0.093    | 0.113 ± 1.1e-07
+      8     | 0.093    | 0.123 ± 1.2e-07
+/Users/maxghenis/.subfleet/worktrees/20261006-162602-hub-resume-9601/policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py:114: AssertionError: ('single', 2031)
+E   AssertionError: ('single', 2031)
+    assert [0.01, 0.02, ...8, 0.093, ...] == approx([0.01 ...93 ± 9.3e-08])
+      
+      comparison failed. Mismatched elements: 3 / 9:
+      Max absolute difference: 0.03
+      Max relative difference: 0.24390243902439024
+      Index | Obtained | Expected       
+      6     | 0.103    | 0.093 ± 9.3e-08
+      7     | 0.113    | 0.093 ± 9.3e-08
+      8     | 0.123    | 0.093 ± 9.3e-08
+/Users/maxghenis/.subfleet/worktrees/20261006-162602-hub-resume-9601/policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py:114: AssertionError: ('single', 2031)
+E   AssertionError: ('single', 2033)
+    assert [0.01, 0.02, ...8, 0.093, ...] == approx([0.01 ...23 ± 1.2e-07])
+      
+      comparison failed. Mismatched elements: 3 / 9:
+      Max absolute difference: 0.03
+      Max relative difference: 0.3225806451612903
+      Index | Obtained | Expected       
+      6     | 0.093    | 0.103 ± 1.0e-07
+      7     | 0.093    | 0.113 ± 1.1e-07
+      8     | 0.093    | 0.123 ± 1.2e-07
+/Users/maxghenis/.subfleet/worktrees/20261006-162602-hub-resume-9601/policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py:114: AssertionError: ('single', 2033)
+E   AssertionError: ('single', 2031)
+    assert [0.01, 0.02, ...8, 0.093, ...] == approx([0.01 ...23 ± 1.2e-07])
+      
+      comparison failed. Mismatched elements: 3 / 9:
+      Max absolute difference: 0.03
+      Max relative difference: 0.3225806451612903
+      Index | Obtained | Expected       
+      6     | 0.093    | 0.103 ± 1.0e-07
+      7     | 0.093    | 0.113 ± 1.1e-07
+      8     | 0.093    | 0.123 ± 1.2e-07
+/Users/maxghenis/.subfleet/worktrees/20261006-162602-hub-resume-9601/policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py:114: AssertionError: ('single', 2031)
+E   assert 0.093 == 0.104 ± 1.0e-07
+      
+      comparison failed
+      Obtained: 0.093
+      Expected: 0.104 ± 1.0e-07
+/Users/maxghenis/.subfleet/worktrees/20261006-162602-hub-resume-9601/policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py:234: assert 0.093 == 0.104 ± 1.0e-07
+E   assert 0.103 == 0.104 ± 1.0e-07
+      
+      comparison failed
+      Obtained: 0.103
+      Expected: 0.104 ± 1.0e-07
+/Users/maxghenis/.subfleet/worktrees/20261006-162602-hub-resume-9601/policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py:295: assert 0.103 == 0.104 ± 1.0e-07
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[single]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[separate]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[joint]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[surviving_spouse]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[head_of_household]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_preserves_thresholds_lower_rates_and_joint_scaling
+SKIPPED [1] policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py:262: old head has no _active_windows helper
+FAILED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_app_activation_from_2031
+FAILED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values0-active_years0]
+FAILED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values1-active_years1]
+FAILED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values2-active_years2]
+FAILED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_copies_2030_user_rates
+FAILED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_isolated_bypass_copies_2030_user_rate
+6 failed, 6 passed, 1 skipped in 403.56s (0:06:43)
+      565.10 real       125.68 user        27.62 sys
+          3921494016  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              372983  page reclaims
+                  94  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+              157467  voluntary context switches
+              491981  involuntary context switches
+        949866231958  instructions retired
+        420926326419  cycles elapsed
+          3842723056  peak memory footprint
+exit 1

@@ -1,0 +1,22 @@
+VERDICT: REQUEST_CHANGES
+
+1. **Blocker — `policyengine_us/reforms/states/ca/prop3/ca_prop3_reform.py:57`: inspecting only January 2031 misses later expiry.** Enable Prop 3 through 2100 and override `single[6].rate` to `.103` for **2031 only**. January 2031 then equals the 2030 rate, so restoration is skipped; 2032 onward remains `.093`. Exact application-sequence replay confirmed this failure. **Fix:** inspect dated rate intervals throughout each active window and restore the sunset wherever it remains, rather than deciding from January 2031 alone.
+
+2. **Should-fix — `policyengine_us/reforms/states/ca/prop3/ca_prop3_reform.py:55`: unrelated lower-rate edits are extended.** A bounded 2030 override changing the ordinary 2% bracket to `.021` is copied through every active year after 2030. Prop 3 does not extend that bracket’s temporary edit. **Fix:** identify brackets affected by the statutory sunset from the unreformed schedule, then copy their user-adjusted 2030 rates. Add a lightweight regression preserving bounded lower-rate edits.
+
+3. **Should-fix — `policyengine_us/reforms/states/ca/prop3/ca_prop3_reform.py:61`: whole-window updates mishandle future user overrides.** A `.104` top-bracket override for 2031 is erased. A 2033 override survives in `Simulation` when activation starts in 2031, but is erased when activation starts in 2033; bare `CountryTaxBenefitSystem` erases it in both cases. US `Simulation` applies structural reforms again at `system.py:250`, after Core’s user-reform replay. **Fix:** preserve explicit future overrides while restoring sunset intervals, and verify consistent results across both construction paths and repeated application.
+
+4. **Should-fix — `policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py:54`: required CI-cost evidence is missing.** The file constructs six full systems: one cached bypass system and five reformed simulations. The live PR has no before/after timing or memory assessment required by `CLAUDE.md:66`. Existing logs cover an older implementation or an import failure. **Fix:** document purpose and measured cost for `test-policy-contrib-python`, using existing CI reports and clearly identifying unavailable measurements.
+
+5. **Should-fix — `~/reviews/us-hub/specs/B1-9601.md:152`: the requested impact comparison remains outstanding.** Available evidence does not contain the main/corrected-baseline/Prop-3 weighted comparison for 2026, 2030, 2031 and 2035. Household examples do not establish downstream population effects. **Fix:** attach the specified comparison using identical data and weights, including AMT, withholding and household net income.
+
+6. **Nit — `policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py:272`: the window property misses endpoint errors.** January/July probes cannot distinguish a window ending December 31 from one ending December 30. A lightweight mutation check confirmed the shortened window passes every current probe. **Fix:** additionally check transitions, adjacent days and horizon endpoints.
+
+Verified:
+
+- Downloaded and inspected [Prop 55 p16](https://vig.cdn.sos.ca.gov/2016/general/en/pdf/text-proposed-laws.pdf#page=16), [Prop 3 pp6–7](https://vig.cdn.sos.ca.gov/2026/general/pdf/prop3-text-proposed-laws.pdf#page=6), and [LAO p2](https://vig.cdn.sos.ca.gov/2026/general/pdf/prop3.pdf#page=2). Dates, changed citations and anchors are correct; all five schedules revert exactly the three top brackets on January 1, 2031.
+- [RTC §17045](https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=17045.&lawCode=RTC) confirms joint/QSS treatment. Direct §17041 and Constitution §36 retrieval was blocked; official PDFs corroborate their cited provisions.
+- Independent Decimal arithmetic confirms every new YAML expectation, including $54,432.81, AMT and MHST stacking.
+- Core-only checks confirm normal window handling, `None` gaps, leap-day boundaries, horizon clipping, bypass behavior and bounded 2030 top-rate copying.
+- Hypothesis is declared and locked; registration filters `None`. Changelog filenames, election comments, and DTrim99’s requested coverage/layout changes are present.
+- Used the supplied green CI evidence; no full test folders or US models were run. No repository edits, commits, pushes or GitHub comments were made.

@@ -1,0 +1,11 @@
+.                                                                        [100%]
+==================================== PASSES ====================================
+============================== slowest durations ===============================
+6.65s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_windows_match_dated_in_effect
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_windows_match_dated_in_effect
+1 passed in 170.09s (0:02:50)
+      648.59 real        30.49 user         8.50 sys
+time: sysctl kern.clockrate: Operation not permitted

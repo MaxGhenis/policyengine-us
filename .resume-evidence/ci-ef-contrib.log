@@ -1,0 +1,1223 @@
+Full Suite - Contrib (other-shard-1)	Set up job	﻿2026-10-06T20:20:19.7834123Z Current runner version: '2.337.0'
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7862952Z ##[group]Runner Image Provisioner
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7863861Z Hosted Compute Agent
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7864567Z Version: 20260901.588
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7865265Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7866028Z Build Date: 2026-09-01T19:56:44Z
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7866896Z Worker ID: {b2ced03d-87c3-4eb0-9074-6420dbde0f46}
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7867640Z Azure Region: westcentralus
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7868486Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7870169Z ##[group]Operating System
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7870811Z Ubuntu
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7871511Z 24.04.5
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7872061Z LTS
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7872667Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7873271Z ##[group]Runner Image
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7873914Z Image: ubuntu-24.04
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7874639Z Version: 20260927.320.1
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7875740Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7877508Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7878791Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7882011Z ##[group]GITHUB_TOKEN Permissions
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7884182Z Actions: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7884976Z ArtifactMetadata: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7885673Z Attestations: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7886321Z Checks: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7887023Z CodeQuality: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7887607Z Contents: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7888648Z CopilotRequests: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7889286Z Deployments: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7889957Z Discussions: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7890563Z Drives: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7891144Z Issues: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7891758Z Metadata: read
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7892435Z Models: read
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7893126Z Packages: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7893729Z Pages: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7894308Z PullRequests: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7895006Z RepositoryProjects: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7895689Z SecurityEvents: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7896322Z Statuses: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7896997Z VulnerabilityAlerts: read
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7897630Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7899983Z Secret source: Actions
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7901023Z Cache mode: write
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.7902050Z Prepare workflow directory
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.8293047Z Prepare all required actions
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:19.8342801Z Getting action download info
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:20.1662038Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:20.2449500Z Download action repository 'actions/setup-python@v6' (SHA:ece7cb06caefa5fff74198d8649806c4678c61a1)
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:20.3213927Z Download action repository 'astral-sh/setup-uv@v8.1.0' (SHA:08807647e7069bb48b6ef5acd8ec9567f424441b)
+Full Suite - Contrib (other-shard-1)	Set up job	2026-10-06T20:20:21.1554378Z Complete job name: Full Suite - Contrib (other-shard-1)
+Full Suite - Contrib (other-shard-1)	Checkout repo	﻿2026-10-06T20:20:21.2272528Z ##[group]Run actions/checkout@v6
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2273459Z with:
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2274000Z   repository: PolicyEngine/policyengine-us
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2278885Z   token: ***
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2279368Z   ssh-strict: true
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2279839Z   ssh-user: git
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2280318Z   persist-credentials: true
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2280852Z   clean: true
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2281330Z   sparse-checkout-cone-mode: true
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2281895Z   fetch-depth: 1
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2282366Z   fetch-tags: false
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2282843Z   show-progress: true
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2283330Z   lfs: false
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2283781Z   submodules: false
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2284301Z   set-safe-directory: true
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2284865Z   allow-unsafe-pr-checkout: false
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2285651Z env:
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2286098Z   PYTHONUNBUFFERED: 1
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2286931Z   PYTEST_ADDOPTS: --durations=25 -p no:unraisableexception -p no:threadexception
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.2287770Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3345859Z Syncing repository: PolicyEngine/policyengine-us
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3348806Z ##[group]Getting Git version info
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3349858Z Working directory is '/home/runner/work/policyengine-us/policyengine-us'
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3351166Z [command]/usr/bin/git version
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3383886Z git version 2.55.0
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3405147Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3419890Z Temporarily overriding HOME='/home/runner/work/_temp/1cbfe5b8-afac-423f-9542-d66dff600992' before making global git config changes
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3422580Z Adding repository directory to the temporary git global config as a safe directory
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3425498Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3468665Z Deleting the contents of '/home/runner/work/policyengine-us/policyengine-us'
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3472711Z ##[group]Determining repository object format
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3475096Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3476550Z ##[group]Initializing the repository
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3480560Z [command]/usr/bin/git init /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3558314Z hint: Using 'master' as the name for the initial branch. This default branch name
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3559649Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3561494Z hint: to use in all of your new repositories, which will suppress this warning,
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3562577Z hint: call:
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3563092Z hint:
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3563733Z hint: 	git config --global init.defaultBranch <name>
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3564475Z hint:
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3565181Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3566403Z hint: 'development'. The just-created branch can be renamed via this command:
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3567273Z hint:
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3567782Z hint: 	git branch -m <name>
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3568730Z hint:
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3569844Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3572021Z Initialized empty Git repository in /home/runner/work/policyengine-us/policyengine-us/.git/
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3574014Z [command]/usr/bin/git remote add origin https://github.com/PolicyEngine/policyengine-us
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3613491Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3614367Z ##[group]Disabling automatic garbage collection
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3617088Z [command]/usr/bin/git config --local gc.auto 0
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3646720Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3647902Z ##[group]Setting up auth
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3649003Z Removing SSH command configuration
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3654022Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.3685492Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4010518Z Removing HTTP extra header
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4016613Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4049264Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4271130Z Removing includeIf entries pointing to credentials config files
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4276181Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4307746Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4538104Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4579869Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/policyengine-us/policyengine-us/.git.path /home/runner/work/_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4675075Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/policyengine-us/policyengine-us/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4679069Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4691688Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4722464Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4723300Z ##[group]Fetching the repository
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:21.4730853Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +eab32f562a69d26a3547c2fd39eada9ef3d124b3:refs/remotes/pull/9601/merge
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:28.2429866Z From https://github.com/PolicyEngine/policyengine-us
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:28.2431851Z  * [new ref]           eab32f562a69d26a3547c2fd39eada9ef3d124b3 -> pull/9601/merge
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:28.2435167Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:28.2436038Z ##[group]Determining the checkout info
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:28.2436879Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:28.2442724Z [command]/usr/bin/git sparse-checkout disable
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:28.2490230Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:28.2521549Z ##[group]Checking out the ref
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:28.2522115Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/9601/merge
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.2855358Z Updating files:  94% (17071/18095)
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.2975683Z Updating files:  95% (17191/18095)
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3049648Z Updating files:  96% (17372/18095)
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3111590Z Updating files:  97% (17553/18095)
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3174696Z Updating files:  98% (17734/18095)
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3254969Z Updating files:  99% (17915/18095)
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3255754Z Updating files: 100% (18095/18095)
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3256167Z Updating files: 100% (18095/18095), done.
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3543951Z Note: switching to 'refs/remotes/pull/9601/merge'.
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3544512Z 
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3544844Z You are in 'detached HEAD' state. You can look around, make experimental
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3545379Z changes and commit them, and you can discard any commits you make in this
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3546044Z state without impacting any branches by switching back to a branch.
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3546502Z 
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3546843Z If you want to create a new branch to retain commits you create, you may
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3547540Z do so (now or later) by using -c with the switch command. Example:
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3547807Z 
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3548749Z   git switch -c <new-branch-name>
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3549063Z 
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3549203Z Or undo this operation with:
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3549428Z 
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3549562Z   git switch -
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3549733Z 
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3549974Z Turn off this advice by setting config variable advice.detachedHead to false
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3550343Z 
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3550706Z HEAD is now at eab32f56 Merge ef290736bf90dd27827121b3773270b12e3155d1 into 6b80a8e4476d4c49900060ab58e0ac2cf96815c0
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3580046Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3625101Z [command]/usr/bin/git log -1 --format=%H
+Full Suite - Contrib (other-shard-1)	Checkout repo	2026-10-06T20:20:29.3650304Z eab32f562a69d26a3547c2fd39eada9ef3d124b3
+Full Suite - Contrib (other-shard-1)	Set up Python	﻿2026-10-06T20:20:29.3925695Z ##[group]Run actions/setup-python@v6
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.3926021Z with:
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.3926232Z   python-version: 3.14
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.3926465Z   check-latest: false
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.3929573Z   token: ***
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.3929804Z   update-environment: true
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.3930064Z   allow-prereleases: false
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.3930319Z   freethreaded: false
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.3930744Z env:
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.3931060Z   PYTHONUNBUFFERED: 1
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.3931503Z   PYTEST_ADDOPTS: --durations=25 -p no:unraisableexception -p no:threadexception
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.3931915Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.5236813Z ##[group]Installed versions
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.5322028Z Successfully set up CPython (3.14.7)
+Full Suite - Contrib (other-shard-1)	Set up Python	2026-10-06T20:20:29.5322878Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Install uv	﻿2026-10-06T20:20:29.5511951Z ##[group]Run astral-sh/setup-uv@v8.1.0
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5512255Z with:
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5512456Z   version: 0.12.13
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5512688Z   activate-environment: false
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5512944Z   no-project: false
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5513271Z   working-directory: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5516240Z   github-token: ***
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5516459Z   enable-cache: auto
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5517019Z   cache-dependency-glob: **/*requirements*.txt
+Full Suite - Contrib (other-shard-1)	Install uv	**/*requirements*.in
+Full Suite - Contrib (other-shard-1)	Install uv	**/*constraints*.txt
+Full Suite - Contrib (other-shard-1)	Install uv	**/*constraints*.in
+Full Suite - Contrib (other-shard-1)	Install uv	**/pyproject.toml
+Full Suite - Contrib (other-shard-1)	Install uv	**/uv.lock
+Full Suite - Contrib (other-shard-1)	Install uv	**/*.py.lock
+Full Suite - Contrib (other-shard-1)	Install uv	
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5517641Z   restore-cache: true
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5517860Z   save-cache: true
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5518071Z   prune-cache: true
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5518495Z   cache-python: false
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5518733Z   ignore-nothing-to-cache: false
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5519012Z   ignore-empty-workdir: false
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5519285Z   add-problem-matchers: true
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5519541Z   resolution-strategy: highest
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5519816Z env:
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5520020Z   PYTHONUNBUFFERED: 1
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5520399Z   PYTEST_ADDOPTS: --durations=25 -p no:unraisableexception -p no:threadexception
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5520868Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5521304Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5521737Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5522109Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5522482Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5522853Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.5523184Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.7213129Z Fetching manifest data from https://raw.githubusercontent.com/astral-sh/versions/main/v1/uv.ndjson ...
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:29.8585932Z Downloading uv from "https://releases.astral.sh/github/uv/releases/download/0.12.13/uv-x86_64-unknown-linux-gnu.tar.gz" ...
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:30.2144170Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/a3156804-f74f-48ce-95c2-7ec084ef592f -f /home/runner/work/_temp/e6ef271f-a3d8-4786-a566-c2ae96041322
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:30.6268009Z Added /home/runner/.local/bin to the path
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:30.6271221Z Added /opt/hostedtoolcache/uv/0.12.13/x86_64 to the path
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:30.6272894Z Set UV_PYTHON_INSTALL_DIR to /home/runner/work/_temp/uv-python-dir
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:30.6273443Z Added /home/runner/work/_temp/uv-python-dir to the path
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:30.6282294Z Set UV_CACHE_DIR to /home/runner/work/_temp/setup-uv-cache
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:30.6282710Z Successfully installed uv version 0.12.13
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:30.7280255Z Searching files using cache dependency glob: /home/runner/work/policyengine-us/policyengine-us/**/*requirements*.txt,/home/runner/work/policyengine-us/policyengine-us/**/*requirements*.in,/home/runner/work/policyengine-us/policyengine-us/**/*constraints*.txt,/home/runner/work/policyengine-us/policyengine-us/**/*constraints*.in,/home/runner/work/policyengine-us/policyengine-us/**/pyproject.toml,/home/runner/work/policyengine-us/policyengine-us/**/uv.lock,/home/runner/work/policyengine-us/policyengine-us/**/*.py.lock
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:30.7554709Z /home/runner/work/policyengine-us/policyengine-us/.github/tests/fixtures/registry/pyproject.toml
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:30.7570177Z /home/runner/work/policyengine-us/policyengine-us/.github/tests/fixtures/registry/uv.lock
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:34.0354547Z /home/runner/work/policyengine-us/policyengine-us/pyproject.toml
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:34.0368561Z /home/runner/work/policyengine-us/policyengine-us/uv.lock
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:34.0380297Z Found 4 files to hash.
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:34.0451170Z Trying to restore cache from GitHub Actions cache with key: setup-uv-2-x86_64-unknown-linux-gnu-ubuntu-24.04-3.14.7-pruned-6e308d14065561309d5a335b345e297b08ed86ff8f4ef8bf25bf85e697cb4287
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:34.2395565Z Cache hit for: setup-uv-2-x86_64-unknown-linux-gnu-ubuntu-24.04-3.14.7-pruned-6e308d14065561309d5a335b345e297b08ed86ff8f4ef8bf25bf85e697cb4287
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:34.6537390Z Received 1100 of 1100 (100.0%), 0.0 MBs/sec
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:34.6538008Z Cache Size: ~0 MB (1100 B)
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:34.6566384Z [command]/usr/bin/tar -xf /home/runner/work/_temp/101080bf-035e-4a7f-be20-7a5eb694d08c/cache.tzst -P -C /home/runner/work/policyengine-us/policyengine-us --use-compress-program unzstd
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:34.6636326Z Cache restored successfully
+Full Suite - Contrib (other-shard-1)	Install uv	2026-10-06T20:20:34.6641330Z cache restored from GitHub Actions cache with key: setup-uv-2-x86_64-unknown-linux-gnu-ubuntu-24.04-3.14.7-pruned-6e308d14065561309d5a335b345e297b08ed86ff8f4ef8bf25bf85e697cb4287
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	﻿2026-10-06T20:20:34.7366131Z ##[group]Run uv lock --upgrade-package policyengine-core
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7366711Z ^[[36;1muv lock --upgrade-package policyengine-core^[[0m
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7591135Z shell: /usr/bin/bash -e {0}
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7591440Z env:
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7591659Z   PYTHONUNBUFFERED: 1
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7592068Z   PYTEST_ADDOPTS: --durations=25 -p no:unraisableexception -p no:threadexception
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7592587Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7593045Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7593475Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7593860Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7594251Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7594647Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7595051Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7595482Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.7595783Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:34.8314617Z Using CPython 3.14.7 interpreter at: /opt/hostedtoolcache/Python/3.14.7/x64/bin/python3.14
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:36.0506574Z Resolved 150 packages in 1.21s
+Full Suite - Contrib (other-shard-1)	Resolve latest compatible PolicyEngine Core	2026-10-06T20:20:36.0545561Z Updated policyengine-core v3.32.8 -> v3.32.20
+Full Suite - Contrib (other-shard-1)	Install dependencies	﻿2026-10-06T20:20:36.0660687Z ##[group]Run uv sync --locked --extra dev
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0661267Z ^[[36;1muv sync --locked --extra dev^[[0m
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0730094Z shell: /usr/bin/bash -e {0}
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0730375Z env:
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0730593Z   PYTHONUNBUFFERED: 1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0730993Z   PYTEST_ADDOPTS: --durations=25 -p no:unraisableexception -p no:threadexception
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0731501Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0731945Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0732370Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0732766Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0733152Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0733548Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0733965Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0734398Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0734707Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0894155Z Using CPython 3.14.7 interpreter at: /opt/hostedtoolcache/Python/3.14.7/x64/bin/python3.14
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0894992Z Creating virtual environment at: .venv
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.0933910Z Resolved 150 packages in 0.83ms
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.1170891Z    Building policyengine-us @ file:///home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2247093Z Downloading pygments (1.2MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2260976Z Downloading sphinx (3.7MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2558659Z Downloading blosc2 (5.0MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2559217Z Downloading babel (9.7MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2564315Z Downloading plotly (18.2MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2568603Z Downloading accessible-pygments (1.3MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2570195Z Downloading jedi (1.5MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2571573Z Downloading hf-xet (3.2MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2573256Z Downloading networkx (2.0MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2578882Z Downloading tables (6.9MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2581086Z Downloading numpy (15.6MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2589589Z Downloading hypothesis (1.1MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2592369Z Downloading setuptools (1.0MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2593869Z Downloading h5py (4.9MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2596650Z Downloading jupyter-book (2.5MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2601499Z Downloading debugpy (4.1MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2603306Z Downloading spm-calculator (7.1MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2606287Z Downloading ruff (10.7MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:36.2618762Z Downloading pandas (10.4MiB)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.1951138Z  Downloaded setuptools
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.2109962Z  Downloaded hypothesis
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.2207423Z  Downloaded pygments
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.2424406Z  Downloaded accessible-pygments
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.2532683Z  Downloaded jedi
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.3238887Z  Downloaded networkx
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.3681283Z  Downloaded jupyter-book
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.4221730Z  Downloaded hf-xet
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.4969802Z  Downloaded debugpy
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.5012702Z  Downloaded sphinx
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.5168546Z  Downloaded h5py
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.5329046Z  Downloaded blosc2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.6089249Z  Downloaded tables
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.6259389Z  Downloaded spm-calculator
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.6959484Z  Downloaded babel
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.7409006Z  Downloaded ruff
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.7759094Z  Downloaded pandas
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:37.8037169Z  Downloaded numpy
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:38.3315009Z  Downloaded plotly
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:38.8373942Z       Built policyengine-us @ file:///home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:38.8384536Z Prepared 145 packages in 2.74s
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3519481Z Installed 145 packages in 513ms
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3520521Z  + accessible-pygments==0.0.5
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3521423Z  + alabaster==1.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3521823Z  + anyio==4.12.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3522172Z  + argon2-cffi==25.1.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3534170Z  + argon2-cffi-bindings==25.1.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3534586Z  + arrow==1.4.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3535326Z  + asttokens==3.0.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3535657Z  + attrs==25.4.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3535979Z  + babel==2.17.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3536305Z  + beautifulsoup4==4.14.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3536672Z  + bleach==6.3.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3536984Z  + blosc2==4.1.2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3537307Z  + build==1.4.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3537620Z  + census==0.8.26
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3537968Z  + certifi==2026.1.4
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3538452Z  + cffi==2.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3538789Z  + charset-normalizer==3.4.4
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3539192Z  + click==8.3.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3539502Z  + comm==0.2.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3539824Z  + coverage==7.13.2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3540160Z  + debugpy==1.8.19
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3540516Z  + decorator==5.2.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3540859Z  + defusedxml==0.7.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3541201Z  + docutils==0.22.4
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3541525Z  + dpath==2.2.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3541852Z  + et-xmlfile==2.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3542200Z  + executing==2.2.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3542550Z  + fastjsonschema==2.21.2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3542925Z  + filelock==3.20.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3543249Z  + fqdn==1.5.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3543577Z  + fsspec==2026.1.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3543901Z  + furo==2025.12.19
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3544206Z  + h11==0.16.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3544508Z  + h5py==3.15.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3544824Z  + hf-xet==1.2.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3545377Z  + httpcore==1.0.9
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3545728Z  + httpx==0.28.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3546066Z  + huggingface-hub==1.3.4
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3546445Z  + hypothesis==6.168.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3546800Z  + idna==3.11
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3547111Z  + imagesize==1.4.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3547440Z  + iniconfig==2.3.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3547768Z  + ipykernel==7.1.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3548108Z  + ipython==8.38.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3548608Z  + isoduration==20.11.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3548954Z  + jedi==0.19.2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3549268Z  + jellyfish==1.2.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3549588Z  + jinja2==3.1.6
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3549927Z  + jsonpickle==4.1.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3550272Z  + jsonpointer==3.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3550621Z  + jsonschema==4.26.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3551007Z  + jsonschema-specifications==2025.9.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3551472Z  + jupyter-book==2.1.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3551848Z  + jupyter-client==8.8.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3552249Z  + jupyter-core==5.9.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3552616Z  + jupyter-events==0.12.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3553036Z  + jupyter-server==2.17.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3553440Z  + jupyter-server-terminals==0.5.4
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3553889Z  + jupyterlab-pygments==0.3.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3554274Z  + lark==1.3.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3554607Z  + markupsafe==3.0.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3554968Z  + matplotlib-inline==0.2.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3555363Z  + microdf-python==1.2.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3555724Z  + mistune==3.2.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3556125Z  + msgpack==1.1.2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3556490Z  + nbclient==0.10.4
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3556823Z  + nbconvert==7.16.6
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3557171Z  + nbformat==5.10.4
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3557499Z  + ndindex==1.10.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3557848Z  + nest-asyncio==1.6.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3558435Z  + networkx==3.6.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3558766Z  + nodeenv==1.10.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3559097Z  + numexpr==2.14.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3559417Z  + numpy==2.4.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3559744Z  + openpyxl==3.1.5
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3560072Z  + packaging==26.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3560420Z  + pandas==3.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3560761Z  + pandocfilters==1.5.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3561121Z  + parso==0.8.5
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3561520Z  + pexpect==4.9.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3561872Z  + platformdirs==4.5.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3562235Z  + plotly==5.24.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3562574Z  + pluggy==1.6.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3562931Z  + policyengine-core==3.32.20
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3563631Z  + policyengine-us==2.29.13 (from file:///home/runner/work/policyengine-us/policyengine-us)
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3564387Z  + prometheus-client==0.24.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3564805Z  + prompt-toolkit==3.0.52
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3565412Z  + psutil==6.1.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3565756Z  + ptyprocess==0.7.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3566119Z  + pure-eval==0.2.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3566479Z  + py-cpuinfo==9.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3566825Z  + pycparser==3.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3567157Z  + pygments==2.19.2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3567514Z  + pyproject-hooks==1.2.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3567893Z  + pytest==8.4.2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3568392Z  + python-dateutil==2.9.0.post0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3568827Z  + python-json-logger==4.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3569226Z  + pyvis==0.3.2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3569552Z  + pyyaml==6.0.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3569872Z  + pyzmq==27.1.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3570203Z  + referencing==0.37.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3570555Z  + requests==2.32.5
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3570912Z  + rfc3339-validator==0.1.4
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3571295Z  + rfc3986-validator==0.1.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3571667Z  + rfc3987-syntax==1.1.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3572036Z  + roman-numerals==4.1.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3572404Z  + rpds-py==0.30.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3572741Z  + ruff==0.15.5
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3573066Z  + send2trash==2.1.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3573408Z  + setuptools==80.10.2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3573775Z  + shellingham==1.5.4
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3574140Z  + six==1.17.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3574476Z  + snowballstemmer==3.0.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3574869Z  + sortedcontainers==2.4.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3575250Z  + soupsieve==2.8.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3575863Z  + sphinx==9.1.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3576197Z  + sphinx-basic-ng==1.0.0b2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3576612Z  + sphinxcontrib-applehelp==2.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3577067Z  + sphinxcontrib-devhelp==2.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3577513Z  + sphinxcontrib-htmlhelp==2.1.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3577948Z  + sphinxcontrib-jsmath==1.0.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3578504Z  + sphinxcontrib-qthelp==2.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3578950Z  + sphinxcontrib-serializinghtml==2.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3579432Z  + spm-calculator==1.0.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3579803Z  + stack-data==0.6.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3580161Z  + standard-imghdr==3.13.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3580532Z  + tables==3.11.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3580904Z  + tenacity==9.1.2
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3581239Z  + terminado==0.18.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3581574Z  + tinycss2==1.4.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3581902Z  + tornado==6.5.4
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3582230Z  + towncrier==25.8.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3582564Z  + tqdm==4.67.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3582887Z  + traitlets==5.14.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3583230Z  + typer-slim==0.21.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3583599Z  + typing-extensions==4.15.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3583989Z  + tzdata==2025.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3584324Z  + uri-template==1.3.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3584672Z  + urllib3==2.6.3
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3584986Z  + us==3.2.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3585298Z  + wcwidth==0.5.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3585584Z  + webcolors==25.10.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3585887Z  + webencodings==0.5.1
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3586228Z  + websocket-client==1.9.0
+Full Suite - Contrib (other-shard-1)	Install dependencies	2026-10-06T20:20:39.3586583Z  + wheel==0.46.3
+Full Suite - Contrib (other-shard-1)	Turn off default branching	﻿2026-10-06T20:20:39.3754892Z ##[group]Run bash ./update_itemization.sh
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3755276Z ^[[36;1mbash ./update_itemization.sh^[[0m
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3824486Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3824855Z env:
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3825075Z   PYTHONUNBUFFERED: 1
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3825952Z   PYTEST_ADDOPTS: --durations=25 -p no:unraisableexception -p no:threadexception
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3826703Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3827166Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3827597Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3827980Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3828559Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3828937Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3829350Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3829764Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+Full Suite - Contrib (other-shard-1)	Turn off default branching	2026-10-06T20:20:39.3830068Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	﻿2026-10-06T20:20:39.3984616Z ##[group]Run uv run --no-sync make test-yaml-structural-other
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.3985094Z ^[[36;1muv run --no-sync make test-yaml-structural-other^[[0m
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4047870Z shell: /usr/bin/bash -e {0}
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4048645Z env:
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4048865Z   PYTHONUNBUFFERED: 1
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4049270Z   PYTEST_ADDOPTS: --durations=25 -p no:unraisableexception -p no:threadexception
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4049780Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4050223Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4050648Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4051031Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4051411Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4051800Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4052203Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4052625Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4052925Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4861130Z # Per-subdir so every remaining contrib folder runs in its own subprocess,
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4867606Z # instead of stacking ~20 light files into one ~13-min catch-all batch that
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4874467Z # risked the 30-min per-batch timeout on slow runners. ssa is excluded (it
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4881715Z # has no YAML tests — only a pytest .py run elsewhere). --workers 1 so a
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4887944Z # single ~1-5 GB peak is resident at a time, leaving headroom for growth.
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.4895744Z python policyengine_us/tests/test_batched.py policyengine_us/tests/policy/contrib --exclude states,ctc,ubi_center,federal,harris,treasury,crfb,congress,refundable_credit_conversion,ssa --mode per-subdir --workers 1
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.6465780Z PolicyEngine Test Runner
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.6466335Z ============================================================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.6466960Z Test path: policyengine_us/tests/policy/contrib
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.6467613Z Requested batches: 2
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.6468590Z Excluding: states, ctc, ubi_center, federal, harris, treasury, crfb, congress, refundable_credit_conversion, ssa
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:39.6550382Z Total test files: 174
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:40.2645640Z Actual batches: 13 (optimized for 174 files)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:40.2646237Z ============================================================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:40.2646554Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:40.2646681Z [Batch 1/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:40.2649748Z   Test files: ~3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:40.2650278Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:40.2650869Z     Running Batch 1...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:40.2651252Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:40.2651447Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:44.5414149Z /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/IPython/core/interactiveshell.py:3141: SyntaxWarning: 'return' in a 'finally' block
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:20:44.5415489Z   return result
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:21:14.7077314Z     Still running Batch 1 after 34s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:21:25.1095235Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:21:25.1096104Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:21:25.1107186Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:21:25.1107806Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:21:25.1114742Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:21:25.1309638Z collected 44 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:21:25.1316300Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:05.1995436Z policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml ....................
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:28.6153140Z policyengine_us/tests/policy/contrib/aca/ptc_additional_bracket.yaml ............
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:58.2220840Z policyengine_us/tests/policy/contrib/aca/ptc_simplified_bracket.yaml ............
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:58.2227231Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:58.2227979Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:58.2229002Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:58.2230758Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:58.2232411Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:58.2232873Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:58.2233357Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0260917Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0262017Z 29.13s call     policyengine_us/tests/policy/contrib/aca/ptc_simplified_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0263106Z 22.94s call     policyengine_us/tests/policy/contrib/aca/ptc_additional_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0264109Z 22.91s call     policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0265142Z 8.92s call     policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0266071Z 3.40s call     policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0267540Z 3.14s call     policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0268612Z 0.30s call     policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0269539Z 0.29s call     policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0270511Z 0.29s call     policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0271416Z 0.29s call     policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0272384Z 0.05s call     policyengine_us/tests/policy/contrib/aca/ptc_additional_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0273353Z 0.05s call     policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0274270Z 0.05s call     policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0275187Z 0.05s call     policyengine_us/tests/policy/contrib/aca/ptc_700_fpl_cliff.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0278070Z 0.05s call     policyengine_us/tests/policy/contrib/aca/ptc_additional_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0279386Z 0.05s call     policyengine_us/tests/policy/contrib/aca/ptc_simplified_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0280517Z 0.04s call     policyengine_us/tests/policy/contrib/aca/ptc_simplified_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0281603Z 0.04s call     policyengine_us/tests/policy/contrib/aca/ptc_simplified_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0282720Z 0.04s call     policyengine_us/tests/policy/contrib/aca/ptc_additional_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0283904Z 0.04s call     policyengine_us/tests/policy/contrib/aca/ptc_additional_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0284963Z 0.04s call     policyengine_us/tests/policy/contrib/aca/ptc_simplified_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0286043Z 0.04s call     policyengine_us/tests/policy/contrib/aca/ptc_simplified_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0287179Z 0.04s call     policyengine_us/tests/policy/contrib/aca/ptc_simplified_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0288273Z 0.04s call     policyengine_us/tests/policy/contrib/aca/ptc_additional_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0289273Z 0.04s call     policyengine_us/tests/policy/contrib/aca/ptc_additional_bracket.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0290230Z =================== 44 passed, 1 warning in 93.86s (0:01:33) ===================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0290748Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0291043Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0291492Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.0291828Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.6442287Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.6443099Z     Batch completed in 139.4s (peak RSS: 7750 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.6445340Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.6484154Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.6484855Z [Batch 2/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.6486573Z   Test files: ~1
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.6486981Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.6487497Z     Running Batch 2...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.6487811Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:22:59.6487960Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:23:29.8155243Z     Still running Batch 2 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:23:35.9296173Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:23:35.9297091Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:23:35.9297863Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:23:35.9298921Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:23:35.9301456Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:23:44.7483074Z collected 18 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:23:44.7483538Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:24:55.1823148Z policyengine_us/tests/policy/contrib/additional_tax_bracket/additional_tax_bracket_reform.yaml .........
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:26:32.4161854Z policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py .......    Still running Batch 2 after 213s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:27:07.9869550Z .    Still running Batch 2 after 248s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:27:38.0574490Z     Still running Batch 2 after 278s (60s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:28:08.1292018Z     Still running Batch 2 after 308s (90s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:28:38.2001828Z     Still running Batch 2 after 339s (120s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:29:08.2718575Z     Still running Batch 2 after 369s (150s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:29:38.3448885Z     Still running Batch 2 after 399s (181s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:08.4174789Z     Still running Batch 2 after 429s (211s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3664567Z .
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3664851Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3665142Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3665886Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3666846Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3667752Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3667990Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3668524Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3668995Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3669860Z 230.50s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_reform_tax_is_finite_and_at_least_tax_without_the_bracket
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3671029Z 35.66s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_reform_with_unset_bracket_reproduces_current_law
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3671952Z 25.25s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/additional_tax_bracket_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3675089Z 22.68s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/additional_tax_bracket_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3676525Z 21.97s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_default_parameters_give_finite_taxes[2026]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3678675Z 19.87s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_default_parameters_give_finite_taxes[2025]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3680137Z 17.61s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/additional_tax_bracket_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3681707Z 13.45s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_schedule_tax_is_finite_and_matches_core_tax_scale
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3683086Z 4.39s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/additional_tax_bracket_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3683998Z 3.28s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_baseline_schedule_is_unchanged_in_every_year
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3685150Z 2.93s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_amount_taxed_below_rate_is_finite_and_matches_indicator_rates
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3686347Z 2.76s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_added_bracket_changes_tax_by_its_own_income_only
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3687451Z 2.73s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_unset_added_bracket_adds_nothing
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3688614Z 0.30s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/additional_tax_bracket_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3689390Z 0.05s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/additional_tax_bracket_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3690831Z 0.05s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/additional_tax_bracket_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3692206Z 0.05s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/additional_tax_bracket_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3692957Z 0.05s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/additional_tax_bracket_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3693369Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3693564Z (7 durations < 0.005s hidden.  Use -vv to show these durations.)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3694020Z ================== 18 passed, 1 warning in 412.48s (0:06:52) ===================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3694292Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3694407Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3694594Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.3694737Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.9339448Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.9340097Z     Batch completed in 449.3s (peak RSS: 8007 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.9340501Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.9371781Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.9371939Z [Batch 3/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.9374528Z   Test files: ~1
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.9374863Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.9375216Z     Running Batch 3...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.9375451Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:28.9375580Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:30:59.1059084Z     Still running Batch 3 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:05.2196612Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:05.2197527Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:05.2198662Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:05.2199333Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:05.2199869Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:05.2200392Z collected 1 item
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:05.2200630Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.3907764Z policyengine_us/tests/policy/contrib/biden/budget_2025/capital_gains_tax_increase.yaml     Still running Batch 3 after 66s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.6913299Z .
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.6914817Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.6915099Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.6915742Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.6917101Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.6918611Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.6918941Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.6919258Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.7757394Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.7758688Z 30.46s call     policyengine_us/tests/policy/contrib/biden/budget_2025/capital_gains_tax_increase.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.7759401Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.7782674Z (2 durations < 0.005s hidden.  Use -vv to show these durations.)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.7783362Z ======================== 1 passed, 1 warning in 30.60s =========================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.7783783Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.7783938Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.7807543Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:35.7807740Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:36.0448387Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:36.0449412Z     Batch completed in 67.1s (peak RSS: 3356 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:36.0449961Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:36.0480240Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:36.0480450Z [Batch 4/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:36.0483200Z   Test files: ~1
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:36.0483651Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:36.0484134Z     Running Batch 4...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:36.0484474Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:31:36.0484617Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:32:06.2165719Z     Still running Batch 4 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:32:12.0087838Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:32:12.0088738Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:32:12.0102688Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:32:12.0103296Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:32:12.0111794Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:32:12.0270448Z collected 4 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:32:12.0279638Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:32:42.1983353Z policyengine_us/tests/policy/contrib/deductions/salt/limit_salt_deduction_to_property_taxes.yaml     Still running Batch 4 after 66s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.0967787Z ....
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.0975840Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.0976190Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.0978085Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.0980200Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.0981431Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.0981916Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.0982291Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3000814Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3002084Z 36.62s call     policyengine_us/tests/policy/contrib/deductions/salt/limit_salt_deduction_to_property_taxes.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3003468Z 18.81s call     policyengine_us/tests/policy/contrib/deductions/salt/limit_salt_deduction_to_property_taxes.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3004854Z 0.34s call     policyengine_us/tests/policy/contrib/deductions/salt/limit_salt_deduction_to_property_taxes.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3006189Z 0.30s call     policyengine_us/tests/policy/contrib/deductions/salt/limit_salt_deduction_to_property_taxes.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3007004Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3007384Z (8 durations < 0.005s hidden.  Use -vv to show these durations.)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3008060Z ======================== 4 passed, 1 warning in 56.21s =========================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3008646Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3008889Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3019799Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.3020082Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.6661366Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.6662061Z     Batch completed in 92.6s (peak RSS: 4351 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.6664309Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.6691956Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.6692181Z [Batch 5/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.6694121Z   Test files: ~1
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.6694530Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.6695033Z     Running Batch 5...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.6695377Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:08.6695573Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:38.8363764Z     Still running Batch 5 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:44.5967094Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:44.5968026Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:44.5978972Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:44.5979850Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:44.5984899Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:44.6138974Z collected 5 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:33:44.6145596Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.7187916Z policyengine_us/tests/policy/contrib/eitc/halve_joint_eitc_phase_out_rate.yaml .....
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.7192807Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.7193547Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.7194311Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.7195893Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.7197788Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.7198370Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.7198721Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9211842Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9213037Z 20.55s call     policyengine_us/tests/policy/contrib/eitc/halve_joint_eitc_phase_out_rate.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9214236Z 9.42s call     policyengine_us/tests/policy/contrib/eitc/halve_joint_eitc_phase_out_rate.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9215361Z 0.05s call     policyengine_us/tests/policy/contrib/eitc/halve_joint_eitc_phase_out_rate.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9216520Z 0.04s call     policyengine_us/tests/policy/contrib/eitc/halve_joint_eitc_phase_out_rate.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9217643Z 0.04s call     policyengine_us/tests/policy/contrib/eitc/halve_joint_eitc_phase_out_rate.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9218574Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9219357Z (10 durations < 0.005s hidden.  Use -vv to show these durations.)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9220145Z ======================== 5 passed, 1 warning in 30.25s =========================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9220646Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9220955Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9234221Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:14.9234612Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:15.2390197Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:15.2390566Z     Batch completed in 66.6s (peak RSS: 3731 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:15.2398894Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:15.2422018Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:15.2422175Z [Batch 6/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:15.2425840Z   Test files: ~2
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:15.2426219Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:15.2426703Z     Running Batch 6...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:15.2427031Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:15.2427231Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:45.4097384Z     Still running Batch 6 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:51.3230023Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:51.3230564Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:51.3231012Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:51.3231367Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:51.3231634Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:51.3231939Z collected 19 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:34:51.3232073Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:35:41.7616266Z policyengine_us/tests/policy/contrib/local/ny/nyc_mamdani_income_tax.yaml ..........
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:29.3547405Z policyengine_us/tests/policy/contrib/local/ny/test_nyc_mamdani_income_tax_properties.py .....
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.6491709Z policyengine_us/tests/policy/contrib/local/nyc/stc/nyc_school_tax_credit_with_phase_out.yaml ....
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.6498583Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.6499061Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.6499856Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.6501577Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.6503217Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.6503688Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.6504168Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8519292Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8520474Z 27.46s call     policyengine_us/tests/policy/contrib/local/ny/nyc_mamdani_income_tax.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8521636Z 22.64s call     policyengine_us/tests/policy/contrib/local/ny/nyc_mamdani_income_tax.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8522855Z 22.16s call     policyengine_us/tests/policy/contrib/local/nyc/stc/nyc_school_tax_credit_with_phase_out.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8524898Z 21.56s call     policyengine_us/tests/policy/contrib/local/ny/test_nyc_mamdani_income_tax_properties.py::test_no_tax_change_outside_nyc
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8526618Z 13.08s call     policyengine_us/tests/policy/contrib/local/ny/test_nyc_mamdani_income_tax_properties.py::test_no_tax_change_before_delayed_activation
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8528644Z 12.94s call     policyengine_us/tests/policy/contrib/local/ny/test_nyc_mamdani_income_tax_properties.py::test_tax_change_matches_reference_for_every_household_size
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8530276Z 0.05s call     policyengine_us/tests/policy/contrib/local/nyc/stc/nyc_school_tax_credit_with_phase_out.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8531486Z 0.05s call     policyengine_us/tests/policy/contrib/local/ny/nyc_mamdani_income_tax.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8532558Z 0.05s call     policyengine_us/tests/policy/contrib/local/ny/nyc_mamdani_income_tax.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8535909Z 0.05s call     policyengine_us/tests/policy/contrib/local/ny/nyc_mamdani_income_tax.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8537104Z 0.04s call     policyengine_us/tests/policy/contrib/local/ny/nyc_mamdani_income_tax.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8539989Z 0.04s call     policyengine_us/tests/policy/contrib/local/ny/nyc_mamdani_income_tax.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8541640Z 0.04s call     policyengine_us/tests/policy/contrib/local/nyc/stc/nyc_school_tax_credit_with_phase_out.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8542952Z 0.04s call     policyengine_us/tests/policy/contrib/local/ny/nyc_mamdani_income_tax.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8544104Z 0.04s call     policyengine_us/tests/policy/contrib/local/ny/nyc_mamdani_income_tax.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8545349Z 0.04s call     policyengine_us/tests/policy/contrib/local/nyc/stc/nyc_school_tax_credit_with_phase_out.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8546582Z 0.04s call     policyengine_us/tests/policy/contrib/local/ny/nyc_mamdani_income_tax.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8547203Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8547619Z (8 durations < 0.005s hidden.  Use -vv to show these durations.)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8549025Z ================== 19 passed, 1 warning in 120.50s (0:02:00) ===================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8549465Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8549633Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8549899Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:51.8550109Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:52.5199364Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:52.5200058Z     Batch completed in 157.3s (peak RSS: 8340 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:52.5200652Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:52.5230016Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:52.5230338Z [Batch 7/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:52.5232312Z   Test files: ~1
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:52.5232708Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:52.5233216Z     Running Batch 7...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:52.5233896Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:36:52.5234031Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:22.6901202Z     Still running Batch 7 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:28.8834700Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:28.8835277Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:28.8849122Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:28.8849542Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:28.8849837Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:28.9011222Z collected 5 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:28.9020115Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.7549731Z policyengine_us/tests/policy/contrib/reconciliation/reconciled_ssn_for_llc_and_aoc.yaml .....
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.7556058Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.7556488Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.7557239Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.7559149Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.7560784Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.7561592Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.7562152Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9577033Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9578715Z 22.65s call     policyengine_us/tests/policy/contrib/reconciliation/reconciled_ssn_for_llc_and_aoc.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9580009Z 0.06s call     policyengine_us/tests/policy/contrib/reconciliation/reconciled_ssn_for_llc_and_aoc.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9581226Z 0.05s call     policyengine_us/tests/policy/contrib/reconciliation/reconciled_ssn_for_llc_and_aoc.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9582401Z 0.05s call     policyengine_us/tests/policy/contrib/reconciliation/reconciled_ssn_for_llc_and_aoc.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9583611Z 0.04s call     policyengine_us/tests/policy/contrib/reconciliation/reconciled_ssn_for_llc_and_aoc.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9584290Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9584593Z (10 durations < 0.005s hidden.  Use -vv to show these durations.)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9585307Z ======================== 5 passed, 1 warning in 22.99s =========================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9585736Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9585899Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9597336Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:51.9597651Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:52.2239623Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:52.2240317Z     Batch completed in 59.7s (peak RSS: 3127 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:52.2240975Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:52.2271946Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:52.2272334Z [Batch 8/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:52.2273179Z   Test files: ~2
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:52.2273605Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:52.2274127Z     Running Batch 8...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:52.2274469Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:37:52.2274641Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:38:22.3942832Z     Still running Batch 8 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:38:28.1670257Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:38:28.1671114Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:38:28.1682407Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:38:28.1683166Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:38:28.1683643Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:38:28.1844120Z collected 4 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:38:28.1850959Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:09.3660809Z policyengine_us/tests/policy/contrib/snap/abolish_snap_deductions.yaml ..
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.2842139Z policyengine_us/tests/policy/contrib/snap/abolish_snap_net_income_test.yaml ..
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.2842864Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.2844998Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.2846176Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.2847813Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.2852016Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.2852529Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.2852981Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3641170Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3642065Z 27.78s call     policyengine_us/tests/policy/contrib/snap/abolish_snap_deductions.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3643021Z 17.79s call     policyengine_us/tests/policy/contrib/snap/abolish_snap_net_income_test.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3643927Z 13.31s call     policyengine_us/tests/policy/contrib/snap/abolish_snap_deductions.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3644850Z 0.16s call     policyengine_us/tests/policy/contrib/snap/abolish_snap_net_income_test.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3645433Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3657637Z (8 durations < 0.005s hidden.  Use -vv to show these durations.)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3658767Z ======================== 4 passed, 1 warning in 59.20s =========================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3659140Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3659285Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3676227Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.3676836Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.8322086Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.8322611Z     Batch completed in 95.6s (peak RSS: 5957 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.8323001Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.8355437Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.8355908Z [Batch 9/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.8358322Z   Test files: ~1
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.8358756Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.8359188Z     Running Batch 9...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.8359549Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:27.8359746Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:39:58.0036576Z     Still running Batch 9 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:04.1291970Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:04.1296354Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:04.1306894Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:04.1307523Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:04.1317659Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:04.1462871Z collected 1 item
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:04.1468297Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:34.3195609Z policyengine_us/tests/policy/contrib/snap_ea/snap_ca_ea_reform.yaml     Still running Batch 9 after 66s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.7156296Z .
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.7164785Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.7165207Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.7165707Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.7167015Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.7168082Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.7168657Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.7171137Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.9189867Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.9190514Z 37.57s call     policyengine_us/tests/policy/contrib/snap_ea/snap_ca_ea_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.9190870Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.9191061Z (2 durations < 0.005s hidden.  Use -vv to show these durations.)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.9191486Z ======================== 1 passed, 1 warning in 37.71s =========================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.9191743Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.9191848Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.9216233Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:41.9216682Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:42.1857317Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:42.1858010Z     Batch completed in 74.3s (peak RSS: 3646 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:42.1858679Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:42.1893695Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:42.1894123Z [Batch 10/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:42.1894477Z   Test files: ~1
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:42.1894879Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:42.1895320Z     Running Batch 10...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:42.1895560Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:40:42.1895699Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:12.3562367Z     Still running Batch 10 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:18.4702978Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:18.4703814Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:18.4704534Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:18.4705185Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:18.4705636Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:18.4797283Z collected 7 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:18.4802935Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.1226301Z policyengine_us/tests/policy/contrib/state_dependent_exemptions/repeal_state_dependent_exemptions.yaml .......
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.1231277Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.1233853Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.1234604Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.1236213Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.1237716Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.1238116Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.1238662Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3249798Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3250974Z 22.50s call     policyengine_us/tests/policy/contrib/state_dependent_exemptions/repeal_state_dependent_exemptions.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3252428Z 17.61s call     policyengine_us/tests/policy/contrib/state_dependent_exemptions/repeal_state_dependent_exemptions.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3253739Z 0.31s call     policyengine_us/tests/policy/contrib/state_dependent_exemptions/repeal_state_dependent_exemptions.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3255070Z 0.06s call     policyengine_us/tests/policy/contrib/state_dependent_exemptions/repeal_state_dependent_exemptions.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3256403Z 0.06s call     policyengine_us/tests/policy/contrib/state_dependent_exemptions/repeal_state_dependent_exemptions.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3257719Z 0.05s call     policyengine_us/tests/policy/contrib/state_dependent_exemptions/repeal_state_dependent_exemptions.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3259250Z 0.05s call     policyengine_us/tests/policy/contrib/state_dependent_exemptions/repeal_state_dependent_exemptions.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3260008Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3260291Z (14 durations < 0.005s hidden.  Use -vv to show these durations.)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3260973Z ======================== 7 passed, 1 warning in 40.78s =========================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3261385Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3261539Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3265793Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.3266359Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.6909410Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.6910074Z     Batch completed in 77.5s (peak RSS: 4290 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.6910593Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.6940665Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.6940863Z [Batch 11/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.6942861Z   Test files: ~1
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.6943263Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.6943780Z     Running Batch 11...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.6944466Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:41:59.6944605Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:42:29.8612774Z     Still running Batch 11 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:42:35.9756796Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:42:35.9757768Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:42:35.9758740Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:42:35.9761311Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:42:35.9762207Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:42:35.9762734Z collected 5 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:42:35.9762958Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5349273Z policyengine_us/tests/policy/contrib/tax_exempt/tax_exempt_reform.yaml .....
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5350129Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5352823Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5355308Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5357038Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5359158Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5360028Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5360398Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5946132Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5947217Z 25.69s call     policyengine_us/tests/policy/contrib/tax_exempt/tax_exempt_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5948478Z 24.40s call     policyengine_us/tests/policy/contrib/tax_exempt/tax_exempt_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5949522Z 22.66s call     policyengine_us/tests/policy/contrib/tax_exempt/tax_exempt_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5950559Z 22.04s call     policyengine_us/tests/policy/contrib/tax_exempt/tax_exempt_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5951568Z 17.74s call     policyengine_us/tests/policy/contrib/tax_exempt/tax_exempt_reform.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5952224Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5966425Z (10 durations < 0.005s hidden.  Use -vv to show these durations.)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5967174Z =================== 5 passed, 1 warning in 112.68s (0:01:52) ===================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5967637Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5967808Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5984023Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:28.5984368Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:29.3137371Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:29.3138761Z     Batch completed in 149.6s (peak RSS: 9421 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:29.3139185Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:29.3169240Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:29.3169462Z [Batch 12/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:29.3173514Z   Test files: ~14
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:29.3173949Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:29.3174422Z     Running Batch 12...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:29.3174768Z     Paths: 1 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:29.3174944Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:44:59.4856907Z     Still running Batch 12 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:05.2967043Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:05.2967902Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:05.2979860Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:05.2980485Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:05.2980936Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:05.3935763Z collected 157 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:05.3940957Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:17.9069257Z policyengine_us/tests/policy/contrib/taxsim/misc/capital_gains.yaml .
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:18.5863262Z policyengine_us/tests/policy/contrib/taxsim/misc/ctc.yaml ..
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:18.6494407Z policyengine_us/tests/policy/contrib/taxsim/misc/eitc_2021_childless.yaml .
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:45.5631277Z policyengine_us/tests/policy/contrib/taxsim/misc/general.yaml .....
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:45.7642270Z policyengine_us/tests/policy/contrib/taxsim/misc/qualified_dividends.yaml .
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:46.0233755Z policyengine_us/tests/policy/contrib/taxsim/misc/sch_r.yaml .
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:50.8331084Z policyengine_us/tests/policy/contrib/taxsim/outputs/taxsim_outputs.yaml ......................
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:57.1511041Z policyengine_us/tests/policy/contrib/taxsim/taxsim_v10.yaml ................................
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:57.6128654Z policyengine_us/tests/policy/contrib/taxsim/taxsim_v10_2018.yaml ........
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:59.4429187Z policyengine_us/tests/policy/contrib/taxsim/taxsim_v11.yaml ................................
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:45:59.9029052Z policyengine_us/tests/policy/contrib/taxsim/taxsim_v11_2018.yaml ........
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:00.0793772Z policyengine_us/tests/policy/contrib/taxsim/taxsim_v12.yaml ....
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:01.8323323Z policyengine_us/tests/policy/contrib/taxsim/taxsim_v13.yaml ................................
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.2741541Z policyengine_us/tests/policy/contrib/taxsim/taxsim_v13_2018.yaml ........
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.2745481Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.2745763Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.2746470Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.2750883Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.2752413Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.2752821Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.2753182Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4765813Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4766592Z 17.04s call     policyengine_us/tests/policy/contrib/taxsim/misc/general.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4767501Z 12.51s call     policyengine_us/tests/policy/contrib/taxsim/misc/capital_gains.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4768632Z 5.96s call     policyengine_us/tests/policy/contrib/taxsim/misc/general.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4769463Z 4.34s call     policyengine_us/tests/policy/contrib/taxsim/taxsim_v10.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4770267Z 3.52s call     policyengine_us/tests/policy/contrib/taxsim/misc/general.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4771147Z 3.15s call     policyengine_us/tests/policy/contrib/taxsim/outputs/taxsim_outputs.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4772015Z 0.48s call     policyengine_us/tests/policy/contrib/taxsim/misc/ctc.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4772821Z 0.33s call     policyengine_us/tests/policy/contrib/taxsim/taxsim_v10.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4773643Z 0.31s call     policyengine_us/tests/policy/contrib/taxsim/outputs/taxsim_outputs.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4774526Z 0.31s call     policyengine_us/tests/policy/contrib/taxsim/outputs/taxsim_outputs.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4775356Z 0.29s call     policyengine_us/tests/policy/contrib/taxsim/misc/sch_r.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4776138Z 0.20s call     policyengine_us/tests/policy/contrib/taxsim/misc/general.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4776890Z 0.20s call     policyengine_us/tests/policy/contrib/taxsim/misc/ctc.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4777731Z 0.18s call     policyengine_us/tests/policy/contrib/taxsim/misc/qualified_dividends.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4778745Z 0.18s call     policyengine_us/tests/policy/contrib/taxsim/misc/general.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4779686Z 0.07s call     policyengine_us/tests/policy/contrib/taxsim/taxsim_v11.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4780735Z 0.06s call     policyengine_us/tests/policy/contrib/taxsim/taxsim_v10.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4781742Z 0.06s call     policyengine_us/tests/policy/contrib/taxsim/misc/eitc_2021_childless.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4782783Z 0.06s call     policyengine_us/tests/policy/contrib/taxsim/outputs/taxsim_outputs.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4783719Z 0.06s call     policyengine_us/tests/policy/contrib/taxsim/taxsim_v10.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4784552Z 0.06s call     policyengine_us/tests/policy/contrib/taxsim/taxsim_v10.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4785779Z 0.06s call     policyengine_us/tests/policy/contrib/taxsim/taxsim_v10.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4786593Z 0.06s call     policyengine_us/tests/policy/contrib/taxsim/taxsim_v11.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4787407Z 0.06s call     policyengine_us/tests/policy/contrib/taxsim/taxsim_v10.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4788353Z 0.06s call     policyengine_us/tests/policy/contrib/taxsim/taxsim_v11.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4789101Z ======================= 157 passed, 1 warning in 57.11s ========================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4789544Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4789717Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4790655Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.4790861Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.8434564Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.8435191Z     Batch completed in 93.5s (peak RSS: 4794 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.8435736Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.8465341Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.8465639Z [Batch 13/13]
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.8467821Z   Test files: ~2
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.8468304Z ------------------------------------------------------------
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.8468689Z     Running Batch 13...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.8468935Z     Paths: 2 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:02.8469075Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:33.0136765Z     Still running Batch 13 after 30s (30s since last output)...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:38.9641228Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:38.9653000Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:38.9653753Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:38.9654452Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:38.9654948Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:38.9849294Z collected 4 items
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:46:38.9856232Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:01.7273120Z policyengine_us/tests/policy/contrib/dc_kccatc.yaml ..
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.8326675Z policyengine_us/tests/policy/contrib/dc_single_joint_threshold_ratio.yaml ..
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.8327514Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.8328044Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.8329010Z .venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.8330774Z   /home/runner/work/policyengine-us/policyengine-us/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.8332626Z     self._mark_plugins_for_rewrite(hook, disable_autoload)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.8333075Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.8333458Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9239290Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9240231Z 27.78s call     policyengine_us/tests/policy/contrib/dc_single_joint_threshold_ratio.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9241090Z 22.69s call     policyengine_us/tests/policy/contrib/dc_kccatc.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9241914Z 16.29s call     policyengine_us/tests/policy/contrib/dc_single_joint_threshold_ratio.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9242716Z 0.05s call     policyengine_us/tests/policy/contrib/dc_kccatc.yaml::
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9243151Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9243495Z (8 durations < 0.005s hidden.  Use -vv to show these durations.)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9260729Z =================== 4 passed, 1 warning in 66.96s (0:01:06) ====================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9261288Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9261561Z __POLICYENGINE_BATCH_EXIT__ 0
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9278293Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:45.9278789Z     Runner reported exit 0; terminating process...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3933110Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3933764Z     Batch completed in 103.5s (peak RSS: 5995 MB, exit 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3934161Z   Cleaning up memory...
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3966537Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3966793Z ============================================================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3967217Z TEST SUMMARY
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3968005Z ============================================================
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3968549Z Total test files: 174
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3968851Z   Batch 1: 139.4s | peak RSS: 7750 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3969205Z   Batch 2: 449.3s | peak RSS: 8007 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3969549Z   Batch 3: 67.1s | peak RSS: 3356 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3969882Z   Batch 4: 92.6s | peak RSS: 4351 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3970221Z   Batch 5: 66.6s | peak RSS: 3731 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3970561Z   Batch 6: 157.3s | peak RSS: 8340 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3970891Z   Batch 7: 59.7s | peak RSS: 3127 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3971216Z   Batch 8: 95.6s | peak RSS: 5957 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3971532Z   Batch 9: 74.3s | peak RSS: 3646 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3971849Z   Batch 10: 77.5s | peak RSS: 4290 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3972181Z   Batch 11: 149.6s | peak RSS: 9421 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3972516Z   Batch 12: 93.5s | peak RSS: 4794 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3972841Z   Batch 13: 103.5s | peak RSS: 5995 MB | exit 0 | passed
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3973127Z Workers: 1
+Full Suite - Contrib (other-shard-1)	Run Contrib YAML tests (other-shard-1)	2026-10-06T20:47:46.3973326Z Total time: 1626.1s
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	﻿2026-10-06T20:47:46.4143272Z ##[group]Run uv run --no-sync make test-policy-contrib-python
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4143753Z ^[[36;1muv run --no-sync make test-policy-contrib-python^[[0m
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4210848Z shell: /usr/bin/bash -e {0}
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4211117Z env:
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4211329Z   PYTHONUNBUFFERED: 1
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4211718Z   PYTEST_ADDOPTS: --durations=25 -p no:unraisableexception -p no:threadexception
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4212222Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4212646Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4213066Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4213456Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4213831Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4214208Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4214618Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4215043Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4215355Z ##[endgroup]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:47:46.4404195Z pytest $(find policyengine_us/tests/policy/contrib -name 'test*.py' -print) --maxfail=0
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:48:06.7950752Z ============================= test session starts ==============================
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:48:06.7951552Z platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:48:06.7963565Z rootdir: /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:48:06.7964091Z configfile: pyproject.toml
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:48:06.7964394Z plugins: anyio-4.12.1, hypothesis-6.168.3
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:48:10.3253774Z collected 72 items
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:48:10.3258773Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:48:10.3267680Z policyengine_us/tests/policy/contrib/ssa/test_trustees_core_thresholds.py . [  1%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:49:00.9293308Z ........                                                                 [ 12%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:49:18.9027378Z policyengine_us/tests/policy/contrib/local/ny/test_nyc_mamdani_income_tax_properties.py . [ 13%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:49:52.2939054Z ....                                                                     [ 19%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:49:52.2944309Z policyengine_us/tests/policy/contrib/refundable_credit_conversion/test_refundable_credit_conversion_autoloader.py . [ 20%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:49:52.2961122Z ..                                                                       [ 23%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:50:22.6111874Z policyengine_us/tests/policy/contrib/congress/afa/test_ok_federal_ctc_under_afa.py . [ 25%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:55:06.4901293Z .........                                                                [ 37%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:55:06.5079251Z policyengine_us/tests/policy/contrib/states/test_dependent_exemption_reform_activation.py . [ 38%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:55:06.5242399Z .....................                                                    [ 68%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:55:20.3160702Z policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py . [ 69%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:58:50.4264826Z ...........                                                              [ 84%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:59:08.3867876Z policyengine_us/tests/policy/contrib/states/test_id_ga_ctc_reform_activation.py . [ 86%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:59:51.1276036Z .                                                                        [ 87%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T20:59:58.2662183Z policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py . [ 88%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6720830Z ........                                                                 [100%]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6721242Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6721434Z =============================== warnings summary ===============================
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6722237Z policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_default_parameters_give_finite_taxes[2025]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6723323Z policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_default_parameters_give_finite_taxes[2026]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6725905Z policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_reform_with_unset_bracket_reproduces_current_law
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6727538Z   /home/runner/work/policyengine-us/policyengine-us/policyengine_us/variables/gov/irs/income/taxable_income/adjusted_gross_income/irs_gross_income/unemployment_insurance/taxable_unemployment_insurance.py:22: RuntimeWarning: invalid value encountered in divide
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6728958Z     share = where(tax_unit_uc > 0, person_uc / tax_unit_uc, 0)
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6729215Z 
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6729453Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6729931Z ============================= slowest 25 durations =============================
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6730753Z 204.66s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_reform_tax_is_finite_and_at_least_tax_without_the_bracket
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6731908Z 54.54s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_preserves_thresholds_lower_rates_and_joint_scaling
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6732922Z 50.29s call     policyengine_us/tests/policy/contrib/ssa/test_trustees_core_thresholds.py::test_reform_leaves_long_run_economic_assumptions_unchanged
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6733874Z 42.74s call     policyengine_us/tests/policy/contrib/states/test_id_ga_ctc_reform_activation.py::test__id_ctc_revival_does_not_leak_before_activation
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6734968Z 39.63s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values2-active_years2]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6736067Z 37.87s call     policyengine_us/tests/policy/contrib/congress/afa/test_ok_federal_ctc_under_afa.py::test_ok_child_care_child_tax_credit_over_agi_limit_under_afa
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6737314Z 35.00s call     policyengine_us/tests/policy/contrib/congress/afa/test_ok_federal_ctc_under_afa.py::test_ok_federal_ctc_computes_under_ctc_restructuring_reforms[gov.contrib.congress.golden.fisc_act.in_effect-_check_fisc]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6738700Z 34.00s call     policyengine_us/tests/policy/contrib/congress/afa/test_ok_federal_ctc_under_afa.py::test_ok_federal_ctc_high_income_guard_branch_under_afa
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6739672Z 32.61s call     policyengine_us/tests/policy/contrib/congress/afa/test_ok_federal_ctc_under_afa.py::test_ok_federal_ctc_leading_edge_2025_under_afa
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6740625Z 32.00s call     policyengine_us/tests/policy/contrib/congress/afa/test_ok_federal_ctc_under_afa.py::test_ok_child_care_child_tax_credit_downstream_under_afa
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6741582Z 31.76s call     policyengine_us/tests/policy/contrib/congress/afa/test_ok_federal_ctc_under_afa.py::test_ok_federal_ctc_computes_after_afa_2039_cliff
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6742623Z 31.75s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_reform_with_unset_bracket_reproduces_current_law
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6743745Z 30.97s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_default_parameters_give_finite_taxes[2025]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6744743Z 30.31s call     policyengine_us/tests/policy/contrib/congress/afa/test_ok_federal_ctc_under_afa.py::test_ok_federal_ctc_computes_under_afa
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6745840Z 30.27s call     policyengine_us/tests/policy/contrib/congress/afa/test_ok_federal_ctc_under_afa.py::test_ok_federal_ctc_computes_under_ctc_restructuring_reforms[gov.contrib.congress.afa.in_effect-_check_afa]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6746936Z 28.56s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_copies_2030_user_rates
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6747980Z 27.18s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values1-active_years1]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6749447Z 26.45s call     policyengine_us/tests/policy/contrib/congress/afa/test_ok_federal_ctc_under_afa.py::test_ok_federal_ctc_zero_ctc_guard_path_under_afa
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6750373Z 24.34s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_app_activation_from_2031
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6751686Z 23.91s call     policyengine_us/tests/policy/contrib/congress/afa/test_ok_federal_ctc_under_afa.py::test_ok_federal_ctc_computes_under_ctc_restructuring_reforms[gov.contrib.congress.tlaib.economic_dignity_for_all_agenda.end_child_poverty_act.in_effect-_check_ecpa]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6753132Z 23.66s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values0-active_years0]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6754262Z 20.14s call     policyengine_us/tests/policy/contrib/additional_tax_bracket/test_additional_tax_bracket_unset_bracket.py::test_default_parameters_give_finite_taxes[2026]
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6755347Z 17.97s call     policyengine_us/tests/policy/contrib/local/ny/test_nyc_mamdani_income_tax_properties.py::test_tax_change_matches_reference_for_every_household_size
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6756355Z 17.96s call     policyengine_us/tests/policy/contrib/states/test_id_ga_ctc_reform_activation.py::test__ga_refundable_ctc_does_not_leak_before_activation
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6757311Z 17.22s call     policyengine_us/tests/policy/contrib/local/ny/test_nyc_mamdani_income_tax_properties.py::test_no_tax_change_before_delayed_activation
+Full Suite - Contrib (other-shard-1)	Run Contrib Python tests	2026-10-06T21:04:55.6757997Z ================= 72 passed, 3 warnings in 1008.88s (0:16:48) ==================
+Full Suite - Contrib (other-shard-1)	Post Install uv	﻿2026-10-06T21:05:39.0236797Z Post job cleanup.
+Full Suite - Contrib (other-shard-1)	Post Install uv	2026-10-06T21:05:39.1424206Z UV_CACHE_DIR is already set to /home/runner/work/_temp/setup-uv-cache
+Full Suite - Contrib (other-shard-1)	Post Install uv	2026-10-06T21:05:39.1435565Z UV_PYTHON_INSTALL_DIR is already set to /home/runner/work/_temp/uv-python-dir
+Full Suite - Contrib (other-shard-1)	Post Install uv	2026-10-06T21:05:39.1436653Z Cache hit occurred on key setup-uv-2-x86_64-unknown-linux-gnu-ubuntu-24.04-3.14.7-pruned-6e308d14065561309d5a335b345e297b08ed86ff8f4ef8bf25bf85e697cb4287, not saving cache.
+Full Suite - Contrib (other-shard-1)	Post Set up Python	﻿2026-10-06T21:05:39.2090727Z Post job cleanup.
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	﻿2026-10-06T21:05:39.3551680Z Post job cleanup.
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.4423245Z [command]/usr/bin/git version
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.4465971Z git version 2.55.0
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.4506436Z Temporarily overriding HOME='/home/runner/work/_temp/a37e3321-f43a-4934-8358-d9b9d48841f8' before making global git config changes
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.4508013Z Adding repository directory to the temporary git global config as a safe directory
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.4511491Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/policyengine-us/policyengine-us
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.4545378Z Removing SSH command configuration
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.4552233Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.4592702Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.4908866Z Removing HTTP extra header
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.4916520Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.4958606Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5256219Z Removing includeIf entries pointing to credentials config files
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5262958Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5291969Z includeif.gitdir:/home/runner/work/policyengine-us/policyengine-us/.git.path
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5293388Z includeif.gitdir:/home/runner/work/policyengine-us/policyengine-us/.git/worktrees/*.path
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5298871Z includeif.gitdir:/github/workspace/.git.path
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5299857Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5303080Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/policyengine-us/policyengine-us/.git.path
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5328758Z /home/runner/work/_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5342083Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/policyengine-us/policyengine-us/.git.path /home/runner/work/_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5381350Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/policyengine-us/policyengine-us/.git/worktrees/*.path
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5404487Z /home/runner/work/_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5415058Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/policyengine-us/policyengine-us/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5452793Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5479123Z /github/runner_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5490095Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5527455Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5552628Z /github/runner_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5568382Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5608108Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Full Suite - Contrib (other-shard-1)	Post Checkout repo	2026-10-06T21:05:39.5896128Z Removing credentials config '/home/runner/work/_temp/git-credentials-709b5297-592b-4247-aa87-b6ebc8a33caa.config'
+Full Suite - Contrib (other-shard-1)	Complete job	﻿2026-10-06T21:05:39.6073618Z Cleaning up orphan processes

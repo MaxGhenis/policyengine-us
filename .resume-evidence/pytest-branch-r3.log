@@ -1,0 +1,73 @@
+.............F.                                                          [100%]
+=================================== FAILURES ===================================
+_________________ test_ca_prop3_windows_match_dated_in_effect __________________
+
+    @settings(max_examples=300, deadline=None)
+>   @given(updates=UPDATES)
+                   ^^^
+E   hypothesis.errors.FailedHealthCheck: Input generation is slow: Hypothesis only generated 3 valid inputs after 158.40 seconds (1 inputs which exceeded the maximum allowed entropy).
+E   
+E               count | fraction |    slowest draws (seconds)
+E     updates |    4  |    100%  |      --      --   0.002,  0.014, 158.381
+E   
+E   This could be for a few reasons:
+E   1. This strategy could be generating too much data per input. Try decreasing the amount of data generated, for example by decreasing the minimum size of collection strategies like st.lists().
+E   2. Some other expensive computation could be running during input generation. For example, if @st.composite or st.data() is interspersed with an expensive computation, HealthCheck.too_slow is likely to trigger. If this computation is unrelated to input generation, move it elsewhere. Otherwise, try making it more efficient, or disable this health check if that is not possible.
+E   
+E   If you expect input generation to take this long, you can disable this health check with @settings(suppress_health_check=[HealthCheck.too_slow]). See https://hypothesis.readthedocs.io/en/latest/reference/api.html#hypothesis.HealthCheck for details.
+
+policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py:376: FailedHealthCheck
+---------------------------------- Hypothesis ----------------------------------
+You can reproduce this failure by adding @seed(267871053670879012239892464994036801716) to this test, or by running pytest with --hypothesis-seed=267871053670879012239892464994036801716.
+==================================== PASSES ====================================
+============================== slowest durations ===============================
+228.50s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_keeps_user_edits_on_both_construction_paths
+158.64s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_windows_match_dated_in_effect
+114.98s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_app_activation_from_2031
+108.36s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values2-active_years2]
+106.82s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_copies_2030_user_rates
+94.89s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values1-active_years1]
+72.21s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values0-active_years0]
+44.92s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[single]
+32.51s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_preserves_thresholds_lower_rates_and_joint_scaling
+29.73s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_restores_only_the_enacted_sunset
+0.10s setup    policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[separate]
+0.02s call     policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[head_of_household]
+
+(33 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[single]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[separate]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[joint]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[surviving_spouse]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_rates_all_statuses_and_years[head_of_household]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_preserves_thresholds_lower_rates_and_joint_scaling
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_app_activation_from_2031
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values0-active_years0]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values1-active_years1]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_respects_delayed_and_bounded_activation[in_effect_values2-active_years2]
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_copies_2030_user_rates
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_enacted_schedules_match_baseline_rates
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_keeps_user_edits_on_both_construction_paths
+PASSED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_restores_only_the_enacted_sunset
+FAILED policyengine_us/tests/policy/contrib/states/ca/prop3/test_ca_prop3_reform.py::test_ca_prop3_windows_match_dated_in_effect
+1 failed, 14 passed in 1028.44s (0:17:08)
+     1205.73 real       229.48 user        40.02 sys
+          4060102656  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              509208  page reclaims
+                  16  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+              334349  voluntary context switches
+              970162  involuntary context switches
+       1539934730396  instructions retired
+        659413826983  cycles elapsed
+          3924561136  peak memory footprint
+exit 1

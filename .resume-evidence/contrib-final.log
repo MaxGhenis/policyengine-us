@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/maxghenis/.subfleet/worktrees/20261007-055850-hub-resume-sol2-9601
+configfile: pyproject.toml
+plugins: hypothesis-6.168.3, anyio-4.15.1
+collected 11 items
+
+policyengine_us/tests/policy/contrib/states/ca/prop3/ca_prop3.yaml ...........
+
+=============================== warnings summary ===============================
+../../../PolicyEngine/_worktrees/pe-us-backlog/main/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1345
+  /Users/maxghenis/PolicyEngine/_worktrees/pe-us-backlog/main/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1345: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 11 passed, 1 warning in 106.25s (0:01:46) ===================
+
+{"exit_code": 0, "wall_seconds": 412.09, "max_rss_bytes": 3952623616}
