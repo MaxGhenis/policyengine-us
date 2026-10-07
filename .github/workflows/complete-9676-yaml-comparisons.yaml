@@ -1,0 +1,146 @@
+name: complete 9676 YAML comparisons
+on:
+  push:
+    branches: [wip/9676-yaml-comparisons]
+permissions:
+  contents: read
+  actions: read
+env:
+  MODEL_SHA: e39bb2c4c248ac4699032d7053f7429213014e75
+  MAIN_SHA: 5b1d5bdf47044607341d76f3c932ba2e7b74a060
+  OLD_HEAD_SHA: a6c44418afccac0270dcb9ea155338dac0c9a05d
+  SOURCE_RUN_ID: "37551528031"
+jobs:
+  comparisons:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: harness
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ env.MODEL_SHA }}
+          path: wip
+      - uses: actions/checkout@v6
+        with:
+          repository: PolicyEngine/policyengine-us
+          ref: ${{ env.MAIN_SHA }}
+          path: main
+      - uses: actions/checkout@v6
+        with:
+          repository: PolicyEngine/policyengine-us
+          ref: ${{ env.OLD_HEAD_SHA }}
+          path: old_head
+      - name: Preserve completed source evidence without altering its receipts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p original-evidence saved-evidence continuation validation
+          gh run view "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --json databaseId,status,conclusion,headSha,url,event,workflowName > continuation/source-run.json
+          gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --name resumed-9676-evidence --dir original-evidence
+          python3 - <<'PY'
+          import hashlib, json, os, shutil
+          from pathlib import Path
+          source = Path('original-evidence')
+          meta = json.loads(Path('continuation/source-run.json').read_text())
+          assert meta['status'] == 'completed' and meta['conclusion'] == 'failure'
+          assert str(meta['databaseId']) == os.environ['SOURCE_RUN_ID']
+          assert meta['headSha'] == os.environ['MODEL_SHA']
+          versions = {json.loads(p.read_text())['python'] for p in source.glob('logs/*/runtime.json')}
+          assert versions == {'3.14.7'}, versions
+          manifest = {str(p.relative_to(source)): hashlib.sha256(p.read_bytes()).hexdigest()
+                      for p in source.rglob('*') if p.is_file()}
+          Path('continuation/source-manifest.json').write_text(json.dumps(manifest, indent=2))
+          shutil.copytree(source, 'saved-evidence', dirs_exist_ok=True)
+          Path('continuation/controller.json').write_text(json.dumps({
+              'controller_run_id': os.environ['GITHUB_RUN_ID'],
+              'controller_sha': os.environ['GITHUB_SHA'],
+              'model_sha': os.environ['MODEL_SHA'],
+              'source_run_id': os.environ['SOURCE_RUN_ID'],
+              'phase': 'two-missing-yaml-comparisons',
+          }, indent=2))
+          PY
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14.7"
+      - uses: astral-sh/setup-uv@v8.1.0
+      - name: Install the exact source environment
+        working-directory: wip
+        run: |
+          uv sync --locked --extra dev
+          uv pip install --python .venv/bin/python policyengine-core==3.32.15
+          uv pip freeze --python .venv/bin/python > "$GITHUB_WORKSPACE/continuation/packages.txt"
+          diff -u "$GITHUB_WORKSPACE/original-evidence/logs/packages.txt" "$GITHUB_WORKSPACE/continuation/packages.txt"
+      - name: Run only the two previously unusable comparisons sequentially
+        run: |
+          mkdir -p "$RUNNER_TEMP/member-fixtures"
+          fixture="$RUNNER_TEMP/member-fixtures/member.yaml"
+          cp "$GITHUB_WORKSPACE/wip/policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_is_assistance_unit_member.yaml" "$fixture"
+          for code in main old_head; do
+            cd "$GITHUB_WORKSPACE/$code"
+            export PYTHONPATH="$PWD"
+            if [ "$code" = main ]; then name=main_new_member_yaml; else name=old_head_new_member_yaml; fi
+            args=("$code" "$fixture" "$GITHUB_WORKSPACE/continuation/$code-receipt.json")
+            if [ "$code" = main ]; then
+              args+=(--failure-output "$GITHUB_WORKSPACE/saved-evidence/logs/main/main_new_member_failures.json")
+            fi
+            /usr/bin/time -v -o "$GITHUB_WORKSPACE/saved-evidence/logs/$code/$name.time" \
+              "$GITHUB_WORKSPACE/wip/.venv/bin/python" "$GITHUB_WORKSPACE/harness/.wip-9676-evidence/complete_yaml_comparison.py" \
+              "${args[@]}" > "$GITHUB_WORKSPACE/saved-evidence/logs/$code/$name.log" 2>&1
+            tail -n 15 "$GITHUB_WORKSPACE/saved-evidence/logs/$code/$name.log"
+          done
+          cd "$GITHUB_WORKSPACE"
+          python - <<'PY'
+          from pathlib import Path
+          for task, name in [('main', 'main_new_member_yaml'), ('old_head', 'old_head_new_member_yaml')]:
+              path = Path(f'saved-evidence/logs/{task}/summary.txt')
+              lines = path.read_text().splitlines()
+              replacements = [i for i, line in enumerate(lines) if line.startswith(name + ' actual=')]
+              assert len(replacements) == 1
+              lines[replacements[0]] = f'{name} actual=0 expected=0'
+              assert lines[-1] == 'Unexpected result flag: 1'
+              lines[-1] = 'Unexpected result flag: 0'
+              path.write_text('\n'.join(lines) + '\n')
+          PY
+      - name: Validate combined evidence with separate source and controller provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run view "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --json databaseId,status,conclusion,headSha,url,event,workflowName > continuation/controller-run.json
+          python harness/.wip-9676-evidence/validate_completed_yaml_evidence.py "$GITHUB_WORKSPACE" \
+            --output validation/result.json > validation/validator.log 2>&1
+      - name: Collect compact final and original comparison receipts
+        if: always()
+        run: |
+          python - <<'PY'
+          import shutil
+          from pathlib import Path
+          for folder in ('logs', 'out'):
+              for p in (Path('saved-evidence') / folder).rglob('*'):
+                  if p.is_file() and p.suffix in ('.json', '.log', '.txt', '.time'):
+                      target = Path('validation/reports') / p.relative_to('saved-evidence')
+                      target.parent.mkdir(parents=True, exist_ok=True)
+                      shutil.copyfile(p, target)
+          shutil.copytree('continuation', 'validation/continuation', dirs_exist_ok=True)
+          for task in ('main', 'old_head'):
+              shutil.copytree(f'original-evidence/logs/{task}', f'validation/original-comparison-logs/{task}', dirs_exist_ok=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: completed-9676-evidence
+          path: |
+            original-evidence/
+            saved-evidence/
+            continuation/
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: completed-9676-evidence-validation
+          path: validation/
+          if-no-files-found: warn
