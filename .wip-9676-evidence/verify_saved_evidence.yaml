@@ -3,6 +3,8 @@
 # verification branch; this workflow does not install or import the model.
 name: verify saved 9676 evidence
 on:
+  push:
+    branches: [wip/9676-evidence-verify]
   workflow_dispatch:
     inputs:
       source_run_id:
@@ -31,7 +33,7 @@ jobs:
       - name: Download the completed original run's saved evidence
         env:
           GH_TOKEN: ${{ github.token }}
-          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id || '37551528031' }}
           SOURCE_REPO: ${{ github.repository }}
         run: |
           mkdir -p validation saved-evidence
@@ -57,8 +59,8 @@ jobs:
             --name resumed-9676-evidence --dir saved-evidence
       - name: Verify saved JSON and assertion provenance without model execution
         env:
-          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
-          REQUIRE_2025: ${{ inputs.require_2025 }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id || '37551528031' }}
+          REQUIRE_2025: ${{ github.event_name == 'push' || inputs.require_2025 }}
         run: |
           years=2026
           if [ "$REQUIRE_2025" = true ]; then years='2026 2025'; fi
@@ -67,6 +69,21 @@ jobs:
             --expected-branch-sha "$EXPECTED_EVIDENCE_SHA" \
             --years $years --output validation/result.json \
             > validation/validator.log 2>&1
+      - name: Collect compact reports for review without microdata transfers
+        if: always()
+        run: |
+          python - <<'PY'
+          import shutil
+          from pathlib import Path
+          source = Path('saved-evidence')
+          destination = Path('validation/reports')
+          for folder in ('logs', 'out'):
+              for path in (source / folder).rglob('*'):
+                  if path.is_file() and path.suffix in ('.json', '.log', '.txt', '.time'):
+                      target = destination / path.relative_to(source)
+                      target.parent.mkdir(parents=True, exist_ok=True)
+                      shutil.copyfile(path, target)
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
