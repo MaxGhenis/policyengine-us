@@ -1,0 +1,126 @@
+# TEMPORARY, fork-only evidence workflow; never part of the PR.
+name: wip 9676 evidence resumed
+on:
+  workflow_dispatch:
+    inputs:
+      replicate_2025:
+        description: Replicate the six paired 2026 runs for 2025
+        type: boolean
+        default: true
+  push:
+    branches: [wip/9676-evidence, wip/9676-evidence-resume]
+permissions:
+  contents: read
+env:
+  PYTHONUNBUFFERED: 1
+  MAIN_SHA: 5b1d5bdf47044607341d76f3c932ba2e7b74a060
+  OLD_HEAD_SHA: a6c44418afccac0270dcb9ea155338dac0c9a05d
+  CORE_VERSION: 3.32.15
+  RUN_2025: ${{ github.event_name != 'workflow_dispatch' || inputs.replicate_2025 }}
+jobs:
+  evidence:
+    name: sequential tests and paired microsim evidence
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: wip
+      - uses: actions/checkout@v6
+        with:
+          repository: PolicyEngine/policyengine-us
+          ref: ${{ env.MAIN_SHA }}
+          path: main
+      - uses: actions/checkout@v6
+        with:
+          repository: PolicyEngine/policyengine-us
+          ref: ${{ env.OLD_HEAD_SHA }}
+          path: old_head
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - uses: astral-sh/setup-uv@v8.1.0
+      - name: Install one identical dependency environment and exact evidence core
+        working-directory: wip
+        run: |
+          uv sync --locked --extra dev
+          # Select the exact core used by recovered evidence; no lock upgrade.
+          uv pip install --python .venv/bin/python "policyengine-core==$CORE_VERSION"
+          mkdir -p "$GITHUB_WORKSPACE/logs" "$GITHUB_WORKSPACE/out"
+          uv pip freeze --python .venv/bin/python > "$GITHUB_WORKSPACE/logs/packages.txt"
+      - name: Targeted tests, old-head comparisons, mutations, unchanged partners
+        continue-on-error: true
+        run: |
+          status=0
+          export WIP_ROOT="$GITHUB_WORKSPACE/wip"
+          for task in suites mutations main old_head; do
+            case "$task" in
+              main) checkout=main; export EXPECTED_CODE_SHA="$MAIN_SHA" ;;
+              old_head) checkout=old_head; export EXPECTED_CODE_SHA="$OLD_HEAD_SHA" ;;
+              *) checkout=wip; export EXPECTED_CODE_SHA="${{ github.sha }}" ;;
+            esac
+            cd "$GITHUB_WORKSPACE/$checkout"
+            bash "$WIP_ROOT/.wip-9676-evidence/run_tests.sh" "$task" || status=1
+          done
+          printf '%s\n' "$status" > "$GITHUB_WORKSPACE/logs/tests_status.txt"
+          exit "$status"
+      - name: Six full default-dataset 2026 runs, then optional 2025 replication
+        continue-on-error: true
+        run: |
+          set +e
+          status=0
+          years=2026
+          if [ "$RUN_2025" = true ]; then years='2026 2025'; fi
+          for year in $years; do
+            for scenario in unmodified marked marked_no_assets; do
+              for code in main branch; do
+                if [ "$code" = main ]; then
+                  checkout=main
+                  export EXPECTED_CODE_SHA="$MAIN_SHA"
+                else
+                  checkout=wip
+                  export EXPECTED_CODE_SHA="${{ github.sha }}"
+                fi
+                cd "$GITHUB_WORKSPACE/$checkout"
+                export PYTHONPATH="$PWD"
+                tag="${code}_${scenario}_${year}"
+                /usr/bin/time -v -o "$GITHUB_WORKSPACE/out/${tag}_time.txt" \
+                  "$GITHUB_WORKSPACE/wip/.venv/bin/python" "$GITHUB_WORKSPACE/wip/.wip-9676-evidence/run_mo.py" \
+                  "$code" "$GITHUB_WORKSPACE/out" "$scenario" --years "$year" \
+                  > "$GITHUB_WORKSPACE/out/${tag}_stdout.log" 2>&1
+                rc=$?
+                printf '%s exit=%s\n' "$tag" "$rc" | tee -a "$GITHUB_WORKSPACE/out/summary.txt"
+                tail -n 15 "$GITHUB_WORKSPACE/out/${tag}_stdout.log"
+                if [ "$rc" -ne 0 ]; then status=1; fi
+              done
+            done
+          done
+          printf '%s\n' "$status" > "$GITHUB_WORKSPACE/out/impact_status.txt"
+          exit "$status"
+      - name: Validate paired hashes, identities and weights; separate failure causes
+        continue-on-error: true
+        run: |
+          set +e
+          years=2026
+          if [ "$RUN_2025" = true ]; then years='2026 2025'; fi
+          "$GITHUB_WORKSPACE/wip/.venv/bin/python" "$GITHUB_WORKSPACE/wip/.wip-9676-evidence/compare_mo.py" "$GITHUB_WORKSPACE/out" --years $years
+          rc=$?
+          printf '%s\n' "$rc" > "$GITHUB_WORKSPACE/out/compare_status.txt"
+          exit "$rc"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resumed-9676-evidence
+          path: |
+            logs/
+            out/
+          if-no-files-found: warn
+      - name: Require all requested phases to succeed
+        if: always()
+        run: |
+          test -f "$GITHUB_WORKSPACE/logs/tests_status.txt"
+          test -f "$GITHUB_WORKSPACE/out/impact_status.txt"
+          test -f "$GITHUB_WORKSPACE/out/compare_status.txt"
+          test "$(cat "$GITHUB_WORKSPACE/logs/tests_status.txt")" = 0
+          test "$(cat "$GITHUB_WORKSPACE/out/impact_status.txt")" = 0
+          test "$(cat "$GITHUB_WORKSPACE/out/compare_status.txt")" = 0

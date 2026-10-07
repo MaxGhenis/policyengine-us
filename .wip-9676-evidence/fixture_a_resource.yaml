@@ -1,0 +1,32 @@
+# Resource follow-up counterexample (hub spec C, us#9676). Expected to FAIL on
+# both main and the #9676 branch until the resource fix lands: the excluded
+# grandparent's separately owned $5,000 counts against the mother and child.
+- name: Excluded grandparent's separately owned assets do not count
+  period: 2026-01
+  input:
+    people:
+      grandparent:
+        age: 55
+        mo_tanf_is_non_parent_caretaker: true
+        bank_account_assets: 5_000
+      mother:
+        age: 20
+        is_tax_unit_dependent: true
+        own_children_in_household: 1
+      child:
+        age: 3
+        is_tax_unit_dependent: true
+    tax_units:
+      family:
+        members: [grandparent, mother, child]
+    spm_units:
+      unit:
+        members: [grandparent, mother, child]
+    households:
+      household:
+        members: [grandparent, mother, child]
+        state_code: MO
+  output:
+    mo_tanf_is_assistance_unit_member: [false, true, true]
+    mo_tanf_countable_resources: 0
+    mo_tanf: 234.08628

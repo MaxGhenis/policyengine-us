@@ -1,0 +1,664 @@
+{
+ "populace_stores": {
+  "is_in_secondary_school": false,
+  "is_tax_unit_dependent": false
+ },
+ "rows": [
+  {
+   "data": "census ASEC 2023-2025 pooled",
+   "school": "none",
+   "scope": "US",
+   "rule": "own_children > 0",
+   "eligible_E": {
+    "n": 5433,
+    "w": 3531157.6433333335
+   },
+   "truth_G": {
+    "n": 58,
+    "w": 33478.04
+   },
+   "selected": {
+    "n": 85,
+    "w": 52136.32666666667
+   },
+   "true_positive": {
+    "n": 58,
+    "w": 33478.04
+   },
+   "false_positive": {
+    "n": 27,
+    "w": 18658.28666666667
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": 0.6823529411764706,
+    "w": 0.6421250237678169
+   },
+   "recall": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "selected_kish_n": 62.45692079290929,
+   "largest_false_positive_weight": 1427.5933333333332,
+   "selected_distinct_persons": 78
+  },
+  {
+   "data": "census ASEC 2023-2025 pooled",
+   "school": "none",
+   "scope": "US",
+   "rule": "with age guard",
+   "eligible_E": {
+    "n": 5433,
+    "w": 3531157.6433333335
+   },
+   "truth_G": {
+    "n": 58,
+    "w": 33478.04
+   },
+   "selected": {
+    "n": 71,
+    "w": 42790.89666666667
+   },
+   "true_positive": {
+    "n": 56,
+    "w": 32014.39
+   },
+   "false_positive": {
+    "n": 15,
+    "w": 10776.506666666666
+   },
+   "false_negative": {
+    "n": 2,
+    "w": 1463.65
+   },
+   "precision": {
+    "n": 0.7887323943661971,
+    "w": 0.7481588957900625
+   },
+   "recall": {
+    "n": 0.9655172413793104,
+    "w": 0.9562802959790955
+   },
+   "selected_kish_n": 50.64953195716165,
+   "largest_false_positive_weight": 1427.5933333333332,
+   "selected_distinct_persons": 64
+  },
+  {
+   "data": "census ASEC 2023-2025 pooled",
+   "school": "none",
+   "scope": "MO",
+   "rule": "own_children > 0",
+   "eligible_E": {
+    "n": 70,
+    "w": 56045.903333333335
+   },
+   "truth_G": {
+    "n": 0,
+    "w": 0.0
+   },
+   "selected": {
+    "n": 0,
+    "w": 0.0
+   },
+   "true_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": NaN,
+    "w": NaN
+   },
+   "recall": {
+    "n": NaN,
+    "w": NaN
+   },
+   "selected_kish_n": 0.0,
+   "largest_false_positive_weight": 0.0,
+   "selected_distinct_persons": 0
+  },
+  {
+   "data": "census ASEC 2023-2025 pooled",
+   "school": "none",
+   "scope": "MO",
+   "rule": "with age guard",
+   "eligible_E": {
+    "n": 70,
+    "w": 56045.903333333335
+   },
+   "truth_G": {
+    "n": 0,
+    "w": 0.0
+   },
+   "selected": {
+    "n": 0,
+    "w": 0.0
+   },
+   "true_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": NaN,
+    "w": NaN
+   },
+   "recall": {
+    "n": NaN,
+    "w": NaN
+   },
+   "selected_kish_n": 0.0,
+   "largest_false_positive_weight": 0.0,
+   "selected_distinct_persons": 0
+  },
+  {
+   "data": "populace 2024",
+   "school": "none",
+   "scope": "US",
+   "rule": "own_children > 0",
+   "eligible_E": {
+    "n": 1874,
+    "w": 4683416.418838031
+   },
+   "truth_G": {
+    "n": 70,
+    "w": 197007.31706267982
+   },
+   "selected": {
+    "n": 74,
+    "w": 207003.46990068135
+   },
+   "true_positive": {
+    "n": 70,
+    "w": 197007.31706267982
+   },
+   "false_positive": {
+    "n": 4,
+    "w": 9996.152838001515
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": 0.9459459459459459,
+    "w": 0.9517102160519454
+   },
+   "recall": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "selected_kish_n": 22.39456904567713,
+   "largest_false_positive_weight": 9996.139649649533,
+   "selected_distinct_persons": 51
+  },
+  {
+   "data": "populace 2024",
+   "school": "none",
+   "scope": "US",
+   "rule": "with age guard",
+   "eligible_E": {
+    "n": 1874,
+    "w": 4683416.418838031
+   },
+   "truth_G": {
+    "n": 70,
+    "w": 197007.31706267982
+   },
+   "selected": {
+    "n": 71,
+    "w": 197007.29918663387
+   },
+   "true_positive": {
+    "n": 68,
+    "w": 197007.2859982819
+   },
+   "false_positive": {
+    "n": 3,
+    "w": 0.013188351983281481
+   },
+   "false_negative": {
+    "n": 2,
+    "w": 0.031064397906714093
+   },
+   "precision": {
+    "n": 0.9577464788732394,
+    "w": 0.9999999330565313
+   },
+   "recall": {
+    "n": 0.9714285714285714,
+    "w": 0.9999998423185577
+   },
+   "selected_kish_n": 21.401558061617926,
+   "largest_false_positive_weight": 0.007753307009645498,
+   "selected_distinct_persons": 49
+  },
+  {
+   "data": "populace 2024",
+   "school": "none",
+   "scope": "MO",
+   "rule": "own_children > 0",
+   "eligible_E": {
+    "n": 40,
+    "w": 147696.64875859796
+   },
+   "truth_G": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "selected": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "true_positive": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "false_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "recall": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "selected_kish_n": 2.92233017238496,
+   "largest_false_positive_weight": 0.0,
+   "selected_distinct_persons": 3
+  },
+  {
+   "data": "populace 2024",
+   "school": "none",
+   "scope": "MO",
+   "rule": "with age guard",
+   "eligible_E": {
+    "n": 40,
+    "w": 147696.64875859796
+   },
+   "truth_G": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "selected": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "true_positive": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "false_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "recall": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "selected_kish_n": 2.92233017238496,
+   "largest_false_positive_weight": 0.0,
+   "selected_distinct_persons": 3
+  },
+  {
+   "data": "census ASEC 2023-2025 pooled",
+   "school": "spec",
+   "scope": "US",
+   "rule": "own_children > 0",
+   "eligible_E": {
+    "n": 4282,
+    "w": 2805079.4
+   },
+   "truth_G": {
+    "n": 62,
+    "w": 37045.97
+   },
+   "selected": {
+    "n": 90,
+    "w": 57104.11
+   },
+   "true_positive": {
+    "n": 62,
+    "w": 37045.97
+   },
+   "false_positive": {
+    "n": 28,
+    "w": 20058.140000000003
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": 0.6888888888888889,
+    "w": 0.6487443723402746
+   },
+   "recall": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "selected_kish_n": 66.74172948442742,
+   "largest_false_positive_weight": 1427.5933333333332,
+   "selected_distinct_persons": 81
+  },
+  {
+   "data": "census ASEC 2023-2025 pooled",
+   "school": "spec",
+   "scope": "US",
+   "rule": "with age guard",
+   "eligible_E": {
+    "n": 4282,
+    "w": 2805079.4
+   },
+   "truth_G": {
+    "n": 62,
+    "w": 37045.97
+   },
+   "selected": {
+    "n": 77,
+    "w": 47662.45333333334
+   },
+   "true_positive": {
+    "n": 60,
+    "w": 35122.58
+   },
+   "false_positive": {
+    "n": 17,
+    "w": 12539.873333333335
+   },
+   "false_negative": {
+    "n": 2,
+    "w": 1923.3899999999999
+   },
+   "precision": {
+    "n": 0.7792207792207793,
+    "w": 0.7369024786526585
+   },
+   "recall": {
+    "n": 0.967741935483871,
+    "w": 0.9480809923454562
+   },
+   "selected_kish_n": 55.67915132500557,
+   "largest_false_positive_weight": 1427.5933333333332,
+   "selected_distinct_persons": 68
+  },
+  {
+   "data": "census ASEC 2023-2025 pooled",
+   "school": "spec",
+   "scope": "MO",
+   "rule": "own_children > 0",
+   "eligible_E": {
+    "n": 49,
+    "w": 40018.09
+   },
+   "truth_G": {
+    "n": 0,
+    "w": 0.0
+   },
+   "selected": {
+    "n": 0,
+    "w": 0.0
+   },
+   "true_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": NaN,
+    "w": NaN
+   },
+   "recall": {
+    "n": NaN,
+    "w": NaN
+   },
+   "selected_kish_n": 0.0,
+   "largest_false_positive_weight": 0.0,
+   "selected_distinct_persons": 0
+  },
+  {
+   "data": "census ASEC 2023-2025 pooled",
+   "school": "spec",
+   "scope": "MO",
+   "rule": "with age guard",
+   "eligible_E": {
+    "n": 49,
+    "w": 40018.09
+   },
+   "truth_G": {
+    "n": 0,
+    "w": 0.0
+   },
+   "selected": {
+    "n": 0,
+    "w": 0.0
+   },
+   "true_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": NaN,
+    "w": NaN
+   },
+   "recall": {
+    "n": NaN,
+    "w": NaN
+   },
+   "selected_kish_n": 0.0,
+   "largest_false_positive_weight": 0.0,
+   "selected_distinct_persons": 0
+  },
+  {
+   "data": "populace 2024",
+   "school": "spec",
+   "scope": "US",
+   "rule": "own_children > 0",
+   "eligible_E": {
+    "n": 1301,
+    "w": 4023827.1536905393
+   },
+   "truth_G": {
+    "n": 72,
+    "w": 211357.713207686
+   },
+   "selected": {
+    "n": 76,
+    "w": 221353.86604568752
+   },
+   "true_positive": {
+    "n": 72,
+    "w": 211357.713207686
+   },
+   "false_positive": {
+    "n": 4,
+    "w": 9996.152838001515
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": 0.9473684210526315,
+    "w": 0.9548408482012313
+   },
+   "recall": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "selected_kish_n": 24.29912493865106,
+   "largest_false_positive_weight": 9996.139649649533,
+   "selected_distinct_persons": 53
+  },
+  {
+   "data": "populace 2024",
+   "school": "spec",
+   "scope": "US",
+   "rule": "with age guard",
+   "eligible_E": {
+    "n": 1301,
+    "w": 4023827.1536905393
+   },
+   "truth_G": {
+    "n": 72,
+    "w": 211357.713207686
+   },
+   "selected": {
+    "n": 73,
+    "w": 211357.6953316401
+   },
+   "true_positive": {
+    "n": 70,
+    "w": 211357.6821432881
+   },
+   "false_positive": {
+    "n": 3,
+    "w": 0.013188351983281481
+   },
+   "false_negative": {
+    "n": 2,
+    "w": 0.031064397906714093
+   },
+   "precision": {
+    "n": 0.958904109589041,
+    "w": 0.999999937601742
+   },
+   "recall": {
+    "n": 0.9722222222222222,
+    "w": 0.9999998530245364
+   },
+   "selected_kish_n": 23.309084392683353,
+   "largest_false_positive_weight": 0.007753307009645498,
+   "selected_distinct_persons": 51
+  },
+  {
+   "data": "populace 2024",
+   "school": "spec",
+   "scope": "MO",
+   "rule": "own_children > 0",
+   "eligible_E": {
+    "n": 26,
+    "w": 119999.73207407247
+   },
+   "truth_G": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "selected": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "true_positive": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "false_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "recall": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "selected_kish_n": 2.92233017238496,
+   "largest_false_positive_weight": 0.0,
+   "selected_distinct_persons": 3
+  },
+  {
+   "data": "populace 2024",
+   "school": "spec",
+   "scope": "MO",
+   "rule": "with age guard",
+   "eligible_E": {
+    "n": 26,
+    "w": 119999.73207407247
+   },
+   "truth_G": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "selected": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "true_positive": {
+    "n": 4,
+    "w": 22053.821267201307
+   },
+   "false_positive": {
+    "n": 0,
+    "w": 0.0
+   },
+   "false_negative": {
+    "n": 0,
+    "w": 0.0
+   },
+   "precision": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "recall": {
+    "n": 1.0,
+    "w": 1.0
+   },
+   "selected_kish_n": 2.92233017238496,
+   "largest_false_positive_weight": 0.0,
+   "selected_distinct_persons": 3
+  }
+ ]
+}

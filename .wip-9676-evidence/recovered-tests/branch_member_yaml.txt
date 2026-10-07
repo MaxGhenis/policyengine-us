@@ -1,0 +1,19 @@
+/Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9676/policyengine_us/__init__.py
+PYTHONPATH=$PWD $V/python -c   15.22s user 5.69s system 0% cpu 46:46.85 total
+============================= test session starts ==============================
+platform darwin -- Python 3.13.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9676
+configfile: pyproject.toml
+plugins: anyio-4.15.1
+collected 16 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_is_assistance_unit_member.yaml ................
+
+=============================== warnings summary ===============================
+../../../PolicyEngine/_worktrees/pe-us-backlog/main/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1345
+  /Users/maxghenis/PolicyEngine/_worktrees/pe-us-backlog/main/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1345: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 16 passed, 1 warning in 141.27s (0:02:21) ===================
+PYTHONPATH=$PWD $V/policyengine-core test  -c policyengine_us  49.99s user 10.17s system 2% cpu 35:34.01 total
