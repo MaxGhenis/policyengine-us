@@ -1,0 +1,18 @@
+Loading /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406, process 94769
+Model: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/__init__.py
+============================= test session starts ==============================
+platform darwin -- Python 3.14.4, pytest-8.4.2, pluggy-1.6.0
+rootdir: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406
+configfile: pyproject.toml
+plugins: anyio-4.12.1
+collected 11 items
+
+policyengine_us/tests/policy/baseline/gov/hhs/medicaid/income/parent_ids.yaml ...........
+
+=============================== warnings summary ===============================
+../../../PolicyEngine/_worktrees/policyengine-us-parent-ids/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /Users/maxghenis/PolicyEngine/_worktrees/policyengine-us-parent-ids/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 11 passed, 1 warning in 6.47s =========================

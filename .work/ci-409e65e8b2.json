@@ -1,0 +1,225 @@
+{
+  "observed_at": "2026-10-07T11:12:11.906106+00:00",
+  "run": {
+    "conclusion": null,
+    "created_at": "2026-10-07T10:49:27Z",
+    "event": "pull_request",
+    "head_sha": "409e65e8b29feb87b8fc7cf245b35be28bb6b152",
+    "html_url": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407",
+    "id": 37609932407,
+    "status": "queued",
+    "updated_at": "2026-10-07T10:50:41Z"
+  },
+  "checks": [
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106260",
+      "name": "Full Suite - Contrib (congress)",
+      "state": "IN_PROGRESS",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106391",
+      "name": "Full Suite - Contrib (states-shard-2)",
+      "state": "IN_PROGRESS",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106302",
+      "name": "Full Suite - Baseline (states-shard-4)",
+      "state": "IN_PROGRESS",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106266",
+      "name": "Full Suite - Contrib (other-shard-2a)",
+      "state": "IN_PROGRESS",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106193",
+      "name": "Install + smoke-import (py3.11)",
+      "state": "SUCCESS",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106105",
+      "name": "Validate bundle metadata contract",
+      "state": "SUCCESS",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757703162",
+      "name": "Unpublished release wheel (final)",
+      "state": "SUCCESS",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112754904243",
+      "name": "Check changelog fragment",
+      "state": "SUCCESS",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757703073",
+      "name": "Unpublished release wheel (rc1)",
+      "state": "SUCCESS",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112754904184",
+      "name": "Release lock guard tests",
+      "state": "SUCCESS",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106566",
+      "name": "Full Suite - Baseline (ssa-usda)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106252",
+      "name": "Quick Feedback (Selective Tests + Coverage)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106361",
+      "name": "Full Suite - Baseline (states-shard-3)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106377",
+      "name": "Full Suite - Baseline (states-shard-1)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106572",
+      "name": "Full Suite - Baseline (irs)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106427",
+      "name": "Full Suite - Baseline (household)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106567",
+      "name": "Lint",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106479",
+      "name": "Full Suite - Baseline (rest-a)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757107463",
+      "name": "Full Suite - Baseline (rest-b)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106497",
+      "name": "Full Suite - Baseline (contrib-hhs)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106656",
+      "name": "Full Suite - Baseline (reform)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106237",
+      "name": "Household API Partners",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106365",
+      "name": "Full Suite - Contrib (states-shard-1)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106342",
+      "name": "Full Suite - Baseline (states-shard-2)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106414",
+      "name": "Full Suite - Contrib (states-shard-3)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106349",
+      "name": "Full Suite - Contrib (states-shard-4)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106953",
+      "name": "Full Suite - Contrib (other-shard-1)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106250",
+      "name": "Install + smoke-import (py3.14)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106682",
+      "name": "Full Suite - Contrib (other-shard-2b)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106418",
+      "name": "Full Suite - Contrib (other-shard-3)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106234",
+      "name": "Install + smoke-import (py3.13)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106415",
+      "name": "Full Suite - Rest (Python + variables)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106271",
+      "name": "Full Suite - Microsimulation",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112757106321",
+      "name": "Install + smoke-import (py3.12)",
+      "state": "QUEUED",
+      "workflow": "Pull request"
+    },
+    {
+      "link": "https://github.com/PolicyEngine/policyengine-us/actions/runs/37609932407/job/112754903869",
+      "name": "Check committed registry lock",
+      "state": "SUCCESS",
+      "workflow": "Pull request"
+    }
+  ]
+}

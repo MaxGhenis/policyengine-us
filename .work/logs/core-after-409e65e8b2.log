@@ -1,0 +1,16 @@
+......                                                                   [100%]
+=============================== warnings summary ===============================
+policyengine_us/tests/core/test_parent_links.py::test_explicit_zero_parent_ids_exactly_match_omitted_inputs
+policyengine_us/tests/core/test_parent_links.py::test_linked_household_income_accumulates_in_float64
+policyengine_us/tests/core/test_parent_links.py::test_a_head_claimed_by_their_own_unit_counts_their_spouse_once
+policyengine_us/tests/core/test_parent_links.py::test_duplicate_ids_resolve_the_same_way_in_every_member_order
+  /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/irs/income/taxable_income/adjusted_gross_income/irs_gross_income/unemployment_insurance/taxable_unemployment_insurance.py:22: RuntimeWarning: invalid value encountered in divide
+    share = where(tax_unit_uc > 0, person_uc / tax_unit_uc, 0)
+
+policyengine_us/tests/core/test_parent_links.py::test_linked_household_income_accumulates_in_float64
+policyengine_us/tests/core/test_parent_links.py::test_a_repeated_id_naming_a_co_resident_does_not_match_a_claimant_elsewhere
+  /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/irs/income/taxable_income/adjusted_gross_income/irs_gross_income/other_net_gain_gross_income.py:23: RuntimeWarning: divide by zero encountered in divide
+    share = where(num_head_or_spouse > 0, 1 / num_head_or_spouse, 0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 6 warnings in 31.72s

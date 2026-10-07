@@ -1,0 +1,39 @@
+main model: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/__init__.py
+main country system: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/system.py
+main core: /Users/maxghenis/PolicyEngine/_worktrees/policyengine-us-parent-ids/.venv/lib/python3.14/site-packages/policyengine_core/__init__.py
+main elapsed including model setup: 161.588s
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_claimed_by_parent_in_tax_unit.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_household_income.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_household_size.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_income_level.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_is_tax_dependent.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_tax_dependent_exception_living_with_both_parents.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_tax_dependent_exception_non_custodial_parent.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_tax_dependent_exception_other_than_spouse_or_child.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_uses_non_filer_rules.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/gov/states/ca/dhcs/medi_cal/ca_medicaid_household_pregnancies.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/household/demographic/person/is_father.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/household/demographic/person/is_mother.py
+main variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/base/policyengine_us/variables/household/demographic/person/is_parent.py
+head model: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/__init__.py
+head country system: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/system.py
+head core: /Users/maxghenis/PolicyEngine/_worktrees/policyengine-us-parent-ids/.venv/lib/python3.14/site-packages/policyengine_core/__init__.py
+head elapsed including model setup: 166.735s
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_claimed_by_parent_in_tax_unit.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_household_income.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_household_size.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_income_level.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_is_tax_dependent.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_tax_dependent_exception_living_with_both_parents.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_tax_dependent_exception_non_custodial_parent.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_tax_dependent_exception_other_than_spouse_or_child.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/hhs/medicaid/income/medicaid_uses_non_filer_rules.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/states/ca/dhcs/medi_cal/ca_medicaid_household_pregnancies.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/household/demographic/person/is_father.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/household/demographic/person/is_mother.py
+head variable source: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/household/demographic/person/is_parent.py
+Cases: 48 (24 worlds; omitted + explicit zero)
+Compared variables: 13
+Identical arrays (dtype/shape/bytes): 624
+Matched calculation errors: 0; matched build errors: 0
+Differences: 0

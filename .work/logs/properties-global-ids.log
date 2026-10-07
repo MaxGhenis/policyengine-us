@@ -1,0 +1,23 @@
+...........                                                              [100%]
+=============================== warnings summary ===============================
+policyengine_us/tests/core/test_parent_links_properties.py::test_explicit_zero_ids_match_omitted_ids_for_random_households
+policyengine_us/tests/core/test_parent_links_properties.py::test_explicit_zero_ids_match_omitted_ids_for_random_households
+policyengine_us/tests/core/test_parent_links_properties.py::test_explicit_zero_ids_match_omitted_ids_for_random_households
+policyengine_us/tests/core/test_parent_links_properties.py::test_linked_composition_matches_the_regulation_on_consistent_data
+policyengine_us/tests/core/test_parent_links_properties.py::test_linked_composition_follows_the_documented_rule_on_gappy_data
+policyengine_us/tests/core/test_parent_links_properties.py::test_linked_composition_is_invariant_to_member_order
+  /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/irs/income/taxable_income/adjusted_gross_income/irs_gross_income/unemployment_insurance/taxable_unemployment_insurance.py:22: RuntimeWarning: invalid value encountered in divide
+    share = where(tax_unit_uc > 0, person_uc / tax_unit_uc, 0)
+
+policyengine_us/tests/core/test_parent_links_properties.py::test_linked_composition_matches_the_regulation_on_consistent_data
+policyengine_us/tests/core/test_parent_links_properties.py::test_linked_composition_follows_the_documented_rule_on_gappy_data
+policyengine_us/tests/core/test_parent_links_properties.py::test_linked_composition_is_invariant_to_member_order
+policyengine_us/tests/core/test_parent_links_properties.py::test_tax_dependent_counts_a_co_resident_spouse_exactly_once
+policyengine_us/tests/core/test_parent_links_properties.py::test_households_without_ids_keep_their_values_next_to_linked_ones
+policyengine_us/tests/core/test_parent_links_properties.py::test_named_parent_must_be_claiming_head_or_spouse
+policyengine_us/tests/core/test_parent_links_properties.py::test_both_parent_joint_return_requires_same_filing_unit
+  /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/variables/gov/irs/income/taxable_income/adjusted_gross_income/irs_gross_income/other_net_gain_gross_income.py:23: RuntimeWarning: divide by zero encountered in divide
+    share = where(num_head_or_spouse > 0, 1 / num_head_or_spouse, 0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+11 passed, 13 warnings in 35.84s

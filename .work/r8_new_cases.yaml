@@ -1,0 +1,751 @@
+- name: Separately filing spouses count each other without a cohabiting flag
+  period: 2026
+  input:
+    people:
+      parent:
+        person_id: 1
+        age: 40
+      child:
+        person_id: 2
+        age: 19
+        parent_1_id: 1
+        is_tax_unit_spouse: false
+      spouse:
+        person_id: 3
+        age: 18
+        employment_income: 30000
+    tax_units:
+      parent_unit:
+        members:
+        - parent
+        - child
+        tax_unit_is_filer: true
+      spouse_unit:
+        members:
+        - spouse
+        tax_unit_is_filer: true
+    families:
+      parent_family:
+        members:
+        - parent
+      couple_family:
+        members:
+        - child
+        - spouse
+    marital_units:
+      parent:
+        members:
+        - parent
+      couple:
+        members:
+        - child
+        - spouse
+    households:
+      parent_home:
+        members:
+        - parent
+        state_code: OH
+      couple_home:
+        members:
+        - child
+        - spouse
+        state_code: OH
+  output:
+    medicaid_claimed_by_parent_in_tax_unit:
+    - false
+    - true
+    - false
+    medicaid_uses_non_filer_rules:
+    - false
+    - false
+    - false
+    medicaid_household_size:
+    - 2
+    - 3
+    - 2
+    medicaid_household_income:
+    - 0
+    - 30000
+    - 30000
+- name: California counts each separately filing spouse's pregnancy once without a flag
+  period: 2026
+  input:
+    people:
+      parent:
+        person_id: 1
+        age: 40
+      child:
+        person_id: 2
+        age: 19
+        parent_1_id: 1
+        is_tax_unit_spouse: false
+      spouse:
+        person_id: 3
+        age: 18
+        employment_income: 30000
+        current_pregnancies: 1
+    tax_units:
+      parent_unit:
+        members:
+        - parent
+        - child
+        tax_unit_is_filer: true
+      spouse_unit:
+        members:
+        - spouse
+        tax_unit_is_filer: true
+    families:
+      parent_family:
+        members:
+        - parent
+      couple_family:
+        members:
+        - child
+        - spouse
+    marital_units:
+      parent:
+        members:
+        - parent
+      couple:
+        members:
+        - child
+        - spouse
+    households:
+      parent_home:
+        members:
+        - parent
+        state_code: CA
+      couple_home:
+        members:
+        - child
+        - spouse
+        state_code: CA
+  output:
+    ca_medicaid_household_pregnancies:
+    - 0
+    - 1
+    - 1
+    medicaid_household_size:
+    - 2
+    - 4
+    - 3
+    medicaid_household_income:
+    - 0
+    - 30000
+    - 30000
+- name: A filer's unflagged co-resident spouse joins the households of the filer's dependents
+  period: 2026
+  input:
+    people:
+      parent:
+        person_id: 1
+        age: 40
+        employment_income: 40000
+      spouse:
+        person_id: 2
+        age: 41
+        employment_income: 20000
+      child:
+        person_id: 3
+        age: 10
+        parent_1_id: 1
+    tax_units:
+      parent_unit:
+        members:
+        - parent
+        - child
+        tax_unit_is_filer: true
+      spouse_unit:
+        members:
+        - spouse
+        tax_unit_is_filer: true
+    families:
+      family:
+        members:
+        - parent
+        - spouse
+        - child
+    marital_units:
+      couple:
+        members:
+        - parent
+        - spouse
+      child:
+        members:
+        - child
+    households:
+      home:
+        members:
+        - parent
+        - spouse
+        - child
+        state_code: OH
+  output:
+    medicaid_claimed_by_parent_in_tax_unit:
+    - false
+    - false
+    - true
+    medicaid_tax_dependent_exception_living_with_both_parents:
+    - false
+    - false
+    - false
+    medicaid_uses_non_filer_rules:
+    - false
+    - false
+    - false
+    medicaid_household_size:
+    - 3
+    - 2
+    - 3
+    medicaid_household_income:
+    - 60000
+    - 60000
+    - 60000
+- name: A filer's spouse claimed into the filer's unit counts once
+  period: 2026
+  input:
+    people:
+      filer:
+        person_id: 1
+        age: 40
+        employment_income: 40000
+        parent_1_id: 9
+      spouse:
+        person_id: 2
+        age: 41
+        employment_income: 5000
+        claimed_as_dependent_on_another_return: true
+        medicaid_claiming_tax_unit_id: 1
+    tax_units:
+      filer_unit:
+        members:
+        - filer
+        tax_unit_id: 1
+        tax_unit_is_filer: true
+      spouse_unit:
+        members:
+        - spouse
+        tax_unit_id: 2
+        tax_unit_is_filer: false
+    families:
+      family:
+        members:
+        - filer
+        - spouse
+    marital_units:
+      couple:
+        members:
+        - filer
+        - spouse
+    households:
+      home:
+        members:
+        - filer
+        - spouse
+        state_code: OH
+  output:
+    medicaid_uses_non_filer_rules:
+    - false
+    - false
+    medicaid_household_size:
+    - 2
+    - 2
+    medicaid_household_income:
+    - 40000
+    - 40000
+- name: A dependent teen parent is not the taxpayer claiming the baby
+  period: 2026
+  input:
+    people:
+      grandparent:
+        person_id: 1
+        age: 40
+        employment_income: 40000
+      teen:
+        person_id: 2
+        age: 17
+        parent_1_id: 1
+      baby:
+        person_id: 3
+        age: 1
+        parent_1_id: 2
+    tax_units:
+      unit:
+        members:
+        - grandparent
+        - teen
+        - baby
+        tax_unit_is_filer: true
+    families:
+      family:
+        members:
+        - grandparent
+        - teen
+        - baby
+    marital_units:
+      grandparent:
+        members:
+        - grandparent
+      teen:
+        members:
+        - teen
+      baby:
+        members:
+        - baby
+    households:
+      home:
+        members:
+        - grandparent
+        - teen
+        - baby
+        state_code: OH
+  output:
+    medicaid_claimed_by_parent_in_tax_unit:
+    - false
+    - true
+    - false
+    medicaid_uses_non_filer_rules:
+    - false
+    - false
+    - true
+    medicaid_household_size:
+    - 3
+    - 3
+    - 2
+    medicaid_household_income:
+    - 40000
+    - 40000
+    - 0
+- name: An established resident stepparent counts when ids name natural parents
+  period: 2026
+  input:
+    people:
+      mother:
+        person_id: 1
+        age: 35
+        employment_income: 20000
+      stepfather:
+        person_id: 2
+        age: 40
+        employment_income: 40000
+      child:
+        person_id: 3
+        age: 10
+        parent_1_id: 1
+        parent_2_id: 99
+    tax_units:
+      mother_unit:
+        members:
+        - mother
+        tax_unit_is_filer: true
+        cohabitating_spouses: true
+      stepfather_unit:
+        members:
+        - stepfather
+        - child
+        tax_unit_is_filer: true
+        cohabitating_spouses: true
+    families:
+      family:
+        members:
+        - mother
+        - stepfather
+        - child
+    marital_units:
+      couple:
+        members:
+        - mother
+        - stepfather
+      child:
+        members:
+        - child
+    households:
+      home:
+        members:
+        - mother
+        - stepfather
+        - child
+        state_code: OH
+  output:
+    medicaid_claimed_by_parent_in_tax_unit:
+    - false
+    - false
+    - true
+    medicaid_tax_dependent_exception_living_with_both_parents:
+    - false
+    - false
+    - true
+    medicaid_uses_non_filer_rules:
+    - false
+    - false
+    - true
+    medicaid_household_size:
+    - 2
+    - 3
+    - 3
+    medicaid_household_income:
+    - 60000
+    - 60000
+    - 60000
+- name: A stepparent shown by a joint return makes step siblings and stepchildren
+  period: 2026
+  input:
+    people:
+      mother:
+        person_id: 1
+        age: 38
+        own_children_in_household: 1
+        medicaid_uses_non_filer_rules: true
+        medicaid_household_income_member: 30000
+      stepfather:
+        person_id: 2
+        age: 40
+        own_children_in_household: 1
+        medicaid_uses_non_filer_rules: true
+        medicaid_household_income_member: 20000
+      her_child:
+        person_id: 3
+        age: 10
+        parent_1_id: 1
+        parent_2_id: 98
+        medicaid_uses_non_filer_rules: true
+        medicaid_household_income_member: 0
+      his_child:
+        person_id: 4
+        age: 8
+        parent_1_id: 99
+        parent_2_id: 2
+        medicaid_uses_non_filer_rules: true
+        medicaid_household_income_member: 0
+    tax_units:
+      unit:
+        members:
+        - mother
+        - stepfather
+        - her_child
+        - his_child
+        filing_status: JOINT
+    families:
+      family:
+        members:
+        - mother
+        - stepfather
+        - her_child
+        - his_child
+    marital_units:
+      couple:
+        members:
+        - mother
+        - stepfather
+      her_child:
+        members:
+        - her_child
+      his_child:
+        members:
+        - his_child
+    households:
+      household:
+        members:
+        - mother
+        - stepfather
+        - her_child
+        - his_child
+        state_code: OH
+  output:
+    medicaid_household_size:
+    - 4
+    - 4
+    - 4
+    - 4
+    medicaid_household_income:
+    - 50000
+    - 50000
+    - 50000
+    - 50000
+- name: A two-person marital unit without a flag or joint return infers no stepparent
+  period: 2026
+  input:
+    people:
+      mother:
+        person_id: 1
+        age: 38
+        medicaid_uses_non_filer_rules: true
+        medicaid_household_income_member: 30000
+      partner:
+        person_id: 2
+        age: 40
+        medicaid_uses_non_filer_rules: true
+        medicaid_household_income_member: 20000
+      child:
+        person_id: 3
+        age: 10
+        parent_1_id: 1
+        medicaid_uses_non_filer_rules: true
+        medicaid_household_income_member: 0
+    tax_units:
+      mother_unit:
+        members:
+        - mother
+        - child
+      partner_unit:
+        members:
+        - partner
+    families:
+      family:
+        members:
+        - mother
+        - partner
+        - child
+    marital_units:
+      couple:
+        members:
+        - mother
+        - partner
+      child:
+        members:
+        - child
+    households:
+      household:
+        members:
+        - mother
+        - partner
+        - child
+        state_code: OH
+  output:
+    medicaid_household_size:
+    - 3
+    - 2
+    - 2
+    medicaid_household_income:
+    - 50000
+    - 50000
+    - 30000
+- name: Id contract fallback, a claimant elsewhere sharing a co-resident's id is not the parent
+  period: 2026
+  input:
+    people:
+      grandparent:
+        person_id: 1
+        age: 65
+        employment_income: 30000
+      child:
+        person_id: 2
+        age: 10
+        parent_1_id: 1
+      mother:
+        person_id: 1
+        age: 35
+        employment_income: 20000
+    tax_units:
+      grandparent_unit:
+        members:
+        - grandparent
+        tax_unit_is_filer: true
+      mother_unit:
+        members:
+        - mother
+        - child
+        tax_unit_is_filer: true
+    families:
+      family:
+        members:
+        - grandparent
+        - child
+      mother_family:
+        members:
+        - mother
+    marital_units:
+      grandparent:
+        members:
+        - grandparent
+      child:
+        members:
+        - child
+      mother:
+        members:
+        - mother
+    households:
+      home:
+        members:
+        - grandparent
+        - child
+        state_code: OH
+      mother_home:
+        members:
+        - mother
+        state_code: OH
+  output:
+    medicaid_claimed_by_parent_in_tax_unit:
+    - false
+    - false
+    - false
+    medicaid_uses_non_filer_rules:
+    - false
+    - true
+    - false
+    medicaid_household_size:
+    - 1
+    - 2
+    - 2
+    medicaid_household_income:
+    - 30000
+    - 30000
+    - 20000
+- name: Id contract fallback, second slot, a claimant elsewhere sharing a co-resident parent's id
+  period: 2026
+  input:
+    people:
+      mother:
+        person_id: 1
+        age: 35
+        employment_income: 20000
+      child:
+        person_id: 2
+        age: 10
+        parent_1_id: 77
+        parent_2_id: 1
+        medicaid_claiming_tax_unit_id: 1
+      grandparent:
+        person_id: 1
+        age: 65
+        employment_income: 30000
+    tax_units:
+      grandparent_unit:
+        members:
+        - grandparent
+        tax_unit_id: 1
+        tax_unit_is_filer: true
+      child_unit:
+        members:
+        - child
+        tax_unit_id: 2
+      mother_unit:
+        members:
+        - mother
+        tax_unit_id: 3
+        tax_unit_is_filer: true
+    families:
+      family:
+        members:
+        - mother
+        - child
+      grandparent_family:
+        members:
+        - grandparent
+    marital_units:
+      mother:
+        members:
+        - mother
+      child:
+        members:
+        - child
+      grandparent:
+        members:
+        - grandparent
+    households:
+      home:
+        members:
+        - mother
+        - child
+        state_code: OH
+      grandparent_home:
+        members:
+        - grandparent
+        state_code: OH
+  output:
+    medicaid_claimed_by_parent_in_tax_unit:
+    - false
+    - false
+    - false
+    medicaid_tax_dependent_exception_other_than_spouse_or_child:
+    - false
+    - true
+    - false
+    medicaid_uses_non_filer_rules:
+    - false
+    - true
+    - false
+    medicaid_household_size:
+    - 1
+    - 2
+    - 2
+    medicaid_household_income:
+    - 20000
+    - 20000
+    - 30000
+- name: Id contract fallback, second slot, a tax unit member elsewhere sharing a co-resident parent's id
+  period: 2026
+  input:
+    people:
+      mother:
+        person_id: 1
+        age: 35
+        employment_income: 20000
+      child:
+        person_id: 2
+        age: 10
+        parent_1_id: 77
+        parent_2_id: 1
+      grandparent:
+        person_id: 1
+        age: 65
+        employment_income: 30000
+    tax_units:
+      grandparent_unit:
+        members:
+        - grandparent
+        - child
+        tax_unit_is_filer: true
+      mother_unit:
+        members:
+        - mother
+        tax_unit_is_filer: true
+    families:
+      family:
+        members:
+        - mother
+        - child
+      grandparent_family:
+        members:
+        - grandparent
+    marital_units:
+      mother:
+        members:
+        - mother
+      child:
+        members:
+        - child
+      grandparent:
+        members:
+        - grandparent
+    households:
+      home:
+        members:
+        - mother
+        - child
+        state_code: OH
+      grandparent_home:
+        members:
+        - grandparent
+        state_code: OH
+  output:
+    medicaid_claimed_by_parent_in_tax_unit:
+    - false
+    - false
+    - false
+    medicaid_tax_dependent_exception_other_than_spouse_or_child:
+    - false
+    - true
+    - false
+    medicaid_uses_non_filer_rules:
+    - false
+    - true
+    - false
+    medicaid_household_size:
+    - 1
+    - 2
+    - 2
+    medicaid_household_income:
+    - 20000
+    - 20000
+    - 30000

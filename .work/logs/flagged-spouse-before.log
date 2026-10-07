@@ -1,0 +1,37 @@
+Loading /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406, process 93902
+/Users/maxghenis/PolicyEngine/_worktrees/policyengine-us-parent-ids/.venv/lib/python3.14/site-packages/IPython/core/interactiveshell.py:3141: SyntaxWarning: 'return' in a 'finally' block
+  return result
+Model: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/policyengine_us/__init__.py
+============================= test session starts ==============================
+platform darwin -- Python 3.14.4, pytest-8.4.2, pluggy-1.6.0
+rootdir: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406
+configfile: pyproject.toml
+plugins: anyio-4.12.1
+collected 3 items
+
+.work/flagged_filer_spouse.yaml FFF
+
+=================================== FAILURES ===================================
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/flagged_filer_spouse.yaml:
+  Test 'A flagged separately filing spouse's income joins the filer's adult dependent household':
+    medicaid_household_income@2026: [60000. 20000. 60000.] differs from [60000. 60000. 60000.] with an absolute margin [    0. 40000.     0.] > 0.001
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/flagged_filer_spouse.yaml:
+  Test 'California propagates a flagged filer spouse's income and pregnancy to the adult dependent':
+    medicaid_household_income@2026: [60000. 20000. 60000.] differs from [60000. 60000. 60000.] with an absolute margin [    0. 40000.     0.] > 0.001
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/flagged_filer_spouse.yaml:
+  Test 'A flagged filer's spouse claimed into the filer's unit counts once in California':
+    ca_medicaid_household_pregnancies@2026: [2. 2.] differs from [1. 1.] with an absolute margin [1. 1.] > 0.001
+=============================== warnings summary ===============================
+../../../PolicyEngine/_worktrees/policyengine-us-parent-ids/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /Users/maxghenis/PolicyEngine/_worktrees/policyengine-us-parent-ids/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED .work/flagged_filer_spouse.yaml::
+FAILED .work/flagged_filer_spouse.yaml::
+FAILED .work/flagged_filer_spouse.yaml::
+======================== 3 failed, 1 warning in 21.61s =========================

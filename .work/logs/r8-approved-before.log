@@ -1,0 +1,45 @@
+Loading /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/approved, process 81851
+Model: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/approved/policyengine_us/__init__.py
+============================= test session starts ==============================
+platform darwin -- Python 3.14.4, pytest-8.4.2, pluggy-1.6.0
+rootdir: /Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406
+configfile: pyproject.toml
+plugins: anyio-4.12.1
+collected 11 items
+
+.work/r8_new_cases.yaml FFF..FF....
+
+=================================== FAILURES ===================================
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/r8_new_cases.yaml:
+  Test 'Separately filing spouses count each other without a cohabiting flag':
+    medicaid_household_size@2026: [2. 3. 1.] differs from [2. 3. 2.] with an absolute margin [0. 0. 1.] > 0.001
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/r8_new_cases.yaml:
+  Test 'California counts each separately filing spouse's pregnancy once without a flag':
+    medicaid_household_size@2026: [2. 4. 2.] differs from [2. 4. 3.] with an absolute margin [0. 0. 1.] > 0.001
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/r8_new_cases.yaml:
+  Test 'A filer's unflagged co-resident spouse joins the households of the filer's dependents':
+    medicaid_household_size@2026: [2. 1. 2.] differs from [3. 2. 3.] with an absolute margin [1. 1. 1.] > 0.001
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/r8_new_cases.yaml:
+  Test 'An established resident stepparent counts when ids name natural parents':
+    medicaid_claimed_by_parent_in_tax_unit@2026: [0. 0. 0.] differs from [0. 0. 1.] with an absolute margin [0. 0. 1.] > 0.001
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261007-055849-hub-resume-sol2-9406/.work/r8_new_cases.yaml:
+  Test 'A stepparent shown by a joint return makes step siblings and stepchildren':
+    medicaid_household_size@2026: [3. 3. 2. 2.] differs from [4. 4. 4. 4.] with an absolute margin [1. 1. 2. 2.] > 0.001
+=============================== warnings summary ===============================
+../../../PolicyEngine/_worktrees/policyengine-us-parent-ids/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /Users/maxghenis/PolicyEngine/_worktrees/policyengine-us-parent-ids/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED .work/r8_new_cases.yaml::
+FAILED .work/r8_new_cases.yaml::
+FAILED .work/r8_new_cases.yaml::
+FAILED .work/r8_new_cases.yaml::
+FAILED .work/r8_new_cases.yaml::
+=================== 5 failed, 6 passed, 1 warning in 29.91s ====================
