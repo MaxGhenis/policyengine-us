@@ -1,0 +1,65 @@
+BEFORE: prior saved formulas; cap case uses pre-build main formula
+FFFFFFF                                                                  [100%]
+=================================== FAILURES ===================================
+______________________ test_carryover_preserves_mortgage _______________________
+.hub-evidence/regression_before_after.py:90: in test_carryover_preserves_mortgage
+    assert s.calculate("interest_deduction", "2025")[0] == 13000
+E   assert np.float32(12000.0) == 13000
+_____________________________ test_carryover_alone _____________________________
+.hub-evidence/regression_before_after.py:99: in test_carryover_alone
+    assert s.calculate("investment_interest_expense_deduction", "2026")[0] == 4000
+E   assert np.float32(0.0) == 4000
+__________________________ test_dependent_investments __________________________
+.hub-evidence/regression_before_after.py:121: in test_dependent_investments
+    assert s.calculate("investment_interest_expense_deduction", "2025")[0] == 1000
+E   assert np.float32(10000.0) == 1000
+___________________________ test_dependent_fees_2017 ___________________________
+.hub-evidence/regression_before_after.py:137: in test_dependent_fees_2017
+    assert s.calculate("form_4952_investment_expenses", "2017")[0] == 1000
+E   assert np.float32(4000.0) == 1000
+_____________________________ test_montana_spouses _____________________________
+.hub-evidence/regression_before_after.py:171: in test_montana_spouses
+    np.testing.assert_allclose(
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=0
+E   
+E   Mismatched elements: 2 / 2 (100%)
+E   Mismatch at indices:
+E    [0]: 150.0 (ACTUAL), 300 (DESIRED)
+E    [1]: 450.0 (ACTUAL), 0 (DESIRED)
+E   Max absolute difference among violations: 450.
+E   Max relative difference among violations: 0.5
+E    ACTUAL: array([150., 450.], dtype=float32)
+E    DESIRED: array([300,   0])
+____________________________ test_main_federal_cap _____________________________
+.hub-evidence/regression_before_after.py:179: in test_main_federal_cap
+    assert s.calculate('income_tax', '2025')[0] == 21647
+E   assert np.float32(20447.0) == 21647
+___________________ test_dependent_fees_stay_off_schedule_a ____________________
+.hub-evidence/regression_before_after.py:185: in test_dependent_fees_stay_off_schedule_a
+    assert s.calculate('total_misc_deductions', '2017')[0] == 3000
+E   assert np.float32(53000.0) == 3000
+=============================== warnings summary ===============================
+.hub-evidence/regression_before_after.py::test_main_federal_cap
+  /Users/maxghenis/.subfleet/worktrees/20261007-055850-hub-resume-sol2-163d/policyengine_us/variables/gov/irs/income/taxable_income/adjusted_gross_income/irs_gross_income/unemployment_insurance/taxable_unemployment_insurance.py:22: RuntimeWarning: invalid value encountered in divide
+    share = where(tax_unit_uc > 0, person_uc / tax_unit_uc, 0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED .hub-evidence/regression_before_after.py::test_carryover_preserves_mortgage
+FAILED .hub-evidence/regression_before_after.py::test_carryover_alone - asser...
+FAILED .hub-evidence/regression_before_after.py::test_dependent_investments
+FAILED .hub-evidence/regression_before_after.py::test_dependent_fees_2017 - a...
+FAILED .hub-evidence/regression_before_after.py::test_montana_spouses - Asser...
+FAILED .hub-evidence/regression_before_after.py::test_main_federal_cap - asse...
+FAILED .hub-evidence/regression_before_after.py::test_dependent_fees_stay_off_schedule_a
+7 failed, 1 warning in 224.37s (0:03:44)
+AFTER: final branch formulas, same cases
+.......                                                                  [100%]
+=============================== warnings summary ===============================
+.hub-evidence/regression_before_after.py::test_main_federal_cap
+  /Users/maxghenis/.subfleet/worktrees/20261007-055850-hub-resume-sol2-163d/policyengine_us/variables/gov/irs/income/taxable_income/adjusted_gross_income/irs_gross_income/unemployment_insurance/taxable_unemployment_insurance.py:22: RuntimeWarning: invalid value encountered in divide
+    share = where(tax_unit_uc > 0, person_uc / tax_unit_uc, 0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+7 passed, 1 warning in 9.15s

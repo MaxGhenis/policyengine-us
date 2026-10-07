@@ -1,0 +1,9 @@
+{
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "packages": {
+    "policyengine-core": "3.32.20",
+    "pytest": "9.1.1",
+    "hypothesis": "6.168.3",
+    "numpy": "2.5.3"
+  }
+}

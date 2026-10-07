@@ -1,0 +1,106 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/maxghenis/.subfleet/worktrees/20261007-055850-hub-resume-sol2-163d
+configfile: pyproject.toml
+plugins: hypothesis-6.168.3, anyio-4.15.1
+collected 8 items
+
+policyengine_us/tests/policy/baseline/gov/states/ar/tax/income/deductions/itemized/ar_misc_deduction_joint.yaml Computation log:
+  ar_misc_deduction_joint<2021, (default)> = [0.]
+    AR<2021, (default)> = [ True]
+      state_code_str<2021, (default)> = ['AR']
+        state_code<2021, (default)> = ['AR']
+    total_misc_deductions<2021, (default)> = [800.]
+    ar_agi_joint<2021, (default)> = [100000.]
+.Computation log:
+  ar_misc_deduction_joint<2021, (default)> = [1000.]
+    AR<2021, (default)> = [ True]
+      state_code_str<2021, (default)> = ['AR']
+        state_code<2021, (default)> = ['AR']
+    total_misc_deductions<2021, (default)> = [3000.]
+    ar_agi_joint<2021, (default)> = [100000.]
+.Computation log:
+  ar_misc_deduction_joint<2017, (default)> = [9000.]
+    AR<2017, (default)> = [ True]
+      state_code_str<2017, (default)> = ['AR']
+        state_code<2017, (default)> = ['AR']
+    total_misc_deductions<2017, (default)> = [10000.]
+    ar_agi_joint<2017, (default)> = [50000.]
+.Computation log:
+  ar_misc_deduction_joint<2018, (default)> = [9000.]
+    AR<2018, (default)> = [ True]
+      state_code_str<2018, (default)> = ['AR']
+        state_code<2018, (default)> = ['AR']
+    total_misc_deductions<2018, (default)> = [10000.]
+    ar_agi_joint<2018, (default)> = [50000.]
+.Computation log:
+  ar_misc_deduction_joint<2022, (default)> = [9000.]
+    AR<2022, (default)> = [ True]
+      state_code_str<2022, (default)> = ['AR']
+        state_code<2022, (default)> = ['AR']
+    total_misc_deductions<2022, (default)> = [10000.]
+    ar_agi_joint<2022, (default)> = [50000.]
+.Computation log:
+  ar_misc_deduction_joint<2025, (default)> = [5500.]
+    AR<2025, (default)> = [ True]
+      state_code_str<2025, (default)> = ['AR']
+        state_code<2025, (default)> = ['AR']
+    total_misc_deductions<2025, (default)> = [6500.]
+      unreimbursed_business_employee_expenses<2025, (default)> = [6000.]
+      tax_preparation_fees<2025, (default)> = [500.]
+      investment_expenses<2025, (default)> = [0.]
+      is_tax_unit_dependent<2025, (default)> = [False]
+        is_tax_unit_head<2025, (default)> = [ True]
+          is_child<2025, (default)> = [False]
+            age<2025, (default)> = [40.]
+          age<2025, (default)> = [40.]
+        is_tax_unit_spouse<2025, (default)> = [False]
+          is_separated<2025, (default)> = [False]
+          is_child<2025, (default)> = [False]
+          is_tax_unit_head<2025, (default)> = [ True]
+          age<2025, (default)> = [40.]
+    ar_agi_joint<2025, (default)> = [50000.]
+.Computation log:
+  total_misc_deductions<2025, (default)> = [3500.]
+    unreimbursed_business_employee_expenses<2025, (default)> = [0.]
+    tax_preparation_fees<2025, (default)> = [500.]
+    investment_expenses<2025, (default)> = [3000.]
+    is_tax_unit_dependent<2025, (default)> = [False]
+      is_tax_unit_head<2025, (default)> = [ True]
+        is_child<2025, (default)> = [False]
+          age<2025, (default)> = [40.]
+        age<2025, (default)> = [40.]
+      is_tax_unit_spouse<2025, (default)> = [False]
+        is_separated<2025, (default)> = [False]
+        is_child<2025, (default)> = [False]
+        is_tax_unit_head<2025, (default)> = [ True]
+        age<2025, (default)> = [40.]
+  ar_misc_deduction_joint<2025, (default)> = [1500.]
+    AR<2025, (default)> = [ True]
+      state_code_str<2025, (default)> = ['AR']
+        state_code<2025, (default)> = ['AR']
+    total_misc_deductions<2025, (default)> = [3500.]
+    ar_agi_joint<2025, (default)> = [100000.]
+  misc_deduction<2025, (default)> = [0.]
+  form_4952_investment_expenses<2025, (default)> = [0.]
+.F
+
+=================================== FAILURES ===================================
+_________________________________ test session _________________________________
+/Users/maxghenis/.subfleet/worktrees/20261007-055850-hub-resume-sol2-163d/policyengine_us/tests/policy/baseline/gov/states/ar/tax/income/deductions/itemized/ar_misc_deduction_joint.yaml:
+  Test 'AR excludes dependent investment fees from the filer miscellaneous pool':
+    Could not parse situation described: {'tax_units': {'unit': {'ar_agi_joint': "You tried to compute the variable 'ar_agi_joint' for the entity 'tax_units'; however the variable 'ar_agi_joint' is defined for 'people'. Learn more about entities in our documentation: <https://openfisca.org/doc/coding-the-legislation/50_entities.html>."}}}
+=============================== warnings summary ===============================
+../../../PolicyEngine/_worktrees/pe-us-backlog/main/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1345
+  /Users/maxghenis/PolicyEngine/_worktrees/pe-us-backlog/main/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1345: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+policyengine_us/tests/policy/baseline/gov/states/ar/tax/income/deductions/itemized/ar_misc_deduction_joint.yaml::
+  /Users/maxghenis/.subfleet/worktrees/20261007-055850-hub-resume-sol2-163d/.hub-evidence/runtime/policyengine_core/errors/situation_parsing_error.py:15: DeprecationWarning: The dpath.util package is being deprecated. All util functions have been moved to dpath package top level.
+    dpath.util.new(self.error, dpath_path, message)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED policyengine_us/tests/policy/baseline/gov/states/ar/tax/income/deductions/itemized/ar_misc_deduction_joint.yaml::
+=================== 1 failed, 7 passed, 2 warnings in 11.83s ===================
+LOCAL_RESOURCE wall_seconds=164.24 max_rss_bytes=1660272640 user_seconds=24.21 sys_seconds=3.77

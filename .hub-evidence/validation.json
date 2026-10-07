@@ -1,0 +1,98 @@
+[
+  {
+    "description": "Federal Form 4952",
+    "log": "form4952-final.log",
+    "passed": 25,
+    "failed": 0,
+    "wall_seconds": null,
+    "max_rss_bytes": null
+  },
+  {
+    "description": "Vectorized properties",
+    "log": "properties-final.log",
+    "passed": 15,
+    "failed": 0,
+    "wall_seconds": 158.62,
+    "max_rss_bytes": 1095139328
+  },
+  {
+    "description": "Montana separate limits and federal alias",
+    "log": "montana-separate.log",
+    "passed": 4,
+    "failed": 0,
+    "wall_seconds": null,
+    "max_rss_bytes": null
+  },
+  {
+    "description": "Montana allocation",
+    "log": "montana-allocation.log",
+    "passed": 2,
+    "failed": 0,
+    "wall_seconds": null,
+    "max_rss_bytes": null
+  },
+  {
+    "description": "Virginia allowed-interest exclusion",
+    "log": "virginia.log",
+    "passed": 5,
+    "failed": 0,
+    "wall_seconds": 209.69,
+    "max_rss_bytes": 1592147968
+  },
+  {
+    "description": "New York dependent fees",
+    "log": "new-york-fees.log",
+    "passed": 1,
+    "failed": 0,
+    "wall_seconds": 277.87,
+    "max_rss_bytes": 1560723456
+  },
+  {
+    "description": "Arkansas dependent fees",
+    "log": "arkansas-fees-fixed.log",
+    "passed": 8,
+    "failed": 0,
+    "wall_seconds": 197.12,
+    "max_rss_bytes": 1659863040
+  },
+  {
+    "description": "California interest replacement",
+    "log": "california.log",
+    "passed": 2,
+    "failed": 0,
+    "wall_seconds": 223.11,
+    "max_rss_bytes": 1565343744
+  },
+  {
+    "description": "New York allowed-interest exclusion",
+    "log": "new-york-phase-out.log",
+    "passed": 7,
+    "failed": 0,
+    "wall_seconds": 38.87,
+    "max_rss_bytes": 1768620032
+  },
+  {
+    "description": "Schedule D election",
+    "log": "election.log",
+    "passed": 13,
+    "failed": 0,
+    "wall_seconds": 32.98,
+    "max_rss_bytes": 1964556288
+  },
+  {
+    "description": "Section 911 dividends",
+    "log": "section911-dividends.log",
+    "passed": 5,
+    "failed": 0,
+    "wall_seconds": 28.93,
+    "max_rss_bytes": 1686913024
+  },
+  {
+    "description": "Section 911 adjusted gain",
+    "log": "section911-gain.log",
+    "passed": 3,
+    "failed": 0,
+    "wall_seconds": 38.04,
+    "max_rss_bytes": 1756725248
+  }
+]

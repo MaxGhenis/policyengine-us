@@ -1,0 +1,107 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/maxghenis/.subfleet/worktrees/20261007-055850-hub-resume-sol2-163d
+configfile: pyproject.toml
+plugins: hypothesis-6.168.3, anyio-4.15.1
+collected 8 items
+
+policyengine_us/tests/policy/baseline/gov/states/ar/tax/income/deductions/itemized/ar_misc_deduction_joint.yaml Computation log:
+  ar_misc_deduction_joint<2021, (default)> = [0.]
+    AR<2021, (default)> = [ True]
+      state_code_str<2021, (default)> = ['AR']
+        state_code<2021, (default)> = ['AR']
+    total_misc_deductions<2021, (default)> = [800.]
+    ar_agi_joint<2021, (default)> = [100000.]
+.Computation log:
+  ar_misc_deduction_joint<2021, (default)> = [1000.]
+    AR<2021, (default)> = [ True]
+      state_code_str<2021, (default)> = ['AR']
+        state_code<2021, (default)> = ['AR']
+    total_misc_deductions<2021, (default)> = [3000.]
+    ar_agi_joint<2021, (default)> = [100000.]
+.Computation log:
+  ar_misc_deduction_joint<2017, (default)> = [9000.]
+    AR<2017, (default)> = [ True]
+      state_code_str<2017, (default)> = ['AR']
+        state_code<2017, (default)> = ['AR']
+    total_misc_deductions<2017, (default)> = [10000.]
+    ar_agi_joint<2017, (default)> = [50000.]
+.Computation log:
+  ar_misc_deduction_joint<2018, (default)> = [9000.]
+    AR<2018, (default)> = [ True]
+      state_code_str<2018, (default)> = ['AR']
+        state_code<2018, (default)> = ['AR']
+    total_misc_deductions<2018, (default)> = [10000.]
+    ar_agi_joint<2018, (default)> = [50000.]
+.Computation log:
+  ar_misc_deduction_joint<2022, (default)> = [9000.]
+    AR<2022, (default)> = [ True]
+      state_code_str<2022, (default)> = ['AR']
+        state_code<2022, (default)> = ['AR']
+    total_misc_deductions<2022, (default)> = [10000.]
+    ar_agi_joint<2022, (default)> = [50000.]
+.Computation log:
+  ar_misc_deduction_joint<2025, (default)> = [5500.]
+    AR<2025, (default)> = [ True]
+      state_code_str<2025, (default)> = ['AR']
+        state_code<2025, (default)> = ['AR']
+    total_misc_deductions<2025, (default)> = [6500.]
+      unreimbursed_business_employee_expenses<2025, (default)> = [6000.]
+      tax_preparation_fees<2025, (default)> = [500.]
+      investment_expenses<2025, (default)> = [0.]
+      is_tax_unit_dependent<2025, (default)> = [False]
+        is_tax_unit_head<2025, (default)> = [ True]
+          is_child<2025, (default)> = [False]
+            age<2025, (default)> = [40.]
+          age<2025, (default)> = [40.]
+        is_tax_unit_spouse<2025, (default)> = [False]
+          is_separated<2025, (default)> = [False]
+          is_child<2025, (default)> = [False]
+          is_tax_unit_head<2025, (default)> = [ True]
+          age<2025, (default)> = [40.]
+    ar_agi_joint<2025, (default)> = [50000.]
+.Computation log:
+  total_misc_deductions<2025, (default)> = [3500.]
+    unreimbursed_business_employee_expenses<2025, (default)> = [0.]
+    tax_preparation_fees<2025, (default)> = [500.]
+    investment_expenses<2025, (default)> = [3000.]
+    is_tax_unit_dependent<2025, (default)> = [False]
+      is_tax_unit_head<2025, (default)> = [ True]
+        is_child<2025, (default)> = [False]
+          age<2025, (default)> = [40.]
+        age<2025, (default)> = [40.]
+      is_tax_unit_spouse<2025, (default)> = [False]
+        is_separated<2025, (default)> = [False]
+        is_child<2025, (default)> = [False]
+        is_tax_unit_head<2025, (default)> = [ True]
+        age<2025, (default)> = [40.]
+  ar_misc_deduction_joint<2025, (default)> = [1500.]
+    AR<2025, (default)> = [ True]
+      state_code_str<2025, (default)> = ['AR']
+        state_code<2025, (default)> = ['AR']
+    total_misc_deductions<2025, (default)> = [3500.]
+    ar_agi_joint<2025, (default)> = [100000.]
+  misc_deduction<2025, (default)> = [0.]
+  form_4952_investment_expenses<2025, (default)> = [0.]
+.Computation log:
+  total_misc_deductions<2025, (default)> = [3000.]
+    unreimbursed_business_employee_expenses<2025, (default)> = [0. 0.]
+    tax_preparation_fees<2025, (default)> = [0. 0.]
+    investment_expenses<2025, (default)> = [ 3000. 50000.]
+    is_tax_unit_dependent<2025, (default)> = [False  True]
+  ar_misc_deduction_joint<2025, (default)> = [1000.]
+    AR<2025, (default)> = [ True]
+      state_code_str<2025, (default)> = ['AR']
+        state_code<2025, (default)> = ['AR']
+    total_misc_deductions<2025, (default)> = [3000.]
+    ar_agi_joint<2025, (default)> = [100000.      0.]
+.
+
+=============================== warnings summary ===============================
+../../../PolicyEngine/_worktrees/pe-us-backlog/main/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1345
+  /Users/maxghenis/PolicyEngine/_worktrees/pe-us-backlog/main/.venv/lib/python3.13/site-packages/_pytest/config/__init__.py:1345: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 8 passed, 1 warning in 10.25s =========================
+LOCAL_RESOURCE wall_seconds=197.12 max_rss_bytes=1659863040 user_seconds=20.87 sys_seconds=3.23
