@@ -14,7 +14,7 @@ This round preserves the existing 40 county and three legacy-TIN cases, the two 
 - All **65 source statements and 15 changed executable lines** are covered on both cores, with **zero exclusions**. County statement/branch coverage is 100%; TIN statement coverage is 100% (whole-file combined coverage 93%, with two unchanged `None` guards partially covered).
 - The **actual selective runner passes six TIN cases**. Current main intentionally disables source coverage when its mapped directory targets are deferred, even if an explicit Python test exercises that source. Direct single-file coverage commands above establish coverage independently; the runner was preserved.
 - Exported core `2e22c8f8016a4873bfc1e1257ee408a5ecc37ba8` matches all 194 tracked package files by Git blob hash (0 missing/changed); no `c574` WIP substitution.
-- Latest CI: 27 checks pass, 8 pending, none failing. Full suites are left to CI.
+- Recorded CI snapshot: 27 checks pass, 8 pending, none failing. Full suites are left to CI.
 - Reused saved checks at `7aa7609340`: 73 passes on locked core 3.32.8; 52 passes on core master `757147c7`. Saved canonical coverage executes `has_tin.py:21`. The prior main-side commands failed to locate copied tests and are not counted as regression failures.
 
 ## Impact evidence and remaining runs
@@ -30,3 +30,5 @@ Hub follow-up: compare current main against updated head in fresh 2025 and 2026 
 Keep draft until the remaining impact checks are complete.
 
 axiom: n/a: branch/cache plumbing for reading stored inputs; no policy rule changes
+
+Detailed resume report and saved run evidence: [9748 report](https://github.com/MaxGhenis/policyengine-us/blob/wip/hub-resume-sol2-9748/9748-report.md).

@@ -28,7 +28,7 @@ Actual command `python policyengine_us/tests/run_selective_tests.py --coverage -
 
 The exact core export matches all **194** tracked package files by Git blob hash, with zero missing/changed files, excluding c574 WIP substitution. Reused prior results: **73 passes on 3.32.8**, **52 on 757147c7**, including the unchanged five-case TIN YAML seed file and existing legacy/counties. Earlier baseline attempts collected no tests (copy failed); they are not counted as red evidence.
 
-`make format` (ruff format and lint) passed before every commit. Latest `gh pr checks`: **27 passing, 8 pending, zero failures**. Full suites remain with CI. PR body refreshed with completed results and limits.
+`make format` (ruff format and lint) passed before every commit. Recorded `gh pr checks` snapshot: **27 passing, 8 pending, zero failures**. Full suites remain with CI. PR body refreshed with completed results and limits.
 
 ## Saved impact evidence
 
@@ -44,4 +44,4 @@ Sandbox instructions prohibit new microsims here. Compare current main dd9cb3f68
 
 ## Delivery
 
-The requested ~/reviews report path and original shared Git metadata are not writable in this sandbox. Report and evidence are saved in the assigned workspace, using local `.resume-git` metadata. The model commits are on the PR branch; report/evidence are mirrored on `origin/wip/hub-resume-sol2-9748`. Retrieve that ref to preserve the report independently of the original protected worktree metadata. No extra worktrees were created, no caller files were written, and all local test processes finished.
+The requested ~/reviews report path and original shared Git metadata are not writable in this sandbox. Report and evidence are saved in the assigned workspace, using local `.hypothesis/.resume-git` metadata (kept under an existing ignored directory). The model commits are on the PR branch; report/evidence are mirrored on `origin/wip/hub-resume-sol2-9748`. Retrieve that ref to preserve the report independently of the original protected worktree metadata. No extra worktrees were created, no caller files were written, and all local test processes finished.
