@@ -204,7 +204,8 @@ def main():
         elif name == "drop_has_dependent_child" and args.yaml:
             target = "Explicit parent flag requires a dependent child"
         if target and not any(
-            target in record.get("test_name", "") for record in records
+            target.casefold() in record.get("test_name", "").casefold()
+            for record in records
         ):
             mismatches[name] = f"intended detecting case missing: {target}"
     if mismatches:
