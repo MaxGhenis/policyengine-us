@@ -1,0 +1,29 @@
+<frozen importlib._bootstrap>:491: RuntimeWarning: The global interpreter lock (GIL) has been enabled to load module 'h5py._errors', which has not declared that it can run safely without the GIL. To override this behavior and keep the GIL disabled (at your own risk), run with PYTHON_GIL=0 or -Xgil=0.
+============================= test session starts ==============================
+platform darwin -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /Users/maxghenis/.subfleet/worktrees/20261007-055850-hub-resume-sol2-9748
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 6 items
+
+policyengine_us/tests/core/test_has_tin_branch_inputs.py ......
+
+=============================== warnings summary ===============================
+../20261006-082904-hub-fix-9748/.venv/lib/python3.14t/site-packages/_pytest/config/__init__.py:1290
+  /Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9748/.venv/lib/python3.14t/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=================== 6 passed, 1 warning in 258.75s (0:04:18) ===================
+Detected 2 changed files:
+  - policyengine_us/tests/core/test_has_tin_branch_inputs.py
+  - policyengine_us/variables/household/demographic/person/has_tin.py
+
+Quick Feedback is deferring slow directory target(s) to the full suite jobs: policyengine_us/tests/microsimulation, policyengine_us/tests/policy/baseline/household.
+Running tests for 1 test locations:
+  - policyengine_us/tests/core/test_has_tin_branch_inputs.py
+Leaving 1 changed source file(s) out of coverage; their tests run only in the full suite:
+  - policyengine_us/variables/household/demographic/person/has_tin.py
+No changed source file is tested in this run; running tests without coverage.
+
+Running command: /Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9748/.venv/bin/python -m policyengine_core.scripts.policyengine_command test -c policyengine_us policyengine_us/tests/core/test_has_tin_branch_inputs.py

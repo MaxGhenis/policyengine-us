@@ -1,0 +1,85 @@
+<frozen importlib._bootstrap>:491: RuntimeWarning: The global interpreter lock (GIL) has been enabled to load module 'h5py._errors', which has not declared that it can run safely without the GIL. To override this behavior and keep the GIL disabled (at your own risk), run with PYTHON_GIL=0 or -Xgil=0.
+Updated formula: full TIN test file
+......                                                                   [100%]
+=============================== warnings summary ===============================
+../20261006-082904-hub-fix-9748/.venv/lib/python3.14t/site-packages/_pytest/config/__init__.py:1290
+  /Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9748/.venv/lib/python3.14t/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 1 warning in 29.93s
+Updated formula pytest exit: 0
+Formula source: current main dd9cb3f6839d290c8490c561b54b7afeedc3c888
+Core source: /Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9748/.venv/lib/python3.14t/site-packages/policyengine_core/__init__.py
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+________ test_formula_reads_branch_or_ancestor_canonical_has_tin[False] ________
+
+nested = False
+
+    @pytest.mark.parametrize("nested", [False, True])
+    def test_formula_reads_branch_or_ancestor_canonical_has_tin(nested):
+        simulation = Simulation(situation=_situation())
+        simulation.set_input("has_tin", YEAR, np.array([True]))
+        simulation.set_input("has_itin", YEAR, np.array([True]))
+        branch = simulation.get_branch("without_tin")
+        branch.set_input("has_tin", YEAR, np.array([False]))
+        target = branch.get_branch("nested") if nested else branch
+        sibling = simulation.get_branch("unrelated")
+    
+        # The branch's canonical False wins over the legacy True it inherits, and
+        # a nested branch inherits it; the simulation and an unrelated sibling
+        # keep the default branch's True.
+        for current, expected in (
+            (target, [False]),
+            (simulation, [True]),
+            (sibling, [True]),
+        ):
+            actual = has_tin.formula(current.persons, as_period(YEAR), None)
+>           assert actual.tolist() == expected
+E           assert [True] == [False]
+E             
+E             At index 0 diff: True != False
+E             Use -v to get more diff
+
+policyengine_us/tests/core/test_has_tin_branch_inputs.py:86: AssertionError
+________ test_formula_reads_branch_or_ancestor_canonical_has_tin[True] _________
+
+nested = True
+
+    @pytest.mark.parametrize("nested", [False, True])
+    def test_formula_reads_branch_or_ancestor_canonical_has_tin(nested):
+        simulation = Simulation(situation=_situation())
+        simulation.set_input("has_tin", YEAR, np.array([True]))
+        simulation.set_input("has_itin", YEAR, np.array([True]))
+        branch = simulation.get_branch("without_tin")
+        branch.set_input("has_tin", YEAR, np.array([False]))
+        target = branch.get_branch("nested") if nested else branch
+        sibling = simulation.get_branch("unrelated")
+    
+        # The branch's canonical False wins over the legacy True it inherits, and
+        # a nested branch inherits it; the simulation and an unrelated sibling
+        # keep the default branch's True.
+        for current, expected in (
+            (target, [False]),
+            (simulation, [True]),
+            (sibling, [True]),
+        ):
+            actual = has_tin.formula(current.persons, as_period(YEAR), None)
+>           assert actual.tolist() == expected
+E           assert [True] == [False]
+E             
+E             At index 0 diff: True != False
+E             Use -v to get more diff
+
+policyengine_us/tests/core/test_has_tin_branch_inputs.py:86: AssertionError
+=============================== warnings summary ===============================
+../20261006-082904-hub-fix-9748/.venv/lib/python3.14t/site-packages/_pytest/config/__init__.py:1290
+  /Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9748/.venv/lib/python3.14t/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED policyengine_us/tests/core/test_has_tin_branch_inputs.py::test_formula_reads_branch_or_ancestor_canonical_has_tin[False]
+FAILED policyengine_us/tests/core/test_has_tin_branch_inputs.py::test_formula_reads_branch_or_ancestor_canonical_has_tin[True]
+2 failed, 4 deselected, 1 warning in 14.27s

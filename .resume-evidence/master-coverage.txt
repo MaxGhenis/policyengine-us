@@ -1,0 +1,6 @@
+Name                                                                          Stmts   Miss Branch BrPart  Cover   Missing
+-------------------------------------------------------------------------------------------------------------------------
+policyengine_us/variables/household/demographic/geographic/county/county.py      44      0     14      0   100%
+policyengine_us/variables/household/demographic/person/has_tin.py                21      0      8      2    93%   22->26, 29->32
+-------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                            65      0     22      2    98%

@@ -1,0 +1,759 @@
+{
+  "source_directory": "/Users/maxghenis/reviews/us-hub/fixes/9748-work/impact/out",
+  "audit_method": "read-only comparison of saved JSON and numeric arrays; no simulation or test run",
+  "fresh_2025": {
+    "dataset": "hf://datasets/policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+    "baseline_us_sha": "3266705e426eda2688800732c2ea9f78cc88e7cf",
+    "branch_us_sha": "7aa7609340f6c27f684578c51d505e3ead0a1b25",
+    "branch_sha_provenance": "inferred from previous worktree reflog: HEAD last transitioned at 2026-10-06 20:57:47 -0400, preceding 2025 run completed 2026-10-07 00:52:10; run JSON records import path, not SHA",
+    "core_sha": "757147c7473d6a3baab9341fb045fa6778d1a7fd",
+    "core_sha_provenance": "export directory name; holder.py and simulation.py matched git source at exact revision",
+    "baseline_import_path": "/Users/maxghenis/reviews/us-hub/fixes/9748-work/base-3266705e42/policyengine_us/__init__.py",
+    "branch_import_path": "/Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9748/policyengine_us/__init__.py",
+    "core_import_path": "/Users/maxghenis/reviews/us-hub/fixes/9748-work/core-757147c7/policyengine_core/__init__.py",
+    "run_completed_local": [
+      "2026-10-07T00:46:03",
+      "2026-10-07T00:52:09"
+    ],
+    "variables": {
+      "county": {
+        "entity": "household",
+        "records": 57240,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": null,
+        "pr_weighted_sum": null,
+        "weighted_delta": null,
+        "max_abs_delta": null,
+        "type": "non-numeric county identifier; no arithmetic sum"
+      },
+      "county_fips": {
+        "entity": "household",
+        "records": 57240,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": null,
+        "pr_weighted_sum": null,
+        "weighted_delta": null,
+        "max_abs_delta": null,
+        "type": "non-numeric county identifier; no arithmetic sum"
+      },
+      "county_str": {
+        "entity": "household",
+        "records": 57240,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": null,
+        "pr_weighted_sum": null,
+        "weighted_delta": null,
+        "max_abs_delta": null,
+        "type": "non-numeric county identifier; no arithmetic sum"
+      },
+      "has_tin": {
+        "entity": "person",
+        "records": 166321,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 343234872.2962102,
+        "pr_weighted_sum": 343234872.2962102,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      },
+      "household_benefits": {
+        "entity": "household",
+        "records": 57240,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 1959621379433.0708,
+        "pr_weighted_sum": 1959621379433.0708,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      },
+      "household_net_income": {
+        "entity": "household",
+        "records": 57240,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 16357214862678.418,
+        "pr_weighted_sum": 16357214862678.418,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      },
+      "household_tax": {
+        "entity": "household",
+        "records": 57240,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 3911274134519.4814,
+        "pr_weighted_sum": 3911274134519.4814,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      },
+      "income_tax": {
+        "entity": "tax_unit",
+        "records": 79729,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 2415999173478.7236,
+        "pr_weighted_sum": 2415999173478.7236,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      },
+      "md_ccs": {
+        "entity": "spm_unit",
+        "records": 59900,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 136838571.20442206,
+        "pr_weighted_sum": 136838571.20442206,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      },
+      "md_ccs_payment_rate": {
+        "entity": "person",
+        "records": 166321,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 1153285405.8018095,
+        "pr_weighted_sum": 1153285405.8018095,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      },
+      "person_in_poverty": {
+        "entity": "person",
+        "records": 166321,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 45907232.89194786,
+        "pr_weighted_sum": 45907232.89194786,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      },
+      "snap": {
+        "entity": "spm_unit",
+        "records": 59900,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 99028974270.75998,
+        "pr_weighted_sum": 99028974270.75998,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      },
+      "spm_unit_is_in_spm_poverty": {
+        "entity": "spm_unit",
+        "records": 59900,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 18457766.8895201,
+        "pr_weighted_sum": 18457766.8895201,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      },
+      "spm_unit_net_income": {
+        "entity": "spm_unit",
+        "records": 59900,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 14085342100641.742,
+        "pr_weighted_sum": 14085342100641.742,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      },
+      "state_income_tax": {
+        "entity": "tax_unit",
+        "records": 79729,
+        "fingerprints_identical": true,
+        "weights_identical": true,
+        "records_changed": 0,
+        "weighted_records_changed": 0.0,
+        "base_weighted_sum": 551260176702.9845,
+        "pr_weighted_sum": 551260176702.9845,
+        "weighted_delta": 0.0,
+        "max_abs_delta": 0.0
+      }
+    },
+    "cache_tree": {
+      "arrays_baseline": 207842,
+      "arrays_branch": 207842,
+      "arrays_changed": 0,
+      "arrays_only_baseline": 0,
+      "arrays_only_branch": 0,
+      "simulations": 9,
+      "county_cache_arrays_with_unknown_baseline": 0,
+      "county_cache_arrays_with_unknown_branch": 0
+    }
+  },
+  "probes": {
+    "base832": {
+      "dataset": "hf://datasets/policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+      "core_import_path": "/Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9748/.venv/lib/python3.14t/site-packages/policyengine_core/__init__.py",
+      "us_import_path": "/Users/maxghenis/reviews/us-hub/fixes/9748-work/base-3266705e42/policyengine_us/__init__.py",
+      "core_version_or_sha": "3.32.8",
+      "us_sha": "3266705e426eda2688800732c2ea9f78cc88e7cf",
+      "us_sha_provenance": "baseline checkout HEAD",
+      "total_reads": 66,
+      "seconds": 165.1,
+      "scenarios": {
+        "upfront/ascending": {
+          "reads": 18,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        },
+        "upfront/descending": {
+          "reads": 18,
+          "reads_with_unknown": 8,
+          "maximum_unknown_households": 57240,
+          "maximum_unknown_maryland_households": 1091,
+          "reads_not_matching_reference": 8,
+          "county_errors": 0,
+          "ccs_rate_errors": 8,
+          "affected_steps": [
+            {
+              "step": [
+                "itemizing",
+                2026
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2026
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing",
+                2025
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2025
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing",
+                2025
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing",
+                2026
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2025
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2026
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            }
+          ]
+        },
+        "ecps/ascending": {
+          "reads": 15,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        },
+        "ecps/descending": {
+          "reads": 15,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        }
+      },
+      "branch_only_legacy_tin": {
+        "without_tin": {
+          "people": 166321,
+          "false": 0
+        },
+        "without_tin/nested": {
+          "people": 166321,
+          "false": 0
+        },
+        "default": {
+          "people": 166321,
+          "false": 0
+        },
+        "unrelated": {
+          "people": 166321,
+          "false": 0
+        }
+      }
+    },
+    "pr832": {
+      "dataset": "hf://datasets/policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+      "core_import_path": "/Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9748/.venv/lib/python3.14t/site-packages/policyengine_core/__init__.py",
+      "us_import_path": "/Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9748/policyengine_us/__init__.py",
+      "core_version_or_sha": "3.32.8",
+      "us_sha": "7aa7609340f6c27f684578c51d505e3ead0a1b25",
+      "us_sha_provenance": "inferred from previous worktree reflog: last HEAD transition 2026-10-06 20:57:47 -0400; run after 23:00; JSON records import path, not SHA",
+      "total_reads": 66,
+      "seconds": 140.6,
+      "scenarios": {
+        "upfront/ascending": {
+          "reads": 18,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        },
+        "upfront/descending": {
+          "reads": 18,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        },
+        "ecps/ascending": {
+          "reads": 15,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        },
+        "ecps/descending": {
+          "reads": 15,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        }
+      },
+      "branch_only_legacy_tin": {
+        "without_tin": {
+          "people": 166321,
+          "false": 166321
+        },
+        "without_tin/nested": {
+          "people": 166321,
+          "false": 166321
+        },
+        "default": {
+          "people": 166321,
+          "false": 0
+        },
+        "unrelated": {
+          "people": 166321,
+          "false": 0
+        }
+      }
+    },
+    "basemaster": {
+      "dataset": "hf://datasets/policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+      "core_import_path": "/Users/maxghenis/reviews/us-hub/fixes/9748-work/core-757147c7/policyengine_core/__init__.py",
+      "us_import_path": "/Users/maxghenis/reviews/us-hub/fixes/9748-work/base-3266705e42/policyengine_us/__init__.py",
+      "core_version_or_sha": "757147c7473d6a3baab9341fb045fa6778d1a7fd",
+      "us_sha": "3266705e426eda2688800732c2ea9f78cc88e7cf",
+      "us_sha_provenance": "baseline checkout HEAD",
+      "total_reads": 66,
+      "seconds": 67.5,
+      "scenarios": {
+        "upfront/ascending": {
+          "reads": 18,
+          "reads_with_unknown": 8,
+          "maximum_unknown_households": 57240,
+          "maximum_unknown_maryland_households": 1091,
+          "reads_not_matching_reference": 8,
+          "county_errors": 0,
+          "ccs_rate_errors": 8,
+          "affected_steps": [
+            {
+              "step": [
+                "itemizing",
+                2026
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2026
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing",
+                2027
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2027
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing",
+                2026
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing",
+                2027
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2026
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2027
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            }
+          ]
+        },
+        "upfront/descending": {
+          "reads": 18,
+          "reads_with_unknown": 8,
+          "maximum_unknown_households": 57240,
+          "maximum_unknown_maryland_households": 1091,
+          "reads_not_matching_reference": 8,
+          "county_errors": 0,
+          "ccs_rate_errors": 8,
+          "affected_steps": [
+            {
+              "step": [
+                "itemizing",
+                2026
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2026
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing",
+                2025
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2025
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing",
+                2025
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing",
+                2026
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2025
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2026
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            }
+          ]
+        },
+        "ecps/ascending": {
+          "reads": 15,
+          "reads_with_unknown": 4,
+          "maximum_unknown_households": 57240,
+          "maximum_unknown_maryland_households": 1091,
+          "reads_not_matching_reference": 4,
+          "county_errors": 0,
+          "ccs_rate_errors": 4,
+          "affected_steps": [
+            {
+              "step": [
+                "itemizing",
+                2027
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2027
+              ],
+              "reread": false,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing",
+                2027
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            },
+            {
+              "step": [
+                "itemizing/no_salt",
+                2027
+              ],
+              "reread": true,
+              "unknown": 57240,
+              "unknown_md": 1091
+            }
+          ]
+        },
+        "ecps/descending": {
+          "reads": 15,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        }
+      },
+      "branch_only_legacy_tin": {
+        "without_tin": {
+          "people": 166321,
+          "false": 0
+        },
+        "without_tin/nested": {
+          "people": 166321,
+          "false": 0
+        },
+        "default": {
+          "people": 166321,
+          "false": 0
+        },
+        "unrelated": {
+          "people": 166321,
+          "false": 0
+        }
+      }
+    },
+    "prmaster": {
+      "dataset": "hf://datasets/policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+      "core_import_path": "/Users/maxghenis/reviews/us-hub/fixes/9748-work/core-757147c7/policyengine_core/__init__.py",
+      "us_import_path": "/Users/maxghenis/.subfleet/worktrees/20261006-082904-hub-fix-9748/policyengine_us/__init__.py",
+      "core_version_or_sha": "757147c7473d6a3baab9341fb045fa6778d1a7fd",
+      "us_sha": "7aa7609340f6c27f684578c51d505e3ead0a1b25",
+      "us_sha_provenance": "inferred from previous worktree reflog: last HEAD transition 2026-10-06 20:57:47 -0400; run after 23:00; JSON records import path, not SHA",
+      "total_reads": 66,
+      "seconds": 86.5,
+      "scenarios": {
+        "upfront/ascending": {
+          "reads": 18,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        },
+        "upfront/descending": {
+          "reads": 18,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        },
+        "ecps/ascending": {
+          "reads": 15,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        },
+        "ecps/descending": {
+          "reads": 15,
+          "reads_with_unknown": 0,
+          "maximum_unknown_households": 0,
+          "maximum_unknown_maryland_households": 0,
+          "reads_not_matching_reference": 0,
+          "county_errors": 0,
+          "ccs_rate_errors": 0,
+          "affected_steps": []
+        }
+      },
+      "branch_only_legacy_tin": {
+        "without_tin": {
+          "people": 166321,
+          "false": 166321
+        },
+        "without_tin/nested": {
+          "people": 166321,
+          "false": 166321
+        },
+        "default": {
+          "people": 166321,
+          "false": 0
+        },
+        "unrelated": {
+          "people": 166321,
+          "false": 0
+        }
+      }
+    }
+  },
+  "pending_impact": [
+    "core 3.32.8 fresh 2025 baseline/branch comparisons: both saved runs killed by memory watchdog",
+    "core 3.32.8 fresh 2026 baseline/branch comparisons: both saved runs killed by memory watchdog",
+    "core 757147c7 fresh 2026 branch run: failed before Python due no space left on device; baseline completed",
+    "exact core 2e22c8f8016a4873bfc1e1257ee408a5ecc37ba8 fresh comparisons and probes: exported code exists, no results recorded",
+    "original requested full-eCPS comparisons: original evidence full/ directory empty; completed runs here use default pinned populace dataset"
+  ]
+}
