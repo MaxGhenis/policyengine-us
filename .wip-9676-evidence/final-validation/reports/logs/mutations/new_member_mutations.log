@@ -1,0 +1,45 @@
+=== MUTATION none START
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 16 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_is_assistance_unit_member.yaml ................
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 16 passed, 1 warning in 13.85s ========================
+=== MUTATION none EXIT CODE 0
+=== MUTATION drop_has_dependent_child START
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 16 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_is_assistance_unit_member.yaml ...............F
+
+=================================== FAILURES ===================================
+_________________________________ test session _________________________________
+/home/runner/work/policyengine-us/policyengine-us/wip/policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_is_assistance_unit_member.yaml:
+  Test 'An explicit parent flag requires a dependent child in that person's tax unit':
+    mo_tanf_is_assistance_unit_member@2026-01: [1. 1. 1.] differs from [1. 1. 0.] with an absolute margin [0. 0. 1.] > 0.001
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_is_assistance_unit_member.yaml::
+=================== 1 failed, 15 passed, 1 warning in 11.64s ===================
+=== MUTATION drop_has_dependent_child EXIT CODE 1
+ALL EXIT CODES {'none': 0, 'drop_has_dependent_child': 1}
+UNEXPECTED MUTATION RESULTS {'drop_has_dependent_child': 'intended detecting case missing: Explicit parent flag requires a dependent child'}

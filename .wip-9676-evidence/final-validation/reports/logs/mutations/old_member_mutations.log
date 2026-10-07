@@ -1,0 +1,37 @@
+=== MUTATION none START
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 14 items
+
+.wip-9676-evidence/old_head_member.yaml ..............
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 14 passed, 1 warning in 13.88s ========================
+=== MUTATION none EXIT CODE 0
+=== MUTATION drop_has_dependent_child START
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 14 items
+
+.wip-9676-evidence/old_head_member.yaml ..............
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 14 passed, 1 warning in 14.52s ========================
+=== MUTATION drop_has_dependent_child EXIT CODE 0
+ALL EXIT CODES {'none': 0, 'drop_has_dependent_child': 0}

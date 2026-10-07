@@ -1,0 +1,17 @@
+{
+  "actual": {
+    "none": 0,
+    "drop_has_dependent_child": 0,
+    "npcr_never": 0
+  },
+  "expected": {
+    "none": 0,
+    "drop_has_dependent_child": 0,
+    "npcr_never": 0
+  },
+  "failures": {
+    "none": [],
+    "drop_has_dependent_child": [],
+    "npcr_never": []
+  }
+}

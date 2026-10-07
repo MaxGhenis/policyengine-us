@@ -1,0 +1,8 @@
+{
+  "code_sha": "a6c44418afccac0270dcb9ea155338dac0c9a05d",
+  "policyengine_core": "3.32.15",
+  "policyengine_us_version": "2.29.14",
+  "policyengine_us_file": "/home/runner/work/policyengine-us/policyengine-us/old_head/policyengine_us/__init__.py",
+  "python": "3.14.7",
+  "membership_formula_sha256": "bbf8d1c6824ca6fe3d5bf1bd48a35664abcd091b8d7cdc127e54e9da216ba862"
+}

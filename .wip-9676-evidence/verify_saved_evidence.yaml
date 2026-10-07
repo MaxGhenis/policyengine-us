@@ -62,12 +62,12 @@ jobs:
           SOURCE_RUN_ID: ${{ inputs.source_run_id || '37551528031' }}
           REQUIRE_2025: ${{ github.event_name == 'push' || inputs.require_2025 }}
         run: |
-          years=2026
-          if [ "$REQUIRE_2025" = true ]; then years='2026 2025'; fi
+          years=(2026)
+          if [ "$REQUIRE_2025" = true ]; then years+=(2025); fi
           python .wip-9676-evidence/validate_saved_evidence.py saved-evidence \
             --run-id "$SOURCE_RUN_ID" --run-metadata validation/source-run.json \
             --expected-branch-sha "$EXPECTED_EVIDENCE_SHA" \
-            --years $years --output validation/result.json \
+            --years "${years[@]}" --output validation/result.json \
             > validation/validator.log 2>&1
       - name: Collect compact reports for review without microdata transfers
         if: always()

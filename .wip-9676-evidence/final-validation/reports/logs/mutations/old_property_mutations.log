@@ -1,0 +1,31 @@
+=== MUTATION none START
+........................                                                 [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+24 passed, 1 warning in 14.55s
+=== MUTATION none EXIT CODE 0
+=== MUTATION drop_has_dependent_child START
+........................                                                 [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+24 passed, 1 warning in 11.25s
+=== MUTATION drop_has_dependent_child EXIT CODE 0
+=== MUTATION npcr_never START
+........................                                                 [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+24 passed, 1 warning in 11.06s
+=== MUTATION npcr_never EXIT CODE 0
+ALL EXIT CODES {'none': 0, 'drop_has_dependent_child': 0, 'npcr_never': 0}

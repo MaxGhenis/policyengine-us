@@ -1,0 +1,74 @@
+/home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/IPython/core/interactiveshell.py:3141: SyntaxWarning: 'return' in a 'finally' block
+  return result
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 16 items
+
+../../../_temp/member-fixtures/member.yaml FFF..FF.FFF.FFF.
+
+=================================== FAILURES ===================================
+_________________________________ test session _________________________________
+/home/runner/work/_temp/member-fixtures/member.yaml:
+  Test 'A mother claimed as her own mother's tax dependent is the caretaker for her child':
+    mo_tanf_is_assistance_unit_member@2026-01: [0. 0. 1.] differs from [0. 1. 1.] with an absolute margin [0. 1. 0.] > 0.001
+_________________________________ test session _________________________________
+/home/runner/work/_temp/member-fixtures/member.yaml:
+  Test 'The dependent mother's earnings count and the excluded grandparent's do not':
+    mo_tanf_is_assistance_unit_member@2026-01: [0. 0. 1.] differs from [0. 1. 1.] with an absolute margin [0. 1. 0.] > 0.001
+_________________________________ test session _________________________________
+/home/runner/work/_temp/member-fixtures/member.yaml:
+  Test 'An 18-year-old mother out of school is the caretaker, not a child':
+    mo_tanf_is_assistance_unit_member@2026-01: [0. 0. 1.] differs from [0. 1. 1.] with an absolute margin [0. 1. 0.] > 0.001
+_________________________________ test session _________________________________
+/home/runner/work/_temp/member-fixtures/member.yaml:
+  Test 'An unmarried father claimed as the mother's dependent is a member with their child':
+    mo_tanf_is_assistance_unit_member@2026-01: [1. 0. 1.] differs from [1. 1. 1.] with an absolute margin [0. 1. 0.] > 0.001
+_________________________________ test session _________________________________
+/home/runner/work/_temp/member-fixtures/member.yaml:
+  Test 'Two dependent parents living with the child's grandparents are both members':
+    mo_tanf_is_assistance_unit_member@2026-01: [0. 0. 0. 0. 1.] differs from [0. 0. 1. 1. 1.] with an absolute margin [0. 0. 1. 1. 0.] > 0.001
+_________________________________ test session _________________________________
+/home/runner/work/_temp/member-fixtures/member.yaml:
+  Test 'Without the input, a grandmother young enough to be the child's parent is counted as one':
+    mo_tanf_is_assistance_unit_member@2026-01: [0. 1. 1.] differs from [1. 1. 1.] with an absolute margin [1. 0. 0.] > 0.001
+_________________________________ test session _________________________________
+/home/runner/work/_temp/member-fixtures/member.yaml:
+  Test 'The default rules out a dependent too old to be the child's parent':
+    mo_tanf_is_parent_of_dependent_child@2026-01: [1. 0. 0.] differs from [0. 0. 0.] with an absolute margin [1. 0. 0.] > 0.001
+_________________________________ test session _________________________________
+/home/runner/work/_temp/member-fixtures/member.yaml:
+  Test 'The default rules out a dependent too young to be the child's parent':
+    mo_tanf_is_parent_of_dependent_child@2026-01: [0. 1. 0.] differs from [0. 0. 0.] with an absolute margin [0. 1. 0.] > 0.001
+_________________________________ test session _________________________________
+/home/runner/work/_temp/member-fixtures/member.yaml:
+  Test 'A grandparent marked as a non-parent stays out even when their own adult child is counted':
+    mo_tanf_is_assistance_unit_member@2026-01: [0. 0. 1.] differs from [0. 1. 1.] with an absolute margin [0. 1. 0.] > 0.001
+_________________________________ test session _________________________________
+/home/runner/work/_temp/member-fixtures/member.yaml:
+  Test 'A mandatory dependent parent's income can eliminate the children's grant':
+    mo_tanf_is_assistance_unit_member@2026-01: [0. 0. 1. 1. 1.] differs from [0. 1. 1. 1. 1.] with an absolute margin [0. 1. 0. 0. 0.] > 0.001
+_________________________________ test session _________________________________
+/home/runner/work/_temp/member-fixtures/member.yaml:
+  Test 'The same household with no income gets the payment standard for four':
+    mo_tanf_is_assistance_unit_member@2026-01: [0. 0. 1. 1. 1.] differs from [0. 1. 1. 1. 1.] with an absolute margin [0. 1. 0. 0. 0.] > 0.001
+=============================== warnings summary ===============================
+../wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../../../_temp/member-fixtures/member.yaml::
+FAILED ../../../_temp/member-fixtures/member.yaml::
+FAILED ../../../_temp/member-fixtures/member.yaml::
+FAILED ../../../_temp/member-fixtures/member.yaml::
+FAILED ../../../_temp/member-fixtures/member.yaml::
+FAILED ../../../_temp/member-fixtures/member.yaml::
+FAILED ../../../_temp/member-fixtures/member.yaml::
+FAILED ../../../_temp/member-fixtures/member.yaml::
+FAILED ../../../_temp/member-fixtures/member.yaml::
+FAILED ../../../_temp/member-fixtures/member.yaml::
+FAILED ../../../_temp/member-fixtures/member.yaml::
+=================== 11 failed, 5 passed, 1 warning in 14.10s ===================

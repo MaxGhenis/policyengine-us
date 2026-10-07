@@ -1,0 +1,17 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[21.1s peak_rss=0.81GB] main_unmodified_2025: verified dataset 6496cc4393d4d3c6574f76eca231de5898c803b9067645591fd5c4d3e65aee84; building full default simulation
+WARNING:root:The dataset contains 189 column(s) that do not match any variable in the tax-benefit system and were ignored: ACTC_CRD, AGI, ANN_VAL, A_AGE, A_ENRLW, A_EXPRRP, A_FAMREL, A_FAMTYP, A_FNLWGT, A_FTPT, … (179 more)
+[283.2s peak_rss=6.96GB] main_unmodified_2025: month 01 checkpointed
+[283.3s peak_rss=6.96GB] main_unmodified_2025: month 02 checkpointed
+[283.5s peak_rss=6.96GB] main_unmodified_2025: month 03 checkpointed
+[283.6s peak_rss=6.96GB] main_unmodified_2025: month 04 checkpointed
+[283.7s peak_rss=6.96GB] main_unmodified_2025: month 05 checkpointed
+[283.9s peak_rss=6.96GB] main_unmodified_2025: month 06 checkpointed
+[284.0s peak_rss=6.96GB] main_unmodified_2025: month 07 checkpointed
+[284.1s peak_rss=6.96GB] main_unmodified_2025: month 08 checkpointed
+[284.3s peak_rss=6.96GB] main_unmodified_2025: month 09 checkpointed
+[284.4s peak_rss=6.96GB] main_unmodified_2025: month 10 checkpointed
+[284.6s peak_rss=6.96GB] main_unmodified_2025: month 11 checkpointed
+[284.7s peak_rss=6.97GB] main_unmodified_2025: month 12 checkpointed
+[284.7s peak_rss=6.97GB] main_unmodified_2025: monthly and annual entitlement saved; calculating annual national tanf
+[332.9s peak_rss=8.76GB] main_unmodified_2025: complete

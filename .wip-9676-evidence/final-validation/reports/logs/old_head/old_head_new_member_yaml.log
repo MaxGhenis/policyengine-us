@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 16 items
+
+../../../_temp/member-fixtures/member.yaml ................
+
+=============================== warnings summary ===============================
+../wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 16 passed, 1 warning in 13.05s ========================

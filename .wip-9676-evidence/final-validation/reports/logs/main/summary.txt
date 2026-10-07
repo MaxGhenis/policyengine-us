@@ -1,0 +1,5 @@
+runtime_identity actual=0 expected=0
+main_new_member_yaml actual=0 expected=0
+main_household_checks actual=0 expected=0
+main_known_resource_defect actual=0 expected=0
+Unexpected result flag: 0

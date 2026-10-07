@@ -1,0 +1,64 @@
+{
+  "original_head": "a6c44418afccac0270dcb9ea155338dac0c9a05d",
+  "recovered_head": "aec34394e4fb69aa4411ab700ba783bfde4e97df",
+  "frozen_main": "5b1d5bdf47044607341d76f3c932ba2e7b74a060",
+  "candidate_head": "b9e7fff948caf4f33313c942c09caa7c7ccc3dea",
+  "evidence_head": "e39bb2c4c248ac4699032d7053f7429213014e75",
+  "evidence_run": "https://github.com/MaxGhenis/policyengine-us/actions/runs/37551528031",
+  "reused": [
+    "16 passed member YAML",
+    "completed none-school parent-pointer rescore"
+  ],
+  "completed": [
+    "clean current-main merge",
+    "formula AST preserved relative reviewed PR head",
+    "NPCR helper equality with frozen main",
+    "partner expectations equality with frozen main",
+    "make format and ruff check",
+    "every new commit backed up on fork",
+    "214 Missouri YAML, 66 properties, four source-role and four input checks passed",
+    "623 unchanged partner cases passed",
+    "all requested original/new mutation assertion receipts validated",
+    "twelve completed paired microsimulations: 2026 and 2025, three scenarios, both codes",
+    "fresh main comparison: 16 collected, five passed, eleven expected call assertions",
+    "fresh original-head comparison: 16 passed",
+    "combined saved-evidence validation: valid=true, errors=[], 30 sections",
+    "successful completed continuation controller provenance independently checked",
+    "126 original source files preserved with only seven comparison receipts replaced",
+    "concrete body and report completed with all six fresh impact rows"
+  ],
+  "pending": [
+    "report fork backup",
+    "authorized candidate PR push and body publication",
+    "confirm final PR state/checks and leave workspace on candidate"
+  ],
+  "sandbox": "Shared Git metadata and ~/reviews writes denied; local Git metadata is .resume/git. Host heavy-run wrapper denied ps; remote evidence is one sequential runner.",
+  "verification_head": "3ac1e1ae80195fdce82c1aedacb67444e40c6abe",
+  "verification_backup": "MaxGhenis/policyengine-us:wip/9676-evidence-verify",
+  "known_evidence_harness_issue": "Original detecting-name wrapper target 'Explicit parent flag requires a dependent child' does not match authored 'An explicit parent flag requires a dependent child in that person's tax unit' case-sensitively; saved underlying guard AssertionError is independently validated. Original wrapper and tests_status remain 1. Two original ImportPathMismatch gaps were completed by the minimal sequential continuation; original failure receipts preserved.",
+  "compact_artifact_plan": "Only compact JSON/text validation artifacts downloaded to host; dataset and serialized frames remained cloud-side. Full original and combined artifacts preserved in GitHub.",
+  "continuation_draft": ".wip-9676-evidence/phased-evidence-continuation.yaml (backed up; not launched)",
+  "continuation_limit": "Only two missing YAML comparisons rerun; controller run/SHA separated from pinned tested model SHA, completed provenance independently confirmed, no stale failed comparison receipts reused.",
+  "source_run_status": {
+    "id": 37551528031,
+    "status": "completed",
+    "conclusion": "failure"
+  },
+  "verification_run": {
+    "id": 37573381797,
+    "head": "3ac1e1ae80195fdce82c1aedacb67444e40c6abe",
+    "status": "completed",
+    "conclusion": "failure",
+    "result": "correctly rejected two original ImportPathMismatch gaps"
+  },
+  "continuation_run": {
+    "id": 37574013106,
+    "head": "f38c6fcf3951b2f5cd8a435ef13ddd2f34c5f549",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/MaxGhenis/policyengine-us/actions/runs/37574013106"
+  },
+  "final_validation": ".resume/combined-validation-final.json",
+  "final_report": ".resume/9676-report-draft.md",
+  "final_body": ".resume/9676-body-draft.md"
+}

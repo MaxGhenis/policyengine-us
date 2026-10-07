@@ -1,0 +1,315 @@
+{
+  "valid": true,
+  "source_run_id": "37551528031",
+  "source_run": {
+    "conclusion": "failure",
+    "databaseId": 37551528031,
+    "event": "push",
+    "headSha": "e39bb2c4c248ac4699032d7053f7429213014e75",
+    "status": "completed",
+    "url": "https://github.com/MaxGhenis/policyengine-us/actions/runs/37551528031",
+    "workflowName": "wip 9676 evidence resumed"
+  },
+  "evidence_branch_sha": "e39bb2c4c248ac4699032d7053f7429213014e75",
+  "years_required": [
+    2026,
+    2025
+  ],
+  "known_name_case_wrapper_failure_only": true,
+  "validated_sections": [
+    "source-run provenance",
+    "new_member_mutations",
+    "old_member_mutations",
+    "new_property_mutations",
+    "old_property_mutations",
+    "task suites",
+    "task mutations",
+    "task main",
+    "task old_head",
+    "household_branch",
+    "household_main",
+    "household_old_head",
+    "known_resource_defect",
+    "main_known_resource_defect",
+    "main_new_member_failures",
+    "impact main/unmodified/2026",
+    "impact branch/unmodified/2026",
+    "impact main/marked/2026",
+    "impact branch/marked/2026",
+    "impact main/marked_no_assets/2026",
+    "impact branch/marked_no_assets/2026",
+    "paired comparison 2026",
+    "impact main/unmodified/2025",
+    "impact branch/unmodified/2025",
+    "impact main/marked/2025",
+    "impact branch/marked/2025",
+    "impact main/marked_no_assets/2025",
+    "impact branch/marked_no_assets/2025",
+    "paired comparison 2025",
+    "aggregate phase status"
+  ],
+  "errors": [],
+  "mutation_assertion_provenance": {
+    "new_member_mutations": {
+      "none": [],
+      "drop_has_dependent_child": [
+        {
+          "nodeid": "policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_is_assistance_unit_member.yaml::",
+          "test_name": "An explicit parent flag requires a dependent child in that person's tax unit",
+          "when": "call",
+          "exception": "AssertionError",
+          "assertion": true
+        }
+      ]
+    },
+    "old_member_mutations": {
+      "none": [],
+      "drop_has_dependent_child": []
+    },
+    "new_property_mutations": {
+      "none": [],
+      "drop_has_dependent_child": [
+        {
+          "nodeid": "policyengine_us/tests/core/test_mo_tanf_dependent_parent_properties.py::test_parent_flag_needs_a_dependent_child_in_the_persons_tax_unit",
+          "test_name": "test_parent_flag_needs_a_dependent_child_in_the_persons_tax_unit",
+          "when": "call",
+          "exception": "AssertionError",
+          "assertion": true
+        }
+      ],
+      "npcr_never": [
+        {
+          "nodeid": "policyengine_us/tests/core/test_mo_tanf_dependent_parent_properties.py::test_non_parent_caretaker_identification_matches_independent_rule",
+          "test_name": "test_non_parent_caretaker_identification_matches_independent_rule",
+          "when": "call",
+          "exception": "AssertionError",
+          "assertion": true
+        }
+      ]
+    },
+    "old_property_mutations": {
+      "none": [],
+      "drop_has_dependent_child": [],
+      "npcr_never": []
+    }
+  },
+  "impacts": {
+    "unmodified_2026": {
+      "annual_entitlement": {
+        "main_sum": 109786412.97497742,
+        "branch_sum": 109786412.97497742,
+        "change": 0.0,
+        "percent_change": 0.0,
+        "records_changed": 0,
+        "weighted_changed": 0.0,
+        "records_up": 0,
+        "records_down": 0,
+        "sum_up": 0.0,
+        "sum_down": 0.0,
+        "max_absolute_record_change": 0.0
+      },
+      "annual_actual_tanf": {
+        "main_sum": 5497666.848239392,
+        "branch_sum": 5497666.848239392,
+        "change": 0.0,
+        "percent_change": 0.0,
+        "records_changed": 0,
+        "weighted_changed": 0.0,
+        "records_up": 0,
+        "records_down": 0,
+        "sum_up": 0.0,
+        "sum_down": 0.0,
+        "max_absolute_record_change": 0.0
+      },
+      "annual_actual_tanf_all_states_change": 0.0,
+      "two_largest_records_share_of_absolute_annual_change": null
+    },
+    "marked_2026": {
+      "annual_entitlement": {
+        "main_sum": 130242839.60064761,
+        "branch_sum": 109786412.97497742,
+        "change": -20456426.625670195,
+        "percent_change": -15.70637333184225,
+        "records_changed": 1,
+        "weighted_changed": 5836.22314453125,
+        "records_up": 0,
+        "records_down": 1,
+        "sum_up": 0.0,
+        "sum_down": -20456426.625670195,
+        "max_absolute_record_change": 3505.07958984375
+      },
+      "annual_actual_tanf": {
+        "main_sum": 5497666.848239392,
+        "branch_sum": 5497666.848239392,
+        "change": 0.0,
+        "percent_change": 0.0,
+        "records_changed": 0,
+        "weighted_changed": 0.0,
+        "records_up": 0,
+        "records_down": 0,
+        "sum_up": 0.0,
+        "sum_down": 0.0,
+        "max_absolute_record_change": 0.0
+      },
+      "annual_actual_tanf_all_states_change": 0.0,
+      "two_largest_records_share_of_absolute_annual_change": 1.0
+    },
+    "marked_no_assets_2026": {
+      "annual_entitlement": {
+        "main_sum": 160944079.64911568,
+        "branch_sum": 145713546.55745715,
+        "change": -15230533.091658523,
+        "percent_change": -9.463245324005435,
+        "records_changed": 3,
+        "weighted_changed": 14595.383286744356,
+        "records_up": 2,
+        "records_down": 1,
+        "sum_up": 5225893.534011671,
+        "sum_down": -20456426.625670195,
+        "max_absolute_record_change": 3505.07958984375
+      },
+      "annual_actual_tanf": {
+        "main_sum": 5497666.848239392,
+        "branch_sum": 5497666.848239392,
+        "change": 0.0,
+        "percent_change": 0.0,
+        "records_changed": 0,
+        "weighted_changed": 0.0,
+        "records_up": 0,
+        "records_down": 0,
+        "sum_up": 0.0,
+        "sum_down": 0.0,
+        "max_absolute_record_change": 0.0
+      },
+      "annual_actual_tanf_all_states_change": 0.0,
+      "two_largest_records_share_of_absolute_annual_change": 0.9999923228904991
+    },
+    "unmodified_2025": {
+      "annual_entitlement": {
+        "main_sum": 110229436.37436697,
+        "branch_sum": 110229436.37436697,
+        "change": 0.0,
+        "percent_change": 0.0,
+        "records_changed": 0,
+        "weighted_changed": 0.0,
+        "records_up": 0,
+        "records_down": 0,
+        "sum_up": 0.0,
+        "sum_down": 0.0,
+        "max_absolute_record_change": 0.0
+      },
+      "annual_actual_tanf": {
+        "main_sum": 5458685.747033298,
+        "branch_sum": 5458685.747033298,
+        "change": 0.0,
+        "percent_change": 0.0,
+        "records_changed": 0,
+        "weighted_changed": 0.0,
+        "records_up": 0,
+        "records_down": 0,
+        "sum_up": 0.0,
+        "sum_down": 0.0,
+        "max_absolute_record_change": 0.0
+      },
+      "annual_actual_tanf_all_states_change": 0.0,
+      "two_largest_records_share_of_absolute_annual_change": null
+    },
+    "marked_2025": {
+      "annual_entitlement": {
+        "main_sum": 130540816.37150237,
+        "branch_sum": 110229436.37436697,
+        "change": -20311379.9971354,
+        "percent_change": -15.559409356941531,
+        "records_changed": 1,
+        "weighted_changed": 5794.84130859375,
+        "records_up": 0,
+        "records_down": 1,
+        "sum_up": 0.0,
+        "sum_down": -20311379.9971354,
+        "max_absolute_record_change": 3505.07958984375
+      },
+      "annual_actual_tanf": {
+        "main_sum": 5458685.747033298,
+        "branch_sum": 5458685.747033298,
+        "change": 0.0,
+        "percent_change": 0.0,
+        "records_changed": 0,
+        "weighted_changed": 0.0,
+        "records_up": 0,
+        "records_down": 0,
+        "sum_up": 0.0,
+        "sum_down": 0.0,
+        "max_absolute_record_change": 0.0
+      },
+      "annual_actual_tanf_all_states_change": 0.0,
+      "two_largest_records_share_of_absolute_annual_change": 1.0
+    },
+    "marked_no_assets_2025": {
+      "annual_entitlement": {
+        "main_sum": 161024369.88128817,
+        "branch_sum": 145901829.3228649,
+        "change": -15122540.558423303,
+        "percent_change": -9.39146078917873,
+        "records_changed": 3,
+        "weighted_changed": 14491.894798114896,
+        "records_up": 2,
+        "records_down": 1,
+        "sum_up": 5188839.438712097,
+        "sum_down": -20311379.9971354,
+        "max_absolute_record_change": 3505.07958984375
+      },
+      "annual_actual_tanf": {
+        "main_sum": 5458685.747033298,
+        "branch_sum": 5458685.747033298,
+        "change": 0.0,
+        "percent_change": 0.0,
+        "records_changed": 0,
+        "weighted_changed": 0.0,
+        "records_up": 0,
+        "records_down": 0,
+        "sum_up": 0.0,
+        "sum_down": 0.0,
+        "max_absolute_record_change": 0.0
+      },
+      "annual_actual_tanf_all_states_change": 0.0,
+      "two_largest_records_share_of_absolute_annual_change": 0.9999923228896596
+    }
+  },
+  "limitations": [
+    "The independent validator executes no model or tests; the continuation explicitly reruns only the two previously unusable YAML comparisons.",
+    "All original microsimulation and completed test artifact bytes are preserved and hashed. Pickled arrays are not deserialized; paired identities, weights and intervention equality rely on the original successful comparator.",
+    "Dataset bytes are not rehashed again. Recorded verified dataset digests are checked; the two fresh comparison receipts rehash their imported membership formulas and candidate fixture.",
+    "The original source workflow remains failed; its two import-path errors are preserved, with separate new comparison receipts.",
+    "The cloud validator verifies controller identity while it is active; completed-controller provenance must be independently checked after artifact download.",
+    "Saved-evidence validation does not fix retained policy limitations or establish the normal PR CI result."
+  ],
+  "continuation_run": {
+    "conclusion": "",
+    "databaseId": 37574013106,
+    "event": "push",
+    "headSha": "f38c6fcf3951b2f5cd8a435ef13ddd2f34c5f549",
+    "status": "in_progress",
+    "url": "https://github.com/MaxGhenis/policyengine-us/actions/runs/37574013106",
+    "workflowName": "complete 9676 YAML comparisons"
+  },
+  "controller_completed": false,
+  "controller_sha": "f38c6fcf3951b2f5cd8a435ef13ddd2f34c5f549",
+  "tested_model_sha": "e39bb2c4c248ac4699032d7053f7429213014e75",
+  "original_validation_errors": [
+    "task main: main_new_member_yaml: unpermitted command failure 1",
+    "task old_head: old_head_new_member_yaml: unpermitted command failure 4",
+    "main_new_member_failures: preserved failure was not an assertion failure"
+  ],
+  "replaced_files": [
+    "logs/main/main_new_member_failures.json",
+    "logs/main/main_new_member_yaml.log",
+    "logs/main/main_new_member_yaml.time",
+    "logs/main/summary.txt",
+    "logs/old_head/old_head_new_member_yaml.log",
+    "logs/old_head/old_head_new_member_yaml.time",
+    "logs/old_head/summary.txt"
+  ],
+  "preserved_source_files": 126,
+  "source_manifest_sha256": "5b4e6906dace68730faf8ed2093bd5e4a9297293009b08ad0bbea7297d20cec8",
+  "continuation_scope": "Only main and old-head YAML comparisons rerun; all other tests, households, mutation and microsimulation files reused byte-for-byte."
+}

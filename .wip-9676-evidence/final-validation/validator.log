@@ -1,0 +1,5 @@
+{
+  "valid": true,
+  "errors": [],
+  "continuation_scope": "Only main and old-head YAML comparisons rerun; all other tests, households, mutation and microsimulation files reused byte-for-byte."
+}

@@ -1,0 +1,123 @@
+=== MUTATION none START
+..........................                                               [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+26 passed, 1 warning in 14.57s
+=== MUTATION none EXIT CODE 0
+=== MUTATION drop_has_dependent_child START
+........................F.                                               [100%]
+=================================== FAILURES ===================================
+_______ test_parent_flag_needs_a_dependent_child_in_the_persons_tax_unit _______
+
+    def test_parent_flag_needs_a_dependent_child_in_the_persons_tax_unit():
+        # Each household: a mother (30) heading a tax unit with her 5-year-old,
+        # and an adult explicitly marked a parent who either files alone (no
+        # dependent child in their tax unit) or is claimed in the mother's unit.
+        cases = list(itertools.product((18, 25, 40, 60), (False, True)))
+        people, tax_units, spm_units, units = {}, {}, {}, {}
+        for i, (age, files_alone) in enumerate(cases):
+            mother, child, adult = (f"g{i}_{r}" for r in ("mother", "child", "adult"))
+            people[mother] = {"age": {YEAR: 30}, "is_tax_unit_dependent": {YEAR: False}}
+            people[child] = {"age": {YEAR: 5}, "is_tax_unit_dependent": {YEAR: True}}
+            people[adult] = {
+                "age": {YEAR: age},
+                "is_tax_unit_dependent": {YEAR: not files_alone},
+                "mo_tanf_is_parent_of_dependent_child": {YEAR: True},
+            }
+            if files_alone:
+                tax_units[f"g{i}_family"] = {"members": [mother, child]}
+                tax_units[f"g{i}_adult"] = {"members": [adult]}
+            else:
+                tax_units[f"g{i}_family"] = {"members": [mother, child, adult]}
+            spm_units[f"g{i}_spm"] = {"members": [mother, child, adult]}
+            units[f"g{i}_hh"] = {
+                "members": [mother, child, adult],
+                "state_code": {YEAR: "MO"},
+            }
+        simulation = Simulation(
+            situation={
+                "people": people,
+                "tax_units": tax_units,
+                "spm_units": spm_units,
+                "households": units,
+            }
+        )
+        member = _calc(simulation, "mo_tanf_is_assistance_unit_member")
+        size = _calc(simulation, "mo_tanf_assistance_unit_size")
+        grant = _calc(simulation, "mo_tanf")
+        for i, (age, files_alone) in enumerate(cases):
+            expected = [True, True, not files_alone]
+>           assert member[3 * i : 3 * i + 3].tolist() == expected, (age, files_alone)
+E           AssertionError: (18, True)
+E           assert [True, True, True] == [True, True, False]
+E             
+E             At index 2 diff: True != False
+E             
+E             Full diff:
+E               [
+E                   True,
+E                   True,
+E             -     False,
+E             +     True,
+E               ]
+
+policyengine_us/tests/core/test_mo_tanf_dependent_parent_properties.py:481: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED policyengine_us/tests/core/test_mo_tanf_dependent_parent_properties.py::test_parent_flag_needs_a_dependent_child_in_the_persons_tax_unit - AssertionError: (18, True)
+assert [True, True, True] == [True, True, False]
+  
+  At index 2 diff: True != False
+  
+  Full diff:
+    [
+        True,
+        True,
+  -     False,
+  +     True,
+    ]
+1 failed, 25 passed, 1 warning in 11.84s
+=== MUTATION drop_has_dependent_child EXIT CODE 1
+=== MUTATION npcr_never START
+.F........................                                               [100%]
+=================================== FAILURES ===================================
+______ test_non_parent_caretaker_identification_matches_independent_rule _______
+
+sim = <policyengine_us.system.Simulation object at 0x7fd74bb92210>
+
+    def test_non_parent_caretaker_identification_matches_independent_rule(sim):
+        npcr = _calc(sim, "mo_tanf_non_parent_caretaker")
+        expected = np.array(
+            [_expected_non_parent_caretaker(HOUSEHOLDS[i], role) for i, role in PEOPLE]
+        )
+        mismatches = [
+            (HOUSEHOLDS[i], role, bool(npcr[k]))
+            for k, (i, role) in enumerate(PEOPLE)
+            if npcr[k] != expected[k]
+        ]
+>       assert not mismatches, mismatches[:5]
+E       AssertionError: [({'adult': None, 'child_ssi': False, 'head_ssi': False, 'marked': True, ...}, 'head', False), ({'adult': 'parent', 'a... 'head', False), ({'adult': 'parent', 'adult_age': 18, 'adult_earned': 300, 'adult_school': True, ...}, 'head', False)]
+E       assert not [({'adult': None, 'child_ssi': False, 'head_ssi': False, 'marked': True, ...}, 'head', False), ({'adult': 'parent', 'a... False), ({'adult': 'non_parent', 'adult_age': 18, 'adult_earned': 0, 'adult_school': False, ...}, 'head', False), ...]
+
+policyengine_us/tests/core/test_mo_tanf_dependent_parent_properties.py:306: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED policyengine_us/tests/core/test_mo_tanf_dependent_parent_properties.py::test_non_parent_caretaker_identification_matches_independent_rule - AssertionError: [({'adult': None, 'child_ssi': False, 'head_ssi': False, 'marked': True, ...}, 'head', False), ({'adult': 'parent', 'a... 'head', False), ({'adult': 'parent', 'adult_age': 18, 'adult_earned': 300, 'adult_school': True, ...}, 'head', False)]
+assert not [({'adult': None, 'child_ssi': False, 'head_ssi': False, 'marked': True, ...}, 'head', False), ({'adult': 'parent', 'a... False), ({'adult': 'non_parent', 'adult_age': 18, 'adult_earned': 0, 'adult_school': False, ...}, 'head', False), ...]
+1 failed, 25 passed, 1 warning in 11.29s
+=== MUTATION npcr_never EXIT CODE 1
+ALL EXIT CODES {'none': 0, 'drop_has_dependent_child': 1, 'npcr_never': 1}

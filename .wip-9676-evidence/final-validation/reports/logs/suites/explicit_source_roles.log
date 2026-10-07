@@ -1,0 +1,5 @@
+PASS test_membership_matches_the_restated_rule with explicit canonical source roles
+PASS test_non_parent_caretaker_identification_matches_independent_rule with explicit canonical source roles
+PASS test_a_dependent_parent_member_excludes_the_non_parent_caretaker with explicit canonical source roles
+PASS test_unit_income_is_members_income with explicit canonical source roles
+Explicit-role grid: 1568 households, 7024 people

@@ -1,0 +1,17 @@
+[21.7s peak_rss=0.81GB] branch_marked_no_assets_2026: verified dataset 6496cc4393d4d3c6574f76eca231de5898c803b9067645591fd5c4d3e65aee84; building full default simulation
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:root:The dataset contains 189 column(s) that do not match any variable in the tax-benefit system and were ignored: ACTC_CRD, AGI, ANN_VAL, A_AGE, A_ENRLW, A_EXPRRP, A_FAMREL, A_FAMTYP, A_FNLWGT, A_FTPT, … (179 more)
+[307.5s peak_rss=7.13GB] branch_marked_no_assets_2026: month 01 checkpointed
+[307.6s peak_rss=7.13GB] branch_marked_no_assets_2026: month 02 checkpointed
+[307.7s peak_rss=7.13GB] branch_marked_no_assets_2026: month 03 checkpointed
+[307.9s peak_rss=7.13GB] branch_marked_no_assets_2026: month 04 checkpointed
+[308.0s peak_rss=7.13GB] branch_marked_no_assets_2026: month 05 checkpointed
+[308.1s peak_rss=7.13GB] branch_marked_no_assets_2026: month 06 checkpointed
+[308.3s peak_rss=7.13GB] branch_marked_no_assets_2026: month 07 checkpointed
+[308.4s peak_rss=7.13GB] branch_marked_no_assets_2026: month 08 checkpointed
+[308.5s peak_rss=7.13GB] branch_marked_no_assets_2026: month 09 checkpointed
+[308.7s peak_rss=7.13GB] branch_marked_no_assets_2026: month 10 checkpointed
+[308.8s peak_rss=7.14GB] branch_marked_no_assets_2026: month 11 checkpointed
+[308.9s peak_rss=7.14GB] branch_marked_no_assets_2026: month 12 checkpointed
+[308.9s peak_rss=7.14GB] branch_marked_no_assets_2026: monthly and annual entitlement saved; calculating annual national tanf
+[356.6s peak_rss=8.94GB] branch_marked_no_assets_2026: complete

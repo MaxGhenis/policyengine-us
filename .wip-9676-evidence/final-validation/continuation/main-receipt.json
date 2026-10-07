@@ -1,0 +1,99 @@
+{
+  "controller_run_id": "37574013106",
+  "controller_sha": "f38c6fcf3951b2f5cd8a435ef13ddd2f34c5f549",
+  "code": "main",
+  "runtime": {
+    "code_sha": "5b1d5bdf47044607341d76f3c932ba2e7b74a060",
+    "policyengine_core": "3.32.15",
+    "policyengine_us_version": "2.29.14",
+    "policyengine_us_file": "/home/runner/work/policyengine-us/policyengine-us/main/policyengine_us/__init__.py",
+    "python": "3.14.7",
+    "membership_formula_sha256": "63ccbb403d9f75050caa8c692da743eeb2761b11fd4227bf588927c8667507a6"
+  },
+  "fixture": "/home/runner/work/_temp/member-fixtures/member.yaml",
+  "fixture_sha256": "0a01250de835a9e5067ac7f5e212fd8cb141b7a403262d6cc0e7cf9f97db2d96",
+  "collected": 16,
+  "passed": 5,
+  "underlying_exit": 1,
+  "wrapper_exit": 0,
+  "all_failures_are_call_assertions": true,
+  "failures": [
+    {
+      "nodeid": "_temp/member-fixtures/member.yaml::",
+      "test_name": "A mother claimed as her own mother's tax dependent is the caretaker for her child",
+      "when": "call",
+      "exception": "AssertionError",
+      "assertion": true
+    },
+    {
+      "nodeid": "_temp/member-fixtures/member.yaml::",
+      "test_name": "The dependent mother's earnings count and the excluded grandparent's do not",
+      "when": "call",
+      "exception": "AssertionError",
+      "assertion": true
+    },
+    {
+      "nodeid": "_temp/member-fixtures/member.yaml::",
+      "test_name": "An 18-year-old mother out of school is the caretaker, not a child",
+      "when": "call",
+      "exception": "AssertionError",
+      "assertion": true
+    },
+    {
+      "nodeid": "_temp/member-fixtures/member.yaml::",
+      "test_name": "An unmarried father claimed as the mother's dependent is a member with their child",
+      "when": "call",
+      "exception": "AssertionError",
+      "assertion": true
+    },
+    {
+      "nodeid": "_temp/member-fixtures/member.yaml::",
+      "test_name": "Two dependent parents living with the child's grandparents are both members",
+      "when": "call",
+      "exception": "AssertionError",
+      "assertion": true
+    },
+    {
+      "nodeid": "_temp/member-fixtures/member.yaml::",
+      "test_name": "Without the input, a grandmother young enough to be the child's parent is counted as one",
+      "when": "call",
+      "exception": "AssertionError",
+      "assertion": true
+    },
+    {
+      "nodeid": "_temp/member-fixtures/member.yaml::",
+      "test_name": "The default rules out a dependent too old to be the child's parent",
+      "when": "call",
+      "exception": "AssertionError",
+      "assertion": true
+    },
+    {
+      "nodeid": "_temp/member-fixtures/member.yaml::",
+      "test_name": "The default rules out a dependent too young to be the child's parent",
+      "when": "call",
+      "exception": "AssertionError",
+      "assertion": true
+    },
+    {
+      "nodeid": "_temp/member-fixtures/member.yaml::",
+      "test_name": "A grandparent marked as a non-parent stays out even when their own adult child is counted",
+      "when": "call",
+      "exception": "AssertionError",
+      "assertion": true
+    },
+    {
+      "nodeid": "_temp/member-fixtures/member.yaml::",
+      "test_name": "A mandatory dependent parent's income can eliminate the children's grant",
+      "when": "call",
+      "exception": "AssertionError",
+      "assertion": true
+    },
+    {
+      "nodeid": "_temp/member-fixtures/member.yaml::",
+      "test_name": "The same household with no income gets the payment standard for four",
+      "when": "call",
+      "exception": "AssertionError",
+      "assertion": true
+    }
+  ]
+}

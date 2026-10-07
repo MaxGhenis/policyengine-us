@@ -1,0 +1,846 @@
+PolicyEngine Test Runner
+============================================================
+Test path: policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf
+Requested batches: 2
+Total test files: 26
+Actual batches: 26 (optimized for 26 files)
+============================================================
+
+[Batch 1/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 1...
+    Paths: 1 items
+
+    Still running Batch 1 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 24 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/integration.yaml ........................
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 24 passed, 1 warning in 15.33s ========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 64.6s (peak RSS: 2306 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 2/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 2...
+    Paths: 1 items
+
+    Still running Batch 2 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 8 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/is_mo_tanf_earned_income_exempt.yaml ........
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 8 passed, 1 warning in 9.46s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 57.3s (peak RSS: 2031 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 3/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 3...
+    Paths: 1 items
+
+    Still running Batch 3 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 6 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf.yaml ......
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 6 passed, 1 warning in 9.57s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 57.3s (peak RSS: 2027 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 4/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 4...
+    Paths: 1 items
+
+    Still running Batch 4 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 8 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_assistance_unit_size.yaml ........
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 8 passed, 1 warning in 12.74s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 61.1s (peak RSS: 2264 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 5/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 5...
+    Paths: 1 items
+
+    Still running Batch 5 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 12 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_child_care_deduction.yaml ............
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 12 passed, 1 warning in 12.81s ========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 60.9s (peak RSS: 2270 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 6/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 6...
+    Paths: 1 items
+
+    Still running Batch 6 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 5 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_countable_income.yaml .....
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 5 passed, 1 warning in 9.30s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 56.7s (peak RSS: 2025 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 7/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 7...
+    Paths: 1 items
+
+    Still running Batch 7 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 9 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_countable_resources.yaml .........
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 9 passed, 1 warning in 18.45s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 67.7s (peak RSS: 2535 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 8/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 8...
+    Paths: 1 items
+
+    Still running Batch 8 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 6 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_dependent_child.yaml ......
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 6 passed, 1 warning in 9.47s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 56.6s (peak RSS: 2027 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 9/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 9...
+    Paths: 1 items
+
+    Still running Batch 9 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 8 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_earned_income_deductions.yaml ........
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 8 passed, 1 warning in 12.52s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 60.3s (peak RSS: 2263 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 10/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 10...
+    Paths: 1 items
+
+    Still running Batch 10 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 10 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_earned_income_deductions_person.yaml ..........
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 10 passed, 1 warning in 9.44s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 56.9s (peak RSS: 2035 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 11/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 11...
+    Paths: 1 items
+
+    Still running Batch 11 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 8 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_eligible.yaml ........
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 8 passed, 1 warning in 12.55s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 60.7s (peak RSS: 2263 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 12/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 12...
+    Paths: 1 items
+
+    Still running Batch 12 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 2 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_gross_earned_income.yaml ..
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 2 passed, 1 warning in 12.12s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 60.1s (peak RSS: 2251 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 13/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 13...
+    Paths: 1 items
+
+    Still running Batch 13 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 3 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_gross_income_eligible.yaml ...
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 3 passed, 1 warning in 9.39s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 57.0s (peak RSS: 2022 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 14/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 14...
+    Paths: 1 items
+
+    Still running Batch 14 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 15 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_gross_unearned_income.yaml ...............
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 15 passed, 1 warning in 19.00s ========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 68.6s (peak RSS: 2539 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 15/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 15...
+    Paths: 1 items
+
+    Still running Batch 15 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 5 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_income_eligible.yaml .....
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 5 passed, 1 warning in 9.73s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 58.7s (peak RSS: 2025 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 16/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 16...
+    Paths: 1 items
+
+    Still running Batch 16 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 5 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_income_for_need_test.yaml .....
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 5 passed, 1 warning in 12.79s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 62.2s (peak RSS: 2257 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 17/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 17...
+    Paths: 1 items
+
+    Still running Batch 17 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 16 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_is_assistance_unit_member.yaml ................
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 16 passed, 1 warning in 14.01s ========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 63.6s (peak RSS: 2280 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 18/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 18...
+    Paths: 1 items
+
+    Still running Batch 18 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 6 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_maximum_benefit.yaml ......
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 6 passed, 1 warning in 9.58s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 57.1s (peak RSS: 2027 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 19/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 19...
+    Paths: 1 items
+
+    Still running Batch 19 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 6 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_percentage_of_need_test.yaml ......
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 6 passed, 1 warning in 9.43s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 57.3s (peak RSS: 2027 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 20/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 20...
+    Paths: 1 items
+
+    Still running Batch 20 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 3 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_resources_eligible.yaml ...
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 3 passed, 1 warning in 12.18s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 60.3s (peak RSS: 2253 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 21/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 21...
+    Paths: 1 items
+
+    Still running Batch 21 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 10 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_standard_of_need.yaml ..........
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 10 passed, 1 warning in 9.54s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 57.0s (peak RSS: 2035 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 22/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 22...
+    Paths: 1 items
+
+    Still running Batch 22 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 5 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_standard_of_need_test.yaml .....
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 5 passed, 1 warning in 9.43s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 57.1s (peak RSS: 2025 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 23/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 23...
+    Paths: 1 items
+
+    Still running Batch 23 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 17 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/non_parent_caretaker/integration.yaml .................
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 17 passed, 1 warning in 17.30s ========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 65.9s (peak RSS: 2368 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 24/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 24...
+    Paths: 1 items
+
+    Still running Batch 24 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 8 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/non_parent_caretaker/mo_tanf_non_parent_caretaker.yaml ........
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 8 passed, 1 warning in 12.86s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 62.0s (peak RSS: 2279 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 25/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 25...
+    Paths: 1 items
+
+    Still running Batch 25 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 6 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/non_parent_caretaker/mo_tanf_non_parent_caretaker_countable_income.yaml ......
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 6 passed, 1 warning in 12.42s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 60.7s (peak RSS: 2259 MB, exit 0)
+  Cleaning up memory...
+
+[Batch 26/26]
+  Test files: ~1
+------------------------------------------------------------
+    Running Batch 26...
+    Paths: 1 items
+
+    Still running Batch 26 after 30s (30s since last output)...
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/runner/work/policyengine-us/policyengine-us/wip
+configfile: pyproject.toml
+plugins: anyio-4.12.1, hypothesis-6.168.3
+collected 3 items
+
+policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/non_parent_caretaker/mo_tanf_non_parent_caretaker_included.yaml ...
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290
+  /home/runner/work/policyengine-us/policyengine-us/wip/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1290: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 3 passed, 1 warning in 12.41s =========================
+
+__POLICYENGINE_BATCH_EXIT__ 0
+
+    Runner reported exit 0; terminating process...
+
+    Batch completed in 61.2s (peak RSS: 2253 MB, exit 0)
+  Cleaning up memory...
+
+============================================================
+TEST SUMMARY
+============================================================
+Total test files: 26
+  Batch 1: 64.6s | peak RSS: 2306 MB | exit 0 | passed
+  Batch 2: 57.3s | peak RSS: 2031 MB | exit 0 | passed
+  Batch 3: 57.3s | peak RSS: 2027 MB | exit 0 | passed
+  Batch 4: 61.1s | peak RSS: 2264 MB | exit 0 | passed
+  Batch 5: 60.9s | peak RSS: 2270 MB | exit 0 | passed
+  Batch 6: 56.7s | peak RSS: 2025 MB | exit 0 | passed
+  Batch 7: 67.7s | peak RSS: 2535 MB | exit 0 | passed
+  Batch 8: 56.6s | peak RSS: 2027 MB | exit 0 | passed
+  Batch 9: 60.3s | peak RSS: 2263 MB | exit 0 | passed
+  Batch 10: 56.9s | peak RSS: 2035 MB | exit 0 | passed
+  Batch 11: 60.7s | peak RSS: 2263 MB | exit 0 | passed
+  Batch 12: 60.1s | peak RSS: 2251 MB | exit 0 | passed
+  Batch 13: 57.0s | peak RSS: 2022 MB | exit 0 | passed
+  Batch 14: 68.6s | peak RSS: 2539 MB | exit 0 | passed
+  Batch 15: 58.7s | peak RSS: 2025 MB | exit 0 | passed
+  Batch 16: 62.2s | peak RSS: 2257 MB | exit 0 | passed
+  Batch 17: 63.6s | peak RSS: 2280 MB | exit 0 | passed
+  Batch 18: 57.1s | peak RSS: 2027 MB | exit 0 | passed
+  Batch 19: 57.3s | peak RSS: 2027 MB | exit 0 | passed
+  Batch 20: 60.3s | peak RSS: 2253 MB | exit 0 | passed
+  Batch 21: 57.0s | peak RSS: 2035 MB | exit 0 | passed
+  Batch 22: 57.1s | peak RSS: 2025 MB | exit 0 | passed
+  Batch 23: 65.9s | peak RSS: 2368 MB | exit 0 | passed
+  Batch 24: 62.0s | peak RSS: 2279 MB | exit 0 | passed
+  Batch 25: 60.7s | peak RSS: 2259 MB | exit 0 | passed
+  Batch 26: 61.2s | peak RSS: 2253 MB | exit 0 | passed
+Workers: 1
+Total time: 1569.0s

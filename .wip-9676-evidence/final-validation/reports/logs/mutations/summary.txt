@@ -1,0 +1,6 @@
+runtime_identity actual=0 expected=0
+new_member_mutations actual=1 expected=0
+old_member_mutations actual=0 expected=0
+new_property_mutations actual=0 expected=0
+old_property_mutations actual=0 expected=0
+Unexpected result flag: 1

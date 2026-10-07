@@ -1,0 +1,33 @@
+{
+  "actual": {
+    "none": 0,
+    "drop_has_dependent_child": 1,
+    "npcr_never": 1
+  },
+  "expected": {
+    "none": 0,
+    "drop_has_dependent_child": 1,
+    "npcr_never": 1
+  },
+  "failures": {
+    "none": [],
+    "drop_has_dependent_child": [
+      {
+        "nodeid": "policyengine_us/tests/core/test_mo_tanf_dependent_parent_properties.py::test_parent_flag_needs_a_dependent_child_in_the_persons_tax_unit",
+        "test_name": "test_parent_flag_needs_a_dependent_child_in_the_persons_tax_unit",
+        "when": "call",
+        "exception": "AssertionError",
+        "assertion": true
+      }
+    ],
+    "npcr_never": [
+      {
+        "nodeid": "policyengine_us/tests/core/test_mo_tanf_dependent_parent_properties.py::test_non_parent_caretaker_identification_matches_independent_rule",
+        "test_name": "test_non_parent_caretaker_identification_matches_independent_rule",
+        "when": "call",
+        "exception": "AssertionError",
+        "assertion": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "actual": {
+    "none": 0,
+    "drop_has_dependent_child": 1
+  },
+  "expected": {
+    "none": 0,
+    "drop_has_dependent_child": 1
+  },
+  "failures": {
+    "none": [],
+    "drop_has_dependent_child": [
+      {
+        "nodeid": "policyengine_us/tests/policy/baseline/gov/states/mo/dss/tanf/mo_tanf_is_assistance_unit_member.yaml::",
+        "test_name": "An explicit parent flag requires a dependent child in that person's tax unit",
+        "when": "call",
+        "exception": "AssertionError",
+        "assertion": true
+      }
+    ]
+  }
+}
