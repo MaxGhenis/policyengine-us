@@ -7,7 +7,10 @@ class ca_cdcc_relevant_expenses(Variable):
     label = "CDCC-relevant care expenses replicated to include California limitations"
     unit = USD
     definition_period = YEAR
-    reference = "https://www.ftb.ca.gov/about-ftb/data-reports-plans/Summary-of-Federal-Income-Tax-Changes/index.html#PL-117-2-9631"
+    reference = (
+        "https://www.ftb.ca.gov/about-ftb/data-reports-plans/Summary-of-Federal-Income-Tax-Changes/index.html#PL-117-2-9631",
+        "https://www.ftb.ca.gov/forms/2021/2021-3506.pdf#page=2",
+    )
     defined_for = StateCode.CA
 
     def formula(tax_unit, period, parameters):
@@ -32,9 +35,11 @@ class ca_cdcc_relevant_expenses(Variable):
         # limit by the IRC § 129 employer-provided dependent care benefits
         # excluded from income (line 30 subtracts the excluded benefits, and
         # line 32 caps at the already-net federal Form 2441 line 31). Mirror the
-        # § 21(c) reduction the federal credit's base applies.
+        # § 21(c) reduction the federal credit's base applies, using the
+        # California exclusion: line 22 keeps the $5,000 cap in 2021, when the
+        # federal cap was $10,500.
         dollar_limit = cdcc.max * count_eligible
-        exclusion = tax_unit("dependent_care_assistance_exclusion", period)
+        exclusion = tax_unit("ca_dependent_care_assistance_exclusion", period)
         dollar_limit_after_exclusion = max_(dollar_limit - exclusion, 0)
         eligible_capped_expenses = min_(expenses, dollar_limit_after_exclusion)
         # Then, cap further to the lowest earnings between the taxpayer and spouse

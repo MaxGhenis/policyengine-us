@@ -104,3 +104,77 @@
     # Benefits ($7,000) below the new $7,500 cap and below earnings, so the
     # full amount is excluded. (Input uprating is disabled for a clean check.)
     dependent_care_assistance_exclusion: 7_000
+
+# Section 129(a)(2)(D) (ARPA section 9632): for taxable years beginning in
+# 2021 the cap is $10,500 ($5,250 for a separate return). 2021 Form 2441
+# line 21 prints "$10,500 ($5,250 if married filing separately)".
+- name: ARPA raises the joint cap to $10,500 for 2021
+  period: 2021
+  input:
+    people:
+      head:
+        is_tax_unit_head: true
+        employment_income: 60_000
+        dependent_care_employer_benefits: 9_000
+      spouse:
+        is_tax_unit_spouse: true
+        employment_income: 40_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+        filing_status: JOINT
+  output:
+    # min($9,000 benefits, $10,500 cap, $40,000 lesser earnings) = $9,000.
+    dependent_care_assistance_exclusion: 9_000
+
+- name: The 2021 cap binds at $10,500 for a head of household
+  period: 2021
+  input:
+    people:
+      head:
+        is_tax_unit_head: true
+        employment_income: 60_000
+        dependent_care_employer_benefits: 12_000
+    tax_units:
+      tax_unit:
+        members: [head]
+        filing_status: HEAD_OF_HOUSEHOLD
+  output:
+    # min($12,000 benefits, $10,500 cap, $60,000 earnings) = $10,500.
+    dependent_care_assistance_exclusion: 10_500
+
+- name: Married filing separately uses the $5,250 cap for 2021
+  period: 2021
+  input:
+    people:
+      head:
+        is_tax_unit_head: true
+        employment_income: 80_000
+        dependent_care_employer_benefits: 6_000
+    tax_units:
+      tax_unit:
+        members: [head]
+        filing_status: SEPARATE
+  output:
+    # min($6,000 benefits, $5,250 cap, $80,000 earnings) = $5,250.
+    dependent_care_assistance_exclusion: 5_250
+
+- name: The cap returns to $5,000 for 2022
+  period: 2022
+  input:
+    people:
+      head:
+        is_tax_unit_head: true
+        employment_income: 60_000
+        dependent_care_employer_benefits: 9_000
+      spouse:
+        is_tax_unit_spouse: true
+        employment_income: 40_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+        filing_status: JOINT
+  output:
+    # Section 129(a)(2)(D) covers only taxable years beginning in 2021.
+    # min($9,000 benefits, $5,000 cap, $40,000 lesser earnings) = $5,000.
+    dependent_care_assistance_exclusion: 5_000

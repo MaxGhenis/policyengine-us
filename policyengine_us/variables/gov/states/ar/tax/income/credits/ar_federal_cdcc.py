@@ -21,8 +21,6 @@ class ar_federal_cdcc(Variable):
         # law ($3,000/$6,000 caps, 35-to-20 percent rate, no second phase-out)
         # and predate both ARPA's 2021 expansion and the scheduled 2026
         # federal change, neither of which a static-conformity state adopts.
-        # Same pinning pattern as va_child_dependent_care_deduction_cdcc_limit
-        # and id_cdcc_limit.
         p = parameters("2020-01-01").gov.irs.credits.cdcc
 
         # AR2441 header: the IRC § 21(e)(2) and (4) special rules apply.

@@ -26,7 +26,8 @@ class dependent_care_assistance_exclusion(Variable):
         benefits = add(tax_unit, period, ["dependent_care_employer_benefits"])
         p = parameters(period).gov.irs.gross_income.dependent_care_assistance_programs
         # Section 129(a)(2)(A) dollar cap by filing status (Form 2441 line 21;
-        # $5,000, $2,500 MFS, raised to $7,500 / $3,750 after 2025 by OBBBA).
+        # $5,000, $2,500 MFS; $10,500 / $5,250 for 2021 under section
+        # 129(a)(2)(D); raised to $7,500 / $3,750 after 2025 by OBBBA).
         filing_status = tax_unit("filing_status", period)
         dollar_cap = p.reduction_amount[filing_status]
         # Section 129(b) earned-income limitation: the exclusion cannot exceed

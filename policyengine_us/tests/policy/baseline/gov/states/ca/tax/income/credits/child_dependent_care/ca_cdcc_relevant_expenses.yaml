@@ -87,3 +87,73 @@
   output:
     # min(10_000 expenses, $6,000 two-child cap - $5,000 exclusion, 50_000) = 1_000.
     ca_cdcc_relevant_expenses: 1_000
+
+# 2021: the federal exclusion uses the $10,500 cap, but FTB 3506 line 22 keeps
+# California's $5,000, so the California base subtracts only $5,000.
+- name: The 2021 California base subtracts the $5,000-capped exclusion
+  absolute_error_margin: 0.01
+  period: 2021
+  input:
+    people:
+      parent1:
+        age: 40
+        employment_income: 55_000
+        dependent_care_employer_benefits: 9_000
+      parent2:
+        age: 38
+        employment_income: 40_000
+      child1:
+        age: 5
+      child2:
+        age: 8
+    tax_units:
+      tax_unit:
+        members: [parent1, parent2, child1, child2]
+        filing_status: JOINT
+        tax_unit_childcare_expenses: 12_000
+    households:
+      household:
+        members: [parent1, parent2, child1, child2]
+        state_code: CA
+  output:
+    # Federal: min($9,000, $10,500, $40,000) = $9,000.
+    dependent_care_assistance_exclusion: 9_000
+    # California: min($9,000, $5,000) = $5,000.
+    ca_dependent_care_assistance_exclusion: 5_000
+    # min($12,000, $6,000 two-person 2020 limit - $5,000, $40,000) = $1,000.
+    ca_cdcc_relevant_expenses: 1_000
+    # AGI $95,000: the 2020 rate is 35% less 1 point per $2,000 over $15,000,
+    # floored at 20%. $1,000 x 20% = $200.
+    ca_federal_cdcc: 200
+    # California matches 34% for AGI over $70,000 and not over $100,000.
+    ca_cdcc: 68
+
+- name: A 2021 separate filer living apart from their spouse subtracts at most $5,000
+  period: 2021
+  input:
+    people:
+      head:
+        age: 35
+        is_tax_unit_head: true
+        is_separated: true
+        employment_income: 50_000
+        dependent_care_employer_benefits: 6_000
+      child1:
+        age: 5
+      child2:
+        age: 8
+    tax_units:
+      tax_unit:
+        members: [head, child1, child2]
+        filing_status: SEPARATE
+        tax_unit_childcare_expenses: 12_000
+    households:
+      household:
+        members: [head, child1, child2]
+        state_code: CA
+  output:
+    # Federal exclusion min($6,000, $5,250, $50,000) = $5,250; California
+    # line 22 is $5,000 (FTB 3506 line 20 instructions), so the exclusion is
+    # $5,000 and the base is min($12,000, $6,000 - $5,000, $50,000) = $1,000.
+    ca_dependent_care_assistance_exclusion: 5_000
+    ca_cdcc_relevant_expenses: 1_000

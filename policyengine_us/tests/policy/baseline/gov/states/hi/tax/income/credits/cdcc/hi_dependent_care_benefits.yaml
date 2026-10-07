@@ -285,3 +285,55 @@
     # two qualifying persons (2023) = 20_000; net = 20_000 - 1 = 19_999.
     # Return min(19_999, 5_000) = 5_000.
     hi_dependent_care_benefits: 5_000
+
+# 2021 Schedule X line 11 still reads $5,000 ($2,500 if married filing
+# separately): Act 89, SLH 2021 conformed 2021 to the IRC as amended as of
+# December 31, 2020, before ARPA section 9632 raised the federal cap to
+# $10,500 ($5,250) for 2021. The 2021 line 17 limit ($2,400 / $4,800) is below
+# $5,000, so only the separate-return cap changes a result.
+- name: 2021 separate filer keeps the pre-ARPA $2,500 line 11 cap
+  period: 2021
+  input:
+    people:
+      head:
+        dependent_care_employer_benefits: 4_000
+    tax_units:
+      tax_unit:
+        members: [head]
+        hi_cdcc_min_head_spouse_earned: 9_000
+        filing_status: SEPARATE
+        count_cdcc_eligible: 2
+        tax_unit_childcare_expenses: 6_000
+    households:
+      household:
+        members: [head]
+        state_code: HI
+  output:
+    # Line 7 = min(4_000, 6_000) = 4_000; line 10 = min(4_000, 9_000) = 4_000.
+    # Line 11 = 2_500; line 14 = min(4_000, 2_500) = 2_500.
+    # Line 17 = 4_800 (two qualifying persons); line 19 = 4_800 - 2_500 = 2_300.
+    # Return min(2_300, 6_000) = 2_300. With the federal $5,250 it would be 800.
+    hi_dependent_care_benefits: 2_300
+
+- name: 2021 separate filer with benefits above the federal $5,250 cap still uses $2,500
+  period: 2021
+  input:
+    people:
+      head:
+        dependent_care_employer_benefits: 6_000
+    tax_units:
+      tax_unit:
+        members: [head]
+        hi_cdcc_min_head_spouse_earned: 9_000
+        filing_status: SEPARATE
+        count_cdcc_eligible: 2
+        tax_unit_childcare_expenses: 7_000
+    households:
+      household:
+        members: [head]
+        state_code: HI
+  output:
+    # Line 10 = 6_000; line 11 = 2_500; line 14 = 2_500;
+    # line 19 = 4_800 - 2_500 = 2_300; min(2_300, 7_000) = 2_300.
+    # With the federal $5,250 it would be max(4_800 - 5_250, 0) = 0.
+    hi_dependent_care_benefits: 2_300
