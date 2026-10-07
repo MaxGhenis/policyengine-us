@@ -1,0 +1,389 @@
+# DRAFT ONLY. Dispatch only after an actual cutoff/failure of the original run.
+# Keep the original run uninterrupted. Publish on a temporary fork branch with
+# corrected helpers under .wip-9676-evidence/; the model stays frozen at e39.
+# The narrow push trigger registers this workflow off the default branch.
+# Publish only when continuation is justified; other evidence branches cannot
+# trigger it, and its branch does not trigger the original expensive workflow.
+name: continue saved 9676 evidence
+on:
+  push:
+    branches: [wip/9676-evidence-continue]
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Completed run containing the saved evidence
+        type: string
+        default: "37551528031"
+        required: true
+      source_artifact_name:
+        description: Exact final or latest cumulative checkpoint artifact
+        type: string
+        default: resumed-9676-evidence
+        required: true
+      source_head_sha:
+        description: Expected source workflow commit (model remains frozen at e39)
+        type: string
+        default: e39bb2c4c248ac4699032d7053f7429213014e75
+        required: true
+      phase:
+        description: Run only the missing phase
+        type: choice
+        options: [impacts-only, tests-only, compare-only, all]
+        default: impacts-only
+      test_tasks:
+        description: Unfinished test tasks, space-separated (suites mutations main old_head)
+        type: string
+        default: ""
+      replicate_2025:
+        description: Also finish missing 2025 runs; prioritize 2026
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: 9676-evidence-continuation
+  cancel-in-progress: false
+env:
+  MODEL_SHA: e39bb2c4c248ac4699032d7053f7429213014e75
+  MAIN_SHA: 5b1d5bdf47044607341d76f3c932ba2e7b74a060
+  OLD_HEAD_SHA: a6c44418afccac0270dcb9ea155338dac0c9a05d
+  CORE_VERSION: 3.32.15
+  PYTHONUNBUFFERED: 1
+  REQUESTED_PHASE: ${{ inputs.phase || 'impacts-only' }}
+  DO_TESTS: ${{ inputs.phase == 'tests-only' || inputs.phase == 'all' }}
+  DO_IMPACTS: ${{ github.event_name == 'push' || inputs.phase == 'impacts-only' || inputs.phase == 'all' }}
+  DO_COMPARE: ${{ inputs.phase != 'tests-only' }}
+jobs:
+  continuation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Reserve time to archive partial evidence before the hard cutoff
+        run: echo "EVIDENCE_DEADLINE=$(( $(date +%s) + 330 * 60 ))" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v6
+        with:
+          path: harness
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ env.MODEL_SHA }}
+          path: wip
+      - uses: actions/checkout@v6
+        with:
+          repository: PolicyEngine/policyengine-us
+          ref: ${{ env.MAIN_SHA }}
+          path: main
+      - uses: actions/checkout@v6
+        with:
+          repository: PolicyEngine/policyengine-us
+          ref: ${{ env.OLD_HEAD_SHA }}
+          path: old_head
+      - name: Require a completed source run and download its exact artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id || '37551528031' }}
+          SOURCE_ARTIFACT: ${{ inputs.source_artifact_name || 'resumed-9676-evidence' }}
+          SOURCE_HEAD_SHA: ${{ inputs.source_head_sha || 'e39bb2c4c248ac4699032d7053f7429213014e75' }}
+        run: |
+          mkdir -p phase recovered-source logs out
+          retry() {
+            for attempt in 1 2 3; do
+              if "$@"; then return 0; fi
+              if [ "$attempt" -lt 3 ]; then sleep "$((attempt * attempt))"; fi
+            done
+            return 1
+          }
+          retry gh run view "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --json databaseId,status,conclusion,headSha,url > phase/source-run.json
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          meta = json.loads(Path('phase/source-run.json').read_text())
+          assert meta['status'] == 'completed', 'Original/source run must finish first'
+          assert str(meta['databaseId']) == os.environ['SOURCE_RUN_ID']
+          assert meta['headSha'] == os.environ['SOURCE_HEAD_SHA']
+          PY
+          retry gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --name "$SOURCE_ARTIFACT" --dir recovered-source
+          printf '%s\n' "$SOURCE_ARTIFACT" > phase/source-artifact.txt
+      - name: Validate source identities; preserve files and recover exact Python version
+        id: source
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, shutil
+          from pathlib import Path
+          src = Path('recovered-source')
+          expected = {'suites': os.environ['MODEL_SHA'], 'mutations': os.environ['MODEL_SHA'],
+                      'main': os.environ['MAIN_SHA'], 'old_head': os.environ['OLD_HEAD_SHA']}
+          versions = set()
+          for p in src.glob('logs/*/runtime.json'):
+              meta = json.loads(p.read_text())
+              assert meta['code_sha'] == expected[p.parent.name], p
+              assert meta['policyengine_core'] == os.environ['CORE_VERSION'], p
+              versions.add(meta['python'])
+          for p in src.glob('out/*_meta.json'):
+              meta = json.loads(p.read_text())
+              sha = os.environ['MAIN_SHA'] if meta['code'] == 'main' else os.environ['MODEL_SHA']
+              assert meta['code'] in ('main', 'branch') and meta['code_sha'] == sha, p
+              assert meta['policyengine_core'] == os.environ['CORE_VERSION'], p
+              assert meta['dataset_actual_sha256'] == '6496cc4393d4d3c6574f76eca231de5898c803b9067645591fd5c4d3e65aee84', p
+              assert p.name == f"{meta['code']}_{meta['scenario']}_{meta['year']}_meta.json", p
+              versions.add(meta['python'])
+          assert len(versions) == 1, ('Expected one recorded source Python version', versions)
+          version = versions.pop()
+          assert version.startswith('3.14.'), version
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f'python_version={version}\n')
+          manifest = {str(p.relative_to(src)): hashlib.sha256(p.read_bytes()).hexdigest()
+                      for p in src.rglob('*') if p.is_file()}
+          Path('phase/source-manifest.json').write_text(json.dumps(manifest, indent=2))
+          controller = {
+              'controller_run_id': os.environ['GITHUB_RUN_ID'],
+              'controller_sha': os.environ['GITHUB_SHA'],
+              'model_sha': os.environ['MODEL_SHA'],
+              'main_sha': os.environ['MAIN_SHA'],
+              'old_head_sha': os.environ['OLD_HEAD_SHA'],
+              'requested_phase': os.environ['REQUESTED_PHASE'],
+              'source_run': json.loads(Path('phase/source-run.json').read_text()),
+              'source_artifact': Path('phase/source-artifact.txt').read_text().strip(),
+          }
+          Path('phase/controller.json').write_text(json.dumps(controller, indent=2))
+          for name in ('logs', 'out'):
+              if (src / name).exists():
+                  shutil.copytree(src / name, Path(name), dirs_exist_ok=True)
+          Path('phase/requested-phase.txt').write_text(os.environ['REQUESTED_PHASE'] + '\n')
+          PY
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ steps.source.outputs.python_version }}
+      - uses: astral-sh/setup-uv@v8.1.0
+      - name: Install the frozen branch environment and require dependency equality
+        working-directory: wip
+        run: |
+          uv sync --locked --extra dev
+          uv pip install --python .venv/bin/python "policyengine-core==$CORE_VERSION"
+          uv pip freeze --python .venv/bin/python > "$GITHUB_WORKSPACE/phase/packages.txt"
+          if [ -f "$GITHUB_WORKSPACE/recovered-source/logs/packages.txt" ]; then
+            diff -u "$GITHUB_WORKSPACE/recovered-source/logs/packages.txt" "$GITHUB_WORKSPACE/phase/packages.txt"
+          fi
+      - name: Prepare bounded, sequential pair command
+        run: |
+          cat > "$RUNNER_TEMP/run-9676-pair.sh" <<'SH'
+          #!/usr/bin/env bash
+          set -uo pipefail
+          year=$1 scenario=$2
+          status=0
+          for code in main branch; do
+            if [ "$code" = main ]; then checkout=main; sha=$MAIN_SHA; else checkout=wip; sha=$MODEL_SHA; fi
+            tag="${code}_${scenario}_${year}"
+            cd "$GITHUB_WORKSPACE/$checkout" || exit 2
+            export EXPECTED_CODE_SHA="$sha" PYTHONPATH="$PWD"
+            # Validate complete records without reconstructing the simulation.
+            "$GITHUB_WORKSPACE/wip/.venv/bin/python" - "$tag" "$sha" <<'PY'
+          import json, os, sys
+          from pathlib import Path
+          tag, sha = sys.argv[1:]
+          out = Path(os.environ['GITHUB_WORKSPACE']) / 'out'
+          path = out / f'{tag}_meta.json'
+          if not path.exists(): raise SystemExit(3)
+          meta = json.loads(path.read_text())
+          assert meta['code_sha'] == sha and meta['policyengine_core'] == '3.32.15'
+          assert meta['dataset_actual_sha256'] == '6496cc4393d4d3c6574f76eca231de5898c803b9067645591fd5c4d3e65aee84'
+          if meta['status'] != 'complete': raise SystemExit(3)
+          assert meta['months_complete'] == 12 and 'tanf_all_states_weighted_sum' in meta
+          assert (out / f'{tag}_person.pkl').exists() and (out / f'{tag}_spm.pkl').exists()
+          PY
+            checkpoint_rc=$?
+            if [ "$checkpoint_rc" -eq 0 ]; then
+              printf '%s reused complete matching checkpoint\n' "$tag" | tee -a "$GITHUB_WORKSPACE/phase/impact-summary.txt"
+              continue
+            elif [ "$checkpoint_rc" -ne 3 ]; then
+              printf '%s invalid source checkpoint; refusing to replace it\n' "$tag" | tee -a "$GITHUB_WORKSPACE/phase/impact-summary.txt"
+              status=1
+              continue
+            fi
+            remaining=$(( EVIDENCE_DEADLINE - $(date +%s) ))
+            if [ "$remaining" -le 0 ]; then status=1; continue; fi
+            timeout --signal=TERM --kill-after=30s "${remaining}s" \
+              /usr/bin/time -v -o "$GITHUB_WORKSPACE/out/${tag}_time.txt" \
+              "$GITHUB_WORKSPACE/wip/.venv/bin/python" "$GITHUB_WORKSPACE/harness/.wip-9676-evidence/run_mo.py" \
+              "$code" "$GITHUB_WORKSPACE/out" "$scenario" --years "$year" \
+              > "$GITHUB_WORKSPACE/out/${tag}_stdout.log" 2>&1
+            rc=$?
+            printf '%s exit=%s\n' "$tag" "$rc" | tee -a "$GITHUB_WORKSPACE/phase/impact-summary.txt"
+            tail -n 15 "$GITHUB_WORKSPACE/out/${tag}_stdout.log"
+            if [ "$rc" -ne 0 ]; then status=1; fi
+          done
+          printf '%s\n' "$status" > "$GITHUB_WORKSPACE/phase/${year}_${scenario}-status.txt"
+          exit "$status"
+          SH
+      - name: Run only explicitly selected unfinished test tasks
+        if: env.DO_TESTS == 'true'
+        continue-on-error: true
+        env:
+          TEST_TASKS: ${{ inputs.test_tasks }}
+        run: |
+          set +e
+          status=0
+          seen=' '
+          export WIP_ROOT="$GITHUB_WORKSPACE/wip"
+          export EVID="$GITHUB_WORKSPACE/harness/.wip-9676-evidence"
+          if [ -z "$TEST_TASKS" ]; then
+            printf 'Select unfinished test tasks after reviewing source evidence.\n'
+            status=1
+          fi
+          for task in $TEST_TASKS; do
+            case "$seen" in
+              *" $task "*) printf 'Duplicate test task: %s\n' "$task"; status=1; continue ;;
+            esac
+            seen="$seen$task "
+            case "$task" in
+              main) checkout=main; export EXPECTED_CODE_SHA="$MAIN_SHA" ;;
+              old_head) checkout=old_head; export EXPECTED_CODE_SHA="$OLD_HEAD_SHA" ;;
+              suites|mutations) checkout=wip; export EXPECTED_CODE_SHA="$MODEL_SHA" ;;
+              *) printf 'Invalid test task: %s\n' "$task"; status=1; continue ;;
+            esac
+            remaining=$(( EVIDENCE_DEADLINE - $(date +%s) ))
+            if [ "$remaining" -le 0 ]; then status=1; break; fi
+            # run_tests.sh appends summary receipts. Archive only the selected
+            # task's copied logs so its new receipt cannot mix with old ones;
+            # recovered-source/ always retains the original artifact verbatim.
+            if [ -d "$GITHUB_WORKSPACE/logs/$task" ]; then
+              mkdir -p "$GITHUB_WORKSPACE/phase/prior-task-logs"
+              mv "$GITHUB_WORKSPACE/logs/$task" "$GITHUB_WORKSPACE/phase/prior-task-logs/$task" || { status=1; continue; }
+            fi
+            cd "$GITHUB_WORKSPACE/$checkout"
+            timeout --signal=TERM --kill-after=30s "${remaining}s" bash "$EVID/run_tests.sh" "$task"
+            rc=$?
+            if [ "$rc" -ne 0 ]; then status=1; fi
+          done
+          printf '%s\n' "$status" > "$GITHUB_WORKSPACE/phase/tests-status.txt"
+          exit "$status"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: continued-9676-tests-${{ github.run_id }}
+          path: |
+            logs/
+            phase/
+          if-no-files-found: warn
+      - name: Finish missing unmodified 2026 pair
+        if: env.DO_IMPACTS == 'true'
+        continue-on-error: true
+        run: bash "$RUNNER_TEMP/run-9676-pair.sh" 2026 unmodified
+      - uses: actions/upload-artifact@v4
+        if: always() && env.DO_IMPACTS == 'true'
+        with:
+          name: continued-9676-2026-unmodified-${{ github.run_id }}
+          path: |
+            logs/
+            out/
+            phase/
+          if-no-files-found: warn
+      - name: Finish missing marked 2026 pair
+        if: env.DO_IMPACTS == 'true'
+        continue-on-error: true
+        run: bash "$RUNNER_TEMP/run-9676-pair.sh" 2026 marked
+      - uses: actions/upload-artifact@v4
+        if: always() && env.DO_IMPACTS == 'true'
+        with:
+          name: continued-9676-2026-marked-${{ github.run_id }}
+          path: |
+            logs/
+            out/
+            phase/
+          if-no-files-found: warn
+      - name: Finish missing marked-no-assets 2026 pair
+        if: env.DO_IMPACTS == 'true'
+        continue-on-error: true
+        run: bash "$RUNNER_TEMP/run-9676-pair.sh" 2026 marked_no_assets
+      - uses: actions/upload-artifact@v4
+        if: always() && env.DO_IMPACTS == 'true'
+        with:
+          name: continued-9676-2026-marked-no-assets-${{ github.run_id }}
+          path: |
+            logs/
+            out/
+            phase/
+          if-no-files-found: warn
+      - name: Finish missing unmodified 2025 pair
+        if: env.DO_IMPACTS == 'true' && inputs.replicate_2025
+        continue-on-error: true
+        run: bash "$RUNNER_TEMP/run-9676-pair.sh" 2025 unmodified
+      - uses: actions/upload-artifact@v4
+        if: always() && env.DO_IMPACTS == 'true' && inputs.replicate_2025
+        with:
+          name: continued-9676-2025-unmodified-${{ github.run_id }}
+          path: |
+            logs/
+            out/
+            phase/
+          if-no-files-found: warn
+      - name: Finish missing marked 2025 pair
+        if: env.DO_IMPACTS == 'true' && inputs.replicate_2025
+        continue-on-error: true
+        run: bash "$RUNNER_TEMP/run-9676-pair.sh" 2025 marked
+      - uses: actions/upload-artifact@v4
+        if: always() && env.DO_IMPACTS == 'true' && inputs.replicate_2025
+        with:
+          name: continued-9676-2025-marked-${{ github.run_id }}
+          path: |
+            logs/
+            out/
+            phase/
+          if-no-files-found: warn
+      - name: Finish missing marked-no-assets 2025 pair
+        if: env.DO_IMPACTS == 'true' && inputs.replicate_2025
+        continue-on-error: true
+        run: bash "$RUNNER_TEMP/run-9676-pair.sh" 2025 marked_no_assets
+      - uses: actions/upload-artifact@v4
+        if: always() && env.DO_IMPACTS == 'true' && inputs.replicate_2025
+        with:
+          name: continued-9676-2025-marked-no-assets-${{ github.run_id }}
+          path: |
+            logs/
+            out/
+            phase/
+          if-no-files-found: warn
+      - name: Compare the requested saved years without rerunning the model
+        if: env.DO_COMPARE == 'true'
+        continue-on-error: true
+        env:
+          REPLICATE_2025: ${{ inputs.replicate_2025 }}
+        run: |
+          set +e
+          years=2026
+          if [ "$REPLICATE_2025" = true ]; then years='2026 2025'; fi
+          "$GITHUB_WORKSPACE/wip/.venv/bin/python" "$GITHUB_WORKSPACE/harness/.wip-9676-evidence/compare_mo.py" \
+            "$GITHUB_WORKSPACE/out" --years $years
+          rc=$?
+          printf '%s\n' "$rc" > "$GITHUB_WORKSPACE/phase/compare-status.txt"
+          exit "$rc"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: continued-9676-evidence-${{ github.run_id }}
+          path: |
+            logs/
+            out/
+            phase/
+            recovered-source/
+          if-no-files-found: warn
+      - name: Require only the explicitly requested phases to succeed
+        if: always()
+        env:
+          REPLICATE_2025: ${{ inputs.replicate_2025 }}
+        run: |
+          if [ "$DO_TESTS" = true ]; then test "$(cat phase/tests-status.txt)" = 0; fi
+          if [ "$DO_IMPACTS" = true ]; then
+            years=2026
+            if [ "$REPLICATE_2025" = true ]; then years='2026 2025'; fi
+            for year in $years; do
+              for scenario in unmodified marked marked_no_assets; do
+                test "$(cat "phase/${year}_${scenario}-status.txt")" = 0
+              done
+            done
+          fi
+          if [ "$DO_COMPARE" = true ]; then test "$(cat phase/compare-status.txt)" = 0; fi
+          # Reused test receipts remain evidence from their original run.
+          # This continuation does not reinterpret a prior failed test status.

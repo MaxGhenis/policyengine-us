@@ -1,0 +1,75 @@
+# OPTIONAL, fork-only draft. Publish only after the original run completes.
+# Copy validate_saved_evidence.py to .wip-9676-evidence/ on this lightweight
+# verification branch; this workflow does not install or import the model.
+name: verify saved 9676 evidence
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Completed original evidence run
+        type: string
+        default: "37551528031"
+        required: true
+      require_2025:
+        description: Require complete 2025 replication in addition to 2026
+        type: boolean
+        default: true
+permissions:
+  contents: read
+  actions: read
+env:
+  EXPECTED_EVIDENCE_SHA: e39bb2c4c248ac4699032d7053f7429213014e75
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - name: Download the completed original run's saved evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+          SOURCE_REPO: ${{ github.repository }}
+        run: |
+          mkdir -p validation saved-evidence
+          retry() {
+            local attempt
+            for attempt in 1 2 3; do
+              if "$@"; then return 0; fi
+              if [ "$attempt" -lt 3 ]; then sleep "$((attempt * attempt))"; fi
+            done
+            return 1
+          }
+          retry gh run view "$SOURCE_RUN_ID" --repo "$SOURCE_REPO" \
+            --json databaseId,status,conclusion,headSha,url,event,workflowName \
+            > validation/source-run.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          meta = json.loads(Path('validation/source-run.json').read_text())
+          if meta['status'] != 'completed':
+              raise SystemExit('Original evidence run is still active; dispatch verification after completion.')
+          PY
+          retry gh run download "$SOURCE_RUN_ID" --repo "$SOURCE_REPO" \
+            --name resumed-9676-evidence --dir saved-evidence
+      - name: Verify saved JSON and assertion provenance without model execution
+        env:
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+          REQUIRE_2025: ${{ inputs.require_2025 }}
+        run: |
+          years=2026
+          if [ "$REQUIRE_2025" = true ]; then years='2026 2025'; fi
+          python .wip-9676-evidence/validate_saved_evidence.py saved-evidence \
+            --run-id "$SOURCE_RUN_ID" --run-metadata validation/source-run.json \
+            --expected-branch-sha "$EXPECTED_EVIDENCE_SHA" \
+            --years $years --output validation/result.json \
+            > validation/validator.log 2>&1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: saved-9676-evidence-validation
+          path: validation/
+          if-no-files-found: warn
