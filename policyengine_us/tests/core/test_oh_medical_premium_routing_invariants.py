@@ -217,7 +217,7 @@ def _situation(units):
         groups["tax_units"][f"tax_unit_{i}"] = {"members": members}
         groups["households"][f"household_{i}"] = {
             "members": members,
-            "state_code": "OH",
+            "state_code": {YEAR: "OH"},
         }
     people = {
         name: {key: {YEAR: value} for key, value in values.items()}

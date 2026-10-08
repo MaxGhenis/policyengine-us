@@ -1,0 +1,1 @@
+Count health insurance premiums in Ohio's unreimbursed medical care deduction (R.C. 5747.01(A)(10)): premiums paid while eligible for Medicare or an employer-paid plan go on worksheet line 3, the rest on line 1, both from the reported premium inputs less pre-tax payroll premiums and the federal self-employed health insurance deduction.
