@@ -82,3 +82,42 @@
   output:
     # The premiums go on line 1 instead; line 4 is 300.
     oh_insured_unreimbursed_medical_care_expense_amount: 300
+
+- name: Medicare is tested per person, so a younger spouse's premiums stay on line 1
+  period: 2026
+  input:
+    people:
+      head:
+        age: 66
+        health_insurance_premiums: 3_000
+      spouse:
+        age: 50
+        health_insurance_premiums: 1_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: OH
+  output:
+    # Neither spouse has an employer plan. The head is Medicare eligible, so
+    # the head's premiums go on line 3; the spouse's go on line 1.
+    oh_insured_unreimbursed_medical_care_expense_amount: [3_000, 0]
+    oh_uninsured_unreimbursed_medical_care_expenses: [0, 1_000]
+
+- name: The federal self-employed health insurance deduction also comes off line 3
+  period: 2026
+  input:
+    state_code: OH
+    age: 67
+    is_self_employed: true
+    self_employment_income: 3_000
+    health_insurance_premiums: 5_000
+  output:
+    # R.C. 5747.01(A)(10)(b) counts only amounts "not otherwise deducted" in
+    # computing federal AGI. The federal deduction is min(3,000 of earnings,
+    # 5,000 of premiums) = 3,000, leaving 2,000 for line 3 (Medicare eligible).
+    self_employed_health_insurance_ald_person: 3_000
+    oh_insured_unreimbursed_medical_care_expense_amount: 2_000
+    oh_uninsured_unreimbursed_medical_care_expenses: 0

@@ -27,8 +27,9 @@ class oh_unreimbursed_health_insurance_premiums(Variable):
         # worksheet line 1 is reduced by the federal self-employed health
         # insurance deduction.
         premiums = person("medical_expense_health_insurance_premiums", period)
-        # NOTE: Pre-tax payroll premiums are treated as part of the reported
-        # premiums, not in addition to them.
+        # NOTE: Pre-tax payroll premiums are treated as part of the same
+        # person's reported premiums, not in addition to them, so they belong on
+        # the person whose premiums they paid.
         pre_tax = person("pre_tax_health_insurance_premiums", period)
         self_employed_deduction = person(
             "self_employed_health_insurance_ald_person", period

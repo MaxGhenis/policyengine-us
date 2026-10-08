@@ -97,3 +97,17 @@
   output:
     # The 2,000 is excluded from federal wages, so only 3,000 counts.
     oh_uninsured_unreimbursed_medical_care_expenses: 3_000
+
+- name: Coverage the employer pays nothing toward leaves the premiums on line 1
+  period: 2026
+  input:
+    state_code: OH
+    age: 55
+    has_esi: true
+    employer_contribution_to_health_insurance_premiums_category: "NONE"
+    health_insurance_premiums_without_medicare_part_b: 9_000
+  output:
+    # A plan is subsidized only if the employer "pays any portion of the
+    # plan's cost" (R.C. 5747.01(A)(10)(a)), so COBRA coverage paid in full
+    # does not bar line 1.
+    oh_uninsured_unreimbursed_medical_care_expenses: 9_000

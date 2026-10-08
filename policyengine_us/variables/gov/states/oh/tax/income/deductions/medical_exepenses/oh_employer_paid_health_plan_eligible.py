@@ -33,12 +33,15 @@ class oh_employer_paid_health_plan_eligible(Variable):
             | (category == levels.ALL)
             | (person("employer_sponsored_insurance_premiums", period) > 0)
         )
-        # NOTE: Employer coverage, or an offer of it, counts as subsidized: the
-        # contribution category defaults to NONE, which records no observation.
-        eligible = (
-            person("has_esi", period)
-            | person("offered_aca_disqualifying_esi", period)
-            | employer_pays
+        employer_pays_nothing = (category == levels.NONE) & ~employer_pays
+        # NOTE: Employer coverage, or an offer of it, counts as subsidized unless
+        # the contribution category says the employer pays nothing (for example
+        # COBRA coverage paid in full). has_esi does not say whose employer
+        # provides the coverage, so coverage through a parent's employer also
+        # counts.
+        covered_or_offered = person("has_esi", period) | person(
+            "offered_aca_disqualifying_esi", period
         )
+        eligible = employer_pays | (covered_or_offered & ~employer_pays_nothing)
         head_or_spouse = person("is_tax_unit_head_or_spouse", period)
         return tax_unit.any(eligible & head_or_spouse)

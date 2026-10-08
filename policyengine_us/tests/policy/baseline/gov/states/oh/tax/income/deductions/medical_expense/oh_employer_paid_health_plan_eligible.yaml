@@ -89,3 +89,23 @@
         state_code: OH
   output:
     oh_employer_paid_health_plan_eligible: false
+
+- name: Case 9, coverage the employer pays nothing toward is not an employer-paid plan.
+  period: 2026
+  input:
+    state_code: OH
+    has_esi: true
+    employer_contribution_to_health_insurance_premiums_category: "NONE"
+  output:
+    # For example COBRA coverage the person pays for in full.
+    oh_employer_paid_health_plan_eligible: false
+
+- name: Case 10, employer-paid premiums outweigh a NONE contribution category.
+  period: 2026
+  input:
+    state_code: OH
+    has_esi: true
+    employer_contribution_to_health_insurance_premiums_category: "NONE"
+    employer_sponsored_insurance_premiums: 5_000
+  output:
+    oh_employer_paid_health_plan_eligible: true

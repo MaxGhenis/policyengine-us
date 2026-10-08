@@ -22,11 +22,15 @@ with every employer-plan signal removed. For every person and tax unit:
 
 1. Exclusion: the premiums Ohio counts equal the premiums paid less pre-tax
    payroll premiums and the federal self-employed health insurance deduction,
-   floored at zero.
-2. Routing: an independent numpy rule, built from the raw inputs, puts a
-   person's premiums on line 1 exactly when the person is not Medicare
-   eligible and neither the head nor the spouse has an employer-paid plan,
-   and on line 3 otherwise.
+   floored at zero. This is a consistency check: it reads the same engine
+   variables the formula reads, so it catches a dropped term or floor, not an
+   error upstream.
+2. Routing: a separate rule written here from the raw inputs puts a person's
+   premiums on line 1 exactly when the person is not Medicare eligible and
+   neither the head nor the spouse has an employer-paid plan, and on line 3
+   otherwise. It restates the model's reading of the law (which signals show
+   an employer-paid plan), so it cross-checks the code rather than reading
+   the law independently.
 3. Conservation: each person's line 1 and line 3 premiums sum to the
    premiums Ohio counts, so no premium is dropped or counted twice.
 4. Bounds: 0 <= the tax unit deduction <= the premiums Ohio counts plus
@@ -252,18 +256,24 @@ def _run(units):
     return out
 
 
+def _employer_paid_plan(filer):
+    employer_pays = (
+        filer["category"] in EMPLOYER_PAID
+        or filer["employer_sponsored_insurance_premiums"] > 0
+    )
+    # An explicit NONE category says the employer pays nothing (COBRA paid in
+    # full, for example), so that coverage is not a subsidized plan.
+    pays_nothing = filer["category"] == "NONE" and not employer_pays
+    covered_or_offered = filer["has_esi"] or filer["offered_aca_disqualifying_esi"]
+    return employer_pays or (covered_or_offered and not pays_nothing)
+
+
 def _expected_line_3(units):
     """Whether each person's premiums go on line 3, from the raw inputs."""
     flags = []
     for unit in units:
         filers = [unit["head"]] + ([unit["spouse"]] if unit["spouse"] else [])
-        employer_plan = any(
-            filer["has_esi"]
-            or filer["offered_aca_disqualifying_esi"]
-            or filer["category"] in EMPLOYER_PAID
-            or filer["employer_sponsored_insurance_premiums"] > 0
-            for filer in filers
-        )
+        employer_plan = any(map(_employer_paid_plan, filers))
         for _, person in _members(unit):
             flags.append(employer_plan or person["age"] >= MEDICARE_AGE)
     return np.array(flags)

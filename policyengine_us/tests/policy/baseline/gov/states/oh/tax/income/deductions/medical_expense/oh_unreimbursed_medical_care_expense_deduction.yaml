@@ -163,6 +163,8 @@
         has_esi: true
         employer_sponsored_insurance_premiums: 21_208
         health_insurance_premiums_without_medicare_part_b: 6_500
+        # The prompt lists the same $6,500 again as "other health insurance
+        # premiums", a component of the total; the Ohio path does not read it.
         other_health_insurance_premiums: 6_500
         other_medical_expenses: 800
         over_the_counter_health_expenses: 50
