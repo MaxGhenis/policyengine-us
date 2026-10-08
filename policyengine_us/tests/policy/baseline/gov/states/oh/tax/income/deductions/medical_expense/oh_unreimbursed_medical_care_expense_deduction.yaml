@@ -143,3 +143,55 @@
     # tax 342 + 2.75% * (52,350 - 26,050) = 1,065.25 (2025 instructions, p. 18).
     # MAGI less exemptions is 52,350, so the credit is 10% = 106.53.
     oh_joint_filing_credit: 106.53
+
+# PolicyBench reference audit 2026-10-05, scenario_025. R.C. 5747.01(A)(10)(b)
+# deducts medical care, which includes insurance premiums under IRC 213(d)(1)(D)
+# (R.C. 5747.01(A)(10)(c)), above 7.5% of federal AGI. The 2025 worksheet
+# (p. 41) puts premiums paid while "eligible for Medicare or an employer-paid
+# health care plan through your or your spouse's employer" on line 3. The head
+# is 61, so not eligible for Medicare, but both spouses have employer coverage,
+# so the head's $6,500 of after-tax premiums go on line 3 with $800 of other
+# medical care. Over-the-counter medicine is not medical care (IRC 213(b)), and
+# the $21,208 of employer-paid premiums were not paid by the taxpayer.
+- name: Scenario 025, a non-Medicare filer's premiums count on line 3 through the spouse's employer plan
+  period: 2026
+  absolute_error_margin: 0.01
+  input:
+    people:
+      head:
+        age: 61
+        has_esi: true
+        employer_sponsored_insurance_premiums: 21_208
+        health_insurance_premiums_without_medicare_part_b: 6_500
+        other_health_insurance_premiums: 6_500
+        other_medical_expenses: 800
+        over_the_counter_health_expenses: 50
+      spouse:
+        age: 57
+        has_esi: true
+        employment_income: 62_725
+        taxable_private_pension_income: 32_200
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    marital_units:
+      marital_unit:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: OH
+  output:
+    adjusted_gross_income: 94_925
+    # Line 1 is barred by the employer plan; line 3 = 6,500; line 4 = 800.
+    oh_uninsured_unreimbursed_medical_care_expenses: [0, 0]
+    oh_insured_unreimbursed_medical_care_expense_amount: [7_300, 0]
+    # Line 7 = 94,925 * 7.5% = 7,119.375; line 8 = 7,300 - 7,119.375 = 180.625.
+    oh_insured_unreimbursed_medical_care_expenses: 180.625
+    oh_unreimbursed_medical_care_expense_deduction: 180.625
+    oh_agi: 94_744.375
+    # Less two $1,900 exemptions (MAGI above $80,000).
+    oh_taxable_income: 90_944.375
+    # R.C. 5747.02(A) for 2026: 332 + 2.75% * (90,944.375 - 26,050) =
+    # 2,116.60, less the $200 retirement income credit (R.C. 5747.055(B)).
+    oh_income_tax_before_refundable_credits: 1_916.60

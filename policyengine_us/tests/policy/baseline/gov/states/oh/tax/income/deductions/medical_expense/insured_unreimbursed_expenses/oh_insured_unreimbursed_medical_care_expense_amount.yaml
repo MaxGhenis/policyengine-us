@@ -9,7 +9,7 @@
   output:
     oh_insured_unreimbursed_medical_care_expense_amount: 1_100
 
-- name: Medicare ineligible with moop
+- name: Medicare eligible with an employer-subsidized plan
   period: 2022
   input:
     state_code: OH
@@ -18,9 +18,11 @@
     other_medical_expenses: 600
     employer_contribution_to_health_insurance_premiums_category: "SOME"
   output:
-    oh_insured_unreimbursed_medical_care_expense_amount: 600
+    # Worksheet line 3 takes premiums paid while eligible for Medicare or an
+    # employer-paid plan, so either one suffices: 500 + line 4 600.
+    oh_insured_unreimbursed_medical_care_expense_amount: 1_100
 
-- name: Medicare ineligible without moop
+- name: Medicare eligible with an employer-subsidized plan and no other medical care
   period: 2022
   input:
     state_code: OH
@@ -29,4 +31,54 @@
     other_medical_expenses: 0
     employer_contribution_to_health_insurance_premiums_category: "SOME"
   output:
-    oh_insured_unreimbursed_medical_care_expense_amount: 0
+    oh_insured_unreimbursed_medical_care_expense_amount: 500
+
+# R.C. 5747.01(A)(10)(b); 2025 IT 1040 instructions, Unreimbursed Medical Care
+# Expenses Worksheet (p. 41), line 3: premiums paid "during any portion of the
+# year in which you were eligible for Medicare or an employer-paid health care
+# plan through your or your spouse's employer".
+- name: A non-Medicare filer with employer coverage counts reported premiums on line 3
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    has_esi: true
+    health_insurance_premiums_without_medicare_part_b: 6_500
+    other_medical_expenses: 800
+    over_the_counter_health_expenses: 50
+  output:
+    # 6,500 of premiums + 800 of other medical care. Over-the-counter
+    # medicine is not medical care (IRC 213(b)).
+    oh_insured_unreimbursed_medical_care_expense_amount: 7_300
+
+- name: The spouse's employer plan puts the head's premiums on line 3
+  period: 2026
+  input:
+    people:
+      head:
+        age: 50
+        health_insurance_premiums: 2_000
+        other_medical_expenses: 100
+      spouse:
+        age: 50
+        employer_contribution_to_health_insurance_premiums_category: "ALL"
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: OH
+  output:
+    oh_insured_unreimbursed_medical_care_expense_amount: [2_100, 0]
+
+- name: Premiums of a filer with no Medicare or employer plan stay off line 3
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    health_insurance_premiums_without_medicare_part_b: 6_000
+    other_medical_expenses: 300
+  output:
+    # The premiums go on line 1 instead; line 4 is 300.
+    oh_insured_unreimbursed_medical_care_expense_amount: 300

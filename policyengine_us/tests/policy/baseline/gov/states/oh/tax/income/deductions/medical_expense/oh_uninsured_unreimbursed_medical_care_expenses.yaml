@@ -27,3 +27,73 @@
     employer_contribution_to_health_insurance_premiums_category: "ALL"
   output:
     oh_uninsured_unreimbursed_medical_care_expenses: 0
+
+# 2025 IT 1040 instructions, Unreimbursed Medical Care Expenses Worksheet
+# (p. 41), line 1: premiums paid "during any portion of the year in which you
+# were not eligible for Medicare or an employer-paid health care plan through
+# your or your spouse's employer", reduced by the federal self-employed health
+# insurance deduction. R.C. 5747.01(A)(10)(a).
+- name: Premiums reported without Medicare Part B reach line 1
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    health_insurance_premiums_without_medicare_part_b: 6_000
+  output:
+    oh_uninsured_unreimbursed_medical_care_expenses: 6_000
+
+- name: A filer with employer coverage gets no line 1 deduction
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    has_esi: true
+    health_insurance_premiums_without_medicare_part_b: 6_000
+  output:
+    oh_uninsured_unreimbursed_medical_care_expenses: 0
+
+- name: The spouse's employer coverage bars line 1 for both spouses
+  period: 2026
+  input:
+    people:
+      head:
+        age: 50
+        health_insurance_premiums_without_medicare_part_b: 3_000
+      spouse:
+        age: 50
+        has_esi: true
+        health_insurance_premiums_without_medicare_part_b: 1_000
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: OH
+  output:
+    oh_uninsured_unreimbursed_medical_care_expenses: [0, 0]
+
+- name: Line 1 is reduced by the federal self-employed health insurance deduction
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    is_self_employed: true
+    self_employment_income: 2_000
+    health_insurance_premiums: 5_000
+  output:
+    # The federal deduction is min(2,000 of earnings, 5,000 of premiums).
+    self_employed_health_insurance_ald_person: 2_000
+    oh_uninsured_unreimbursed_medical_care_expenses: 3_000
+
+- name: Premiums paid through pre-tax payroll deductions stay off line 1
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    employment_income: 40_000
+    health_insurance_premiums_without_medicare_part_b: 5_000
+    pre_tax_health_insurance_premiums: 2_000
+  output:
+    # The 2,000 is excluded from federal wages, so only 3,000 counts.
+    oh_uninsured_unreimbursed_medical_care_expenses: 3_000

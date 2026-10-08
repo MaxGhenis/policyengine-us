@@ -1,0 +1,68 @@
+# R.C. 5747.01(A)(10)(a) and (b) count premiums only "to the extent not
+# otherwise deducted or excluded in computing federal or Ohio adjusted gross
+# income". The 2025 IT 1040 instructions (line 44, pp. 25-26) say not to deduct
+# amounts "paid with pre-tax dollars", and the worksheet (p. 41) reduces line 1
+# by the federal self-employed health insurance deduction.
+- name: Case 1, premiums reported without Medicare Part B count in full.
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    health_insurance_premiums_without_medicare_part_b: 6_500
+  output:
+    oh_unreimbursed_health_insurance_premiums: 6_500
+
+- name: Case 2, a direct premium input counts in full.
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    health_insurance_premiums: 4_000
+  output:
+    oh_unreimbursed_health_insurance_premiums: 4_000
+
+- name: Case 3, pre-tax payroll premiums are excluded.
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    employment_income: 40_000
+    health_insurance_premiums_without_medicare_part_b: 5_000
+    pre_tax_health_insurance_premiums: 2_000
+  output:
+    oh_unreimbursed_health_insurance_premiums: 3_000
+
+- name: Case 4, premiums all paid pre-tax leave nothing to count.
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    employment_income: 40_000
+    health_insurance_premiums_without_medicare_part_b: 2_000
+    pre_tax_health_insurance_premiums: 2_000
+  output:
+    oh_unreimbursed_health_insurance_premiums: 0
+
+- name: Case 5, the federal self-employed health insurance deduction is excluded.
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    is_self_employed: true
+    self_employment_income: 2_000
+    health_insurance_premiums: 5_000
+  output:
+    # The federal deduction is min(2,000 of earnings, 5,000 of premiums).
+    oh_unreimbursed_health_insurance_premiums: 3_000
+
+- name: Case 6, a self-employment loss leaves the premiums undeducted federally.
+  period: 2026
+  input:
+    state_code: OH
+    age: 50
+    is_self_employed: true
+    self_employment_income: -5_000
+    health_insurance_premiums: 5_000
+  output:
+    self_employed_health_insurance_ald_person: 0
+    oh_unreimbursed_health_insurance_premiums: 5_000

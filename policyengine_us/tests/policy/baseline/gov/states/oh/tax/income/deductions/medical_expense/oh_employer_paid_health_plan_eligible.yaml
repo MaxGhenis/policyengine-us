@@ -1,0 +1,91 @@
+# R.C. 5747.01(A)(10)(a): a taxpayer "eligible to participate in any subsidized
+# health plan maintained by any employer of the taxpayer or of the taxpayer's
+# spouse", where a subsidized plan is one "for which the employer pays any
+# portion of the plan's cost". 2025 IT 1040 instructions, Unreimbursed Medical
+# Care Expenses Worksheet (p. 41), lines 1 and 3: "an employer-paid health
+# care plan through your or your spouse's employer".
+- name: Case 1, no employer coverage.
+  period: 2026
+  input:
+    state_code: OH
+  output:
+    oh_employer_paid_health_plan_eligible: false
+
+- name: Case 2, the head has employer coverage.
+  period: 2026
+  input:
+    state_code: OH
+    has_esi: true
+  output:
+    oh_employer_paid_health_plan_eligible: true
+
+- name: Case 3, the head declined an offer of employer coverage.
+  period: 2026
+  input:
+    state_code: OH
+    offered_aca_disqualifying_esi: true
+  output:
+    oh_employer_paid_health_plan_eligible: true
+
+- name: Case 4, the spouse's employer pays part of the premiums.
+  period: 2026
+  input:
+    people:
+      head:
+        age: 40
+      spouse:
+        age: 40
+        employer_contribution_to_health_insurance_premiums_category: "SOME"
+    tax_units:
+      tax_unit:
+        members: [head, spouse]
+    households:
+      household:
+        members: [head, spouse]
+        state_code: OH
+  output:
+    oh_employer_paid_health_plan_eligible: true
+
+- name: Case 5, the employer pays all of the premiums.
+  period: 2026
+  input:
+    state_code: OH
+    employer_contribution_to_health_insurance_premiums_category: "ALL"
+  output:
+    oh_employer_paid_health_plan_eligible: true
+
+- name: Case 6, employer-paid premiums show an employer-paid plan.
+  period: 2026
+  input:
+    state_code: OH
+    employer_sponsored_insurance_premiums: 21_208
+  output:
+    oh_employer_paid_health_plan_eligible: true
+
+- name: Case 7, an N/A employer contribution category is not an employer-paid plan.
+  period: 2026
+  input:
+    state_code: OH
+    employer_contribution_to_health_insurance_premiums_category: "NA"
+  output:
+    oh_employer_paid_health_plan_eligible: false
+
+- name: Case 8, a dependent's own employer coverage does not count.
+  period: 2026
+  input:
+    people:
+      head:
+        age: 40
+      child:
+        age: 17
+        is_tax_unit_dependent: true
+        has_esi: true
+    tax_units:
+      tax_unit:
+        members: [head, child]
+    households:
+      household:
+        members: [head, child]
+        state_code: OH
+  output:
+    oh_employer_paid_health_plan_eligible: false
