@@ -326,7 +326,8 @@ def test_states_follow_section_1341_b_3():
     assert np.any(np.abs(with_deduction - without_repayment) > 1), (
         "the deduction should reach the states that follow federal itemized deductions"
     )
-    excluded = np.isin(STATES, STATES_WITHOUT_THE_DEDUCTION)
+    # A state that chooses its own method may give its own deduction here.
+    excluded = np.isin(STATES, STATES_WITHOUT_THE_DEDUCTION) & follows_federal
     np.testing.assert_allclose(
         with_deduction[excluded], without_repayment[excluded], atol=TOLERANCE
     )
