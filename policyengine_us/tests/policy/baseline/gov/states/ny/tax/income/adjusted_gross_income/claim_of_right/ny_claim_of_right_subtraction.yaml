@@ -1,0 +1,156 @@
+# N.Y. Tax Law 612(c)(45), from 2021 (Form IT-225 modification S-141): New
+# York subtracts the amount of an item that was included in New York adjusted
+# gross income for an earlier year under a claim of right and repaid this
+# year. No subtraction is allowed if the repayment is included in the New York
+# itemized deduction, or is the basis for a section 662 credit. Form IT-257
+# instructions: "you may be able to take an itemized deduction on your New
+# York State return or subtract the amount repaid, but not both"; filers who
+# itemize use Form IT-196, and filers who do not itemize may subtract.
+- name: Case 1, the subtraction has no 3,000 dollar threshold.
+  period: 2025
+  input:
+    claim_of_right_repayment: 2_000
+    ny_claim_of_right_subtraction_applies: true
+    state_code: NY
+  output:
+    ny_claim_of_right_repayment: 2_000
+    ny_claim_of_right_subtraction: 2_000
+
+- name: Case 2, only income that was in New York adjusted gross income is subtracted.
+  period: 2025
+  input:
+    claim_of_right_repayment: 2_000
+    ny_claim_of_right_repayment_excluded_from_agi: 500
+    ny_claim_of_right_subtraction_applies: true
+    state_code: NY
+  output:
+    ny_claim_of_right_repayment: 1_500
+    ny_claim_of_right_subtraction: 1_500
+
+- name: Case 3, no subtraction before 2021.
+  period: 2020
+  input:
+    claim_of_right_repayment: 2_000
+    ny_claim_of_right_subtraction_applies: true
+    state_code: NY
+  output:
+    ny_claim_of_right_subtraction: 0
+
+- name: Case 4, no subtraction outside New York.
+  period: 2025
+  input:
+    claim_of_right_repayment: 2_000
+    state_code: NJ
+  output:
+    ny_claim_of_right_subtraction: 0
+
+- name: Case 5, a standard deduction filer subtracts a small repayment.
+  # Single, wages 50,000, repays 2,000. Itemizing would allow only
+  # 2,000 - 2 percent of 50,000 = 1,000, below the 8,000 standard deduction,
+  # so without the subtraction the repayment saves nothing. Subtracting gives
+  # New York adjusted gross income of 48,000 and taxable income of 40,000:
+  # 599.50 + 0.055 * (40,000 - 13,900) = 2,035.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    age: 40
+    employment_income: 50_000
+    claim_of_right_repayment: 2_000
+    state_code: NY
+  output:
+    ny_claim_of_right_subtraction_applies: true
+    ny_claim_of_right_subtraction: 2_000
+    ny_agi: 48_000
+    ny_deductions: 8_000
+    ny_taxable_income: 40_000
+    ny_income_tax: 2_035
+
+- name: Case 6, the same filer in 2020 has no subtraction.
+  period: 2020
+  absolute_error_margin: 0.01
+  input:
+    age: 40
+    employment_income: 50_000
+    claim_of_right_repayment: 2_000
+    state_code: NY
+  output:
+    ny_claim_of_right_subtraction_applies: false
+    ny_claim_of_right_subtraction: 0
+    ny_agi: 50_000
+    ny_taxable_income: 42_000
+
+- name: Case 7, a standard deduction filer subtracts a repayment over 3,000 dollars.
+  # Single, wages 50,000, repays 5,000 with no prior-year federal decrease, so
+  # federal tax is computed under section 1341(a)(4) and there is no section
+  # 662 credit. Itemizing the 5,000 (Form IT-196 line 34) falls short of the
+  # 8,000 standard deduction; subtracting gives taxable income of
+  # 45,000 - 8,000 = 37,000 and tax of 1,870.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    age: 40
+    employment_income: 50_000
+    claim_of_right_repayment: 5_000
+    state_code: NY
+  output:
+    claim_of_right_credit_applies: false
+    ny_claim_of_right_subtraction_applies: true
+    ny_claim_of_right_subtraction_bars_itemizing: true
+    ny_claim_of_right_subtraction: 5_000
+    ny_agi: 45_000
+    ny_deductions: 8_000
+    ny_taxable_income: 37_000
+    ny_income_tax: 1_870
+
+- name: Case 8, an itemizer deducts the repayment on Form IT-196 instead.
+  # Single, wages 100,000, gives 20,000 to charity and repays 5,000; federal
+  # tax is computed with the deduction. Itemizing gives New York deductions of
+  # 20,000 + 5,000 = 25,000 and taxable income of 75,000. The subtraction
+  # would require the standard deduction: 95,000 - 8,000 = 87,000.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    age: 40
+    employment_income: 100_000
+    charitable_cash_donations: 20_000
+    claim_of_right_repayment: 5_000
+    state_code: NY
+  output:
+    claim_of_right_credit_applies: false
+    ny_claim_of_right_subtraction_applies: false
+    ny_claim_of_right_subtraction: 0
+    ny_agi: 100_000
+    ny_itemized_deductions: 25_000
+    ny_deductions: 25_000
+    ny_taxable_income: 75_000
+
+- name: Case 9, an itemizer whose small repayment falls under the 2 percent floor gets no relief.
+  # As Case 8 with 1,500 repaid: the floor is 2 percent of 100,000 = 2,000, so
+  # the itemized deduction stays 20,000 and taxable income 80,000. Taking the
+  # standard deduction to subtract 1,500 would leave 90,500.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    age: 40
+    employment_income: 100_000
+    charitable_cash_donations: 20_000
+    claim_of_right_repayment: 1_500
+    state_code: NY
+  output:
+    ny_claim_of_right_subtraction_applies: false
+    ny_misc_deduction: 0
+    ny_itemized_deductions: 20_000
+    ny_taxable_income: 80_000
+
+- name: Case 10, under the federal credit method a subtracting filer may still itemize.
+  # The repayment is not deducted under section 1341(a)(5), so it is not in
+  # the itemized deduction and the subtraction does not rule itemizing out.
+  period: 2025
+  input:
+    claim_of_right_repayment: 5_000
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: true
+    state_code: NY
+  output:
+    ny_claim_of_right_subtraction: 5_000
+    ny_claim_of_right_subtraction_bars_itemizing: false

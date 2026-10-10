@@ -1,0 +1,121 @@
+# N.Y. Tax Law 1312(a) applies the claim of right adjustment of section 662 to
+# the New York City tax. Form IT-257, line 9: the New York City resident claim
+# of right credit is the previously calculated city resident tax less the
+# recalculated tax.
+- name: Case 1, the credit is the prior-year city tax decrease under the federal credit method.
+  period: 2025
+  input:
+    claim_of_right_repayment: 5_000
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: false
+    nyc_claim_of_right_prior_year_tax_decrease: 180
+    in_nyc: true
+    state_code: NY
+  output:
+    nyc_claim_of_right_credit: 180
+
+- name: Case 2, no credit when the filer takes the federal deduction.
+  period: 2025
+  input:
+    claim_of_right_repayment: 5_000
+    claim_of_right_credit_applies: false
+    ny_claim_of_right_subtraction_applies: false
+    nyc_claim_of_right_prior_year_tax_decrease: 180
+    in_nyc: true
+    state_code: NY
+  output:
+    nyc_claim_of_right_credit: 0
+
+- name: Case 3, no credit when the filer subtracts the repayment instead.
+  period: 2025
+  input:
+    claim_of_right_repayment: 5_000
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: true
+    nyc_claim_of_right_prior_year_tax_decrease: 180
+    in_nyc: true
+    state_code: NY
+  output:
+    nyc_claim_of_right_credit: 0
+
+- name: Case 4, no credit for a New York resident outside the city.
+  period: 2025
+  input:
+    claim_of_right_repayment: 5_000
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: false
+    nyc_claim_of_right_prior_year_tax_decrease: 180
+    in_nyc: false
+    state_code: NY
+  output:
+    nyc_claim_of_right_credit: 0
+
+- name: Case 5, a joint return sums the spouses' amounts, not a dependent's.
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 45
+        nyc_claim_of_right_prior_year_tax_decrease: 120
+      person2:
+        age: 44
+        nyc_claim_of_right_prior_year_tax_decrease: 60
+      person3:
+        age: 30
+        is_tax_unit_dependent: true
+        nyc_claim_of_right_prior_year_tax_decrease: 1_000
+    tax_units:
+      tax_unit:
+        members: [person1, person2, person3]
+        claim_of_right_credit_applies: true
+        ny_claim_of_right_subtraction_applies: false
+    households:
+      household:
+        members: [person1, person2, person3]
+        in_nyc: true
+        state_code: NY
+  output:
+    nyc_claim_of_right_credit: 180
+
+- name: Case 6, the state and city credits together beat the subtraction.
+  # The Case 6 filer of ny_claim_of_right_credit.yaml living in New York
+  # City. The subtraction would save 275 of state tax and less than 4 percent
+  # of 5,000 = 200 of city tax; the credits are 342 + 180 = 522.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    age: 40
+    employment_income: 50_000
+    claim_of_right_repayment: 5_000
+    claim_of_right_prior_year_tax_decrease: 600
+    ny_claim_of_right_prior_year_tax_decrease: 342
+    nyc_claim_of_right_prior_year_tax_decrease: 180
+    in_nyc: true
+    state_code: NY
+  output:
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: false
+    ny_claim_of_right_credit: 342
+    nyc_claim_of_right_credit: 180
+    nyc_taxable_income: 42_000
+
+- name: Case 7, the subtraction lowers the city tax too, so small credits lose to it.
+  # As Case 6 with credits of 200 + 20 = 220: the subtraction saves 275 of
+  # state tax alone.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    age: 40
+    employment_income: 50_000
+    claim_of_right_repayment: 5_000
+    claim_of_right_prior_year_tax_decrease: 600
+    ny_claim_of_right_prior_year_tax_decrease: 200
+    nyc_claim_of_right_prior_year_tax_decrease: 20
+    in_nyc: true
+    state_code: NY
+  output:
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: true
+    ny_claim_of_right_credit: 0
+    nyc_claim_of_right_credit: 0
+    nyc_taxable_income: 37_000

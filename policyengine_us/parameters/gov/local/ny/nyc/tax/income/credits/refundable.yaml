@@ -4,10 +4,12 @@ values:
     - nyc_cdcc
     - nyc_eitc
     - nyc_school_tax_credit
+    - nyc_claim_of_right_credit
   2025-01-01:
     - nyc_cdcc
     - nyc_eitc
     - nyc_school_tax_credit
+    - nyc_claim_of_right_credit
     - nyc_income_tax_elimination_credit
 metadata:
   unit: list
@@ -17,3 +19,7 @@ metadata:
       href: https://www.tax.ny.gov/pdf/current_forms/it/it201i.pdf#page=26
     - title: 2025 Form IT-201-I, line 70a (NYC income tax elimination credit)
       href: https://www.tax.ny.gov/pdf/2025/inc/it201i_2025.pdf#page=21
+    - title: N.Y. Tax Law § 1312(a) (applies the claim of right adjustment of § 662 to the city tax)
+      href: https://legislation.nysenate.gov/pdf/laws/TAX1312
+    - title: "2025 Form IT-201-ATT, Part 1, Section D, line 16 #page 2"
+      href: https://www.tax.ny.gov/pdf/2025/inc/it201att_2025_fill_in.pdf#page=2

@@ -1,0 +1,161 @@
+# N.Y. Tax Law 662: when 26 U.S.C. 1341(a)(5) applies to repaid claim of right
+# income for federal tax, New York State tax is reduced by the decrease in the
+# earlier year's New York tax from excluding that income, and any excess is
+# refunded. Form IT-257 instructions: a filer who takes the federal deduction
+# instead of the credit cannot claim the New York credit. Tax Law
+# 612(c)(45)(B): no subtraction for a repayment that is the basis for a
+# section 662 credit, so the filer takes one or the other.
+- name: Case 1, the Form IT-257 instructions' example gives a credit of 342 dollars.
+  # "The New York State tax you originally reported on that prior year's
+  # return was $809. Your prior-year New York State tax, calculated without
+  # including the $5,000 on that return, is $467. Your current-year New York
+  # State claim of right credit is $342 ($809 - $467)."
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    claim_of_right_repayment: 5_000
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: false
+    ny_claim_of_right_prior_year_tax_decrease: 342
+    state_code: NY
+  output:
+    ny_claim_of_right_credit: 342
+
+- name: Case 2, no credit when the filer takes the federal deduction.
+  period: 2025
+  input:
+    claim_of_right_repayment: 5_000
+    claim_of_right_credit_applies: false
+    ny_claim_of_right_subtraction_applies: false
+    ny_claim_of_right_prior_year_tax_decrease: 342
+    state_code: NY
+  output:
+    ny_claim_of_right_credit: 0
+
+- name: Case 3, no credit when the filer subtracts the repayment instead.
+  period: 2025
+  input:
+    claim_of_right_repayment: 5_000
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: true
+    ny_claim_of_right_prior_year_tax_decrease: 342
+    state_code: NY
+  output:
+    ny_claim_of_right_subtraction: 5_000
+    ny_claim_of_right_credit: 0
+
+- name: Case 4, a joint return sums the spouses' amounts, not a dependent's.
+  period: 2025
+  input:
+    people:
+      person1:
+        age: 45
+        ny_claim_of_right_prior_year_tax_decrease: 200
+      person2:
+        age: 44
+        ny_claim_of_right_prior_year_tax_decrease: 100
+      person3:
+        age: 30
+        is_tax_unit_dependent: true
+        ny_claim_of_right_prior_year_tax_decrease: 1_000
+    tax_units:
+      tax_unit:
+        members: [person1, person2, person3]
+        claim_of_right_credit_applies: true
+        ny_claim_of_right_subtraction_applies: false
+    households:
+      household:
+        members: [person1, person2, person3]
+        state_code: NY
+  output:
+    ny_claim_of_right_credit: 300
+
+- name: Case 5, no credit outside New York.
+  period: 2025
+  input:
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_prior_year_tax_decrease: 342
+    state_code: NJ
+  output:
+    ny_claim_of_right_credit: 0
+
+- name: Case 6, the credit beats the subtraction when it is worth more.
+  # Single, wages 50,000. Federally the filer takes the standard deduction, so
+  # a deduction for the 5,000 repaid would save nothing and the 600 dollar
+  # prior-year decrease puts the filer under section 1341(a)(5).
+  # New York taxable income is 50,000 - 8,000 = 42,000, in the 5.5 percent
+  # bracket: 599.50 + 0.055 * (42,000 - 13,900) = 2,145. The credit brings
+  # tax to 2,145 - 342 = 1,803. Subtracting 5,000 instead would bring it to
+  # 599.50 + 0.055 * (37,000 - 13,900) = 1,870, so the filer claims the credit.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    age: 40
+    employment_income: 50_000
+    claim_of_right_repayment: 5_000
+    claim_of_right_prior_year_tax_decrease: 600
+    ny_claim_of_right_prior_year_tax_decrease: 342
+    state_code: NY
+  output:
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: false
+    ny_claim_of_right_credit: 342
+    ny_agi: 50_000
+    ny_taxable_income: 42_000
+    ny_income_tax: 1_803
+
+- name: Case 7, the filer subtracts instead when the credit is worth less.
+  # As Case 6 with a 200 dollar New York prior-year decrease: the credit would
+  # bring tax to 1,945, the subtraction to 1,870.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    age: 40
+    employment_income: 50_000
+    claim_of_right_repayment: 5_000
+    claim_of_right_prior_year_tax_decrease: 600
+    ny_claim_of_right_prior_year_tax_decrease: 200
+    state_code: NY
+  output:
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: true
+    ny_claim_of_right_subtraction: 5_000
+    ny_claim_of_right_credit: 0
+    ny_agi: 45_000
+    ny_taxable_income: 37_000
+    ny_income_tax: 1_870
+
+- name: Case 8, a credit above the year's tax is refunded.
+  # No income, so no New York tax and nothing for a subtraction to reduce.
+  period: 2025
+  absolute_error_margin: 0.01
+  input:
+    age: 40
+    claim_of_right_repayment: 5_000
+    claim_of_right_prior_year_tax_decrease: 600
+    ny_claim_of_right_prior_year_tax_decrease: 342
+    state_code: NY
+  output:
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: false
+    ny_claim_of_right_credit: 342
+    ny_income_tax: -342
+
+- name: Case 9, before 2021 there is no subtraction to choose instead.
+  # The facts of Case 7 in 2020: the subtraction began in 2021, so the filer
+  # claims the 200 dollar credit.
+  period: 2020
+  absolute_error_margin: 0.01
+  input:
+    age: 40
+    employment_income: 50_000
+    claim_of_right_repayment: 5_000
+    claim_of_right_prior_year_tax_decrease: 600
+    ny_claim_of_right_prior_year_tax_decrease: 200
+    state_code: NY
+  output:
+    claim_of_right_credit_applies: true
+    ny_claim_of_right_subtraction_applies: false
+    ny_claim_of_right_subtraction: 0
+    ny_claim_of_right_credit: 200
+    ny_agi: 50_000

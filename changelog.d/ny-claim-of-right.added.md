@@ -1,0 +1,1 @@
+Add New York's and New York City's claim of right credits (Tax Law 662 and 1312(a)), New York's claim of right repayment subtraction from 2021 (Tax Law 612(c)(45)), and the repayment's place in New York itemized deductions (Form IT-196 lines 24 and 34).

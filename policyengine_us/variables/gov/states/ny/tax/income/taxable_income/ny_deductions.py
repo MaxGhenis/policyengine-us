@@ -11,7 +11,9 @@ class ny_deductions(Variable):
     defined_for = StateCode.NY
 
     def formula(tax_unit, period, parameters):
-        return max_(
-            tax_unit("ny_itemized_deductions", period),
-            tax_unit("ny_standard_deduction", period),
-        )
+        itemized = tax_unit("ny_itemized_deductions", period)
+        standard = tax_unit("ny_standard_deduction", period)
+        # A filer who subtracts a repayment that the itemized deduction
+        # would include takes the standard deduction (Tax Law 612(c)(45)(B)).
+        standard_only = tax_unit("ny_claim_of_right_subtraction_bars_itemizing", period)
+        return where(standard_only, standard, max_(itemized, standard))

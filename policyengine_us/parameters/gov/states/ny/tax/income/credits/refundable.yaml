@@ -7,6 +7,7 @@ values:
     - ny_cdcc
     - ny_real_property_tax_credit
     - ny_college_tuition_credit
+    - ny_claim_of_right_credit
 
   2021-01-01:
     - ny_eitc
@@ -15,6 +16,7 @@ values:
     - ny_cdcc
     - ny_real_property_tax_credit
     - ny_college_tuition_credit
+    - ny_claim_of_right_credit
     - ny_additional_ctc
 
   2022-01-01:
@@ -24,6 +26,7 @@ values:
     - ny_cdcc
     - ny_real_property_tax_credit
     - ny_college_tuition_credit
+    - ny_claim_of_right_credit
 
   2023-01-01:
     - ny_eitc
@@ -32,6 +35,7 @@ values:
     - ny_cdcc
     - ny_real_property_tax_credit
     - ny_college_tuition_credit
+    - ny_claim_of_right_credit
     - ny_additional_ctc
     - ny_inflation_refund_credit
 
@@ -42,6 +46,7 @@ values:
     - ny_cdcc
     - ny_real_property_tax_credit
     - ny_college_tuition_credit
+    - ny_claim_of_right_credit
 
   2025-01-01:
     - ny_eitc
@@ -50,6 +55,7 @@ values:
     - ny_cdcc
     - ny_real_property_tax_credit
     - ny_college_tuition_credit
+    - ny_claim_of_right_credit
 
   2026-01-01:
     - ny_eitc
@@ -58,8 +64,14 @@ values:
     - ny_cdcc
     - ny_real_property_tax_credit
     - ny_college_tuition_credit
+    - ny_claim_of_right_credit
 
 metadata:
   unit: list
   period: year
   label: New York refundable tax credits
+  reference:
+    - title: N.Y. Tax Law § 662 (claim of right credit)
+      href: https://legislation.nysenate.gov/pdf/laws/TAX662
+    - title: "2025 Form IT-201-ATT, Part 1, Section D, line 15 #page 2"
+      href: https://www.tax.ny.gov/pdf/2025/inc/it201att_2025_fill_in.pdf#page=2

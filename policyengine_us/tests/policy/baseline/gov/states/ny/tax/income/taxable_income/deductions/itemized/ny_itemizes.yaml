@@ -30,3 +30,15 @@
     state_code: NY
   output:
     ny_itemizes: false
+
+- name: Case 4, subtracting an itemizable claim of right repayment rules out itemizing.
+  period: 2025
+  absolute_error_margin: 0
+  input:
+    tax_unit_itemizes: true
+    ny_claim_of_right_subtraction_bars_itemizing: true
+    ny_standard_deduction: 8_000
+    ny_itemized_deductions: 12_000
+    state_code: NY
+  output:
+    ny_itemizes: false

@@ -14,6 +14,9 @@ Maryland (Administrative Release 40) and Virginia (P.D. 16-183, P.D. 20-35)
 credit the state's own prior-year tax on the repaid income, and Nebraska
 (Neb. Rev. Stat. 77-2716(7)) and Louisiana (Revenue Ruling 04-002) subtract
 the amount repaid from income. Under 1341(a)(4) none of the four adjusts.
+New York credits its own prior-year tax under 1341(a)(5) (Tax Law 662) or,
+from 2021, subtracts the amount repaid (Tax Law 612(c)(45)), whichever the
+filer chooses; test_ny_claim_of_right_properties.py covers that choice.
 
 YAML cases check single households from Publication 525. These tests check
 properties at every point of a grid, one vectorized simulation per year and
@@ -36,6 +39,7 @@ simulations that fix the method as an input:
   are refunded past zero; Nebraska's and Louisiana's subtractions are the
   amount repaid exactly when the credit method applies and lower state
   adjusted gross income by that much;
+- under the credit method New York's tax falls by at least its credit;
 - under the credit method the repayment changes no other state's income tax
   (section 1341(b)(3): the deduction is not taken into account for any other
   purpose), and under the deduction method it changes none in Arizona, Kansas
@@ -97,6 +101,12 @@ STATE_SUBTRACTIONS = {
     "NE": ("ne_claim_of_right_subtraction", "ne_agi"),
 }
 STATE_GRID_STATES = sorted([*STATE_CREDITS, *STATE_SUBTRACTIONS])
+# New York credits its own prior-year tax under the federal credit method or
+# subtracts the amount repaid, whichever gives less tax: Tax Law 662 and
+# 612(c)(45).
+STATES_CHOOSING_A_CREDIT_OR_SUBTRACTION = {
+    "NY": "ny_claim_of_right_prior_year_tax_decrease",
+}
 # An illustrative state prior-year tax on the repaid income.
 STATE_PRIOR_YEAR_TAX = 0.04 * REPAYMENT
 VARIABLES = [
@@ -414,7 +424,10 @@ def state_income_tax(year, repayment, credit_applies=None, state_prior_year_tax=
             "claim_of_right_prior_year_tax_decrease": {year: 2_500},
             **{
                 name: {year: state_prior_year_tax}
-                for name in STATE_PRIOR_YEAR_TAX_INPUTS.values()
+                for name in [
+                    *STATE_PRIOR_YEAR_TAX_INPUTS.values(),
+                    *STATES_CHOOSING_A_CREDIT_OR_SUBTRACTION.values(),
+                ]
             },
         }
         situation["tax_units"][f"t{i}"] = {"members": [f"p{i}"]}
@@ -441,8 +454,11 @@ def test_states_follow_section_1341_b_3():
     change = with_credit - without_repayment
     crediting = np.isin(STATES, list(STATE_PRIOR_YEAR_TAX_INPUTS))
     subtracting = np.isin(STATES, list(STATE_SUBTRACTIONS))
-    np.testing.assert_allclose(change[~crediting & ~subtracting], 0, atol=TOLERANCE)
+    choosing = np.isin(STATES, list(STATES_CHOOSING_A_CREDIT_OR_SUBTRACTION))
+    unchanged = ~crediting & ~subtracting & ~choosing
+    np.testing.assert_allclose(change[unchanged], 0, atol=TOLERANCE)
     np.testing.assert_allclose(change[crediting], -prior_year_tax, atol=TOLERANCE)
+    assert np.all(change[choosing] <= -prior_year_tax + TOLERANCE)
     assert np.all(change[subtracting] < -1), "the subtraction should lower the tax"
     with_deduction = state_income_tax(
         year, 10_000, credit_applies=False, state_prior_year_tax=prior_year_tax

@@ -10,6 +10,15 @@ values:
     # local governments, or the federal government. Pensions from other states are not exempt.
     # PolicyEngine subtracts taxable_public_pension_income as an in-state/federal proxy.
     - taxable_public_pension_income
+  2021-01-01:
+    - taxable_social_security
+    - us_govt_interest
+    - investment_in_529_plan
+    - ny_pension_exclusion
+    - salt_refund_income
+    - taxable_public_pension_income
+    # N.Y. Tax Law § 612(c)(45) / Form IT-225 S-141, from 2021.
+    - ny_claim_of_right_subtraction
 metadata:
   unit: list
   period: year
@@ -27,3 +36,7 @@ metadata:
       href: https://newyork.public.law/laws/n.y._tax_law_section_612
     - title: N.Y. Comp. Codes R. & Regs. tit. 20 § 112.3
       href: https://www.law.cornell.edu/regulations/new-york/20-NYCRR-112.3
+    - title: "N.Y. Tax Law § 612(c)(45) #page 23"
+      href: https://legislation.nysenate.gov/pdf/laws/TAX612#page=23
+    - title: "2025 Form IT-225 Instructions, S-141 #page 19"
+      href: https://www.tax.ny.gov/pdf/2025/inc/it225i_2025.pdf#page=19

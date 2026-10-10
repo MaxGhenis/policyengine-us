@@ -10,6 +10,8 @@ class ny_itemized_deductions_max(Variable):
     reference = (
         "https://www.nysenate.gov/legislation/laws/TAX/615",
         "https://www.tax.ny.gov/pit/file/itemized-deductions.htm",
+        # 2025 Form IT-196 instructions, line 34
+        "https://www.tax.ny.gov/pdf/2025/inc/it196i_2025.pdf#page=17",
     )
     defined_for = StateCode.NY
     documentation = """
@@ -31,6 +33,9 @@ class ny_itemized_deductions_max(Variable):
         "ny_salt_deduction",
         "ny_misc_deduction",
         "ny_casualty_loss_deduction",
+        # Form IT-196 line 34: a repayment over $3,000 that federal law
+        # deducts under 26 U.S.C. 1341(a)(4), outside the 2% floor
+        "claim_of_right_deduction",
         # NY-specific addition per Tax Law § 615(d)
         "ny_college_tuition_deduction",
     ]

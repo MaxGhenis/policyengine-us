@@ -84,3 +84,38 @@
     # NY Casualty: 15,000 - (100,000 * 0.10) = 5,000
     # Total: 5,000 + 2,500 + 12,000 + 2,000 + 5,000 = 26,500
     ny_itemized_deductions_max: 26_500
+
+- name: NY misc deduction includes a claim of right repayment of 3,000 dollars or less
+  period: 2025
+  input:
+    state_code: NY
+    employment_income: 50_000
+    claim_of_right_repayment: 3_000
+  output:
+    # Form IT-196 line 24, subject to the 2% floor:
+    # 3,000 - (50,000 * 0.02) = 2,000
+    ny_misc_deduction: 2_000
+
+- name: NY deducts a claim of right repayment over 3,000 dollars outside the 2% floor
+  period: 2025
+  input:
+    state_code: NY
+    employment_income: 50_000
+    claim_of_right_repayment: 3_001
+    claim_of_right_credit_applies: false
+  output:
+    # Form IT-196 line 34 rather than line 24
+    ny_misc_deduction: 0
+    ny_itemized_deductions_max: 3_001
+
+- name: NY does not deduct a repayment when federal tax is computed under section 1341(a)(5)
+  period: 2025
+  input:
+    state_code: NY
+    employment_income: 50_000
+    claim_of_right_repayment: 3_001
+    claim_of_right_credit_applies: true
+  output:
+    # The section 662 credit applies instead
+    ny_misc_deduction: 0
+    ny_itemized_deductions_max: 0

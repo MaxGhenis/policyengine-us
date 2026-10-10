@@ -1,0 +1,15 @@
+description: New York subtracts repaid income that was held under a claim of right from adjusted gross income if this is true.
+values:
+  0000-01-01: false
+  2021-01-01: true
+metadata:
+  unit: bool
+  period: year
+  label: New York claim of right repayment subtraction in effect
+  reference:
+    - title: "N.Y. Tax Law § 612(c)(45) #page 23"
+      href: https://legislation.nysenate.gov/pdf/laws/TAX612#page=23
+    - title: Chapter 149 of the Laws of 2021 (S.7231), section 2
+      href: https://legislation.nysenate.gov/pdf/bills/2021/S7231
+    - title: Summary of 2021 corporation tax and personal income tax changes
+      href: https://www.tax.ny.gov/legal/2021/pit-corp-changes.htm

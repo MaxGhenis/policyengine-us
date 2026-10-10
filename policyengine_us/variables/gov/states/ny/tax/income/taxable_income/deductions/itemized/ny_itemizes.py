@@ -14,4 +14,11 @@ class ny_itemizes(Variable):
         federal_itemizes = tax_unit("tax_unit_itemizes", period)
         standard_deduction = tax_unit("ny_standard_deduction", period)
         itemized_deductions = tax_unit("ny_itemized_deductions", period)
-        return federal_itemizes & (itemized_deductions >= standard_deduction)
+        # A filer who subtracts a repayment that the itemized deduction
+        # would include takes the standard deduction.
+        standard_only = tax_unit("ny_claim_of_right_subtraction_bars_itemizing", period)
+        return (
+            federal_itemizes
+            & (itemized_deductions >= standard_deduction)
+            & ~standard_only
+        )
