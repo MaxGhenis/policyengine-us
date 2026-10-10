@@ -1,3 +1,65 @@
+## [2.38.7] - 2026-10-10
+
+### Changed
+
+- Recognize the intended Michigan dependent-retirement SSI interaction in state tax invariants and add a regression for the resulting heating credit increase.
+
+### Fixed
+
+- Michigan household resources count only the claimant's and spouse's own income, capital gains and Schedule 1 adjustments (MCL 206.508(3)), keeping the Social Security, SSI, railroad retirement, child support and public assistance received for dependents (MI-1040CR lines 21, 22 and 27) and premiums paid for the family (line 31). The filer's Form 1040 line 7a amount, read by Michigan and by federal net investment income, now keeps a net capital gains amount supplied for the tax unit, less only the dependents' own gains and losses.
+- Use the filers' shared Schedule D lines for Form 1040 capital gains, preserving supplied aggregate inputs without letting dependents' large gains introduce rounding errors.
+- Correct Wisconsin retirement exclusion election reporting, prevent overlapping retirement subtractions, and include directly reported capital gain distributions in the capital gain subtraction.
+
+
+## [2.38.6] - 2026-10-10
+
+### Fixed
+
+- Fix traditional IRA deductions by applying employer-plan phase-outs using each person's own coverage, inferred from positive 401(k), 403(b), or self-employed pension contributions unless explicitly overridden. Defined-benefit coverage requires an explicit input. Limit deductions and combined IRA contributions to compensation with the joint spousal rule, and keep dependent contributions off the filers' return. Add IRS phase-out ranges for 2015–2026 and the 2026 IRA and catch-up dollar limits.
+
+
+## [2.38.5] - 2026-10-10
+
+### Fixed
+
+- Correct California itemized deductions to retain its charitable contribution limits without the federal charitable floor, allow miscellaneous expenses above 2% of federal AGI, and add back the California miscellaneous deduction for alternative minimum tax. Preserve signed California taxable income before AMT add-backs so deductions exceeding income do not inflate alternative minimum taxable income.
+
+
+## [2.38.4] - 2026-10-09
+
+### Fixed
+
+- Include New Jersey employee unemployment insurance and workforce development contributions in employee payroll tax, using annual employee wage bases through 2027.
+
+
+## [2.38.3] - 2026-10-09
+
+### Changed
+
+- Name Ziming Hua as the approver for partner API contract test edits in the agent instructions.
+
+
+## [2.38.2] - 2026-10-09
+
+### Fixed
+
+- Exclude estate and trust income from qualified business income unless its qualification is explicitly supplied.
+
+
+## [2.38.1] - 2026-10-09
+
+### Fixed
+
+- Arizona property tax credit household income counts capital gains and qualified dividends once, includes dependents' income and losses, and limits each member's net capital loss (including capital gain distributions) to $1,500 instead of federal AGI's $3,000 per-return limit. Household income can be negative, with zero used only for the credit schedules. Short-term capital inputs must exclude prior-year carryovers.
+
+
+## [2.38.0] - 2026-10-09
+
+### Added
+
+- Add Oregon LIHEAP regular heating assistance for program years 2025 to 2027.
+
+
 ## [2.37.2] - 2026-10-09
 
 ### Fixed
