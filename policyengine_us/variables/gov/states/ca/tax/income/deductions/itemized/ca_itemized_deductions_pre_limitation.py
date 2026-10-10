@@ -13,9 +13,12 @@ class ca_itemized_deductions_pre_limitation(Variable):
     )
     defined_for = StateCode.CA
 
+    # Schedule CA (540) Part II line 9: federal investment interest
+    # (column A, in itemized_deductions_less_salt) plus the form FTB 3526
+    # line 10 addition (column C) less its subtraction (column B).
     adds = [
         "itemized_deductions_less_salt",
-        "ca_investment_interest_expense_deduction",
+        "ca_investment_interest_deduction_addition",
         "real_estate_taxes",
     ]
-    subtracts = ["investment_interest_expense"]
+    subtracts = ["ca_investment_interest_deduction_subtraction"]

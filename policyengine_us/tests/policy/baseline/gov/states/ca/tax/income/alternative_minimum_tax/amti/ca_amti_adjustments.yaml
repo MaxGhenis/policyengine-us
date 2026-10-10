@@ -8,7 +8,7 @@
     real_estate_taxes: 6_000 
     mortgage_interest: 0 
     misc_deduction: 0
-    ca_investment_interest_deduction: 0
+    ca_amt_investment_interest_adjustment: 0
   output:
     ca_amti_adjustments: 7_000
 
@@ -22,7 +22,7 @@
     real_estate_taxes: 6_000 
     mortgage_interest: 0 
     misc_deduction: 0
-    ca_investment_interest_deduction: 0
+    ca_amt_investment_interest_adjustment: 0
   output:
     ca_amti_adjustments: 5_000
 
@@ -36,6 +36,19 @@
     real_estate_taxes: 6_000 
     mortgage_interest: 0 
     misc_deduction: 0
-    ca_investment_interest_deduction: 500
+    ca_amt_investment_interest_adjustment: 500
   output:
     ca_amti_adjustments: 7_500
+
+- name: Schedule P line 7 can be negative and reduces the adjustments.
+  period: 2025
+  input:
+    state_code: CA
+    ca_itemized_deductions: 10_000
+    ca_standard_deduction: 5_000
+    medical_expense_deduction: 1_000
+    real_estate_taxes: 6_000
+    misc_deduction: 0
+    ca_amt_investment_interest_adjustment: -3_000
+  output:
+    ca_amti_adjustments: 4_000
