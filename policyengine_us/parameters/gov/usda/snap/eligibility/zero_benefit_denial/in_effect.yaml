@@ -9,8 +9,8 @@ metadata:
   reference:
     - title: 7 CFR 273.10(e)(2)(iii) - Households entitled to no benefits
       href: https://www.ecfr.gov/current/title-7/section-273.10#p-273.10(e)(2)(iii)
-    - title: Food Stamp Program final rule, 65 FR 70134, 70161 (November 21, 2000)
-      href: https://www.govinfo.gov/content/pkg/FR-2000-11-21/pdf/00-29355.pdf#page=28
+    - title: "Food Stamp Program final rule, 65 FR 70134 (November 21, 2000) #page 1,28"
+      href: https://www.govinfo.gov/content/pkg/FR-2000-11-21/pdf/00-29355.pdf#page=1
     - title: CDSS ACIN I-50-13, Traditional and Modified Categorical Eligibility
       href: https://www.cdss.ca.gov/lettersnotices/entres/getinfo/acin/2013/I-50_13.pdf#page=2
     - title: CDSS ACL 14-56, CalFresh Modified Categorical Eligibility
@@ -28,11 +28,11 @@ metadata:
 # California: ACIN I-50-13 (August 23, 2013) first states that California
 # "has opted to deny such cases", including households that are otherwise
 # categorically eligible (CE) or Modified Categorically Eligible (MCE).
-# ACL 14-63 restates the election and has ongoing cases discontinued. MPP
-# 63-503.329(b), last amended in 2005, still exempts PA and GA categorically
-# eligible households (MPP 63-301.7 and .82); it carries forward the federal
-# bar removed in 2001, and the later CDSS letters apply the denial to those
-# households too.
+# ACL 14-56 and ACL 14-63 restate the election, have ongoing cases
+# discontinued, and apply it to traditional CE and MCE households alike.
+# MPP 63-503.329(b), last amended in 2005, still exempts households that are
+# categorically eligible under MPP 63-301.7 (PA) and .82 (GA), as the federal
+# rule required before 2001. This parameter follows the later CDSS letters.
 AK:
   2001-01-20: false
 AL:

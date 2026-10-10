@@ -132,7 +132,7 @@
       spm_unit:
         members: [person]
         snap_unit_size: 3
-        snap_max_allotment: 497
+        snap_max_allotment: 526
         snap_expected_contribution: 600
         snap_min_allotment: 0
     households:
@@ -140,6 +140,8 @@
         members: [person]
         state_code: CA
   output:
+    # The FY2013 maximum allotment for three, $526, applied through
+    # October 2013 (CDSS ACIN I-52-13).
     snap_zero_benefit_denial_applies: false
 
 - name: California's denial applies in the first full month after ACIN I-50-13.
@@ -152,7 +154,7 @@
       spm_unit:
         members: [person]
         snap_unit_size: 3
-        snap_max_allotment: 497
+        snap_max_allotment: 526
         snap_expected_contribution: 600
         snap_min_allotment: 0
     households:
@@ -207,6 +209,10 @@
 # standard (200%) $4,442 for three; 20% earned income deduction. No housing
 # costs, so the excess shelter deduction is zero at these incomes whichever
 # utility allowance applies.
+# The MCE cases set the BBCE net income test as met. CalFresh MCE has no net
+# income test (CDSS ACL 12-62, 13-32, 14-56), so these households are
+# categorically eligible above the $2,221 net standard and reach the
+# issuance-table boundary this rule turns on.
 - name: California MCE household of three whose allotment computes to zero is denied.
   period: 2026-01
   absolute_error_margin: 0.1
@@ -224,6 +230,7 @@
       spm_unit:
         members: [parent, child1, child2]
         housing_cost: 0
+        meets_tanf_non_cash_net_income_test: true
     tax_units:
       tax_unit:
         members: [parent, child1, child2]
@@ -232,6 +239,7 @@
         members: [parent, child1, child2]
         state_code: CA
   output:
+    meets_snap_categorical_eligibility: true
     # Gross $4,000 is within the $4,442 MCE standard. Net $4,000 - $800 -
     # $209 = $2,991; 30% = $897.30, rounded up to $898, above the $785
     # maximum. California denies the application because net income
@@ -242,10 +250,6 @@
     is_snap_eligible: false
     snap: 0
 
-# The next two cases set the BBCE net income test as met. CalFresh MCE has
-# no net income test (CDSS ACL 12-62, 13-32, 14-56), so the household is
-# categorically eligible above the $2,221 net standard and reaches the
-# issuance-table boundary this rule turns on.
 - name: California MCE household of three one dollar above the zero boundary is eligible for $1.
   period: 2026-01
   absolute_error_margin: 0.1
@@ -313,4 +317,46 @@
     snap_expected_contribution: 785
     snap_zero_benefit_denial_applies: true
     is_snap_eligible: false
+    snap: 0
+
+- name: A denied California unit receives no emergency allotment.
+  period: 2021-06
+  input:
+    people:
+      parent:
+        age:
+          2021: 35
+        employment_income:
+          2021: 60_000
+        weekly_hours_worked_before_lsr:
+          2021: 40
+      child1:
+        age:
+          2021: 8
+      child2:
+        age:
+          2021: 4
+    spm_units:
+      spm_unit:
+        members: [parent, child1, child2]
+        tanf:
+          2021: 1_200
+        housing_cost:
+          2021: 0
+    tax_units:
+      tax_unit:
+        members: [parent, child1, child2]
+    households:
+      household:
+        members: [parent, child1, child2]
+        state_code: CA
+  output:
+    # California issued emergency allotments in June 2021, but only to
+    # participating households. This categorically eligible unit's regular
+    # allotment is zero, so California denies it and it gets none.
+    meets_snap_categorical_eligibility: true
+    snap_normal_allotment: 0
+    snap_zero_benefit_denial_applies: true
+    is_snap_eligible: false
+    snap_emergency_allotment: 0
     snap: 0
