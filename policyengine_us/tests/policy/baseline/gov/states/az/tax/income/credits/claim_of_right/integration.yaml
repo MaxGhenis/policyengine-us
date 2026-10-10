@@ -32,12 +32,13 @@
     az_income_tax: -36
 
 - name: Case 2, a federal deduction is added back and gives no Arizona deduction.
-  # Federal itemized deductions are $20,000 of interest plus the $10,000
-  # repayment (section 1341(a)(4): with no prior-year federal decrease the
-  # deduction gives less federal tax). Arizona adds the $10,000 back, so
-  # Arizona adjusted gross income is $110,000. Arizona tax is computed
-  # without the deduction: 100,000 - 20,000 = 80,000, taxed at 2.5% = 2,000,
-  # less the $250 decrease in prior-year Arizona tax.
+  # Federal itemized deductions are $20,000 of interest, $2,106.25 of state
+  # income tax (the model's Arizona withholding, 2.5% of 100,000 - 15,750)
+  # and the $10,000 repayment (section 1341(a)(4): with no prior-year federal
+  # decrease the deduction gives less federal tax). Arizona adds the $10,000
+  # back, so Arizona adjusted gross income is $110,000. Arizona tax is
+  # computed without the deduction: 100,000 - 22,106.25 = 77,893.75, taxed
+  # at 2.5% = 1,947.34, less the $250 decrease in prior-year Arizona tax.
   absolute_error_margin: 0.01
   period: 2025
   input:
@@ -61,17 +62,18 @@
     claim_of_right_deduction: 10_000
     az_claim_of_right_addition: 10_000
     az_agi: 110_000
-    az_itemized_deductions: 20_000
-    az_taxable_income: 80_000
-    az_income_tax_before_refundable_credits: 2_000
+    az_itemized_deductions: 22_106.25
+    az_taxable_income: 77_893.75
+    az_income_tax_before_refundable_credits: 1_947.34
     az_claim_of_right_credit: 250
-    az_income_tax: 1_750
+    az_income_tax: 1_697.34
 
 - name: Case 3, the repayment cannot raise Arizona taxable income.
   # The filer itemizes federally only because of the repayment: $10,000 of
-  # interest plus the $10,000 repayment exceeds the $15,750 federal standard
-  # deduction. Arizona itemized deductions without the repayment ($10,000)
-  # are below the Arizona standard deduction, so Arizona taxable income is
+  # interest, $2,106.25 of state income tax and the $10,000 repayment exceed
+  # the $15,750 federal standard deduction. Arizona itemized deductions
+  # without the repayment ($12,106.25) are below the Arizona standard
+  # deduction, so Arizona taxable income is
   # 100,000 - 15,750 = 84,250, the same as with no repayment (Case 4), and
   # tax is 2.5% of that.
   absolute_error_margin: 0.01
