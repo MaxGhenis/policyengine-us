@@ -5,7 +5,7 @@ line 11), and 165(h)(2)(A) allows the rest only above 10% of adjusted gross
 income (line 17). A joint return is one individual for the $100 rule
 (165(h)(4)(B)), and a dependent's loss belongs on the dependent's own return.
 The model records one loss amount per person and no event count, so a return's
-losses are treated as one casualty. Four variables copy the computation:
+losses are treated as one casualty. Six variables copy the computation:
 
 - the federal `casualty_loss_deduction`, on federal AGI, suspended from 2018
   (gov.irs.deductions.itemized.casualty.active);
@@ -15,11 +15,15 @@ losses are treated as one casualty. Four variables copy the computation:
   effect from time to time, so suspended with the federal deduction;
 - Hawaii's `hi_casualty_loss_deduction`, on Hawaii AGI (floored at zero), with
   Hawaii's own $100, allowed for non-disaster losses through 2025 (Act 35,
-  SLH 2026, adopts 165(h)(5) from 2026).
+  SLH 2026, adopts 165(h)(5) from 2026);
+- California's `ca_casualty_loss_deduction`, on federal AGI, in every year
+  (Cal. Rev. & Tax. Code 17204(b); Schedule CA (540) line 15);
+- Minnesota's `mn_casualty_loss_deduction`, on federal AGI, in every year
+  (Minn. Stat. 290.0122, subd. 8; Schedule M1CAT).
 
 Hypothesis draws batches of tax units (single or joint, with up to two
-dependents who have their own losses), each placed in New York, Alabama and
-Hawaii, and gives every copy the same AGI. Each batch runs as one vectorized
+dependents who have their own losses), each placed in New York, Alabama,
+Hawaii, California and Minnesota, and gives every copy the same AGI. Each batch runs as one vectorized
 baseline simulation. For every tax unit and year:
 
 1. Each copy equals a closed-form reference on the head's and spouse's losses:
@@ -27,7 +31,7 @@ baseline simulation. For every tax unit and year:
    never enter it.
 2. Bounds: 0 <= deduction <= max(loss - 100, 0).
 3. A state copy is zero outside its state.
-4. Differential: where their gates are on, the four copies agree with each
+4. Differential: where their gates are on, the six copies agree with each
    other, since they share the computation and the AGI.
 
 A deterministic grid adds the boundary inputs ($0, $99, $100, $101, the floor
@@ -48,7 +52,8 @@ from policyengine_us import Simulation
 REDUCTION = 100  # Form 4684 line 11; HRS 235-2.4(l)(1)
 FLOOR = 0.1  # Form 4684 line 17
 TOLERANCE = 0.01
-STATES = ["NY", "AL", "HI"]
+CA_AGI_OFFSET = 7_000  # makes California AGI differ from federal AGI
+STATES = ["NY", "AL", "HI", "CA", "MN"]
 YEARS = [2017, 2025, 2026]
 # Whether each copy allows a non-disaster loss, by year, in baseline. Hawaii's
 # variables start in 2018, when its itemized deductions do.
@@ -57,11 +62,15 @@ GATES = {
     "ny_casualty_loss_deduction": {2017: 1, 2025: 1, 2026: 1},
     "al_casualty_loss_deduction": {2017: 1, 2025: 0, 2026: 0},
     "hi_casualty_loss_deduction": {2025: 1, 2026: 0},
+    "ca_casualty_loss_deduction": {2017: 1, 2025: 1, 2026: 1},
+    "mn_casualty_loss_deduction": {2017: 1, 2025: 1, 2026: 1},
 }
 STATE_OF = {
     "ny_casualty_loss_deduction": "NY",
     "al_casualty_loss_deduction": "AL",
     "hi_casualty_loss_deduction": "HI",
+    "ca_casualty_loss_deduction": "CA",
+    "mn_casualty_loss_deduction": "MN",
 }
 
 
@@ -107,6 +116,9 @@ def build_situation(units):
                 "adjusted_gross_income": every_year(agi),
                 "al_agi": every_year(agi),
                 "hi_agi": every_year(agi),
+                # California's floor is on federal AGI (FTB Publication 1034),
+                # so a different California AGI must not move its copy.
+                "ca_agi": every_year(agi + CA_AGI_OFFSET),
             }
             households[name] = {"members": members, "state_code": every_year(state)}
             rows.append((filer_loss, agi, state))
