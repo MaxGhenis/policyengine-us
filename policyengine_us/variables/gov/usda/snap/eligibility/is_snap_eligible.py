@@ -11,6 +11,8 @@ class is_snap_eligible(Variable):
         "https://www.law.cornell.edu/uscode/text/7/2017#a",
         "https://www.law.cornell.edu/uscode/text/7/2014#c",
         "https://www.law.cornell.edu/uscode/text/7/2015#f",
+        # 7 CFR 273.10(e)(2)(iii).
+        "https://www.ecfr.gov/current/title-7/section-273.10#p-273.10(e)(2)(iii)",
     )
 
     def formula(spm_unit, period, parameters):
@@ -31,4 +33,11 @@ class is_snap_eligible(Variable):
         eligible_member_present = spm_unit.any(
             ~person("is_snap_excluded_member", period)
         )
-        return (normal_eligibility | categorical_eligibility) & eligible_member_present
+        # States that take the 7 CFR 273.10(e)(2)(iii)(A) option deny units of
+        # three or more whose benefit computes to zero.
+        denied = spm_unit("snap_zero_benefit_denial_applies", period)
+        return (
+            (normal_eligibility | categorical_eligibility)
+            & eligible_member_present
+            & ~denied
+        )

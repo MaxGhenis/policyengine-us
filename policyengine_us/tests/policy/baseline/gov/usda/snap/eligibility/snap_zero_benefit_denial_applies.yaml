@@ -1,0 +1,316 @@
+# 7 CFR 273.10(e)(2)(iii): a state denies, or certifies and suspends, an
+# eligible household of three or more entitled to no benefits. California
+# denies (CDSS ACIN I-50-13; ACL 14-63). FY2026 contiguous-US maximum
+# allotment for three people is $785 (CDSS ACIN I-46-25).
+- name: California unit of three whose allotment computes to exactly zero is denied.
+  period: 2026-01
+  input:
+    people:
+      person:
+        age: 30
+    spm_units:
+      spm_unit:
+        members: [person]
+        snap_unit_size: 3
+        snap_max_allotment: 785
+        snap_expected_contribution: 785
+        snap_min_allotment: 0
+    households:
+      household:
+        members: [person]
+        state_code: CA
+  output:
+    snap_zero_benefit_denial_applies: true
+
+- name: California unit of three whose allotment computes to one dollar is not denied.
+  period: 2026-01
+  input:
+    people:
+      person:
+        age: 30
+    spm_units:
+      spm_unit:
+        members: [person]
+        snap_unit_size: 3
+        snap_max_allotment: 785
+        snap_expected_contribution: 784
+        snap_min_allotment: 0
+    households:
+      household:
+        members: [person]
+        state_code: CA
+  output:
+    snap_zero_benefit_denial_applies: false
+
+- name: California unit of five whose expected contribution exceeds the maximum allotment is denied.
+  period: 2026-01
+  input:
+    people:
+      person:
+        age: 30
+    spm_units:
+      spm_unit:
+        members: [person]
+        snap_unit_size: 5
+        snap_max_allotment: 1_183
+        snap_expected_contribution: 1_500
+        snap_min_allotment: 0
+    households:
+      household:
+        members: [person]
+        state_code: CA
+  output:
+    snap_zero_benefit_denial_applies: true
+
+- name: California unit of two receives the minimum allotment and is not denied.
+  period: 2026-01
+  input:
+    people:
+      person:
+        age: 30
+    spm_units:
+      spm_unit:
+        members: [person]
+        snap_unit_size: 2
+        snap_max_allotment: 546
+        snap_expected_contribution: 900
+        snap_min_allotment: 24
+    households:
+      household:
+        members: [person]
+        state_code: CA
+  output:
+    snap_zero_benefit_denial_applies: false
+
+- name: A state minimum allotment for a unit of three prevents the denial.
+  period: 2026-01
+  input:
+    people:
+      person:
+        age: 30
+    spm_units:
+      spm_unit:
+        members: [person]
+        snap_unit_size: 3
+        snap_max_allotment: 785
+        snap_expected_contribution: 900
+        snap_min_allotment: 95
+    households:
+      household:
+        members: [person]
+        state_code: CA
+  output:
+    snap_zero_benefit_denial_applies: false
+
+- name: Missouri, which the model does not treat as denying, keeps a zero-allotment unit of three.
+  period: 2026-01
+  input:
+    people:
+      person:
+        age: 30
+    spm_units:
+      spm_unit:
+        members: [person]
+        snap_unit_size: 3
+        snap_max_allotment: 785
+        snap_expected_contribution: 900
+        snap_min_allotment: 0
+    households:
+      household:
+        members: [person]
+        state_code: MO
+  output:
+    snap_zero_benefit_denial_applies: false
+
+- name: California's denial is modeled from ACIN I-50-13 (August 23, 2013), not before.
+  period: 2013-07
+  input:
+    people:
+      person:
+        age: 30
+    spm_units:
+      spm_unit:
+        members: [person]
+        snap_unit_size: 3
+        snap_max_allotment: 497
+        snap_expected_contribution: 600
+        snap_min_allotment: 0
+    households:
+      household:
+        members: [person]
+        state_code: CA
+  output:
+    snap_zero_benefit_denial_applies: false
+
+- name: California's denial applies in the first full month after ACIN I-50-13.
+  period: 2013-09
+  input:
+    people:
+      person:
+        age: 30
+    spm_units:
+      spm_unit:
+        members: [person]
+        snap_unit_size: 3
+        snap_max_allotment: 497
+        snap_expected_contribution: 600
+        snap_min_allotment: 0
+    households:
+      household:
+        members: [person]
+        state_code: CA
+  output:
+    snap_zero_benefit_denial_applies: true
+
+- name: Vectorized units in California and Missouri, at and around the zero boundary.
+  period: 2026-01
+  input:
+    spm_units:
+      ca_three_zero:
+        members: [a1]
+        snap_unit_size: 3
+        snap_max_allotment: 785
+        snap_expected_contribution: 786
+        snap_min_allotment: 0
+      ca_three_positive:
+        members: [b1]
+        snap_unit_size: 3
+        snap_max_allotment: 785
+        snap_expected_contribution: 700
+        snap_min_allotment: 0
+      mo_three_zero:
+        members: [c1]
+        snap_unit_size: 3
+        snap_max_allotment: 785
+        snap_expected_contribution: 786
+        snap_min_allotment: 0
+    people:
+      a1:
+        age: 30
+      b1:
+        age: 30
+      c1:
+        age: 30
+    households:
+      ca:
+        members: [a1, b1]
+        state_code: CA
+      mo:
+        members: [c1]
+        state_code: MO
+  output:
+    snap_zero_benefit_denial_applies: [true, false, false]
+
+# Full California households in FY2026, using CDSS ACIN I-46-25,
+# attachment I: maximum allotment for three people $785; standard deduction
+# $209 (1-3 people); net standard (100% of poverty) $2,221 and MCE gross
+# standard (200%) $4,442 for three; 20% earned income deduction. No housing
+# costs, so the excess shelter deduction is zero at these incomes whichever
+# utility allowance applies.
+- name: California MCE household of three whose allotment computes to zero is denied.
+  period: 2026-01
+  absolute_error_margin: 0.1
+  input:
+    people:
+      parent:
+        age: 35
+        employment_income: 48_000
+        weekly_hours_worked_before_lsr: 40
+      child1:
+        age: 8
+      child2:
+        age: 4
+    spm_units:
+      spm_unit:
+        members: [parent, child1, child2]
+        housing_cost: 0
+    tax_units:
+      tax_unit:
+        members: [parent, child1, child2]
+    households:
+      household:
+        members: [parent, child1, child2]
+        state_code: CA
+  output:
+    # Gross $4,000 is within the $4,442 MCE standard. Net $4,000 - $800 -
+    # $209 = $2,991; 30% = $897.30, rounded up to $898, above the $785
+    # maximum. California denies the application because net income
+    # "exceeds the level at which benefits are issued" (ACL 14-63).
+    snap_net_income: 2_991
+    snap_expected_contribution: 898
+    snap_zero_benefit_denial_applies: true
+    is_snap_eligible: false
+    snap: 0
+
+# The next two cases set the BBCE net income test as met. CalFresh MCE has
+# no net income test (CDSS ACL 12-62, 13-32, 14-56), so the household is
+# categorically eligible above the $2,221 net standard and reaches the
+# issuance-table boundary this rule turns on.
+- name: California MCE household of three one dollar above the zero boundary is eligible for $1.
+  period: 2026-01
+  absolute_error_margin: 0.1
+  input:
+    people:
+      parent:
+        age: 35
+        employment_income: 42_300
+        weekly_hours_worked_before_lsr: 40
+      child1:
+        age: 8
+      child2:
+        age: 4
+    spm_units:
+      spm_unit:
+        members: [parent, child1, child2]
+        housing_cost: 0
+        meets_tanf_non_cash_net_income_test: true
+    tax_units:
+      tax_unit:
+        members: [parent, child1, child2]
+    households:
+      household:
+        members: [parent, child1, child2]
+        state_code: CA
+  output:
+    meets_snap_categorical_eligibility: true
+    # Net $3,525 - $705 - $209 = $2,611; 30% = $783.30, rounded up to $784.
+    snap_net_income: 2_611
+    snap_expected_contribution: 784
+    snap_zero_benefit_denial_applies: false
+    is_snap_eligible: true
+    snap: 1
+
+- name: California MCE household of three whose allotment is exactly zero is denied.
+  period: 2026-01
+  absolute_error_margin: 0.1
+  input:
+    people:
+      parent:
+        age: 35
+        employment_income: 42_360
+        weekly_hours_worked_before_lsr: 40
+      child1:
+        age: 8
+      child2:
+        age: 4
+    spm_units:
+      spm_unit:
+        members: [parent, child1, child2]
+        housing_cost: 0
+        meets_tanf_non_cash_net_income_test: true
+    tax_units:
+      tax_unit:
+        members: [parent, child1, child2]
+    households:
+      household:
+        members: [parent, child1, child2]
+        state_code: CA
+  output:
+    meets_snap_categorical_eligibility: true
+    # Net $3,530 - $706 - $209 = $2,615; 30% = $784.50, rounded up to $785,
+    # which leaves $785 - $785 = $0.
+    snap_net_income: 2_615
+    snap_expected_contribution: 785
+    snap_zero_benefit_denial_applies: true
+    is_snap_eligible: false
+    snap: 0

@@ -1,0 +1,10 @@
+description: The Supplemental Nutrition Assistance Program zero-benefit denial option applies to households with at least this many members.
+values:
+  2001-01-20: 3
+metadata:
+  unit: persons
+  period: year
+  label: SNAP zero-benefit denial minimum household size
+  reference:
+    - title: 7 CFR 273.10(e)(2)(iii) - Households entitled to no benefits
+      href: https://www.ecfr.gov/current/title-7/section-273.10#p-273.10(e)(2)(iii)

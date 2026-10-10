@@ -1,0 +1,142 @@
+description: Whether the state denies the Supplemental Nutrition Assistance Program application of an eligible household with three or more members whose benefit computes to zero, rather than certifying the household and suspending its participation.
+metadata:
+  unit: bool
+  period: year
+  label: SNAP zero-benefit denial for households of three or more
+  propagate_metadata_to_children: true
+  breakdown:
+    - state_code
+  reference:
+    - title: 7 CFR 273.10(e)(2)(iii) - Households entitled to no benefits
+      href: https://www.ecfr.gov/current/title-7/section-273.10#p-273.10(e)(2)(iii)
+    - title: Food Stamp Program final rule, 65 FR 70134, 70161 (November 21, 2000)
+      href: https://www.govinfo.gov/content/pkg/FR-2000-11-21/pdf/00-29355.pdf#page=28
+    - title: CDSS ACIN I-50-13, Traditional and Modified Categorical Eligibility
+      href: https://www.cdss.ca.gov/lettersnotices/entres/getinfo/acin/2013/I-50_13.pdf#page=2
+    - title: CDSS ACL 14-56, CalFresh Modified Categorical Eligibility
+      href: https://www.cdss.ca.gov/lettersnotices/entres/getinfo/acl/2014/14-56.pdf#page=6
+    - title: CDSS ACL 14-63, Households Eligible for CalFresh, but Entitled to No Benefits
+      href: https://www.cdss.ca.gov/lettersnotices/entres/getinfo/acl/2014/14-63.pdf#page=2
+    - title: California MPP 63-503.329
+      href: https://www.cdss.ca.gov/ord/entres/getinfo/pdf/fsman06.pdf#page=36
+# Under 7 CFR 273.10(e)(2)(iii), a state either (A) denies these households
+# or (B) certifies them and suspends their participation. Until January 20,
+# 2001, states could not deny categorically eligible households (65 FR 70134,
+# 70161). Only California's election is modeled. A false entry keeps the
+# model's treatment of these households as eligible for a zero benefit; it is
+# not a finding that the state certifies and suspends them.
+# California: ACIN I-50-13 (August 23, 2013) first states that California
+# "has opted to deny such cases", including households that are otherwise
+# categorically eligible (CE) or Modified Categorically Eligible (MCE).
+# ACL 14-63 restates the election and has ongoing cases discontinued. MPP
+# 63-503.329(b), last amended in 2005, still exempts PA and GA categorically
+# eligible households (MPP 63-301.7 and .82); it carries forward the federal
+# bar removed in 2001, and the later CDSS letters apply the denial to those
+# households too.
+AK:
+  2001-01-20: false
+AL:
+  2001-01-20: false
+AR:
+  2001-01-20: false
+AZ:
+  2001-01-20: false
+CA:
+  2001-01-20: false
+  2013-08-23: true
+CO:
+  2001-01-20: false
+CT:
+  2001-01-20: false
+DC:
+  2001-01-20: false
+DE:
+  2001-01-20: false
+FL:
+  2001-01-20: false
+GA:
+  2001-01-20: false
+GU:
+  2001-01-20: false
+HI:
+  2001-01-20: false
+IA:
+  2001-01-20: false
+ID:
+  2001-01-20: false
+IL:
+  2001-01-20: false
+IN:
+  2001-01-20: false
+KS:
+  2001-01-20: false
+KY:
+  2001-01-20: false
+LA:
+  2001-01-20: false
+MA:
+  2001-01-20: false
+MD:
+  2001-01-20: false
+ME:
+  2001-01-20: false
+MI:
+  2001-01-20: false
+MN:
+  2001-01-20: false
+MO:
+  2001-01-20: false
+MS:
+  2001-01-20: false
+MT:
+  2001-01-20: false
+NC:
+  2001-01-20: false
+ND:
+  2001-01-20: false
+NE:
+  2001-01-20: false
+NH:
+  2001-01-20: false
+NJ:
+  2001-01-20: false
+NM:
+  2001-01-20: false
+NV:
+  2001-01-20: false
+NY:
+  2001-01-20: false
+OH:
+  2001-01-20: false
+OK:
+  2001-01-20: false
+OR:
+  2001-01-20: false
+PA:
+  2001-01-20: false
+RI:
+  2001-01-20: false
+SC:
+  2001-01-20: false
+SD:
+  2001-01-20: false
+TN:
+  2001-01-20: false
+TX:
+  2001-01-20: false
+UT:
+  2001-01-20: false
+VA:
+  2001-01-20: false
+VI:
+  2001-01-20: false
+VT:
+  2001-01-20: false
+WA:
+  2001-01-20: false
+WI:
+  2001-01-20: false
+WV:
+  2001-01-20: false
+WY:
+  2001-01-20: false
