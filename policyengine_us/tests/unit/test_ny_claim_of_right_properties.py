@@ -28,7 +28,9 @@ independent simulations that fix both method flags as inputs:
   include takes the standard deduction;
 - the rules never raise tax, and tax never rises with the prior-year New
   York decrease;
-- a credit above the year's tax is refunded;
+- a claimed credit lowers the state's or the city's tax by exactly its
+  amount (section 1341(b)(3): the repayment is not deducted), and a credit
+  above that tax is refunded;
 - before 2021 nobody subtracts, and the credit follows the federal method.
 """
 
@@ -139,8 +141,10 @@ def results():
     # Independent references: no repayment at all, and both methods fixed as
     # inputs rather than chosen in branches. The federal method is the
     # model's own, so only the New York choice differs between the two.
-    none = simulation(year, places, repay=False)
-    r["tax_without_repayment"] = total_tax(calculate(none, year, TAXES))
+    none = calculate(simulation(year, places, repay=False), year, TAXES)
+    r["tax_without_repayment"] = total_tax(none)
+    for tax in TAXES:
+        r[f"{tax}_without_repayment"] = none[tax]
     credit_applies = r["claim_of_right_credit_applies"]
     for name, subtracts in (("subtracting", True), ("not_subtracting", False)):
         fixed = simulation(
@@ -226,12 +230,27 @@ def test_tax_never_rises(results):
     assert np.all(np.diff(table, axis=1 + NY_DECREASE_AXIS) <= TOLERANCE)
 
 
-def test_a_credit_above_the_tax_is_refunded(results):
+@pytest.mark.parametrize(
+    "credit_name, tax",
+    [
+        ("ny_claim_of_right_credit", "ny_income_tax"),
+        ("nyc_claim_of_right_credit", "nyc_income_tax"),
+    ],
+)
+def test_a_credit_lowers_its_tax_by_its_amount_and_is_refunded(
+    results, credit_name, tax
+):
     r = results
-    credit = r["ny_claim_of_right_credit"]
-    refunded = credit > r["tax_without_repayment"]
+    credit = r[credit_name]
+    claimed = credit > 0
+    assert claimed.any()
+    tax_without_repayment = r[f"{tax}_without_repayment"]
+    np.testing.assert_allclose(
+        r[tax][claimed], (tax_without_repayment - credit)[claimed], atol=TOLERANCE
+    )
+    refunded = claimed & (credit > tax_without_repayment)
     assert refunded.any(), "the grid should include refunds"
-    assert np.all(r["ny_income_tax"][refunded] < 0)
+    assert np.all(r[tax][refunded] < 0)
 
 
 def test_before_2021_nobody_subtracts():
