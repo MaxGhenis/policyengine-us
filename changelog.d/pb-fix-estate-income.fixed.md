@@ -1,0 +1,1 @@
+Include taxable estate and trust beneficiary income in federal gross income, adjusted gross income, and the income used to determine taxable Social Security benefits. Preserve the existing treatment of estate losses and qualified business income status.

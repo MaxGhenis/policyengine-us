@@ -1,0 +1,147 @@
+# IRC 61(a)(14) and 662(a): taxable income from an estate or trust is
+# included in the beneficiary's gross income. Before TCJA renumbering,
+# the same inclusion appeared at 61(a)(15).
+# https://www.law.cornell.edu/uscode/text/26/61
+# https://www.law.cornell.edu/uscode/text/26/662
+# These inputs represent taxable beneficiary income, not inherited corpus
+# excluded by IRC 102(a).
+
+- name: Estate income is included before 2026
+  period: 2022
+  input:
+    estate_income: 1_000
+  output:
+    irs_gross_income: 1_000
+
+- name: Positive estate income raises gross income and AGI without QBI status
+  period: 2024
+  input:
+    employment_income: 20_000
+    estate_income: 1_000
+    estate_income_would_be_qualified: false
+  output:
+    irs_gross_income: 21_000
+    loss_ald: 0
+    adjusted_gross_income: 21_000
+    qualified_business_income: 0
+
+- name: Estate income inclusion continues after 2026
+  period: 2027
+  input:
+    estate_income: 1_000
+  output:
+    irs_gross_income: 1_000
+    adjusted_gross_income: 1_000
+
+- name: Zero estate income does not change gross income or AGI
+  period: 2024
+  input:
+    employment_income: 20_000
+    estate_income: 0
+  output:
+    irs_gross_income: 20_000
+    loss_ald: 0
+    adjusted_gross_income: 20_000
+
+- name: Estate loss is deducted once below the excess business loss limit
+  # IRC 165 and 461(l): the existing loss deduction handles the loss;
+  # gross income includes only positive amounts.
+  # https://www.law.cornell.edu/uscode/text/26/461#l
+  period: 2024
+  input:
+    employment_income: 20_000
+    estate_income: -1_000
+  output:
+    irs_gross_income: 20_000
+    loss_ald: 1_000
+    adjusted_gross_income: 19_000
+    taxable_ss_magi: 19_000
+
+- name: Positive estate business income offsets losses before the excess loss cap
+  # IRC 461(l)(3)(A): 100,000 business income + 305,000 single-filer
+  # threshold permits all 400,000 of business losses in 2024.
+  period: 2024
+  absolute_error_margin: 0.1
+  input:
+    estate_income: 100_000
+    estate_income_would_be_qualified: true
+    self_employment_income: -400_000
+    filing_status: SINGLE
+  output:
+    irs_gross_income: 100_000
+    loss_ald: 400_000
+    adjusted_gross_income: -300_000
+
+- name: Dependent estate income is excluded from the parent's gross income
+  period: 2024
+  input:
+    people:
+      parent:
+        age: 40
+        is_tax_unit_head: true
+        estate_income: 2_000
+      child:
+        age: 10
+        is_tax_unit_dependent: true
+        estate_income: 1_000
+    tax_units:
+      tax_unit:
+        members: [parent, child]
+  output:
+    irs_gross_income: [2_000, 0]
+    dependent_gross_income: [0, 1_000]
+    adjusted_gross_income: 2_000
+
+- name: PolicyBench scenario 039 estate income enters Social Security MAGI and AGI
+  # IRC 86(b)(2): MAGI includes estate income and the deductible business loss.
+  # MAGI = 25,950 + 26,800 + 2,030 - 6,260 = 48,520.
+  # Combined income = 48,520 + 0.5 * 36,105 = 66,572.50.
+  # IRC 86(a)(2), single filer (no dependent qualifying child):
+  # min(0.85 * (66,572.50 - 34,000) + 4,500, 0.85 * 36,105)
+  # = 30,689.25 taxable Social Security; AGI = 79,209.25.
+  # https://www.law.cornell.edu/uscode/text/26/86
+  period: 2026
+  absolute_error_margin: 0.1
+  input:
+    age: 61
+    state_code: VA
+    is_disabled: true
+    is_surviving_spouse: true
+    estate_income: 25_950
+    # Explicitly retain the engine's QBI convention for this reproduction.
+    estate_income_would_be_qualified: true
+    self_employment_income: -6_260
+    social_security_retirement: 36_105
+    taxable_ira_distributions: 26_800
+    taxable_private_pension_income: 2_030
+  output:
+    filing_status: SINGLE
+    loss_ald: 6_260
+    taxable_ss_magi: 48_520
+    tax_unit_combined_income_for_social_security_taxability: 66_572.50
+    taxable_social_security: 30_689.25
+    irs_gross_income: 85_469.25
+    adjusted_gross_income: 79_209.25
+
+- name: PolicyBench scenario 110 estate income enters gross income and AGI
+  # IRC 61(a)(14), 662(a): include 6,323 of taxable estate income.
+  # Gross income = 100,000 + 6,323 + 30,852 + 5,662 + 10,032 + 18
+  #                + 21,301 = 174,188.
+  # IRC 62(a)(7), 219: deduct the 198 traditional IRA contribution.
+  period: 2026
+  absolute_error_margin: 0.1
+  input:
+    state_code: OH
+    employment_income: 100_000
+    estate_income: 6_323
+    estate_income_would_be_qualified: true
+    long_term_capital_gains: 30_852
+    non_qualified_dividend_income: 5_662
+    qualified_dividend_income: 10_032
+    short_term_capital_gains: 18
+    tax_exempt_interest_income: 954
+    taxable_interest_income: 21_301
+    traditional_ira_contributions_desired: 198
+  output:
+    irs_gross_income: 174_188
+    adjusted_gross_income: 173_990

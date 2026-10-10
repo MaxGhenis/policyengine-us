@@ -19,7 +19,7 @@ values:
     # Pension income includes annuities and endowment contracts
     - debt_relief
     # Decedent income
-    # Estate interest income
+    - estate_income
     - taxable_unemployment_compensation
     - taxable_social_security
     - illicit_income
@@ -40,5 +40,7 @@ metadata:
   reference:
     - title: 26 U.S. Code § 61 - Gross income defined
       href: https://www.law.cornell.edu/uscode/text/26/61
+    - title: 26 U.S. Code § 662 - Inclusion of amounts in gross income of beneficiaries of estates and trusts
+      href: https://www.law.cornell.edu/uscode/text/26/662
     - title: 26 U.S. Code § 111 - Recovery of tax benefit items
       href: https://www.law.cornell.edu/uscode/text/26/111
