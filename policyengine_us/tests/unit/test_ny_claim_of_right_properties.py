@@ -235,9 +235,8 @@ def test_a_credit_above_the_tax_is_refunded(results):
 
 
 def test_before_2021_nobody_subtracts():
-    # Outside New York City only: the city's credit list starts in 2022.
     year = 2020
-    places = [False]
+    places = [False, True]
     r = calculate(simulation(year, places), year, VARIABLES)
     _, _, ny_decrease, _, _ = axis_values(places)
     credit_method = r["claim_of_right_credit_applies"]

@@ -36,6 +36,11 @@ class ny_claim_of_right_subtraction_applies(Variable):
             # Comparing the two choices takes two more tax computations;
             # skip them when no New York filer repaid anything.
             return nobody
+        # The federal method is computed before branching, so both branches
+        # start from it. In New York City it depends on this choice, because
+        # city tax is a federal itemized deduction; computing it first, with
+        # this choice still open, gives the same result in any order.
+        tax_unit("claim_of_right_credit_applies", period)
         tax_if_subtracting = tax_unit(
             "ny_income_tax_if_subtracting_claim_of_right_repayment", period
         )
