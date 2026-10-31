@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi._ssi_state_supplement import (
+    ssi_deemed_state_supplement,
+)
 
 
 class dc_ossp(Variable):
@@ -21,4 +24,19 @@ class dc_ossp(Variable):
         payment_standard = person("dc_ossp_payment_amount", period)
         uncapped_ssi = person("uncapped_ssi", period)
         income_excess = max_(0, -uncapped_ssi)
-        return max_(0, payment_standard - income_excess)
+        payment = max_(0, payment_standard - income_excess)
+        # POMS SI 01320.430 D: with an ineligible spouse's income deemed,
+        # the supplement is the lesser of separate individual and couple
+        # state computations, not the individual rate less the federal
+        # shortfall.
+        deeming = person("is_ssi_spousal_deeming_applies", period.this_year)
+        living_arrangement = person("dc_ossp_living_arrangement", period)
+        p = parameters(period).gov.states.dc.dhcf.ossp.payment
+        deemed_payment = ssi_deemed_state_supplement(
+            person,
+            period,
+            parameters,
+            p.individual[living_arrangement],
+            p.couple[living_arrangement],
+        )
+        return where(deeming, deemed_payment, payment)

@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_couple_total,
+)
 
 
 class ms_wd_premium(Variable):
@@ -17,7 +20,7 @@ class ms_wd_premium(Variable):
     def formula(person, period, parameters):
         p = parameters(period).gov.states.ms.dom.wd.premium
         eligible = person("ms_wd_eligible", period)
-        eligible_count = person.marital_unit.sum(eligible)
+        eligible_count = _ssi_couple_total(person, period.this_year, eligible)
         countable_earned_income = person("ms_wd_countable_earned_income", period)
         premium_applies = (
             countable_earned_income > person("ms_wd_fpg", period) * p.fpl_threshold

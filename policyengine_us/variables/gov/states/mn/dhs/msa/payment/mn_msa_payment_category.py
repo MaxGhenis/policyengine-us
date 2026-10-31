@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_spouse_value,
+)
 from policyengine_us.variables.gov.states.mn.dhs.msa.mn_msa_living_arrangement import (
     MNMSALivingArrangement,
 )
@@ -36,7 +39,10 @@ class mn_msa_payment_category(Variable):
         )
         apply_housing_standard = where(
             is_couple,
-            person.marital_unit.any(housing_assistance_eligible),
+            housing_assistance_eligible
+            | _ssi_spouse_value(
+                person, period.this_year, housing_assistance_eligible, False
+            ),
             housing_assistance_eligible,
         )
         housing_standard_arrangement = select(

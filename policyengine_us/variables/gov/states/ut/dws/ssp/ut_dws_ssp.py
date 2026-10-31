@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_both_spouses,
+)
 from policyengine_us.variables.gov.ssa.ssi.eligibility.status.ssi_federal_living_arrangement import (
     SSIFederalLivingArrangement,
 )
@@ -33,7 +36,7 @@ class ut_dws_ssp(Variable):
         # receives half. A person whose spouse does not qualify receives the
         # single person amount.
         eligible = person("ut_dws_ssp_eligible", period)
-        couple = person.marital_unit.sum(eligible) == 2
+        couple = _ssi_both_spouses(person, period.this_year, eligible)
         # 205-10 pays couples "who live in the household of another" and
         # couples "who live alone or with others in their own household". SSA
         # paid the same rows by federal living arrangement codes B and A

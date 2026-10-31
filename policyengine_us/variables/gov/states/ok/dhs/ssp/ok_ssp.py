@@ -1,4 +1,9 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_both_spouses,
+    _ssi_spouse_index,
+    _ssi_spouse_value,
+)
 
 
 class ok_ssp(Variable):
@@ -23,7 +28,8 @@ class ok_ssp(Variable):
         individual_standard = ssi.individual + p.maximum_payment
         couple_standard = ssi.couple + 2 * p.maximum_payment
         eligible = person("ok_ssp_eligible", period)
-        joint = person.marital_unit.sum(eligible) == 2
+        year = period.this_year
+        joint = _ssi_both_spouses(person, year, eligible)
         # NOTE: OAC 340:15-1-2 defines an ineligible spouse as one who is not
         # aged, blind or disabled, and is silent on an aged, blind or disabled
         # spouse who is not eligible. 340:15-1-4(10) applies 317:35-5-42, whose
@@ -37,7 +43,7 @@ class ok_ssp(Variable):
             arrangement == arrangement.possible_values.MEDICAL_TREATMENT_FACILITY
         )
         apart = in_facility | person("is_incarcerated", period)
-        ineligible_spouse = person.marital_unit.sum(~eligible & ~apart) > 0
+        ineligible_spouse = _ssi_spouse_value(person, year, ~eligible & ~apart, False)
         own = person("ok_ssp_own_countable_income", period)
         combined = person("ok_ssp_countable_income", period)
         standard = where(
@@ -49,9 +55,9 @@ class ok_ssp(Variable):
         gap = max_(standard - income, 0)
         # OAC 340:15-1-5(c)(1)(B) and Appendix C-1 Schedule VIII.A give one
         # spouse the odd dollar without naming which, so person-level amounts
-        # follow member order while the couple total does not.
+        # follow the order of people while the couple total does not.
         first_share = np.floor(gap / 2)
-        first = person.marital_unit.reference_entity.members_position == 0
+        first = np.arange(person.count) < _ssi_spouse_index(person, year)
         payment = where(joint, where(first, first_share, gap - first_share), gap)
         # NOTE: 340:15-1-5(c)(6) tests a blind or disabled minor's income plus
         # deemed parental income against the SSP standard for an individual,

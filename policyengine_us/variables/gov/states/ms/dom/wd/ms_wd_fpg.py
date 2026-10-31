@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_spouse_index,
+)
 
 
 class ms_wd_fpg(Variable):
@@ -13,7 +16,8 @@ class ms_wd_fpg(Variable):
     def formula(person, period, parameters):
         p = parameters(period).gov.hhs.fpg
         state_group = person.household("state_group_str", period)
-        unit_size = person.marital_unit.nb_persons()
+        # The applicant and a spouse living with them.
+        unit_size = 1 + (_ssi_spouse_index(person, period.this_year) >= 0)
         annual_fpg = (
             p.first_person[state_group]
             + (unit_size - 1) * p.additional_person[state_group]

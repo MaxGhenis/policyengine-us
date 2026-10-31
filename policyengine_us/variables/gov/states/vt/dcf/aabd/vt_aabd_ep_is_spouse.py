@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_spouse_value,
+)
 
 
 class vt_aabd_ep_is_spouse(Variable):
@@ -16,6 +19,6 @@ class vt_aabd_ep_is_spouse(Variable):
         # ABD person's marital unit is that person's spouse.
         return (
             abd
-            & person.marital_unit.any(~abd)
+            & _ssi_spouse_value(person, period.this_year, ~abd, False)
             & ~person("vt_aabd_ep_nonspouse_essential_person", period)
         )

@@ -1,4 +1,8 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_both_spouses,
+    _ssi_spouse_value,
+)
 
 
 class wi_ssp_regular(Variable):
@@ -13,14 +17,14 @@ class wi_ssp_regular(Variable):
     def formula(person, period, parameters):
         p = parameters(period).gov.states.wi.dhs.ssp
         eligible = person("wi_ssp_eligible", period)
-        eligible_couple = person.marital_unit.sum(eligible) == 2
+        year = period.this_year
+        eligible_couple = _ssi_both_spouses(person, year, eligible)
         # The one-eligible-spouse rate requires an SSI-ineligible spouse. A spouse
         # who is SSI-eligible but excluded from the state payment leaves the
         # recipient on the individual rate.
-        ineligible_spouse = person("is_ssi_ineligible_spouse", period.this_year)
-        has_ineligible_spouse = (
-            person.marital_unit.sum(ineligible_spouse) - ineligible_spouse
-        ) > 0
+        has_ineligible_spouse = _ssi_spouse_value(
+            person, year, person("is_ssi_ineligible_spouse", year), False
+        )
         arrangement = person("ssi_federal_living_arrangement", period)
         other_household = (
             arrangement == arrangement.possible_values.ANOTHER_PERSONS_HOUSEHOLD

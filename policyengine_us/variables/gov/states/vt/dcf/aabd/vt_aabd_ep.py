@@ -1,4 +1,8 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_couple_total,
+    _ssi_spouse_value,
+)
 
 
 class vt_aabd_ep(Variable):
@@ -36,9 +40,13 @@ class vt_aabd_ep(Variable):
         # different levels for each spouse; use the highest level certified for
         # either spouse.
         certified = abd_eligible & valid_level
-        person_eligible = abd_eligible & person.marital_unit.any(certified)
-        rate = person.marital_unit.max(where(certified, p.ep.rate[level], 0))
-        count = person.marital_unit.sum(person_eligible)
+        year = period.this_year
+        person_eligible = abd_eligible & (
+            certified | _ssi_spouse_value(person, year, certified, False)
+        )
+        own_rate = where(certified, p.ep.rate[level], 0)
+        rate = max_(own_rate, _ssi_spouse_value(person, year, own_rate))
+        count = _ssi_couple_total(person, year, person_eligible)
         couple = count > 1
         # Rule 2784(B)-(C): the individual maximum is the combined couple
         # payment, the another-household maximum is the combined independent

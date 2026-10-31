@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_both_spouses,
+)
 
 
 class me_ssp(Variable):
@@ -16,14 +19,19 @@ class me_ssp(Variable):
     )
 
     def formula(person, period, parameters):
-        joint_claim = person("ssi_claim_is_joint", period.this_year)
+        year = period.this_year
+        joint_claim = person("ssi_claim_is_joint", year)
         eligible = person("me_ssp_eligible", period)
-        both_eligible = person.marital_unit.sum(eligible) == 2
+        both_eligible = _ssi_both_spouses(person, year, eligible)
         category = person("me_ssp_payment_category", period)
         # Both spouses must share the same payment category to be treated
         # as a joint couple claim.
-        shared_category = person.marital_unit.max(category) == person.marital_unit.min(
-            category
+        shared_category = (
+            sum(
+                _ssi_both_spouses(person, year, category == value)
+                for value in category.possible_values
+            )
+            > 0
         )
         couple_applies = joint_claim & both_eligible & shared_category
         return where(

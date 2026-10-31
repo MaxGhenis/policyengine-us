@@ -1,4 +1,8 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_couple_total,
+    _ssi_spouse_index,
+)
 
 
 class ms_hmw_resource_eligible(Variable):
@@ -15,12 +19,7 @@ class ms_hmw_resource_eligible(Variable):
 
     def formula(person, period, parameters):
         personal_resources = person("ssi_countable_resources", period)
-        marital_unit = person.marital_unit
-        couple = marital_unit.nb_persons() == 2
-        resources = where(
-            couple,
-            marital_unit.sum(personal_resources),
-            personal_resources,
-        )
+        couple = _ssi_spouse_index(person, period) >= 0
+        resources = _ssi_couple_total(person, period, personal_resources)
         p = parameters(period).gov.states.ms.dom.hmw.resources.limit
         return resources < where(couple, p.couple, p.individual)

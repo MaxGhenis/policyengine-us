@@ -1,4 +1,8 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_couple_total,
+    _ssi_spouse_index,
+)
 
 
 class msp_asset_eligible(Variable):
@@ -21,12 +25,12 @@ class msp_asset_eligible(Variable):
         # Check if asset test applies (some states have eliminated it)
         asset_test_applies = p.asset.applies[state_code]
         # If asset test doesn't apply, everyone is asset-eligible
+        # The resources of an individual, or of a married couple living
+        # together (42 U.S.C. 1396d(p)(1)(C) applies SSI's resource rules).
         personal_resources = person("ssi_countable_resources", period.this_year)
-        married = person.spm_unit("spm_unit_is_married", period.this_year)
-        countable_resources = where(
-            married,
-            person.marital_unit.sum(personal_resources),
-            personal_resources,
+        married = _ssi_spouse_index(person, period.this_year) >= 0
+        countable_resources = _ssi_couple_total(
+            person, period.this_year, personal_resources
         )
         asset_limit = where(married, p.asset.couple, p.asset.individual)
         meets_asset_test = countable_resources <= asset_limit

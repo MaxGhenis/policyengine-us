@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_couple_total,
+)
 
 
 class ms_wd_countable_unearned_income(Variable):
@@ -12,7 +15,7 @@ class ms_wd_countable_unearned_income(Variable):
 
     def formula(person, period, parameters):
         p = parameters(period).gov.states.ms.dom.wd.eligibility.income
-        unearned_income = person.marital_unit.sum(
-            person("ms_wd_gross_unearned_income", period)
+        unearned_income = _ssi_couple_total(
+            person, period.this_year, person("ms_wd_gross_unearned_income", period)
         )
         return max_(unearned_income - p.exclusions.general, 0)

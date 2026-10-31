@@ -1,4 +1,8 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_both_spouses,
+    _ssi_couple_total,
+)
 
 
 class in_ssp_sapn(Variable):
@@ -19,9 +23,10 @@ class in_ssp_sapn(Variable):
         # Uses actual SSI payment + SSI countable income as proxy for
         # Medicaid post-eligibility budgeted income.
         p = parameters(period).gov.states["in"].fssa.ssp
-        joint_claim = person("ssi_claim_is_joint", period.this_year)
+        year = period.this_year
+        joint_claim = person("ssi_claim_is_joint", year)
         eligible = person("in_ssp_sapn_eligible", period)
-        both_eligible = person.marital_unit.sum(eligible) == 2
+        both_eligible = _ssi_both_spouses(person, year, eligible)
         is_couple = joint_claim & both_eligible
         ssi_monthly = person("ssi", period)
         countable_income = person("ssi_countable_income", period)
@@ -33,7 +38,9 @@ class in_ssp_sapn(Variable):
             min_(pna - ssi_monthly - countable_income, max_individual),
             0,
         )
-        couple_budgeted = person.marital_unit.sum(ssi_monthly + countable_income)
+        couple_budgeted = _ssi_couple_total(
+            person, year, ssi_monthly + countable_income
+        )
         couple_amount = max_(
             min_(2 * pna - couple_budgeted, max_couple),
             0,

@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_spouse_value,
+)
 from policyengine_us.variables.gov.states.co.ssa.oap._precision import (
     cents,
     ssi_paid,
@@ -71,13 +74,11 @@ class co_oap_deemed_income(Variable):
             0, fbr * p.income.deeming.child_allocation_share - child_income
         )
         # Each person's household total; the spouse's reaches the client
-        # through the marital unit.
+        # through the spouse test.
         child_allocations = person.household.sum(child_allocation) * deemable
 
-        marital_unit = person.marital_unit
-
         def spouse(values):
-            return marital_unit.sum(values) - values
+            return _ssi_spouse_value(person, period.this_year, values)
 
         # 3.534(A): deduct $65 from the spouse's gross earned income and halve
         # the rest. Unlike SSI (20 CFR 416.1163) there is no deeming threshold.

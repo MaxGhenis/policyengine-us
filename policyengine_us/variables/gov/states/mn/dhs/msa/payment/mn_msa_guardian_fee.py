@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_couple_total,
+)
 
 
 class mn_msa_guardian_fee(Variable):
@@ -28,7 +31,7 @@ class mn_msa_guardian_fee(Variable):
         has_guardian = person("mn_msa_has_guardian", period)
         guardian_is_county_staff = person("mn_msa_guardian_is_county_staff", period)
         gross = person("mn_msa_gross_income", period)
-        unit_gross = person.marital_unit.sum(gross)
+        unit_gross = _ssi_couple_total(person, period.this_year, gross)
         unit_fee = min_(unit_gross * p.rate, p.max_amount)
         # Minn. Stat. § 256D.44 Subd. 5(d) allows no fee for county agency staff.
         return has_guardian * ~guardian_is_county_staff * unit_fee

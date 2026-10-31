@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_couple_total,
+)
 
 
 class is_209b_ssi_recipient_income_eligible_for_medicaid(Variable):
@@ -27,9 +30,10 @@ class is_209b_ssi_recipient_income_eligible_for_medicaid(Variable):
         # supplement benefits, so apply the remaining 435.121 spenddown here.
         medical_expenses = person("medicaid_medically_needy_medical_expenses", period)
         # SSI financial responsibility rules (42 CFR 435.602): the unit is
-        # the individual or the married couple, not the tax filing unit.
-        income_after_spenddown = person.marital_unit.sum(
-            personal_income - medical_expenses
+        # the individual or the married couple living together, not the tax
+        # filing unit or a marital unit holding other adults.
+        income_after_spenddown = _ssi_couple_total(
+            person, period, personal_income - medical_expenses
         )
 
         # The limit is per person (Missouri's blind standard can differ

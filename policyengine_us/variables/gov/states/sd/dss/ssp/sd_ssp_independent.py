@@ -1,4 +1,9 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_both_spouses,
+    _ssi_couple_total,
+    _ssi_spouse_index,
+)
 
 
 class sd_ssp_independent(Variable):
@@ -52,11 +57,15 @@ class sd_ssp_independent(Variable):
         # B.5.b pays "individuals and couples ... who have no other income";
         # ARSD 67:12:14:03(2) reads per person ("The person is receiving other
         # income").
-        couple = person("ssi_claim_is_joint", period.this_year) & (
-            person.marital_unit.sum(qualifies) > 1
+        year = period.this_year
+        couple = person("ssi_claim_is_joint", year) & _ssi_both_spouses(
+            person, year, qualifies
         )
-        other_income = where(couple, person.marital_unit.sum(own_income), own_income)
-        first = person.marital_unit.reference_entity.members_position == 0
+        other_income = where(
+            couple, _ssi_couple_total(person, year, own_income), own_income
+        )
+        # The spouse listed first receives the first amount.
+        first = np.arange(person.count) < _ssi_spouse_index(person, year)
         amount = where(
             couple,
             where(first, p.couple_first_amount, p.couple_second_amount),

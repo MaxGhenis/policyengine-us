@@ -1,4 +1,8 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_couple_total,
+    _ssi_spouse_index,
+)
 
 
 class is_optional_senior_or_disabled_asset_eligible(Variable):
@@ -11,10 +15,11 @@ class is_optional_senior_or_disabled_asset_eligible(Variable):
     def formula(person, period, parameters):
         #  Assets
         # SSI financial responsibility rules (42 CFR 435.602): the unit is
-        # the individual or the married couple, not the tax filing unit.
+        # the individual or the married couple living together, not the tax
+        # filing unit or a marital unit holding other adults.
         personal_assets = person("ssi_countable_resources", period)  # $
-        assets = person.marital_unit.sum(personal_assets)
-        is_couple = person.marital_unit.nb_persons() == 2
+        assets = _ssi_couple_total(person, period, personal_assets)
+        is_couple = _ssi_spouse_index(person, period) >= 0
         state = person.household("state_code_str", period)
 
         #  Parameters

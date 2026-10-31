@@ -1,4 +1,8 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_both_spouses,
+    _ssi_couple_total,
+)
 from policyengine_us.variables.gov.ssa.ssi.eligibility.income._apply_ssi_exclusions import (
     _apply_ssi_exclusions,
 )
@@ -36,7 +40,7 @@ class msp_countable_income(Variable):
         earned_income = person("ssi_earned_income", year)
         unearned_income = person("ssi_unearned_income", year)
         is_medicare_eligible = person("is_medicare_eligible", year)
-        both_medicare_eligible = person.marital_unit.sum(is_medicare_eligible) == 2
+        both_medicare_eligible = _ssi_both_spouses(person, year, is_medicare_eligible)
 
         blind_or_disabled_working_student_exclusion = person(
             "ssi_blind_or_disabled_working_student_exclusion", year
@@ -62,11 +66,13 @@ class msp_countable_income(Variable):
 
         couple_countable = _apply_ssi_exclusions(
             max_(
-                person.marital_unit.sum(earned_income)
-                - person.marital_unit.sum(blind_or_disabled_working_student_exclusion),
+                _ssi_couple_total(person, year, earned_income)
+                - _ssi_couple_total(
+                    person, year, blind_or_disabled_working_student_exclusion
+                ),
                 0,
             ),
-            person.marital_unit.sum(unearned_income),
+            _ssi_couple_total(person, year, unearned_income),
             parameters,
             year,
         )

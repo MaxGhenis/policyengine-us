@@ -1,4 +1,8 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_both_spouses,
+    _ssi_couple_total,
+)
 
 
 class mn_msa_gross_income_eligible(Variable):
@@ -21,9 +25,13 @@ class mn_msa_gross_income_eligible(Variable):
         p = parameters(period).gov.states.mn.dhs.msa.eligibility.income_limit
         ssi_individual_fbr = parameters(period).gov.ssa.ssi.amount.individual
         categorically_eligible = person("is_ssi_aged_blind_disabled", period.this_year)
-        both_eligible = person.marital_unit.sum(categorically_eligible) == 2
+        both_eligible = _ssi_both_spouses(
+            person, period.this_year, categorically_eligible
+        )
         gross = person("mn_msa_gross_income", period)
-        au_income = where(both_eligible, person.marital_unit.sum(gross), gross)
+        au_income = where(
+            both_eligible, _ssi_couple_total(person, period.this_year, gross), gross
+        )
         cap = ssi_individual_fbr * where(
             both_eligible, p.couple_fbr_multiplier, p.individual_fbr_multiplier
         )

@@ -98,13 +98,37 @@ def _ssi_resource_couple(person, period):
     return person("ssi_claim_is_joint", period) & eligible & eligible[spouse]
 
 
-def _ssi_couple_total(person, period, values):
-    """Each person's value plus their co-resident spouse's, if they have one.
+def _ssi_spouse_value(person, period, values, default=0):
+    """The co-resident spouse's value, or ``default`` without a spouse.
 
-    This equals the marital-unit sum for units of one or two people, and
-    adds only the spouse when a unit holds more people, as the default unit
-    of a situation that omits marital units can. ``period`` is the year of
+    Programs that follow SSI's financial responsibility rules combine a
+    married couple living together (416.1801, 416.1806, 42 CFR 435.602). A
+    marital unit can hold more than the couple, as the default unit of a
+    situation that omits marital units does, so they read the spouse through
+    _ssi_spouse_index rather than summing the unit. ``period`` is the year of
     the spouse test.
     """
     spouse = _ssi_spouse_index(person, period)
-    return values + where(spouse >= 0, values[np.maximum(spouse, 0)], 0)
+    return where(spouse >= 0, values[np.maximum(spouse, 0)], default)
+
+
+def _ssi_couple_total(person, period, values):
+    """Each person's value plus their co-resident spouse's, if they have one.
+
+    For a marital unit of two whose members _ssi_spouse_index pairs, and for
+    a person alone, this equals the marital-unit sum. It adds only the spouse
+    when a unit holds more people. It differs from the unit sum for a
+    two-person unit that _ssi_spouse_index does not pair: spouses in
+    different households (416.1806), a pair whose parent links name one as
+    the other's parent, and the documented case of a simulation holding only
+    a married couple in which one spouse is the other's tax dependent.
+    """
+    return values + _ssi_spouse_value(person, period, values)
+
+
+def _ssi_both_spouses(person, period, condition):
+    """Whether a person and their co-resident spouse both meet ``condition``.
+
+    False for a person without a spouse.
+    """
+    return condition & _ssi_spouse_value(person, period, condition, False)

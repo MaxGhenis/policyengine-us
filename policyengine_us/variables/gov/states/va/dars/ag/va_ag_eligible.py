@@ -1,4 +1,8 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_both_spouses,
+    _ssi_couple_total,
+)
 
 
 class va_ag_eligible(Variable):
@@ -14,11 +18,12 @@ class va_ag_eligible(Variable):
         immigration = person("immigration_status", period.this_year)
         citizen = immigration == immigration.possible_values.CITIZEN
         immigrant = person("is_ssi_qualified_noncitizen", period.this_year)
-        joint = (
-            person.marital_unit.sum(person("va_ag_is_joint_initial_month", period)) == 2
+        year = period.this_year
+        joint = _ssi_both_spouses(
+            person, year, person("va_ag_is_joint_initial_month", period)
         )
-        resources = person("ssi_countable_resources", period.this_year)
-        resources = where(joint, person.marital_unit.sum(resources), resources)
+        resources = person("ssi_countable_resources", year)
+        resources = where(joint, _ssi_couple_total(person, year, resources), resources)
         limits = parameters(period).gov.ssa.ssi.eligibility.resources.limit
         receives_ssi = (person("ssi", period) > 0) | person("receives_ssi", period)
         resource_eligible = receives_ssi | (

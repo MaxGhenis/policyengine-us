@@ -1,4 +1,8 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_couple_total,
+    _ssi_spouse_value,
+)
 
 
 class ct_ssp_resource_eligible(Variable):
@@ -17,17 +21,15 @@ class ct_ssp_resource_eligible(Variable):
         # federal SSI limits ($2,000/$3,000).
         p = parameters(period).gov.states.ct.dss.ssp.eligibility
         personal_resources = person("ssi_countable_resources", period.this_year)
-        is_joint_claim = person("ssi_claim_is_joint", period.this_year)
-        has_ineligible_spouse = (
-            person.marital_unit.sum(
-                person("is_ssi_ineligible_spouse", period.this_year)
-            )
-            > 0
+        year = period.this_year
+        is_joint_claim = person("ssi_claim_is_joint", year)
+        has_ineligible_spouse = _ssi_spouse_value(
+            person, year, person("is_ssi_ineligible_spouse", year), False
         )
         applies_couple_limit = is_joint_claim | has_ineligible_spouse
         resources = where(
             applies_couple_limit,
-            person.marital_unit.sum(personal_resources),
+            _ssi_couple_total(person, year, personal_resources),
             personal_resources,
         )
         limit = where(

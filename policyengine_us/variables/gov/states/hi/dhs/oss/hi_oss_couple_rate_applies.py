@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_both_spouses,
+)
 from policyengine_us.variables.gov.states.hi.dhs.oss.hi_oss_living_arrangement import (
     HIOSSLivingArrangement,
 )
@@ -16,18 +19,16 @@ class hi_oss_couple_rate_applies(Variable):
     )
 
     def formula(person, period, parameters):
-        joint_claim = person("ssi_claim_is_joint", period.this_year)
+        year = period.this_year
+        joint_claim = person("ssi_claim_is_joint", year)
         is_eligible = person("is_ssi_eligible", period)
-        both_ssi_eligible = (
-            person.marital_unit.sum(is_eligible) == person.marital_unit.nb_persons()
-        )
+        both_ssi_eligible = _ssi_both_spouses(person, year, is_eligible)
         la = person("hi_oss_living_arrangement", period)
         LA = HIOSSLivingArrangement
-        unit_size = person.marital_unit.nb_persons()
         both_same_facility = (
-            (person.marital_unit.sum(la == LA.COMMUNITY_CARE) == unit_size)
-            | (person.marital_unit.sum(la == LA.DOMICILIARY_CARE_I) == unit_size)
-            | (person.marital_unit.sum(la == LA.DOMICILIARY_CARE_II) == unit_size)
-            | (person.marital_unit.sum(la == LA.MEDICAID_INSTITUTION) == unit_size)
+            _ssi_both_spouses(person, year, la == LA.COMMUNITY_CARE)
+            | _ssi_both_spouses(person, year, la == LA.DOMICILIARY_CARE_I)
+            | _ssi_both_spouses(person, year, la == LA.DOMICILIARY_CARE_II)
+            | _ssi_both_spouses(person, year, la == LA.MEDICAID_INSTITUTION)
         )
         return joint_claim & both_ssi_eligible & both_same_facility

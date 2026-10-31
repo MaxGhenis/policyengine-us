@@ -1,4 +1,7 @@
 from policyengine_us.model_api import *
+from policyengine_us.variables.gov.ssa.ssi.eligibility.resources.deemed._ssi_spouses import (
+    _ssi_spouse_value,
+)
 
 
 class vt_aabd_ep_resources_eligible(Variable):
@@ -26,4 +29,5 @@ class vt_aabd_ep_resources_eligible(Variable):
             arrangement == la.HOUSEHOLD_OF_ANOTHER
         )
         # Rule 2785 tests the assistance group's combined resources once.
-        return person.marital_unit.any((receives | passes_state_test) & in_household)
+        passes = (receives | passes_state_test) & in_household
+        return passes | _ssi_spouse_value(person, period.this_year, passes, False)
