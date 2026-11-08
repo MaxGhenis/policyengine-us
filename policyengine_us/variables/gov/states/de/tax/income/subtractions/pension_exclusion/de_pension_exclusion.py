@@ -10,6 +10,7 @@ class de_pension_exclusion(Variable):
     reference = (
         "https://revenuefiles.delaware.gov/2022/PIT-RES_TY22_2022-02_Instructions.pdf#page=6",
         "https://delcode.delaware.gov/title30/c011/sc02/index.html",
+        "https://revenuefiles.delaware.gov/2025/PITForms_Instructions/Instructions/PIT-RES_Instructions_2025-01.pdf#page=6",
     )
     defined_for = StateCode.DE
 
@@ -59,15 +60,33 @@ class de_pension_exclusion(Variable):
             capped_military_retirement_pay = min_(
                 p.cap.military, military_retirement_pay
             )
-            younger_amount = max_(
+            # Filers under the age threshold take the greater of the pension
+            # exclusion and the military pension exclusion from 2022
+            # (30 Del. C. 1106(b)(3)b.1), and filers at or above it from 2027
+            # (1106(b)(3)c.2, d.2 and e.2).
+            greater_amount = max_(
                 capped_military_retirement_pay, capped_eligible_pension_income
             )
-            # Filers under the age threshold, post 2022, can subtract their military retirement
-            # income which is capped at a larger amount
-            return where(
+            if p.military_retirement_exclusion_available_at_age_threshold:
+                older_amount = greater_amount
+            else:
+                older_amount = capped_eligible_pension_income
+            exclusion = where(
                 eligible_for_pension_exclusion_income,
-                capped_eligible_pension_income,
-                younger_amount,
+                older_amount,
+                greater_amount,
             )
         else:
-            return capped_eligible_pension_income
+            exclusion = capped_eligible_pension_income
+        if p.domicile_requirement_applies:
+            # A person at or above the age threshold claims the exclusion only
+            # after 3 years of Delaware domicile, or 5 years for a person
+            # domiciled in Delaware from 2027 (30 Del. C. 1106(b)(3)f.4).
+            meets_domicile_requirement = person(
+                "de_pension_exclusion_domicile_requirement_met", period
+            )
+            older_exclusion = where(meets_domicile_requirement, exclusion, 0)
+            return where(
+                eligible_for_pension_exclusion_income, older_exclusion, exclusion
+            )
+        return exclusion
