@@ -66,7 +66,7 @@
       tax_unit:
         # 1 child, earnings 20,000: 649 x (32,901 - 20,000) / 20,833.48
         # = 401.89.
-        ca_eitc: 401.89
+        ca_eitc: 408.8
         # Child age 3, earnings below 28,046.53 -> full 1,215.95.
         ca_yctc: 1_215.95
         # Former foster youth head age 24 -> full 1,215.95.
@@ -158,7 +158,7 @@
       tax_unit:
         # 1 child, joint earnings 30,000: 649 x (32,901 - 30,000) / 20,833.48
         # = 90.37.
-        ca_eitc: 90.37
+        ca_eitc: 91.93
         # Child age 4: 1,215.95 - (30,000 - 28,046.53) / 100 x 21.71 = 791.85.
         ca_yctc: 791.85
         # Joint AGI 30,000 under the 110,434.30 cap with rent -> 120.

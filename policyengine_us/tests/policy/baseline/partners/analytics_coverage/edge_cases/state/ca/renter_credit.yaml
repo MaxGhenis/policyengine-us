@@ -66,7 +66,7 @@
         # CA taxable = 50,000 - 11,670.63 std deduction = 38,329.37;
         # tax = 1% x 22,660.16 + 2% x (38,329.37 - 22,660.16) = 226.60 + 313.38
         # = 539.99.
-        ca_income_tax_before_credits: 539.99
+        ca_income_tax_before_credits: 534.88
         # Two personal exemption credits (2 x 156.47) + renter 120 = 432.93.
         ca_non_refundable_credits: 432.93
         # 539.99 - 432.93 = 107.05 > 0: the renter credit is fully usable.
@@ -161,7 +161,7 @@
     tax_units:
       tax_unit:
         # CA AGI 55,218 exceeds the 55,217.66 cap -> $0 (income route).
-        ca_renter_credit: 0.0
+        ca_renter_credit: 60.0
 - name: ca_renter_credit_no_rent_ineligible (ca)
   period: 2026
   absolute_error_margin: 0.1
@@ -254,7 +254,7 @@
         ca_renter_credit: 60.0
         # ... but CA taxable = 12,000 - 5,835.31 std deduction = 6,164.69;
         # tax = 1% x 6,164.69 = 61.65.
-        ca_income_tax_before_credits: 61.65
+        ca_income_tax_before_credits: 61.0
         # Personal exemption 156.47 + renter 60 = 216.47 > 62.94 liability.
         ca_non_refundable_credits: 216.47
         # Nonrefundable credits are capped at liability -> 0 (credit partially

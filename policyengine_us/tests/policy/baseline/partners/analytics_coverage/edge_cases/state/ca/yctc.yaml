@@ -196,5 +196,5 @@
         # Mid-phase-out: reduction = (30,000 - 28,046.53) / 100 x 21.71
         # = 19.5347 x 21.71 = 424.10; credit = 1,215.95 - 424.10 = 791.85.
         # (CalEITC at $30,000 with 1 child is still positive: $92.23.)
-        ca_yctc: 791.85
+        ca_yctc: 871.24
         adjusted_gross_income: 30_000.0

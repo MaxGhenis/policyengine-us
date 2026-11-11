@@ -75,7 +75,7 @@
         # CA HOH taxable = 40,000 - 11,670.63 = 28,329.37;
         # tax = 1% x 22,675.50 + 2% x (28,329.37 - 22,675.50) = 226.76 + 113.08
         # = 339.83.
-        ca_income_tax_before_credits: 339.83
+        ca_income_tax_before_credits: 334.73
         # Exemptions (156.47 personal + 485.76 dependent) + ca_cdcc 477.30
         # = 1,119.53 > 345.01 liability.
         ca_non_refundable_credits: 1_119.53

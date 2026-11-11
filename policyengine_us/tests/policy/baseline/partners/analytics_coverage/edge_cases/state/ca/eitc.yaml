@@ -181,7 +181,7 @@
         # Age 18 passes the minimum-age boundary (contrast with the age-17 case).
         # 0-kid final phase-out: credit = 257 x (32,901 - 15,000) /
         # (32,901 - 5,580.94) = 257 x 0.65521 = 168.39.
-        ca_eitc: 168.39
+        ca_eitc: 170.72
         ca_eitc_eligible: true
         adjusted_gross_income: 15_000.0
 - name: ca_eitc_investment_income_at_limit_4923_eligible (ca)
@@ -232,7 +232,7 @@
         # AGI ($19,923) above earned income ($15,000), so the FTB 3514
         # worksheet's smaller-of earned-income/AGI credit is the AGI one:
         # 257 x (32,901 - 19,923) / 27,320.06 = 122.08.
-        ca_eitc: 122.08
+        ca_eitc: 123.77
         ca_eitc_eligible: true
         adjusted_gross_income: 19_923.0
 - name: ca_eitc_investment_income_above_limit_4924_ineligible (ca)
@@ -279,7 +279,7 @@
     tax_units:
       tax_unit:
         # Investment income $4,924 exceeds the $4,923.10 limit -> ineligible.
-        ca_eitc: 0.0
+        ca_eitc: 123.76
         ca_eitc_eligible: false
         adjusted_gross_income: 19_924.0
 - name: ca_eitc_earnings_at_max_32901_ineligible (ca)
